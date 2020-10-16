@@ -16,4 +16,9 @@ public class MainActivity extends AppCompatActivity {
     public void onPointerCaptureChanged(boolean hasCapture) {
         
     }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+    }
 }
