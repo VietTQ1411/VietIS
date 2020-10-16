@@ -34,11 +34,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
-
-
-
-    
     public String toString4() {
         return "MainActivity{}";
 
