@@ -31,4 +31,8 @@ public class MainActivity extends AppCompatActivity {
         return "MainActivity{}";
 
     }
+    public String toString3() {
+        return "MainActivity{}";
+
+    }
 }
