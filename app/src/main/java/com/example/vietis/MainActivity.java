@@ -27,12 +27,18 @@ public class MainActivity extends AppCompatActivity {
     protected void onRestart() {
         super.onRestart();
     }
-    
+
     public String toString2() {
         return "MainActivity{}";
 
     }
 
+
+
+
+
+
+    
     public String toString4() {
         return "MainActivity{}";
 
