@@ -14,7 +14,12 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onPointerCaptureChanged(boolean hasCapture) {
-        
+
+    }
+
+    @Override
+    public String toString() {
+        return "MainActivity{}";
     }
 
     @Override
