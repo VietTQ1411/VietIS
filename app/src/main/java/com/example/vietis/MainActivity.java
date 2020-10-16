@@ -22,8 +22,13 @@ public class MainActivity extends AppCompatActivity {
         return "MainActivity{}";
     }
 
+
     @Override
     protected void onRestart() {
         super.onRestart();
+    }
+    public String toString2() {
+        return "MainActivity{}";
+
     }
 }
