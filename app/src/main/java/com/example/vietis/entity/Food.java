@@ -1,5 +1,6 @@
 package com.example.vietis.entity;
 
+
 import lombok.Builder;
 import lombok.Data;
 
@@ -13,13 +14,4 @@ public class Food {
     private float price;
     private String description;
     private int imageID;
-
-    public Food getRandomFood(){
-        return Food.builder()
-                .ID(1)
-                .shopID(1)
-                .name("Bun cha")
-                .cateID(1)
-                .build();
-    }
 }
