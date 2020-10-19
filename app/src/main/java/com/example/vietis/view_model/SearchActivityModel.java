@@ -9,7 +9,7 @@ import androidx.lifecycle.ViewModel;
 
 import com.example.vietis.entity.Food;
 import com.example.vietis.inteface.IFoodRespository;
-import com.example.vietis.respository.FoodRespository;
+import com.example.vietis.repository.FoodRespository;
 
 import java.util.ArrayList;
 
