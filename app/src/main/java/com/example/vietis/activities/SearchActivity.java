@@ -1,4 +1,4 @@
-package com.example.vietis.controller;
+package com.example.vietis.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -12,7 +12,7 @@ import com.example.vietis.inteface.IView;
 import java.io.Console;
 import java.util.logging.Logger;
 
-public class ActivitySearch extends AppCompatActivity implements IView {
+public class SearchActivity extends AppCompatActivity implements IView {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
