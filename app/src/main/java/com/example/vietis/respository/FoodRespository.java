@@ -1,66 +1,30 @@
 package com.example.vietis.respository;
 
+import androidx.lifecycle.MutableLiveData;
+
 import com.example.vietis.entity.Food;
+import com.example.vietis.inteface.IFoodRespository;
 
 import java.util.ArrayList;
 
 public class FoodRespository {
-    public static ArrayList<Food> generateFoodArray() {
-        ArrayList<Food> list = new ArrayList<>();
-        list.add(Food.builder()
-                .ID(1)
-                .shopID(1)
-                .name("Bun cha")
-                .cateID(1)
-                .price(30000)
-                .description("this is a food")
-                .imageID(1)
-                .build());
-        list.add(Food.builder()
-                .ID(2)
-                .shopID(1)
-                .name("Bun ca")
-                .cateID(1)
-                .price(35000)
-                .description("this is a food")
-                .imageID(2)
-                .build());
-        list.add(Food.builder()
-                .ID(3)
-                .shopID(2)
-                .name("Pho bo")
-                .cateID(2)
-                .price(30000)
-                .description("this is a food")
-                .imageID(3)
-                .build());
-        list.add(Food.builder()
-                .ID(4)
-                .shopID(2)
-                .name("Pho ga")
-                .cateID(1)
-                .price(25000)
-                .description("this is a food")
-                .imageID(4)
-                .build());
-        list.add(Food.builder()
-                .ID(5)
-                .shopID(3)
-                .name("Banh mi bon bon")
-                .cateID(3)
-                .price(20000)
-                .description("this is a food")
-                .imageID(5)
-                .build());
-        list.add(Food.builder()
-                .ID(6)
-                .shopID(3)
-                .name("Banh mi que")
-                .cateID(3)
-                .price(15000)
-                .description("this is a food")
-                .imageID(6)
-                .build());
-        return list;
+    private static FoodRespository instance;
+    private IFoodRespository iFoodRespository;
+
+    private FoodRespository(IFoodRespository iFoodRespository) {
+        this.iFoodRespository = iFoodRespository;
+    }
+
+    public static FoodRespository getInstance(IFoodRespository iFoodRespository) {
+        if (instance == null) {
+            instance = new FoodRespository(iFoodRespository);
+        }
+        return instance;
+    }
+
+    public MutableLiveData<ArrayList<Food>> getFoodData() {
+        MutableLiveData<ArrayList<Food>> mutableLiveDataFood = new MutableLiveData<>();
+        mutableLiveDataFood.setValue(Food.generateFoodArray());
+        return mutableLiveDataFood;
     }
 }
