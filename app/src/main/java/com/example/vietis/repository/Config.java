@@ -1,4 +1,4 @@
-package com.example.vietis.respository;
+package com.example.vietis.repository;
 
 public class Config {
     //test nhớ sửa file config
