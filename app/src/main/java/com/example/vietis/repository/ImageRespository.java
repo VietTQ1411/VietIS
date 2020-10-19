@@ -4,13 +4,6 @@ import com.example.vietis.entity.Image;
 
 import java.util.ArrayList;
 
-import lombok.Builder;
-import lombok.Data;
-import lombok.Getter;
-
-@Data
-@Builder
-@Getter
 public class ImageRespository {
     ImageRespository instance;
     ArrayList<Image> arrayListImage;
