@@ -7,12 +7,29 @@
     tools:context=".controller.MainActivity">
 
     <TextView
+        android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginTop="12dp"
+        android:text="Haven't got an account yet ?"
+        android:textColor="#FFFFFF"
+        android:textSize="18dp"
+        app:layout_constraintEnd_toEndOf="@+id/main_login"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/main_login"
+        app:layout_constraintTop_toBottomOf="@+id/main_login" />
 
+    <TextView
+        android:id="@+id/main_sign_up"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:clickable="true"
+        android:text="Sign up"
+        android:textColor="#4A5EDF"
+        android:textSize="18dp"
+        app:layout_constraintEnd_toEndOf="@+id/main_login"
+        app:layout_constraintHorizontal_bias="0.149"
+        app:layout_constraintStart_toEndOf="@+id/textView2"
+        app:layout_constraintTop_toBottomOf="@+id/main_login" />
 </androidx.constraintlayout.widget.ConstraintLayout>
