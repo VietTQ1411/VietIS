@@ -30,7 +30,9 @@ public class MainActivity extends AppCompatActivity {
 
     public String toString2() {
         return "MainActivity{}";
-
+    }
+    public String toString4() {
+        return "MainActivity{}";
     }
  
 }
