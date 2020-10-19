@@ -1,4 +1,4 @@
-package com.example.vietis.respository;
+package com.example.vietis.repository;
 
 import com.example.vietis.entity.Image;
 
