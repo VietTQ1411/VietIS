@@ -20,5 +20,4 @@ public class User {
     private String userType;
     private String tokenKey;
     private Date expiredDate;
-
 }
