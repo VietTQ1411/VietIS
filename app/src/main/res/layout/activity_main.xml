@@ -4,59 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.MainActivity"
-    android:background="@drawable/background">
-
-
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="363dp"
-        android:layout_height="215dp"
-        android:src="@mipmap/logo_foreground"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
-
-    <Button
-        android:id="@+id/main_facebook"
-        android:layout_width="350dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
-        android:backgroundTint="#3B60CD"
-        android:text="Continue with Facebook"
-        android:textColor="#FFFFFF"
-        android:textSize="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
-
-    <Button
-        android:id="@+id/main_google"
-        android:layout_width="350dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:backgroundTint="#CF3B3B"
-        android:text="Continue with google"
-        android:textColor="#FFFFFF"
-        android:textSize="20dp"
-        app:layout_constraintEnd_toEndOf="@+id/main_facebook"
-        app:layout_constraintStart_toStartOf="@+id/main_facebook"
-        app:layout_constraintTop_toBottomOf="@+id/main_facebook" />
-
-    <Button
-        android:id="@+id/main_login"
-        android:layout_width="350dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:backgroundTint="#6DE66F"
-        android:text="Login"
-        android:textColor="#FFFFFF"
-        android:textSize="20dp"
-        app:layout_constraintEnd_toEndOf="@+id/main_google"
-        app:layout_constraintHorizontal_bias="0.491"
-        app:layout_constraintStart_toStartOf="@+id/main_google"
-        app:layout_constraintTop_toBottomOf="@+id/main_google" />
+    tools:context=".controller.MainActivity">
 
     <TextView
         android:id="@+id/textView2"

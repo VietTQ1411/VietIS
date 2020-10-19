@@ -1,8 +1,10 @@
-package com.example.vietis;
+package com.example.vietis.controller;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.example.vietis.R;
 
 public class MainActivity extends AppCompatActivity {
 
