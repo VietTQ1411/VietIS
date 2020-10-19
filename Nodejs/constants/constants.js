@@ -6,7 +6,7 @@ const PORT = 3000
 //sequelize-automate -t js -h VIETTQ  -d AndroidLibrary -u sa -p Matkhaumoi1 -P 1433  -e mssql -o models 
 const HOSTNAME = 'DESKTOP-4SJNRQ6'
 const DB_PORT = 1433
-const DB_NAME = "AndroidLibrary"
+const DB_NAME = "VietIS"
 const DB_USERNAME = 'sa'
 const DB_PASSWORD = '123456'
 
