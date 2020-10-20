@@ -1,5 +1,3 @@
-const mysql = require('mysql')
-const mysql2 = require('mysql2')
 const { Sequelize } = require('sequelize')
 const {
     MAXMUM_FILE_SIZE,
@@ -12,16 +10,24 @@ const {
 } = require('../constants/constants')
 
 const sequelize = new Sequelize(
-    DB_NAME,
-    DB_USERNAME,
-    DB_PASSWORD, {
-        dialect: 'mssql',
-        dialectModule: mysql2,
-        host: HOSTNAME,
-        port: DB_PORT
-    }
-)
+        DB_NAME,
+        DB_USERNAME,
+        DB_PASSWORD, {
+            dialect: 'mssql',
+            dialectOptions: {
+                instanceName: 'SQLEXPRESS',
+                requestTimeout: 30000
+            },
+            host: 'localhost',
+            port: 1433,
+            additional: {
+                timestamps: false,
 
+            }
+
+        }
+    )
+    //sequelize-automate -t js -h DESKTOP-4SJNRQ6  -d VietIS -u sa -p 123456 -P 1433  -e mssql -o models 
 sequelize.authenticate()
     .then(() => {
         console.log('Connection Sequelize successfully.');

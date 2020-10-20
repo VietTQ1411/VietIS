@@ -1,7 +1,7 @@
 /*
     import file
 */
-const {MAXMUM_FILE_SIZE, PORT} = require('./constants/constants')
+const { MAXMUM_FILE_SIZE, PORT } = require('./constants/constants')
 const express = require('express')
 const app = express()
 
@@ -15,15 +15,14 @@ app.use(bodyParser.json())
     setting
 */
 app.use(fileUpload({
-    limits: { fileSize: MAXMUM_FILE_SIZE * 1024 * 1024 },  //Maximum = 50 MB  
+    limits: { fileSize: MAXMUM_FILE_SIZE * 1024 * 1024 }, //Maximum = 50 MB  
 }))
 
 
 /*
     call API rourter
 */
-const BookRouter = require('./routings/Book')
-app.use('/books', BookRouter)
+
 const UserRouter = require('./routings/User')
 app.use('/users', UserRouter)
 
