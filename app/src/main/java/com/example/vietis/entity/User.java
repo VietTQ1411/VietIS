@@ -37,7 +37,7 @@ public class User {
     @Builder.Default
     private String address="";
     @Builder.Default
-    private String userType="";
+    private int userType=1;
     @Builder.Default
     private String tokenKey="";
     @Builder.Default
@@ -53,7 +53,7 @@ public class User {
                     .imageId(jsonObject.getInt("imageId"))
                     .phoneNumber(jsonObject.getString("phoneNumber"))
                     .address(jsonObject.getString("address"))
-                    .userType(jsonObject.getString("userType"))
+                    .userType(jsonObject.getInt("userType"))
                     .tokenKey(jsonObject.getString("tokenKey"))
                     .expiredDate(Utility.convertToDate(jsonObject.getString("expiredDate")))
                     .build();
