@@ -9,6 +9,7 @@ import com.example.vietis.helpers.Utility;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.Calendar;
 import java.util.Date;
 
 import lombok.Builder;
@@ -41,7 +42,7 @@ public class User {
     @Builder.Default
     private String tokenKey="";
     @Builder.Default
-    private Date expiredDate= new Date(System.currentTimeMillis());
+    private String expiredDate= Calendar.getInstance().toString();
 
     public static User createUserFromJSONObject(JSONObject jsonObject) {
         try{
@@ -55,7 +56,7 @@ public class User {
                     .address(jsonObject.getString("address"))
                     .userType(jsonObject.getInt("userType"))
                     .tokenKey(jsonObject.getString("tokenKey"))
-                    .expiredDate(Utility.convertToDate(jsonObject.getString("expiredDate")))
+                    .expiredDate(jsonObject.getString("expiredDate"))
                     .build();
 
         }catch (JSONException e){
