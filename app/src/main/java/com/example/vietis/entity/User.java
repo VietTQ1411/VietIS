@@ -25,22 +25,22 @@ public class User {
     private int id;
     @ColumnInfo(name = "email")
     @Builder.Default
-    private String email ="";
+    private String email = "";
     @ColumnInfo(name = "password")
-    private String password="";
+    private String password = "";
     @Builder.Default
-    private String hashedPassword="";
+    private String hashedPassword = "";
     @Builder.Default
-    private String name="";
+    private String name = "";
     private int imageId;
     @Builder.Default
-    private String phoneNumber="";
+    private String phoneNumber = "";
     @Builder.Default
-    private String address="";
+    private String address = "";
     @Builder.Default
-    private int userType=1;
+    private int userType = 1;
     @Builder.Default
-    private String tokenKey="";
+    private String tokenKey = "";
     @Builder.Default
     private String expiredDate= Calendar.getInstance().toString();
 
@@ -59,7 +59,7 @@ public class User {
     }
 
     public static User createUserFromJSONObject(JSONObject jsonObject) {
-        try{
+        try {
             return User.builder()
                     .id(jsonObject.getInt("id"))
                     .email(jsonObject.getString("email"))
@@ -73,7 +73,7 @@ public class User {
                     .expiredDate(jsonObject.getString("expiredDate"))
                     .build();
 
-        }catch (JSONException e){
+        } catch (JSONException e) {
             return null;
         }
     }
