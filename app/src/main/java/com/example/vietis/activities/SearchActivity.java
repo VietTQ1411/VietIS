@@ -1,18 +1,37 @@
 package com.example.vietis.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
+import android.view.View;
 
 import com.example.vietis.R;
-import com.example.vietis.entity.Food;
+import com.example.vietis.adapter.ShopAdapter;
+import com.example.vietis.entity.Shop;
 import com.example.vietis.inteface.IView;
+import com.example.vietis.view_model.SearchActivityModel;
 
-import java.io.Console;
-import java.util.logging.Logger;
+import java.security.Key;
+import java.util.ArrayList;
 
 public class SearchActivity extends AppCompatActivity implements IView {
+
+    //UI holders
+    private SearchView searchViewSearch;
+    private RecyclerView recyclerViewSearch;
+
+    //RecyclerView components
+    private ShopAdapter shopAdapter;
+
+    //View Model
+    private SearchActivityModel searchActivityModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,11 +43,38 @@ public class SearchActivity extends AppCompatActivity implements IView {
 
     @Override
     public void mappingUI() {
-
+        searchViewSearch = findViewById(R.id.searchViewSearch);
+        recyclerViewSearch = findViewById(R.id.recyclerViewSearch);
+        shopAdapter = new ShopAdapter(new ArrayList<Shop>());
+        searchActivityModel = new ViewModelProvider(this).get(SearchActivityModel.class);
     }
 
     @Override
     public void setupUI() {
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext(),
+                LinearLayoutManager.VERTICAL, false);
+        recyclerViewSearch.setLayoutManager(layoutManager);
+        searchActivityModel.init();
+        searchActivityModel.getShopData().observe(this, new Observer<ArrayList<Shop>>() {
+            @Override
+            public void onChanged(ArrayList<Shop> arrayList) {
+                shopAdapter = new ShopAdapter(arrayList);
+                shopAdapter.notifyDataSetChanged();
+                recyclerViewSearch.setAdapter(shopAdapter);
+            }
+        });
+        //SearchView action
+        searchViewSearch.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
 
     }
 }
