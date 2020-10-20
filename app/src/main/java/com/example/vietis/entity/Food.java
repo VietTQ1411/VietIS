@@ -11,13 +11,26 @@ import lombok.Getter;
 @Builder
 @Getter
 public class Food {
-    private int ID;
-    private int shopID;
-    private String name;
-    private int cateID;
-    private float price;
-    private String description;
-    private int imageID;
+    @Builder.Default
+    private int ID = 1;
+
+    @Builder.Default
+    private int shopID = 1;
+
+    @Builder.Default
+    private String name = "default name";
+
+    @Builder.Default
+    private int cateID = 1;
+
+    @Builder.Default
+    private float price = 0;
+
+    @Builder.Default
+    private String description = "default description";
+
+    @Builder.Default
+    private int imageID = 1;
 
     public static ArrayList<Food> generateFoodArray() {
         ArrayList<Food> list = new ArrayList<>();
