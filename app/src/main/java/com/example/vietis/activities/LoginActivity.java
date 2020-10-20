@@ -56,9 +56,9 @@ public class LoginActivity extends AppCompatActivity implements IView {
                     public void onChanged(User user) {
                         if(user.getName().isEmpty()) return;
                         Database db = Database.getInstance(LoginActivity.this);
-//                        if(db.userDAO().getLoginUser(user)!= null){
+                        if(db.userDAO().getLoginUser(user)!= null){
                             LoginActivity.this.navigateToOtherActivity();
-//                        }
+                        }
                     }
 
                 });
