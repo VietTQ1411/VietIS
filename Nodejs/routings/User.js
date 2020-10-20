@@ -21,20 +21,20 @@ router.post('/register', validateRegisterUser(), async(req, res) => {
             });
             return;
         }
-        const { email, password, name, phoneNumber, imageId, address, userType } = req.body
+        const { email, password, name, phoneNumber, address, userType } = req.body
         try {
-            let haPassword = await bcrypt.hash(password, 10);
-            const future30Days = new Date();
-            future30Days.setDate(future30Days.getDate() + 30);
+            let hashPassword = await bcrypt.hash(password, 10);
+            const expireDate = new Date();
+            await expireDate.setDate(expireDate.getDate() + 30);
             let newUser = await UserModel.create({
                 email,
-                password,
+                hashPassword,
                 name,
                 phoneNumber,
-                imageId,
+                imageId: 1,
                 address,
                 userType,
-                expiredDate: future30Days,
+                expireDate,
                 tokenKey: require('key-creator').generate()
             })
             await newUser.save()
@@ -85,15 +85,16 @@ router.post('/login', validateLogin(), async(req, res) => {
             return
         }
         let foundUser = foundUsers[0]
-        let hashedPassword = foundUser.hashedPassword
-        let isMatchPassword = await bcrypt.compare(password, hashedPassword)
+        let hashPassword = foundUser.hashPassword
+
+        let isMatchPassword = await bcrypt.compare(password, hashPassword)
         if (isMatchPassword) {
             const future30Days = new Date();
             future30Days.setDate(future30Days.getDate() + 30);
             foundUser.tokenKey = require('key-creator').generate()
-            foundUser.expiredDate = future30Days
+            foundUser.expireDate = future30Days
             await foundUser.save()
-            foundUser.hashedPassword = "not show"
+            foundUser.hashPassword = "not show"
             res.status(200).json({
                 result: 'ok',
                 data: foundUser,
