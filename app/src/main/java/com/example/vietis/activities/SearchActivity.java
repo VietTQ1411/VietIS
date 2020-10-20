@@ -9,16 +9,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 
-
-import com.example.vietis.R;
-import com.example.vietis.adapter.ShopAdapter;
-import com.example.vietis.entity.Shop;
-import com.example.vietis.inteface.IView;
-import com.example.vietis.view_model.SearchActivityModel;
-
-
-import java.util.ArrayList;
-
 public class SearchActivity extends AppCompatActivity implements IView {
 
     //UI holders
