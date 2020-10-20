@@ -8,9 +8,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.Getter;
 
-@Data
-@Builder
-@Getter
 public class ImageRespository {
     ImageRespository instance;
     ArrayList<Image> arrayListImage;
