@@ -54,8 +54,8 @@ public class LoginActivity extends AppCompatActivity implements IView {
                 new Observer<User>() {
                     @Override
                     public void onChanged(User user) {
-                        if(user.getEmail().isEmpty()) return;
-                        Database db = Room.databaseBuilder(getApplicationContext(),Database.class,"Fuddy").build();
+                        if(user.getName().isEmpty()) return;
+                        Database db = Database.getInstance(LoginActivity.this);
                         if(db.userDAO().getLoginUser(user)!= null){
                             LoginActivity.this.navigateToOtherActivity();
                         }
