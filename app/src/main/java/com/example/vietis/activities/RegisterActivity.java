@@ -46,9 +46,9 @@ public class RegisterActivity extends AppCompatActivity implements IView {
                     @Override
                     public void onChanged(User user) {
                         Database db =Database.getInstance(RegisterActivity.this);
-                        if(db.userDAO().getLoginUser(user)!= null){
-                            db.userDAO().insertUser(user);
-                        }
+//                        if(db.userDAO().getLoginUser(user)!= null){
+//                            db.userDAO().insertUser(user);
+//                        }
                     }
                 });
     }
