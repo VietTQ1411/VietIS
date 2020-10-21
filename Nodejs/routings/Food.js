@@ -86,10 +86,10 @@ router.get('/getfood', async(req, res) => {
             })
             return;
         }
-        let foundBooks = await FoodModel.findAll({
-            offset: 10,
-            limit: 2
-        })
+        // let foundBooks = await FoodModel.findAll({
+        //     offset: 10,
+        //     limit: 2
+        // })
         res.json({
             result: "ok",
             data: foundBooks,

@@ -11,8 +11,10 @@ import java.util.List;
 public interface UserDAO {
     @Query("SELECT * FROM User")
     List<User> getAll();
+
     @Query("SELECT * FROM User WHERE email = :email AND password= :password")
     User getLoginUser(String email, String password);
-    @Insert()
-    void insertUser(User user);
+
+    @Insert
+    void insertUser(User... users);
 }
