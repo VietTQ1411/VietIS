@@ -4,7 +4,9 @@ const { checkToken } = require('../helpers/TokenCheck')
 const { sequelize } = require('../databases/database')
 const FoodModel = require('../models/Food')(sequelize)
 const { validateFoodNew } = require('../validations/validate')
+const { validationResult } = require('express-validator')
 
+const { Op } = require("sequelize");
 /**
  * URL: http://localhost:3000/foods/addnew
  */
