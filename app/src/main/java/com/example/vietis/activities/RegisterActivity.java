@@ -2,6 +2,7 @@ package com.example.vietis.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -47,9 +48,13 @@ public class RegisterActivity extends AppCompatActivity implements IView {
                 new Observer<User>() {
                     @Override
                     public void onChanged(User user) {
-//                        Database db =Database.getInstance(RegisterActivity.this);
-//
-//                            db.userDAO().insertUser(user);
+                        Database db =Database.getInstance(RegisterActivity.this);
+                            db.userDAO().insertUser(user);
+                            if(db.userDAO().getAll() != null){
+                                Log.d("USER","REGISTER SUCCESS");
+                            }else{
+                                Log.d("USER","REGISTER FAILED");
+                            }
                         if(user!=null){
                             Intent intent = new Intent(RegisterActivity.this,SearchActivity.class);
                             RegisterActivity.this.startActivity(intent);
