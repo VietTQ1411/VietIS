@@ -30,7 +30,7 @@ const validateLogin = () => {
 const validateFoodNew = () => {
     return [
         check('name', 'Invalid does not Empty').not().isEmpty(),
-        check('shopId', 'Invalid email').not().isEmpty(),
+        //check('shopId', 'Invalid email').not().isEmpty(),
     ];
 }
 
