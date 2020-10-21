@@ -39,6 +39,7 @@ public class LoginActivity extends AppCompatActivity implements IView {
         txtPassword = findViewById(R.id.login_password);
         btnLogin = findViewById(R.id.button_login);
         forgotPassword = findViewById(R.id.forgot_password);
+        loginActivityViewModel = new LoginActivityViewModel();
     }
 
     public void navigateToOtherActivity(){
@@ -54,9 +55,7 @@ public class LoginActivity extends AppCompatActivity implements IView {
                 new Observer<User>() {
                     @Override
                     public void onChanged(User user) {
-                        if(user.getName().isEmpty()) return;
-                        Database db = Database.getInstance(LoginActivity.this);
-                        if(db.userDAO().getLoginUser(user.getEmail(),user.getPassword())!= null){
+                        if(user!= null){
                             LoginActivity.this.navigateToOtherActivity();
                         }
                     }

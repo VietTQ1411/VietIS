@@ -57,7 +57,7 @@ public class UserRepository {
             @Override
             public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
                 try{
-                    String jsonString = response.body().toString();
+                    String jsonString = response.body().string();
                     JSONObject jsonObject = new JSONObject(jsonString);
                     JSONObject jsonUserObject =jsonObject.getJSONObject("data");
                     User user = User.createUserFromJSONObject(jsonUserObject);
@@ -91,7 +91,7 @@ public class UserRepository {
             @Override
             public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
                 try{
-                    String jsonString = response.body().toString();
+                    String jsonString = response.body().string();
                     JSONObject jsonObject = new JSONObject(jsonString);
                     JSONObject jsonUserObject =jsonObject.getJSONObject("data");
                     User user = User.createUserFromJSONObject(jsonUserObject);
