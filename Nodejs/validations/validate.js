@@ -6,7 +6,7 @@ const validateRegisterUser = () => {
         check('name', 'name more than 3 degits').isLength({ min: 3 }),
         check('email', 'Invalid does not Empty').not().isEmpty(),
         check('email', 'Invalid email').isEmail(),
-        check('password', 'password more than 6 degits').isLength({ min: 6 }),
+        //check('hashPassword', 'password more than 6 degits').isLength({ min: 6 }),
         // checkSchema( {
         //     "userType": {
         //       in: 'body',
@@ -26,7 +26,17 @@ const validateLogin = () => {
     ];
 }
 
+
+const validateFoodNew = () => {
+    return [
+        check('name', 'Invalid does not Empty').not().isEmpty(),
+        check('shopId', 'Invalid email').not().isEmpty(),
+    ];
+}
+
+
 module.exports = {
     validateRegisterUser: validateRegisterUser,
-    validateLogin: validateLogin
+    validateLogin: validateLogin,
+    validateFoodNew: validateFoodNew
 }
