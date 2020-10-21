@@ -46,8 +46,22 @@ public class User {
     private String tokenKey = "";
 
     @Builder.Default
-    @TypeConverters(DateConverter.class)
-    private Date expireDate = Calendar.getInstance().getTime();
+    private String expireDate ="";
+
+    public User(int id, String email, String password, String hashedPassword,
+                String name, int imageId, String phoneNumber, String address, int userType, String tokenKey,String expireDate) {
+        this.id = id;
+        this.email = email;
+        this.password = password;
+        this.hashedPassword = hashedPassword;
+        this.name = name;
+        this.imageId = imageId;
+        this.phoneNumber = phoneNumber;
+        this.address = address;
+        this.userType = userType;
+        this.tokenKey = tokenKey;
+        this.expireDate = expireDate;
+    }
 
     public static User createUserFromJSONObject(JSONObject jsonObject) {
         try {
@@ -62,7 +76,6 @@ public class User {
                     .userType(jsonObject.getInt("userType"))
                     .tokenKey(jsonObject.getString("tokenKey"))
                     .expireDate(jsonObject.getString("expireDate"))
-
                     .build();
 
         } catch (JSONException e) {
