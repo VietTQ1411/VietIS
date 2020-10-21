@@ -3,7 +3,9 @@ package com.example.vietis.entity;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
+import androidx.room.TypeConverters;
 
+import com.example.vietis.helpers.DateConverter;
 import com.example.vietis.helpers.Utility;
 
 import org.json.JSONException;
@@ -42,37 +44,25 @@ public class User {
     private int userType = 1;
     @Builder.Default
     private String tokenKey = "";
-    @Builder.Default
-    private String expiredDate="";
 
-    public User(int id, String email, String password, String hashedPassword, String name,
-                int imageId, String phoneNumber, String address, int userType, String tokenKey, String expiredDate) {
-        this.id = id;
-        this.email = email;
-        this.password = password;
-        this.hashedPassword = hashedPassword;
-        this.name = name;
-        this.imageId = imageId;
-        this.phoneNumber = phoneNumber;
-        this.address = address;
-        this.userType = userType;
-        this.tokenKey = tokenKey;
-        this.expiredDate = expiredDate;
-    }
+    @Builder.Default
+    @TypeConverters(DateConverter.class)
+    private Date expireDate = Calendar.getInstance().getTime();
 
     public static User createUserFromJSONObject(JSONObject jsonObject) {
         try {
             return User.builder()
                     .id(jsonObject.getInt("id"))
                     .email(jsonObject.getString("email"))
-                    .hashedPassword(jsonObject.getString("hashedPassword"))
+                    .hashedPassword(jsonObject.getString("hashPassword"))
                     .name(jsonObject.getString("name"))
                     .imageId(jsonObject.getInt("imageId"))
                     .phoneNumber(jsonObject.getString("phoneNumber"))
                     .address(jsonObject.getString("address"))
                     .userType(jsonObject.getInt("userType"))
                     .tokenKey(jsonObject.getString("tokenKey"))
-                    .expiredDate(jsonObject.getString("expireDate"))
+                    .expireDate(jsonObject.getString("expireDate"))
+
                     .build();
 
         } catch (JSONException e) {

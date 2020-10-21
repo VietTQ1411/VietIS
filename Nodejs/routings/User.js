@@ -10,50 +10,74 @@ const UserModel = require('../models/User')(sequelize)
 
 //http://192.168.1.142:3000/users/register
 router.post('/register', validateRegisterUser(), async(req, res) => {
-        //validate du lieu tu client gui len    
-        const errors = validationResult(req);
-        if (!errors.isEmpty()) {
-            res.status(422).json({
+    //validate du lieu tu client gui len    
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        res.status(422).json({
+            result: 'failed',
+            data: {},
+            message: 'Validation input error',
+            errors: errors.errors
+        });
+        return;
+    }
+    const { email, password, name, userType } = req.body
+    try {
+        let foundUsers = await UserModel.findAll({
+            where: {
+                email: {
+                    [Op.eq]: email
+                }
+            }
+        })
+        if (foundUsers.length > 0) {
+            res.json({
                 result: 'failed',
                 data: {},
-                message: 'Validation input error',
-                errors: errors.errors
-            });
-            return;
-        }
-        const { email, password, name, phoneNumber, imageId, address, userType } = req.body
-        try {
-            let haPassword = await bcrypt.hash(password, 10);
-            const future30Days = new Date();
-            future30Days.setDate(future30Days.getDate() + 30);
-            let newUser = await UserModel.create({
-                email,
-                password,
-                name,
-                phoneNumber,
-                imageId,
-                address,
-                userType,
-                expiredDate: future30Days,
-                tokenKey: require('key-creator').generate()
+                message: 'User tồn tại'
             })
-            await newUser.save()
+            return
+        }
+        let hashPassword = await bcrypt.hash(password, 10);
+        const expireDate = new Date();
+        await expireDate.setDate(expireDate.getDate() + 30);
+        let newUser = await UserModel.create({
+            email,
+            hashPassword,
+            name,
+            userType,
+            imageId: 1,
+            expireDate,
+            tokenKey: require('key-creator').generate()
+        })
+        await newUser.save()
 
-            res.json({
-                result: 'ok',
-                data: newUser,
-                message: 'Register new user successfully'
-            })
-        } catch (exception) {
-            res.status(500).json({
-                result: 'failed 500',
-                data: {},
-                message: `Error details: ${exception.toString()}`,
-                errors: []
-            })
-        }
-    })
-    //http://192.168.1.142:3000/users/login
+        res.json({
+            result: 'ok',
+            data: newUser,
+            message: 'Register new user successfully'
+        })
+    } catch (exception) {
+        res.status(500).json({
+            result: 'failed 500',
+            data: {},
+            message: `Error details: ${exception.toString()}`,
+            errors: []
+        })
+    }
+})
+
+
+
+
+
+
+
+
+
+
+
+//http://192.168.1.142:3000/users/login
 router.post('/login', validateLogin(), async(req, res) => {
     //validate du lieu tu client gui len    
     const errors = validationResult(req);
@@ -85,15 +109,16 @@ router.post('/login', validateLogin(), async(req, res) => {
             return
         }
         let foundUser = foundUsers[0]
-        let hashedPassword = foundUser.hashedPassword
-        let isMatchPassword = await bcrypt.compare(password, hashedPassword)
+        let hashPassword = foundUser.hashPassword
+
+        let isMatchPassword = await bcrypt.compare(password, hashPassword)
         if (isMatchPassword) {
             const future30Days = new Date();
             future30Days.setDate(future30Days.getDate() + 30);
             foundUser.tokenKey = require('key-creator').generate()
-            foundUser.expiredDate = future30Days
+            foundUser.expireDate = future30Days
             await foundUser.save()
-            foundUser.hashedPassword = "not show"
+            foundUser.hashPassword = "not show"
             res.status(200).json({
                 result: 'ok',
                 data: foundUser,

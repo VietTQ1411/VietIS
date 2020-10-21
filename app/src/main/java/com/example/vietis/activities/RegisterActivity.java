@@ -1,5 +1,6 @@
 package com.example.vietis.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -42,15 +43,19 @@ public class RegisterActivity extends AppCompatActivity implements IView {
     private String getPassword(){return txtPassword.getText().toString().trim();}
     private String getName(){return txtName.getText().toString().trim();}
     public void register(){
-        registerActivityViewModel.register(getEmail(),getPassword(),getName(),"1");
+        registerActivityViewModel.register(getEmail(),getPassword(),getName(),1+"");
         registerActivityViewModel.getUser().observe(this,
                 new Observer<User>() {
                     @Override
                     public void onChanged(User user) {
-                        Database db =Database.getInstance(RegisterActivity.this);
-                            db.userDAO().insertUser(user);
-//                            db.userDAO().getLoginUser(user.getEmail(),user.getPassword());
-                        Log.d("user",user.getEmail());
+//                        Database db =Database.getInstance(RegisterActivity.this);
+//
+//                            db.userDAO().insertUser(user);
+                        if(user!=null){
+                            Intent intent = new Intent(RegisterActivity.this,SearchActivity.class);
+                            RegisterActivity.this.startActivity(intent);
+                        }
+
                     }
                 });
     }

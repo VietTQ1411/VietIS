@@ -52,6 +52,24 @@ module.exports = sequelize => {
         key: "id",
         model: "Image_model"
       }
+    },
+    rating: {
+      type: DataTypes.FLOAT,
+      allowNull: true,
+      defaultValue: null,
+      primaryKey: false,
+      autoIncrement: false,
+      comment: null,
+      field: "rating"
+    },
+    voucherId: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      defaultValue: null,
+      primaryKey: false,
+      autoIncrement: false,
+      comment: null,
+      field: "voucherId"
     }
   };
   const options = {

@@ -36,7 +36,9 @@ public class LoginActivity extends AppCompatActivity implements IView {
     @Override
     public void mappingUI() {
         txtEmail = findViewById(R.id.login_username);
+        txtEmail.setText("vettq@gmail.com");
         txtPassword = findViewById(R.id.login_password);
+        txtPassword.setText("123456");
         btnLogin = findViewById(R.id.button_login);
         forgotPassword = findViewById(R.id.forgot_password);
         loginActivityViewModel = new LoginActivityViewModel();
@@ -45,8 +47,8 @@ public class LoginActivity extends AppCompatActivity implements IView {
     public void navigateToOtherActivity(){
         Intent intent = new Intent(LoginActivity.this,SearchActivity.class);
         this.startActivity(intent);
-
     }
+
     public String getEmail(){return txtEmail.getText().toString().trim();}
     public String getPassword(){return txtPassword.getText().toString().trim();}
     private void login(){
@@ -55,6 +57,7 @@ public class LoginActivity extends AppCompatActivity implements IView {
                 new Observer<User>() {
                     @Override
                     public void onChanged(User user) {
+
                         if(user!= null){
                             LoginActivity.this.navigateToOtherActivity();
                         }
