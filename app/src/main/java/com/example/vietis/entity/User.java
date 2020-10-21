@@ -47,9 +47,9 @@ public class User {
 
     @Builder.Default
     private String expireDate ="";
-
+    
     public User(int id, String email, String password, String hashedPassword,
-                String name, int imageId, String phoneNumber, String address, int userType, String tokenKey,String expireDate) {
+                String name, int imageId, String phoneNumber, String address, int userType, String tokenKey, String expireDate) {
         this.id = id;
         this.email = email;
         this.password = password;
