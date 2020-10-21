@@ -25,7 +25,8 @@ app.use(fileUpload({
 
 const UserRouter = require('./routings/User')
 app.use('/users', UserRouter)
-
+const FoodRouter = require('./routings/Food')
+app.use('/foods', FoodRouter)
 
 /*
     listening

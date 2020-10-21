@@ -8,7 +8,7 @@ const {
     DB_USERNAME,
     DB_PASSWORD
 } = require('../constants/constants')
-
+    // timestamps: false,
 Sequelize.DATE.prototype._stringify = function _stringify(date, options) {
     date = this._applyTimezone(date, options);
 

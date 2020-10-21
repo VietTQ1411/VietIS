@@ -20,10 +20,11 @@ module.exports = sequelize => {
             primaryKey: false,
             autoIncrement: false,
             comment: null,
-            field: "email"
+            field: "email",
+            unique: "UC_User"
         },
         hashPassword: {
-            type: DataTypes.TEXT,
+            type: DataTypes.STRING(300),
             allowNull: true,
             defaultValue: null,
             primaryKey: false,
@@ -43,7 +44,6 @@ module.exports = sequelize => {
         imageId: {
             type: DataTypes.INTEGER,
             allowNull: true,
-            defaultValue: null,
             primaryKey: false,
             autoIncrement: false,
             comment: null,

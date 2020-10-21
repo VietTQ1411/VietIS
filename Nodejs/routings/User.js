@@ -10,50 +10,74 @@ const UserModel = require('../models/User')(sequelize)
 
 //http://192.168.1.142:3000/users/register
 router.post('/register', validateRegisterUser(), async(req, res) => {
-        //validate du lieu tu client gui len    
-        const errors = validationResult(req);
-        if (!errors.isEmpty()) {
-            res.status(422).json({
+    //validate du lieu tu client gui len    
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        res.status(422).json({
+            result: 'failed',
+            data: {},
+            message: 'Validation input error',
+            errors: errors.errors
+        });
+        return;
+    }
+    const { email, password, name, userType } = req.body
+    try {
+        let foundUsers = await UserModel.findAll({
+            where: {
+                email: {
+                    [Op.eq]: email
+                }
+            }
+        })
+        if (foundUsers.length > 0) {
+            res.json({
                 result: 'failed',
                 data: {},
-                message: 'Validation input error',
-                errors: errors.errors
-            });
-            return;
-        }
-        const { email, password, name, phoneNumber, address, userType } = req.body
-        try {
-            let hashPassword = await bcrypt.hash(password, 10);
-            const expireDate = new Date();
-            await expireDate.setDate(expireDate.getDate() + 30);
-            let newUser = await UserModel.create({
-                email,
-                hashPassword,
-                name,
-                phoneNumber,
-                imageId: 1,
-                address,
-                userType,
-                expireDate,
-                tokenKey: require('key-creator').generate()
+                message: 'User tồn tại'
             })
-            await newUser.save()
+            return
+        }
+        let hashPassword = await bcrypt.hash(password, 10);
+        const expireDate = new Date();
+        await expireDate.setDate(expireDate.getDate() + 30);
+        let newUser = await UserModel.create({
+            email,
+            hashPassword,
+            name,
+            userType,
+            imageId: 1,
+            expireDate,
+            tokenKey: require('key-creator').generate()
+        })
+        await newUser.save()
 
-            res.json({
-                result: 'ok',
-                data: newUser,
-                message: 'Register new user successfully'
-            })
-        } catch (exception) {
-            res.status(500).json({
-                result: 'failed 500',
-                data: {},
-                message: `Error details: ${exception.toString()}`,
-                errors: []
-            })
-        }
-    })
-    //http://192.168.1.142:3000/users/login
+        res.json({
+            result: 'ok',
+            data: newUser,
+            message: 'Register new user successfully'
+        })
+    } catch (exception) {
+        res.status(500).json({
+            result: 'failed 500',
+            data: {},
+            message: `Error details: ${exception.toString()}`,
+            errors: []
+        })
+    }
+})
+
+
+
+
+
+
+
+
+
+
+
+//http://192.168.1.142:3000/users/login
 router.post('/login', validateLogin(), async(req, res) => {
     //validate du lieu tu client gui len    
     const errors = validationResult(req);
