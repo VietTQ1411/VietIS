@@ -5,8 +5,9 @@ const { sequelize } = require('../databases/database')
 const FoodModel = require('../models/Food')(sequelize)
 const { validateFoodNew } = require('../validations/validate')
 const { validationResult } = require('express-validator')
-
 const { Op } = require("sequelize");
+
+
 /**
  * URL: http://localhost:3000/foods/addnew
  */
@@ -27,7 +28,7 @@ router.post('/addnew', validateFoodNew(), async(req, res) => {
         let foundFoods = await FoodModel.findAll({
             where: {
                 name: {
-                    [Op.eq]: name
+                    [Op.like]: name
                 },
                 storeId: {
                     [Op.eq]: storeId
@@ -70,7 +71,7 @@ router.post('/addnew', validateFoodNew(), async(req, res) => {
 
 
 /**
- * URL: http://books/getfood
+ * URL: http://localhost:3000/foods/getfood
  */
 
 router.get('/getfood', async(req, res) => {
@@ -85,7 +86,10 @@ router.get('/getfood', async(req, res) => {
             })
             return;
         }
-        let foundBooks = await FoodModel.findAll()
+        let foundBooks = await FoodModel.findAll({
+            offset: 10,
+            limit: 2
+        })
         res.json({
             result: "ok",
             data: foundBooks,
