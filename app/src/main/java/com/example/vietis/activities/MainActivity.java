@@ -36,11 +36,17 @@ public class MainActivity extends AppCompatActivity implements IView {
 
     @Override
     public void setupUI() {
-
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                MainActivity.this.startActivity(intent);
+            }
+        });
+        signUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this,RegisterActivity.class);
                 MainActivity.this.startActivity(intent);
             }
         });

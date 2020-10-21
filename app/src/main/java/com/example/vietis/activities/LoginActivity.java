@@ -2,6 +2,7 @@ package com.example.vietis.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -53,9 +54,9 @@ public class LoginActivity extends AppCompatActivity implements IView {
                 new Observer<User>() {
                     @Override
                     public void onChanged(User user) {
-                        if(user.getEmail().isEmpty()) return;
-                        Database db = Room.databaseBuilder(getApplicationContext(),Database.class,"Fuddy").build();
-                        if(db.userDAO().getLoginUser(user)!= null){
+                        if(user.getName().isEmpty()) return;
+                        Database db = Database.getInstance(LoginActivity.this);
+                        if(db.userDAO().getLoginUser(user.getEmail(),user.getPassword())!= null){
                             LoginActivity.this.navigateToOtherActivity();
                         }
                     }
@@ -64,6 +65,11 @@ public class LoginActivity extends AppCompatActivity implements IView {
     }
     @Override
     public void setupUI() {
-
+        btnLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                login();
+            }
+        });
     }
 }

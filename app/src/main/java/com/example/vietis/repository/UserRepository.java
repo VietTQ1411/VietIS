@@ -1,5 +1,7 @@
 package com.example.vietis.repository;
 
+import android.widget.SearchView;
+
 import com.example.vietis.entity.User;
 import com.example.vietis.inteface.IUserRepository;
 
@@ -24,6 +26,7 @@ public class UserRepository {
     private List<User> users;
     public static final String URL_LOGIN =
             "http://"+ Config.HOST_NAME+":"+Config.PORT+"/users/login";
+    public static final String URL_REGISTER="http://"+ Config.HOST_NAME+":"+Config.PORT+"/users/register";
     private UserRepository(IUserRepository iUserRepository) {
         this.iUserRepository = iUserRepository;
     }
@@ -62,6 +65,41 @@ public class UserRepository {
                 }catch (JSONException e){
                     iUserRepository.afterLogin(null, e);
                 }
+            }
+        });
+    }
+    public void register(String email, String password, String name, String userType){
+        OkHttpClient okHttpClient = new OkHttpClient();
+        RequestBody requestBody = new MultipartBody.Builder()
+                .setType(MultipartBody.FORM)
+                .addFormDataPart("email",email)
+                .addFormDataPart("password",password)
+                .addFormDataPart("name",name)
+                .addFormDataPart("userType", userType)
+                .build();
+        Request request = new Request.Builder()
+                .url(URL_REGISTER)
+                .post(requestBody)
+                .build();
+        Call call = okHttpClient.newCall(request);
+        call.enqueue(new Callback() {
+            @Override
+            public void onFailure(@NotNull Call call, @NotNull IOException ioException) {
+                iUserRepository.afterRegister(null, ioException);
+            }
+
+            @Override
+            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+                try{
+                    String jsonString = response.body().toString();
+                    JSONObject jsonObject = new JSONObject(jsonString);
+                    JSONObject jsonUserObject =jsonObject.getJSONObject("data");
+                    User user = User.createUserFromJSONObject(jsonUserObject);
+                    iUserRepository.afterRegister(user,null);
+                }catch (JSONException e){
+                    iUserRepository.afterRegister(null, e);
+                }
+
             }
         });
     }
