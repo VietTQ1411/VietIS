@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.vietis.R;
 import com.example.vietis.entity.Shop;
 import com.example.vietis.inteface.IView;
+import com.squareup.picasso.Picasso;
 
 
 public class SearchItemViewHolder extends RecyclerView.ViewHolder implements IView {
@@ -28,6 +29,11 @@ public class SearchItemViewHolder extends RecyclerView.ViewHolder implements IVi
     }
 
     public void setShopItem(Shop shop, int pos) {
+        Picasso.get().load(shop.getImageURL())
+                .placeholder(R.drawable.ic_launcher_foreground)
+                .resize(100, 100)
+                .centerCrop()
+                .into(imageViewShopIcon);
         textViewShopName.setText(shop.getName());
         textViewShopAddress.setText(shop.getAddress());
         ratingBarShopRating.setRating(shop.getRating());

@@ -29,6 +29,7 @@ public class User {
     @Builder.Default
     private String email = "";
     @ColumnInfo(name = "password")
+    @Builder.Default
     private String password = "";
     @Builder.Default
     private String hashedPassword = "";

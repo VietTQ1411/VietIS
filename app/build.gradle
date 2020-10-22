@@ -36,6 +36,8 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok:1.18.16'
     implementation 'com.squareup.okhttp3:okhttp:4.3.1'
 
+    //Picasso
+    implementation 'com.squareup.picasso:picasso:2.71828'
 
     def lifecycle_version = "2.2.0"
     def arch_version = "2.1.0"

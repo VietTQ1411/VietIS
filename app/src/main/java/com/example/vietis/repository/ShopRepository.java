@@ -25,10 +25,9 @@ public class ShopRepository {
         return instance;
     }
 
-    public void searchShopFromFakeData(String query, MutableLiveData<ArrayList<Shop>> data) {
+    public ArrayList<Shop> searchShopFromFakeData(String query) {
         if (query.isEmpty()) {
-            data.setValue(new ArrayList<Shop>());
-            return;
+            return new ArrayList<Shop>();
         }
         Log.i("Query",query);
         ArrayList<Shop> fakeData = Shop.generateRandomShopArray();
@@ -40,6 +39,6 @@ public class ShopRepository {
                 i--;
             }
         }
-        data.setValue(fakeData);
+        return fakeData;
     }
 }
