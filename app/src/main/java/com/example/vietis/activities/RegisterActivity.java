@@ -59,6 +59,7 @@ public class RegisterActivity extends AppCompatActivity implements IView {
                             Intent intent = new Intent(RegisterActivity.this,SearchActivity.class);
                             RegisterActivity.this.startActivity(intent);
                         }
+
                     }
                 });
     }
