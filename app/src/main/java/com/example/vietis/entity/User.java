@@ -44,7 +44,6 @@ public class User {
     private int userType = 1;
     @Builder.Default
     private String tokenKey = "";
-
     @Builder.Default
     private String expireDate ="";
 

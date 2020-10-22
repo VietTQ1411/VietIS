@@ -1,6 +1,9 @@
 package com.example.vietis.entity;
 
+import com.example.vietis.repository.Config;
+
 import java.util.ArrayList;
+import java.util.regex.Pattern;
 
 import lombok.Builder;
 import lombok.Data;
@@ -24,6 +27,11 @@ public class Shop {
     private String phoneNumber = "";
     @Builder.Default
     private int imageID = 1;
+
+    public boolean shopContainQuery(String query) {
+        return Config.containIgnoreCase(this.toString(), query);
+    }
+
 
     public static ArrayList<Shop> generateRandomShopArray() {
         ArrayList<Shop> list = new ArrayList<>();

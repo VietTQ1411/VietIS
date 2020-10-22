@@ -11,11 +11,24 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <androidx.appcompat.widget.SearchView
-            android:id="@+id/searchViewSearch"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:iconifiedByDefault="false" />
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/imageBtnSearch"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_action_back" />
+
+            <androidx.appcompat.widget.SearchView
+                android:id="@+id/searchViewSearch"
+                app:queryHint="@string/search_hint"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:iconifiedByDefault="false" />
+        </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerViewSearch"
