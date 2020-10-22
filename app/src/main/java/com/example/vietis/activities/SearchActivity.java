@@ -8,6 +8,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageButton;
 
 import com.example.vietis.R;
 import com.example.vietis.adapter.ShopAdapter;
@@ -21,6 +23,7 @@ import java.util.ArrayList;
 public class SearchActivity extends AppCompatActivity implements IView {
 
     //UI holders
+    private ImageButton imageButtonSearch;
     private SearchView searchViewSearch;
     private RecyclerView recyclerViewSearch;
 
@@ -40,6 +43,7 @@ public class SearchActivity extends AppCompatActivity implements IView {
 
     @Override
     public void mappingUI() {
+        imageButtonSearch = findViewById(R.id.imageBtnSearch);
         searchViewSearch = findViewById(R.id.searchViewSearch);
         recyclerViewSearch = findViewById(R.id.recyclerViewSearch);
         shopAdapter = new ShopAdapter(new ArrayList<Shop>());
@@ -55,20 +59,34 @@ public class SearchActivity extends AppCompatActivity implements IView {
         searchActivityModel.getShopData().observe(this, new Observer<ArrayList<Shop>>() {
             @Override
             public void onChanged(ArrayList<Shop> arrayList) {
-                shopAdapter = new ShopAdapter(arrayList);
+                shopAdapter.setShopArray(arrayList);
                 shopAdapter.notifyDataSetChanged();
-                recyclerViewSearch.setAdapter(shopAdapter);
             }
         });
+        recyclerViewSearch.setAdapter(shopAdapter);
+        //ImageButton action
+        imageButtonSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SearchActivity.this.finish();
+            }
+        });
+
         //SearchView action
         searchViewSearch.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
+                searchActivityModel.searchShopFromFakeData(query);
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
+                if (newText.equals("")) {
+                    this.onQueryTextSubmit("");
+                    return false;
+                }
+                searchActivityModel.searchShopFromFakeData(newText);
                 return false;
             }
         });
