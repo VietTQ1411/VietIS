@@ -51,7 +51,6 @@ public class RegisterActivity extends AppCompatActivity implements IView {
                         Database db =Database.getInstance(RegisterActivity.this);
                             db.userDAO().insertUser(user);
                             if(db.userDAO().getAll() != null){
-
                                 Log.d("USER","REGISTER SUCCESS");
                             }else{
                                 Log.d("USER","REGISTER FAILED");
