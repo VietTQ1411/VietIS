@@ -1,5 +1,7 @@
 package com.example.vietis.repository;
 
+import android.util.Log;
+
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.vietis.entity.Shop;
@@ -23,9 +25,21 @@ public class ShopRepository {
         return instance;
     }
 
-    public MutableLiveData<ArrayList<Shop>> getShopData() {
-        MutableLiveData<ArrayList<Shop>> mutableLiveDataShop = new MutableLiveData<>();
-        mutableLiveDataShop.setValue(Shop.generateRandomShopArray());
-        return mutableLiveDataShop;
+    public void searchShopFromFakeData(String query, MutableLiveData<ArrayList<Shop>> data) {
+        if (query.isEmpty()) {
+            data.setValue(new ArrayList<Shop>());
+            return;
+        }
+        Log.i("Query",query);
+        ArrayList<Shop> fakeData = Shop.generateRandomShopArray();
+        for (int i = 0; i < fakeData.size(); i++) {
+            Shop item = fakeData.get(i);
+            Log.i("Query",""+item.shopContainQuery(query));
+            if (!item.shopContainQuery(query)) {
+                fakeData.remove(i);
+                i--;
+            }
+        }
+        data.setValue(fakeData);
     }
 }

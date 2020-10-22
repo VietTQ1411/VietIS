@@ -4,4 +4,5 @@
     <string name="shop_name">This is the name of a shop</string>
     <string name="shop_address">3A Building, Duy Tan, Cau Giay</string>
     <string name="shop_voucher">20% off</string>
+    <string name="search_hint">Find places, items, address...</string>
 </resources>

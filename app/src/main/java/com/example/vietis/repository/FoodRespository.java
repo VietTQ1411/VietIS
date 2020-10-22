@@ -3,6 +3,7 @@ package com.example.vietis.repository;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.vietis.entity.Food;
+import com.example.vietis.entity.Shop;
 import com.example.vietis.inteface.IFoodRespository;
 
 import java.util.ArrayList;
@@ -22,9 +23,15 @@ public class FoodRespository {
         return instance;
     }
 
-    public MutableLiveData<ArrayList<Food>> getFoodData() {
+    public MutableLiveData<ArrayList<Food>> searchFoodFromFakeData(String query) {
         MutableLiveData<ArrayList<Food>> mutableLiveDataFood = new MutableLiveData<>();
-        mutableLiveDataFood.setValue(Food.generateFoodArray());
+        ArrayList<Food> data = Food.generateFoodArray();
+        for (Food item : data) {
+            if (!item.getName().contains(query)) {
+                data.remove(item);
+            }
+        }
+        mutableLiveDataFood.setValue(data);
         return mutableLiveDataFood;
     }
 }

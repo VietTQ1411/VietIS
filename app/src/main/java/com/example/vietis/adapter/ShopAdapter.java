@@ -20,6 +20,10 @@ public class ShopAdapter extends RecyclerView.Adapter<SearchItemViewHolder> {
         this.arrayListShop = arrayListShop;
     }
 
+    public void setShopArray(ArrayList<Shop> list) {
+        this.arrayListShop = list;
+    }
+
     @NonNull
     @Override
     public SearchItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
