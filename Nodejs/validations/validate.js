@@ -34,9 +34,16 @@ const validateFoodNew = () => {
     ];
 }
 
+const validateString = () => {
+    return [
+        check('search', 'Invalid does not Empty').not().isEmpty(),
+        //check('shopId', 'Invalid email').not().isEmpty(),
+    ];
+}
 
 module.exports = {
     validateRegisterUser: validateRegisterUser,
     validateLogin: validateLogin,
-    validateFoodNew: validateFoodNew
+    validateFoodNew: validateFoodNew,
+    validateString: validateString
 }
