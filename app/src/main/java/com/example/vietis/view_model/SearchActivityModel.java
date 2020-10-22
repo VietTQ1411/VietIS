@@ -36,7 +36,7 @@ public class SearchActivityModel extends ViewModel implements IShopRepository, I
     }
 
     public void searchShopFromFakeData (String query){
-        ShopRepository.getInstance(this).searchShopFromFakeData(query,this.mutableLiveDataShop);
+        mutableLiveDataShop.setValue(ShopRepository.getInstance(this).searchShopFromFakeData(query));
     }
     public void searchFoodFromFakeData(){
 

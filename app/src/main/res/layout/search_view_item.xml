@@ -58,7 +58,10 @@
                     android:id="@+id/textViewShopVoucher"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/shop_voucher" />
+                    android:background="@drawable/solid_border"
+                    android:paddingHorizontal="5dp"
+                    android:text="@string/shop_voucher"
+                    android:textColor="@color/colorVoucher" />
             </RelativeLayout>
         </LinearLayout>
     </LinearLayout>
