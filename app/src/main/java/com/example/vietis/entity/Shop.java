@@ -32,6 +32,10 @@ public class Shop {
         return Config.containIgnoreCase(this.toString(), query);
     }
 
+    @Override
+    public String toString() {
+        return ID + "-" + name + "-" + address + "-" + rating + "-" + voucherID + "-" + phoneNumber + "-" + imageURL;
+    }
 
     public static ArrayList<Shop> generateRandomShopArray() {
         ArrayList<Shop> list = new ArrayList<>();
