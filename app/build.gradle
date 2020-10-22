@@ -24,6 +24,11 @@ android {
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
+    implementation("com.google.firebase:firebase-database:19.2.1")
+    implementation("com.google.firebase:firebase-messaging:20.1.2")
+    implementation platform('com.google.firebase:firebase-bom:25.12.0')
+    implementation 'com.google.android.gms:play-services-maps:16.0.0'
+    implementation 'com.google.firebase:firebase-analytics'
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.2'
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
@@ -32,10 +37,7 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
-    compileOnly 'org.projectlombok:lombok:1.18.16'
-    annotationProcessor 'org.projectlombok:lombok:1.18.16'
     implementation 'com.squareup.okhttp3:okhttp:4.3.1'
-
 
     def lifecycle_version = "2.2.0"
     def arch_version = "2.1.0"
@@ -63,3 +65,4 @@ dependencies {
     implementation "androidx.room:room-runtime:2.2.5"
     annotationProcessor "androidx.room:room-compiler:2.2.5"
 }
+apply plugin: 'com.google.gms.google-services'
