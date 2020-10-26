@@ -46,7 +46,7 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     private void exitAnimation() {
-        imageView.startAnimation(AnimationUtils.loadAnimation(this,R.anim.imagine_out));
+        imageView.startAnimation(AnimationUtils.loadAnimation(this,R.anim.image_out));
         textView.startAnimation(AnimationUtils.loadAnimation(this,R.anim.text_out));
         textView2.startAnimation(AnimationUtils.loadAnimation(this,R.anim.text_out));
         imageView.setVisibility(View.INVISIBLE);
@@ -55,7 +55,7 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     private void startAnimation() {
-        imageView.startAnimation(AnimationUtils.loadAnimation(this,R.anim.imagine_in));
+        imageView.startAnimation(AnimationUtils.loadAnimation(this,R.anim.image_in));
         textView.startAnimation(AnimationUtils.loadAnimation(this,R.anim.text_in));
         textView2.startAnimation(AnimationUtils.loadAnimation(this,R.anim.text_in));
         imageView.setVisibility(View.VISIBLE);

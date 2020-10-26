@@ -60,7 +60,6 @@ public class MainActivity extends AppCompatActivity implements IView {
                     return;
                 }
                 String token = task.getResult();
-
                 String msg = getString(R.string.msg_token_fmt,token);
                 Log.d(TAG,msg);
                 Toast.makeText(MainActivity.this, msg,Toast.LENGTH_LONG).show();
