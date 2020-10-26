@@ -13,31 +13,35 @@ module.exports = sequelize => {
             comment: null,
             field: "id"
         },
-        imageURL: {
-            type: DataTypes.TEXT,
+        storeId: {
+            type: DataTypes.INTEGER,
             allowNull: true,
             defaultValue: null,
             primaryKey: false,
             autoIncrement: false,
             comment: null,
-            field: "imageURL"
+            field: "storeId",
+            references: {
+                key: "id",
+                model: "Store_model"
+            }
         },
-        type: {
-            type: DataTypes.STRING(30),
+        rating: {
+            type: DataTypes.FLOAT,
             allowNull: true,
             defaultValue: null,
             primaryKey: false,
             autoIncrement: false,
             comment: null,
-            field: "type"
+            field: "rating"
         }
     };
     const options = {
-        tableName: "Image",
+        tableName: "RatingStore",
         comment: "",
         timestamps: false,
         indexes: []
     };
-    const ImageModel = sequelize.define("Image_model", attributes, options);
-    return ImageModel;
+    const RatingStoreModel = sequelize.define("RatingStore_model", attributes, options);
+    return RatingStoreModel;
 };

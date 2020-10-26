@@ -87,7 +87,7 @@ router.get('/getfood', async(req, res) => {
             return;
         }
         const { page, pageNumber } = req.body
-        let foundBooks = await FoodModel.findAndCountAll({
+        let foundBooks = await FoodModel.findAll({
             limit: pageNumber,
             offset: pageNumber * page,
         })
