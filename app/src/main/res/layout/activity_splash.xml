@@ -27,7 +27,7 @@
         android:text="Hungry Then"
         android:textSize="50dp"
         android:textStyle="bold|italic"
-        android:textColor="@color/colorGold"
+        android:textColor="@color/colorAccent"
         app:layout_constraintBottom_toTopOf="@+id/imageView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
