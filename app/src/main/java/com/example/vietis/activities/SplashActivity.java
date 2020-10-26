@@ -9,8 +9,6 @@ import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import com.example.vietis.MainActivity;
 import com.example.vietis.R;
 
 public class SplashActivity extends AppCompatActivity {
