@@ -2,6 +2,9 @@ package com.example.vietis.entity;
 
 import com.example.vietis.repository.Config;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.regex.Pattern;
 
@@ -22,8 +25,6 @@ public class Shop {
     @Builder.Default
     private float rating = 0;
     @Builder.Default
-    private int voucherID = 1;
-    @Builder.Default
     private String phoneNumber = "";
     @Builder.Default
     private String imageURL = "";
@@ -34,7 +35,22 @@ public class Shop {
 
     @Override
     public String toString() {
-        return ID + "-" + name + "-" + address + "-" + rating + "-" + voucherID + "-" + phoneNumber + "-" + imageURL;
+        return ID + "-" + name + "-" + address + "-" + rating + "-" + phoneNumber + "-" + imageURL;
+    }
+
+    public static Shop generateShopFromJSON(JSONObject jsonObject) {
+        try {
+            return Shop.builder()
+                    .ID(jsonObject.getInt("id"))
+                    .name(jsonObject.getString("name"))
+                    .address(jsonObject.getString("address"))
+                    .rating((float) jsonObject.getDouble("rating"))
+                    .phoneNumber(jsonObject.getString("phoneNumber"))
+                    .imageURL(jsonObject.getJSONObject("Image_model").getString("imageURL"))
+                    .build();
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     public static ArrayList<Shop> generateRandomShopArray() {
