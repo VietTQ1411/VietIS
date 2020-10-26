@@ -27,6 +27,10 @@ const UserRouter = require('./routings/User')
 app.use('/users', UserRouter)
 const FoodRouter = require('./routings/Food')
 app.use('/foods', FoodRouter)
+const StoreRouter = require('./routings/Store')
+app.use('/store', StoreRouter)
+
+
 
 /*
     listening
