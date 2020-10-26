@@ -11,7 +11,6 @@ import com.example.vietis.entity.Food;
 import com.example.vietis.entity.Shop;
 import com.example.vietis.inteface.IFoodRespository;
 import com.example.vietis.inteface.IShopRepository;
-import com.example.vietis.repository.FoodRespository;
 import com.example.vietis.repository.ShopRepository;
 
 import java.util.ArrayList;
@@ -36,7 +35,7 @@ public class SearchActivityModel extends ViewModel implements IShopRepository, I
     }
 
     public void searchShopFromFakeData (String query){
-        mutableLiveDataShop.setValue(ShopRepository.getInstance(this).searchShopFromFakeData(query));
+        mutableLiveDataShop.setValue(ShopRepository.getInstance(this).searchShopInFakeData(query));
     }
     public void searchFoodFromFakeData(){
 
