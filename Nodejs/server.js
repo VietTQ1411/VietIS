@@ -30,8 +30,6 @@ app.use('/foods', FoodRouter)
 const StoreRouter = require('./routings/Store')
 app.use('/store', StoreRouter)
 
-
-
 /*
     listening
 */
