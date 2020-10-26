@@ -1,7 +1,6 @@
 package com.example.vietis.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.SearchView;
 import androidx.core.widget.NestedScrollView;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -9,10 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
-import android.text.SpannableString;
-import android.text.style.LeadingMarginSpan;
 import android.view.View;
-import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.example.vietis.R;
@@ -23,7 +19,7 @@ import com.example.vietis.view_model.SearchActivityModel;
 
 import java.util.ArrayList;
 
-public class UserProfileActivity extends AppCompatActivity implements IView {
+public class StoreDetailActivity extends AppCompatActivity implements IView {
     //UI holders
     private RecyclerView FoodRecyclerView;
     private NestedScrollView nsvStoreView;
@@ -42,7 +38,7 @@ public class UserProfileActivity extends AppCompatActivity implements IView {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_user_profile);
+        setContentView(R.layout.activity_store_detail);
         mappingUI();
         setupUI();
 
