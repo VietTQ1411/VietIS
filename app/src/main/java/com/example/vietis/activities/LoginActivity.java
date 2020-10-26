@@ -10,10 +10,8 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
-import androidx.room.Room;
 
 import com.example.vietis.R;
-import com.example.vietis.database.Database;
 import com.example.vietis.entity.User;
 import com.example.vietis.inteface.IView;
 import com.example.vietis.view_model.LoginActivityViewModel;
@@ -44,8 +42,8 @@ public class LoginActivity extends AppCompatActivity implements IView {
         loginActivityViewModel = new LoginActivityViewModel();
     }
 
-    public void navigateToOtherActivity(){
-        Intent intent = new Intent(LoginActivity.this,SearchActivity.class);
+    public void navigateToHomeActivity(){
+        Intent intent = new Intent(LoginActivity.this,HomeActivity.class);
         this.startActivity(intent);
     }
 
@@ -59,7 +57,7 @@ public class LoginActivity extends AppCompatActivity implements IView {
                     public void onChanged(User user) {
 
                         if(user!= null){
-                            LoginActivity.this.navigateToOtherActivity();
+                            LoginActivity.this.navigateToHomeActivity();
                         }
                     }
 

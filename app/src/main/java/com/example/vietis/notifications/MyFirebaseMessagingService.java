@@ -21,7 +21,6 @@ import java.util.Map;
 public class MyFirebaseMessagingService extends FirebaseMessagingService {
     private static final String TAG ="FIREBASE MESSAGING";
     public  static final String CHANNEL_1_ID = "channel1";
-    public  static final String CHANNEL_2_ID = "channel2";
     @Override
     public void onMessageReceived(@NonNull RemoteMessage remoteMessage) {
         super.onMessageReceived(remoteMessage);
@@ -47,7 +46,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         PendingIntent actionIntent = PendingIntent.getBroadcast(context, 0, broadcastIntent,
                 PendingIntent.FLAG_UPDATE_CURRENT);
 
-        Notification notification = new NotificationCompat.Builder(context, CHANNEL_1_ID)
+        Notification notification = new NotificationCompat.Builder(context,CHANNEL_1_ID)
                 .setSmallIcon(R.drawable.ic_notification)
                 .setContentTitle("NEW PRODUCT!!!")
                 .setContentText("Name = "+data.get("name")+", age = "+data.get("age"))
