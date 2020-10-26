@@ -1,6 +1,9 @@
 package com.example.vietis.entity;
 
+import com.example.vietis.repository.Config;
+
 import java.util.ArrayList;
+import java.util.regex.Pattern;
 
 import lombok.Builder;
 import lombok.Data;
@@ -23,7 +26,16 @@ public class Shop {
     @Builder.Default
     private String phoneNumber = "";
     @Builder.Default
-    private int imageID = 1;
+    private String imageURL = "";
+
+    public boolean shopContainQuery(String query) {
+        return Config.containIgnoreCase(this.toString(), query);
+    }
+
+    @Override
+    public String toString() {
+        return ID + "-" + name + "-" + address + "-" + rating + "-" + voucherID + "-" + phoneNumber + "-" + imageURL;
+    }
 
     public static ArrayList<Shop> generateRandomShopArray() {
         ArrayList<Shop> list = new ArrayList<>();
@@ -33,7 +45,7 @@ public class Shop {
                 .address("50 Duy Tan, Cau Giay, Ha Noi")
                 .rating(3.5f)
                 .phoneNumber("0357467491")
-                .imageID(1)
+                .imageURL("https://cdn.becungshop.vn/images/blog/tro-thanh-fan-cung-cua-be-cung-shop-nhan-ngay-ma-giam-gia-20-9a5e157d.jpg")
                 .build());
         list.add(Shop.builder()
                 .ID(2)
@@ -41,7 +53,7 @@ public class Shop {
                 .address("66 Le Duc Thang, Ha Noi")
                 .rating(3.5f)
                 .phoneNumber("0357467491")
-                .imageID(2)
+                .imageURL("https://cdn.tgdd.vn/2020/03/GameApp/unnamed-200x200-3.png")
                 .build());
         list.add(Shop.builder()
                 .ID(3)
@@ -49,7 +61,7 @@ public class Shop {
                 .address("88 Lang Ha, Ha Noi")
                 .rating(3.5f)
                 .phoneNumber("0357467491")
-                .imageID(3)
+                .imageURL("https://elevate.bike/wp-content/uploads/2019/12/service-logo-200x200.png")
                 .build());
         list.add(Shop.builder()
                 .ID(4)
@@ -57,7 +69,7 @@ public class Shop {
                 .address("50 Duy Tan, Cau Giay, Ha Noi")
                 .rating(3.5f)
                 .phoneNumber("0357467491")
-                .imageID(4)
+                .imageURL("https://bluecowbarrydale.com/wp-content/uploads/2019/04/Bluecow-logo-200x200.png")
                 .build());
         list.add(Shop.builder()
                 .ID(5)
@@ -65,7 +77,7 @@ public class Shop {
                 .address("120 Tran Duy Hung")
                 .rating(3.5f)
                 .phoneNumber("0357467491")
-                .imageID(5)
+                .imageURL("https://cdn.shopify.com/s/files/1/0055/7105/1602/files/hdlogotransparent_180x.jpg?v=1575486343")
                 .build());
         list.add(Shop.builder()
                 .ID(6)
@@ -73,7 +85,7 @@ public class Shop {
                 .address("150 Thai Ha, Ha Noi")
                 .rating(3.5f)
                 .phoneNumber("0357467491")
-                .imageID(6)
+                .imageURL("https://www.ami.co.nz/images/Shop.png")
                 .build());
         return list;
     }

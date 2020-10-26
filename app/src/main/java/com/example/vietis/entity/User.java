@@ -17,6 +17,7 @@ import java.util.Date;
 import lombok.Builder;
 import lombok.Data;
 import lombok.Getter;
+import okhttp3.internal.Util;
 
 @Data
 @Builder
@@ -29,6 +30,7 @@ public class User {
     @Builder.Default
     private String email = "";
     @ColumnInfo(name = "password")
+    @Builder.Default
     private String password = "";
     @Builder.Default
     private String hashedPassword = "";
@@ -43,11 +45,11 @@ public class User {
     private int userType = 1;
     @Builder.Default
     private String tokenKey = "";
-
     @Builder.Default
     private String expireDate ="";
 
-    public User(int id, String email, String password, String hashedPassword, String name, int imageId, String phoneNumber, String address, int userType, String tokenKey, String expireDate) {
+    public User(int id, String email, String password, String hashedPassword,
+                String name, int imageId, String phoneNumber, String address, int userType, String tokenKey, String expireDate) {
         this.id = id;
         this.email = email;
         this.password = password;

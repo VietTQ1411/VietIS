@@ -99,7 +99,6 @@ public class UserRepository {
                 }catch (JSONException e){
                     iUserRepository.afterRegister(null, e);
                 }
-
             }
         });
     }

@@ -5,8 +5,4 @@
     <string name="shop_address">3A Building, Duy Tan, Cau Giay</string>
     <string name="shop_voucher">20% off</string>
 
-    <!--
-        Error Code
-    -->
-    <string name="UL01">Password is invalid</string>
 </resources>

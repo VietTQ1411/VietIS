@@ -30,9 +30,16 @@ public class SearchActivityModel extends ViewModel implements IShopRepository, I
 
     public void init() {
         if (mutableLiveDataFood == null)
-            this.mutableLiveDataFood = FoodRespository.getInstance(this).getFoodData();
+            this.mutableLiveDataFood = new MutableLiveData<>();
         if (mutableLiveDataShop == null)
-            this.mutableLiveDataShop = ShopRepository.getInstance(this).getShopData();
+            this.mutableLiveDataShop = new MutableLiveData<>();
+    }
+
+    public void searchShopFromFakeData (String query){
+        mutableLiveDataShop.setValue(ShopRepository.getInstance(this).searchShopFromFakeData(query));
+    }
+    public void searchFoodFromFakeData(){
+
     }
 
     @Override

@@ -22,10 +22,14 @@ public class ImageRespository {
         return instance;
     }
 
-    public static Image generateRandomImage() {
-        return Image.builder()
-                .ID(1)
-                .imageURL("https://source.unsplash.com/random")
-                .build();
+    public ArrayList<Image> getImageByID(int[] idArray) {
+        ArrayList<Image> fullData = Image.generateFakeImageArray();
+        ArrayList<Image> fakeData = new ArrayList<Image>();
+        for (int i = 0; i < idArray.length; i++) {
+            for (int j = 0; j < fakeData.size(); j++) {
+
+            }
+        }
+        return fakeData;
     }
 }
