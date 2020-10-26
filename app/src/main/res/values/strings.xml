@@ -4,5 +4,15 @@
     <string name="shop_name">This is the name of a shop</string>
     <string name="shop_address">3A Building, Duy Tan, Cau Giay</string>
     <string name="shop_voucher">20% off</string>
-
+    <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
+    <string name="msg_token_fmt" translatable="false">InstanceID Token: %s</string>
+    <!-- [START fcm_default_icon_string] -->
+    <string name="default_notification_channel_name" translatable="true">FuddyRemotePushNotification</string>
+    <!-- [END fcm_default_icon_string] -->
+    <string name="fcm_message">FCM Message</string>
+    <string name="search_hint">Find places, items, address...</string>
+    <string name="title_activity_bottom_navi_test">MainActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
 </resources>
