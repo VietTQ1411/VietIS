@@ -59,7 +59,6 @@ public class ShopRepository {
             public void onFailure(@NotNull Call call, @NotNull IOException e) {
                 list.clear();
             }
-
             @Override
             public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
                 try {
