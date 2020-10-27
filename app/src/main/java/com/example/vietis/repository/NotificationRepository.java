@@ -57,6 +57,7 @@ public class NotificationRepository {
                     iNotiRepository.getNotiMessage(msg,null);
                 }catch (JSONException e){
                     iNotiRepository.getNotiMessage(null,e);
+                    System.out.println(e.toString());
                 }
             }
         });
