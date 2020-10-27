@@ -4,12 +4,16 @@ const { checkToken } = require('../helpers/TokenCheck')
 const { sequelize } = require('../databases/database')
 const StoreModel = require('../models/Store')(sequelize)
 const ImageModel = require('../models/Image')(sequelize)
+const RatingModel = require('../models/RatingStore')(sequelize)
 const { validateString } = require('../validations/validate')
 const { validationResult } = require('express-validator')
 const { Op } = require("sequelize");
 
-ImageModel.hasMany(StoreModel, { foreignKey: 'id' })
+ImageModel.hasMany(StoreModel, { foreignKey: 'imageId' })
 StoreModel.belongsTo(ImageModel, { foreignKey: 'imageId' })
+
+StoreModel.hasMany(RatingModel, { foreignKey: 'storeId' })
+RatingModel.belongsTo(StoreModel, { foreignKey: 'storeId' })
 
 /**
  * URL: http://localhost:3000/store/search
@@ -36,7 +40,7 @@ router.post('/search', validateString(), async(req, res) => {
         });
         return;
     }
-    const { search } = req.body
+    const { search, page, pageNumber } = req.body
     try {
         let foundStore = await StoreModel.findAll({
             where: {
@@ -54,11 +58,20 @@ router.post('/search', validateString(), async(req, res) => {
                     }
                 }]
             },
-            include: {
-                model: ImageModel,
-                as: "Image_model"
-            }
+            include: [{
+                    model: ImageModel,
+                    as: "Image_model",
+                    attributes: ['imageURL']
+                },
+                {
+                    model: RatingModel,
+                    as: "RatingStore_models",
+                }
+            ],
+            limit: pageNumber,
+            offset: pageNumber * page,
         })
+
         res.json({
             result: 'ok',
             data: foundStore,

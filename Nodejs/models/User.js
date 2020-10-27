@@ -44,6 +44,7 @@ module.exports = sequelize => {
         imageId: {
             type: DataTypes.INTEGER,
             allowNull: true,
+            defaultValue: "((1))",
             primaryKey: false,
             autoIncrement: false,
             comment: null,
