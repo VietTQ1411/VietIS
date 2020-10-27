@@ -54,7 +54,6 @@ public class SplashActivity extends AppCompatActivity implements IView {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
-
         FirebaseMessaging.getInstance().setAutoInitEnabled(true);
         FirebaseMessaging.getInstance().getToken().addOnCompleteListener(new OnCompleteListener<String>() {
             @Override
@@ -68,14 +67,11 @@ public class SplashActivity extends AppCompatActivity implements IView {
                 splashActivityViewModel.getMsg().observe(SplashActivity.this, new Observer<String>() {
                     @Override
                     public void onChanged(String msg) {
-                        if(msg!=""){
+                        if(!msg.equals("")){
                             Toast.makeText(SplashActivity.this,msg,Toast.LENGTH_LONG).show();
                         }
                     }
                 });
-
-
-
             }
         });
         createNotificationChannels();

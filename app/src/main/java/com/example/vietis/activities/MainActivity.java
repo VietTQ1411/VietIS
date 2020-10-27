@@ -38,16 +38,16 @@ public class MainActivity extends AppCompatActivity implements IView {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        FirebaseAuth auth = FirebaseAuth.getInstance();
-        String email = "huypham1700@gmail.com";
-        auth.sendPasswordResetEmail(email).addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                if(task.isSuccessful()){
-                    Log.d("TEST","email sent");
-                }
-            }
-        });
+//        FirebaseAuth auth = FirebaseAuth.getInstance();
+//        String email = "huypham1700@gmail.com";
+//        auth.sendPasswordResetEmail(email).addOnCompleteListener(new OnCompleteListener<Void>() {
+//            @Override
+//            public void onComplete(@NonNull Task<Void> task) {
+//                if(task.isSuccessful()){
+//                    Log.d("TEST","email sent");
+//                }
+//            }
+//        });
         mappingUI();
         setupUI();
     }
