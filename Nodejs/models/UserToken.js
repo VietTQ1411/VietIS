@@ -13,6 +13,19 @@ module.exports = sequelize => {
             comment: null,
             field: "id"
         },
+        userId: {
+            type: DataTypes.INTEGER,
+            allowNull: true,
+            defaultValue: null,
+            primaryKey: false,
+            autoIncrement: false,
+            comment: null,
+            field: "userId",
+            references: {
+                key: "id",
+                model: "User_model"
+            }
+        },
         tokenKey: {
             type: DataTypes.TEXT,
             allowNull: true,
@@ -33,11 +46,11 @@ module.exports = sequelize => {
         }
     };
     const options = {
-        tableName: "PhoneToken",
+        tableName: "UserToken",
         comment: "",
         timestamps: false,
         indexes: []
     };
-    const PhoneTokenModel = sequelize.define("PhoneToken_model", attributes, options);
-    return PhoneTokenModel;
+    const UserTokenModel = sequelize.define("UserToken_model", attributes, options);
+    return UserTokenModel;
 };
