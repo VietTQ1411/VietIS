@@ -12,10 +12,10 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.example.vietis.R;
-import com.example.vietis.adapter.ShopAdapter;
+import com.example.vietis.adapter.SearchAdapter;
 import com.example.vietis.entity.Shop;
 import com.example.vietis.inteface.IView;
-import com.example.vietis.view_model.SearchActivityModel;
+import com.example.vietis.view_model.ListActivityModel;
 
 import java.util.ArrayList;
 
@@ -27,10 +27,10 @@ public class StoreDetailActivity extends AppCompatActivity implements IView {
     private TextView txtDescriptionVisible;
 
     //RecyclerView components
-    private ShopAdapter shopAdapter;
+    private SearchAdapter searchAdapter;
 
     //View Model
-    private SearchActivityModel searchActivityModel;
+    private ListActivityModel listActivityModel;
 
     //local param
     private boolean isVisible = true;
@@ -46,8 +46,8 @@ public class StoreDetailActivity extends AppCompatActivity implements IView {
     @Override
     public void mappingUI() {
         FoodRecyclerView = findViewById(R.id.FoodRecyclerView);
-        shopAdapter = new ShopAdapter(new ArrayList<Shop>());
-        searchActivityModel = new ViewModelProvider(this).get(SearchActivityModel.class);
+        searchAdapter = new SearchAdapter(new ArrayList<Shop>());
+        listActivityModel = new ViewModelProvider(this).get(ListActivityModel.class);
         txtStoreDescription = findViewById(R.id.txtStoreDescription);
         nsvStoreView = findViewById(R.id.nsvStoreView);
         txtDescriptionVisible = findViewById(R.id.txtDescriptionVisible);
@@ -68,13 +68,13 @@ public class StoreDetailActivity extends AppCompatActivity implements IView {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext(),
                 LinearLayoutManager.VERTICAL, false);
         FoodRecyclerView.setLayoutManager(layoutManager);
-        searchActivityModel.init();
-        searchActivityModel.getShopData().observe(this, new Observer<ArrayList<Shop>>() {
+        listActivityModel.init(false,false);
+        listActivityModel.getShopData().observe(this, new Observer<ArrayList<Shop>>() {
             @Override
             public void onChanged(ArrayList<Shop> arrayList) {
-                shopAdapter = new ShopAdapter(arrayList);
-                shopAdapter.notifyDataSetChanged();
-                FoodRecyclerView.setAdapter(shopAdapter);
+                searchAdapter = new SearchAdapter(arrayList);
+                searchAdapter.notifyDataSetChanged();
+                FoodRecyclerView.setAdapter(searchAdapter);
                 nsvStoreView.scrollTo(0, 0);
             }
         });

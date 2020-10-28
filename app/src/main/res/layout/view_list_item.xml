@@ -55,7 +55,7 @@
                 android:gravity="bottom">
 
                 <TextView
-                    android:id="@+id/textViewShopVoucher"
+                    android:id="@+id/textViewVoucher"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/solid_border"

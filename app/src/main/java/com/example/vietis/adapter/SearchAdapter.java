@@ -9,14 +9,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.vietis.R;
 import com.example.vietis.entity.Shop;
-import com.example.vietis.view_holder.ShopItemViewHolder;
+import com.example.vietis.view_holder.SearchItemViewHolder;
 
 import java.util.ArrayList;
 
-public class ShopAdapter extends RecyclerView.Adapter<ShopItemViewHolder> {
+public class SearchAdapter extends RecyclerView.Adapter<SearchItemViewHolder> {
     private ArrayList<Shop> arrayListShop;
 
-    public ShopAdapter(ArrayList<Shop> arrayListShop) {
+    public SearchAdapter(ArrayList<Shop> arrayListShop) {
         this.arrayListShop = arrayListShop;
     }
 
@@ -26,20 +26,20 @@ public class ShopAdapter extends RecyclerView.Adapter<ShopItemViewHolder> {
 
     @NonNull
     @Override
-    public ShopItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public SearchItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater
                 .from(parent.getContext())
                 .inflate(R.layout.view_search_item, parent, false);
-        return new ShopItemViewHolder(view);
+        return new SearchItemViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ShopItemViewHolder holder, int position) {
-        holder.setShopItem(this.arrayListShop.get(position), position);
+    public void onBindViewHolder(@NonNull SearchItemViewHolder holder, int position) {
+        holder.getShopItemViewHolder().setShopItem(this.arrayListShop.get(position), position);
     }
 
     @Override
     public int getItemCount() {
-      return arrayListShop.size();
+        return arrayListShop.size();
     }
 }

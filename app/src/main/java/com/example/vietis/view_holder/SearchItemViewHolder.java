@@ -15,41 +15,27 @@ import com.squareup.picasso.Picasso;
 
 
 public class SearchItemViewHolder extends RecyclerView.ViewHolder implements IView {
+
     //UI holders
-    private ImageView imageViewShopIcon;
-    private TextView textViewShopName;
-    private TextView textViewShopAddress;
-    private RatingBar ratingBarShopRating;
-    private TextView textViewShopVoucher;
+    private ShopItemViewHolder shopItemViewHolder;
+
 
     public SearchItemViewHolder(@NonNull View itemView) {
         super(itemView);
+        this.shopItemViewHolder = new ShopItemViewHolder(itemView);
         mappingUI();
         setupUI();
     }
 
-    public void setShopItem(Shop shop, int pos) {
-        Picasso.get().load(shop.getImageURL())
-                .placeholder(R.drawable.ic_launcher_foreground)
-                .resize(100, 100)
-                .centerCrop()
-                .into(imageViewShopIcon);
-        textViewShopName.setText(shop.getName());
-        textViewShopAddress.setText(shop.getAddress());
-        ratingBarShopRating.setRating(shop.getRating());
+    public ShopItemViewHolder getShopItemViewHolder() {
+        return shopItemViewHolder;
     }
 
     @Override
     public void mappingUI() {
-        imageViewShopIcon = itemView.findViewById(R.id.imageViewShopIcon);
-        textViewShopName = itemView.findViewById(R.id.textViewShopName);
-        textViewShopAddress = itemView.findViewById(R.id.textViewShopAddress);
-        ratingBarShopRating = itemView.findViewById(R.id.ratingBarShopRating);
-        textViewShopVoucher = itemView.findViewById(R.id.textViewShopVoucher);
     }
 
     @Override
     public void setupUI() {
-
     }
 }
