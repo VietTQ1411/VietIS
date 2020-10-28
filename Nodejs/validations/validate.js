@@ -36,7 +36,7 @@ const validateFoodNew = () => {
 
 const validateString = () => {
     return [
-        check('search', 'Invalid does not Empty').not().isEmpty(),
+        //check('search', 'Invalid does not Empty').not().isEmpty(),
         //check('shopId', 'Invalid email').not().isEmpty(),
     ];
 }

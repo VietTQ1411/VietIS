@@ -39,6 +39,7 @@
 <!--                <category android:name="android.intent.category.LAUNCHER" />-->
 <!--            </intent-filter>-->
 
+
         <!-- </activity> -->
 
         <service
@@ -49,6 +50,8 @@
             </intent-filter>
         </service>
 
+
+        </activity>
         <meta-data
             android:name="firebase_messaging_auto_init_enabled"
             android:value="false" />
@@ -64,8 +67,19 @@
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_channel_id"
             android:value="@string/default_notification_channel_id" />
+        <receiver android:name=".notifications.MyBroadcastReceiver" />
+        <service
+            android:name=".notifications.MyFirebaseMessagingService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
+
 
         <activity android:name=".activities.HomeActivity">
+
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -82,8 +96,12 @@
                         <intent-filter>
                             <action android:name="android.intent.action.MAIN" />
 
-                            <category android:name="android.intent.category.LAUNCHER" />
-                        </intent-filter>
+<!--                        <intent-filter>-->
+<!--                            <action android:name="android.intent.action.MAIN" />-->
+
+
+<!--                            <category android:name="android.intent.category.LAUNCHER" />-->
+<!--                        </intent-filter>-->
         </activity>
         <activity android:name=".activities.LoginActivity" />
         <activity android:name=".activities.RegisterActivity" />
@@ -96,6 +114,7 @@
         </activity>
         <activity android:name=".activities.MainActivity">
 
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -105,8 +124,12 @@
 <!--             <intent-filter>-->
 <!--             <action android:name="android.intent.action.MAIN" />-->
 
-<!--             <category android:name="android.intent.category.LAUNCHER" />-->
-<!--             </intent-filter>-->
+             <intent-filter>
+             <action android:name="android.intent.action.MAIN" />
+
+
+             <category android:name="android.intent.category.LAUNCHER" />
+             </intent-filter>
         </activity>
     </application>
 </manifest>

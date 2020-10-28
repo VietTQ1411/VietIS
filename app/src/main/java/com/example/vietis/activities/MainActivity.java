@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity implements IView {
             NotificationChannel channel1 = new NotificationChannel(
                     MyFirebaseMessagingService.CHANNEL_1_ID,
                     "Channel 1",
-                    NotificationManager.IMPORTANCE_DEFAULT
+                    NotificationManager.IMPORTANCE_HIGH
             );
             channel1.setDescription("This is channel 1 ");
             channel1.enableLights(true);
