@@ -19,7 +19,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activities.SettingActivity" />
+        <activity android:name=".activities.SettingActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".BottomNaviTestActivity"
             android:label="@string/title_activity_bottom_navi_test"/>
@@ -51,7 +57,7 @@
         </service>
 
 
-        </activity>
+
         <meta-data
             android:name="firebase_messaging_auto_init_enabled"
             android:value="false" />
@@ -101,7 +107,7 @@
 
 
 <!--                            <category android:name="android.intent.category.LAUNCHER" />-->
-<!--                        </intent-filter>-->
+                        </intent-filter>
         </activity>
         <activity android:name=".activities.LoginActivity" />
         <activity android:name=".activities.RegisterActivity" />
@@ -126,7 +132,6 @@
 
              <intent-filter>
              <action android:name="android.intent.action.MAIN" />
-
 
              <category android:name="android.intent.category.LAUNCHER" />
              </intent-filter>

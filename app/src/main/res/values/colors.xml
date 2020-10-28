@@ -8,4 +8,5 @@
     <color name="colorGray">#A9A4A4</color>
     <color name="colorVoucher">#FF2000</color>
     <color name="colorVoucherBorder">#A9A9A9</color>
+    <color name="colorWhite">#FFFFFF</color>
 </resources>
