@@ -21,6 +21,7 @@ import com.example.vietis.inteface.IView;
 import com.example.vietis.notifications.MyFirebaseMessagingService;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.firebase.messaging.FirebaseMessagingService;
 
@@ -32,22 +33,7 @@ public class MainActivity extends AppCompatActivity implements IView {
     private Button btnLogin;
     private TextView signUp;
 
-    private void createNotificationChannels() {
-        if(Build.VERSION.SDK_INT > Build.VERSION_CODES.O) {
-            NotificationChannel channel1 = new NotificationChannel(
-                    MyFirebaseMessagingService.CHANNEL_1_ID,
-                    "Channel 1",
-                    NotificationManager.IMPORTANCE_HIGH
-            );
-            channel1.setDescription("This is channel 1 ");
-            channel1.enableLights(true);
-            channel1.setLightColor(Color.CYAN);
-            channel1.enableVibration(true);
-            channel1.setVibrationPattern(new long[]{100, 400, 200, 400});
-            NotificationManager manager = getSystemService(NotificationManager.class);
-            manager.createNotificationChannel(channel1);
-        }
-    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,7 +53,16 @@ public class MainActivity extends AppCompatActivity implements IView {
         });
         createNotificationChannels();
         setContentView(R.layout.activity_main);
-
+//        FirebaseAuth auth = FirebaseAuth.getInstance();
+//        String email = "huypham1700@gmail.com";
+//        auth.sendPasswordResetEmail(email).addOnCompleteListener(new OnCompleteListener<Void>() {
+//            @Override
+//            public void onComplete(@NonNull Task<Void> task) {
+//                if(task.isSuccessful()){
+//                    Log.d("TEST","email sent");
+//                }
+//            }
+//        });
         mappingUI();
         setupUI();
     }

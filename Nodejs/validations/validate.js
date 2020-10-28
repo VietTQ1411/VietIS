@@ -40,10 +40,18 @@ const validateString = () => {
         //check('shopId', 'Invalid email').not().isEmpty(),
     ];
 }
+const validatePhoneToken = () => {
+    return [
+        check('userId', 'insert phoneToken').not().isEmpty(),
+        //  check('userId', 'Invalid email').not(),
+    ];
+}
+
 
 module.exports = {
     validateRegisterUser: validateRegisterUser,
     validateLogin: validateLogin,
     validateFoodNew: validateFoodNew,
-    validateString: validateString
+    validateString: validateString,
+    validatePhoneToken: validatePhoneToken
 }
