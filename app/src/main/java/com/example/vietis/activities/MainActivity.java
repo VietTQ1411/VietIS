@@ -37,21 +37,6 @@ public class MainActivity extends AppCompatActivity implements IView {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        FirebaseMessaging.getInstance().setAutoInitEnabled(true);
-        FirebaseMessaging.getInstance().getToken().addOnCompleteListener(new OnCompleteListener<String>() {
-            @Override
-            public void onComplete(@NonNull Task<String> task) {
-                if (!task.isSuccessful()){
-                    Log.w(TAG,"Fetching FCM registration token failed",task.getException());
-                    return;
-                }
-                String token = task.getResult();
-                String msg = getString(R.string.msg_token_fmt,token);
-                Log.d(TAG,msg);
-                Toast.makeText(MainActivity.this, msg,Toast.LENGTH_LONG).show();
-            }
-        });
-        createNotificationChannels();
         setContentView(R.layout.activity_main);
 //        FirebaseAuth auth = FirebaseAuth.getInstance();
 //        String email = "huypham1700@gmail.com";
