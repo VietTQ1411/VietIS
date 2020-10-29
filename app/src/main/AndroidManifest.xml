@@ -27,20 +27,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <!-- <intent-filter> -->
-        <!-- <action android:name="android.intent.action.MAIN" /> -->
-        <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
-        <!-- </intent-filter> -->
-        <!--
-<activity
+
+        <!--<activity
            android:name=".BottomNaviTestActivity"
            android:label="@string/title_activity_bottom_navi_test">
-<!-            <intent-filter>
-        -->
-        <!-- <action android:name="android.intent.action.MAIN" /> -->
-        <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
-        <!-- </intent-filter> -->
-        <!-- </activity> -->
+<!-            <intent-filter> -->
+
         <service
             android:name=".notifications.MyFirebaseMessagingService"
             android:exported="false">
@@ -48,11 +40,6 @@
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
-
-
-
-
-
 
         <meta-data
             android:name="firebase_messaging_auto_init_enabled"
@@ -81,11 +68,6 @@
         </service>
 
         <activity android:name=".activities.HomeActivity">
-
-
-
-
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -99,76 +81,23 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <!-- <intent-filter> -->
-                <!-- <action android:name="android.intent.action.MAIN" /> -->
-
-
-
-<!--                            <category android:name="android.intent.category.LAUNCHER" />-->
-                        </intent-filter>
-
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.MAIN" />-->
-
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
-<!--            </intent-filter>-->
-
-                <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
-<!--            </intent-filter>-->
 
         <activity android:name=".activities.LoginActivity" />
         <activity android:name=".activities.RegisterActivity" />
         <activity android:name=".activities.SearchActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-            <!-- <intent-filter> -->
-            <!-- <action android:name="android.intent.action.MAIN" /> -->
-            <!--  -->
-            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
-            <!-- </intent-filter> -->
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
+
         <activity android:name=".activities.MainActivity">
-
-
-
-
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
-            <!-- <intent-filter> -->
-            <!-- <action android:name="android.intent.action.MAIN" /> -->
-
-
-
-            <!-- <intent-filter> -->
-            <!-- <action android:name="android.intent.action.MAIN" /> -->
-
-
-            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
-            <!-- </intent-filter> -->
-        </activity>
-        <activity android:name=".FoodListActivity">
-
-             <intent-filter>
-             <action android:name="android.intent.action.MAIN" />
-
-
-             <category android:name="android.intent.category.LAUNCHER" />
-             </intent-filter>
-=======
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
->>>>>>> Stashed changes
         </activity>
     </application>
-
 </manifest>

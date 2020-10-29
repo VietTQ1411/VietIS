@@ -91,4 +91,8 @@ public class ShopRepository {
         }
         return fakeData;
     }
+
+    public ArrayList<Shop> gennerateFakeShopArray(){
+        return Shop.generateRandomShopArray();
+    }
 }

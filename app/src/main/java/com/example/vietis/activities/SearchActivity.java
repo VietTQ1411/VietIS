@@ -12,10 +12,10 @@ import android.view.View;
 import android.widget.ImageButton;
 
 import com.example.vietis.R;
-import com.example.vietis.adapter.ShopAdapter;
+import com.example.vietis.adapter.SearchAdapter;
 import com.example.vietis.entity.Shop;
 import com.example.vietis.inteface.IView;
-import com.example.vietis.view_model.SearchActivityModel;
+import com.example.vietis.view_model.ListActivityModel;
 
 import java.util.ArrayList;
 
@@ -28,10 +28,10 @@ public class SearchActivity extends AppCompatActivity implements IView {
     private RecyclerView recyclerViewSearch;
 
     //RecyclerView components
-    private ShopAdapter shopAdapter;
+    private SearchAdapter searchAdapter;
 
     //View Model
-    private SearchActivityModel searchActivityModel;
+    private ListActivityModel listActivityModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,8 +46,8 @@ public class SearchActivity extends AppCompatActivity implements IView {
         imageButtonSearch = findViewById(R.id.imageBtnSearch);
         searchViewSearch = findViewById(R.id.searchViewSearch);
         recyclerViewSearch = findViewById(R.id.recyclerViewSearch);
-        shopAdapter = new ShopAdapter(new ArrayList<Shop>());
-        searchActivityModel = new ViewModelProvider(this).get(SearchActivityModel.class);
+        searchAdapter = new SearchAdapter(new ArrayList<Shop>());
+        listActivityModel = new ViewModelProvider(this).get(ListActivityModel.class);
     }
 
     @Override
@@ -55,15 +55,16 @@ public class SearchActivity extends AppCompatActivity implements IView {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext(),
                 LinearLayoutManager.VERTICAL, false);
         recyclerViewSearch.setLayoutManager(layoutManager);
-        searchActivityModel.init();
-        searchActivityModel.getShopData().observe(this, new Observer<ArrayList<Shop>>() {
+        listActivityModel.init(true,true);
+        listActivityModel.getShopData().observe(this, new Observer<ArrayList<Shop>>() {
             @Override
             public void onChanged(ArrayList<Shop> arrayList) {
-                shopAdapter.setShopArray(arrayList);
-                shopAdapter.notifyDataSetChanged();
+                searchAdapter.setShopArray(arrayList);
+                searchAdapter.notifyDataSetChanged();
             }
         });
-        recyclerViewSearch.setAdapter(shopAdapter);
+        recyclerViewSearch.setAdapter(searchAdapter);
+
         //ImageButton action
         imageButtonSearch.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,7 +77,7 @@ public class SearchActivity extends AppCompatActivity implements IView {
         searchViewSearch.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                searchActivityModel.searchShopFromFakeData(query);
+                listActivityModel.searchShopFromFakeData(query);
                 return false;
             }
 
@@ -86,7 +87,7 @@ public class SearchActivity extends AppCompatActivity implements IView {
                     this.onQueryTextSubmit("");
                     return false;
                 }
-                searchActivityModel.searchShopFromFakeData(newText);
+                listActivityModel.searchShopFromFakeData(newText);
                 return false;
             }
         });
