@@ -25,6 +25,7 @@ import com.example.vietis.view_model.SplashActivityViewModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.messaging.FirebaseMessaging;
+import com.google.firebase.messaging.FirebaseMessagingService;
 
 public class SplashActivity extends AppCompatActivity implements IView {
 
@@ -53,7 +54,6 @@ public class SplashActivity extends AppCompatActivity implements IView {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_splash);
         FirebaseMessaging.getInstance().setAutoInitEnabled(true);
         FirebaseMessaging.getInstance().getToken().addOnCompleteListener(new OnCompleteListener<String>() {
             @Override
@@ -75,6 +75,7 @@ public class SplashActivity extends AppCompatActivity implements IView {
             }
         });
         createNotificationChannels();
+        setContentView(R.layout.activity_splash);
         mappingUI();
         new Handler().postDelayed(new Runnable() {
             @Override
@@ -98,7 +99,7 @@ public class SplashActivity extends AppCompatActivity implements IView {
     }
 
     private void exitAnimation() {
-        imageView.startAnimation(AnimationUtils.loadAnimation(this,R.anim.imagine_out));
+        imageView.startAnimation(AnimationUtils.loadAnimation(this,R.anim.image_out));
         textView.startAnimation(AnimationUtils.loadAnimation(this,R.anim.text_out));
         textView2.startAnimation(AnimationUtils.loadAnimation(this,R.anim.text_out));
         imageView.setVisibility(View.INVISIBLE);
@@ -107,7 +108,7 @@ public class SplashActivity extends AppCompatActivity implements IView {
     }
 
     private void startAnimation() {
-        imageView.startAnimation(AnimationUtils.loadAnimation(this,R.anim.imagine_in));
+        imageView.startAnimation(AnimationUtils.loadAnimation(this,R.anim.image_in));
         textView.startAnimation(AnimationUtils.loadAnimation(this,R.anim.text_in));
         textView2.startAnimation(AnimationUtils.loadAnimation(this,R.anim.text_in));
         imageView.setVisibility(View.VISIBLE);

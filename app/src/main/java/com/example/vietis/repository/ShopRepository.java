@@ -41,7 +41,7 @@ public class ShopRepository {
         return instance;
     }
 
-    public ArrayList<Shop> searchShopOnServer(String query, String token) {
+    public ArrayList<Shop> searchShopOnServer(String token, String query, int page, int pageNumber) {
         final ArrayList<Shop> list = new ArrayList<>();
         OkHttpClient okHttpClient = new OkHttpClient();
         RequestBody requestBody = new MultipartBody.Builder()
@@ -77,21 +77,22 @@ public class ShopRepository {
         return list;
     }
 
-
     public ArrayList<Shop> searchShopInFakeData(String query) {
         if (query.isEmpty()) {
             return new ArrayList<>();
         }
-        Log.i("Query", query);
         ArrayList<Shop> fakeData = Shop.generateRandomShopArray();
         for (int i = 0; i < fakeData.size(); i++) {
             Shop item = fakeData.get(i);
-            Log.i("Query", "" + item.shopContainQuery(query));
             if (!item.shopContainQuery(query)) {
                 fakeData.remove(i);
                 i--;
             }
         }
         return fakeData;
+    }
+
+    public ArrayList<Shop> gennerateFakeShopArray(){
+        return Shop.generateRandomShopArray();
     }
 }

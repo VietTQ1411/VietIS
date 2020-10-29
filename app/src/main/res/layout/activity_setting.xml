@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activities.SettingActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="160dp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="120dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_launcher_background"
+            android:id="@+id/imgAvatar"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/txtProfileName"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:text="Low G"
+                android:textSize="24dp"
+                android:gravity="bottom"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:text="LowG@gmail.com"
+                android:textSize="20dp"
+                android:textColor="@color/colorGray"
+                android:id="@+id/txtProfileAccount"/>
+
+            <Button
+                android:id="@+id/btnEdit"
+                android:layout_width="90dp"
+                android:layout_height="35dp"
+                android:layout_gravity="center|bottom"
+                android:text="Edit Profile"
+                android:textSize="10dp"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:orientation="horizontal"
+            android:background="@drawable/drop_shadow">
+
+            <TextView
+                android:id="@+id/txtNotifications"
+                android:layout_width="355dp"
+                android:layout_height="match_parent"
+                android:text="Notification"
+                android:textSize="20dp"
+                android:gravity="center|left"
+                android:layout_marginRight="30dp"/>
+
+            <Switch
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_marginLeft="-25dp"
+                android:id="@+id/switchilly"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:orientation="horizontal"
+            android:background="@drawable/drop_shadow">
+
+            <TextView
+                android:id="@+id/txtPrivacy"
+                android:layout_width="355dp"
+                android:layout_height="match_parent"
+                android:text="Privacy"
+                android:textSize="20dp"
+                android:gravity="center|left"
+                android:layout_marginRight="30dp"/>
+
+            <ImageButton
+                android:id="@+id/ibPrivacy"
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_marginLeft="-25dp"
+                android:src="@drawable/ic_arrow_forward"
+                android:backgroundTint="@color/colorWhite"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:orientation="horizontal"
+            android:background="@drawable/drop_shadow">
+
+            <TextView
+                android:id="@+id/txtPolicy"
+                android:layout_width="355dp"
+                android:layout_height="match_parent"
+                android:text="Policy"
+                android:textSize="20dp"
+                android:gravity="center|left"
+                android:layout_marginRight="30dp"/>
+
+            <ImageButton
+                android:id="@+id/ibPolicy"
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_marginLeft="-25dp"
+                android:src="@drawable/ic_arrow_forward"
+                android:backgroundTint="@color/colorWhite"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:orientation="horizontal"
+            android:background="@drawable/drop_shadow">
+
+            <TextView
+                android:id="@+id/txtAppVersion"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="App Version"
+                android:textSize="20dp"
+                android:gravity="center|left" />
+
+
+            <TextView
+                android:id="@+id/txtNoAppVersion"
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:layout_marginLeft="-53dp"
+                android:text="1.0"
+                android:textSize="20dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:orientation="horizontal"
+            android:background="@drawable/drop_shadow">
+
+            <TextView
+                android:id="@+id/txtSignOut"
+                android:layout_width="355dp"
+                android:layout_height="match_parent"
+                android:text="Sign out"
+                android:textSize="20dp"
+                android:gravity="center|left"
+                android:layout_marginRight="30dp"/>
+
+            <ImageButton
+                android:id="@+id/ibSignOut"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_marginLeft="-25dp"
+                android:src="@drawable/exit_64px"
+                android:backgroundTint="@color/colorWhite"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>
