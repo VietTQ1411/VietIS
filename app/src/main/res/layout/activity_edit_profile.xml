@@ -10,15 +10,13 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="350dp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:background="@drawable/background">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="47dp"
-            android:orientation="horizontal"
-            android:background="@drawable/background"
-            android:backgroundTint="@color/colorGray"
-            android:backgroundTintMode="multiply">
+            android:orientation="horizontal">
 
             <Button
                 android:id="@+id/btnSave"
@@ -26,7 +24,7 @@
                 android:layout_height="45dp"
                 android:layout_marginLeft="320dp"
                 android:textColor="@color/colorWhite"
-                android:background=""
+                android:background="@android:color/transparent"
                 android:textSize="20dp"
                 android:text="Save"/>
 
@@ -49,7 +47,7 @@
                 android:layout_height="45dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginLeft="-251dp"
-                android:background=""
+                android:background="@android:color/transparent"
                 android:src="@drawable/ic_arrow_forward" />
 
         </LinearLayout>

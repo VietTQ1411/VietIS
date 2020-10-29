@@ -39,6 +39,12 @@ public class SettingActivity extends AppCompatActivity {
                 startActivity(new Intent(SettingActivity.this,EditProfileActivity.class));
             }
         });
+        ibSignOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(SettingActivity.this, LoginActivity.class));
+            }
+        });
     }
 
     private void mappingUI() {

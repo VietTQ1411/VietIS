@@ -13,23 +13,29 @@
         android:layout_height="200dp"
         android:orientation="horizontal">
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/myCardView"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_gravity="center"
-            app:cardCornerRadius="80dp"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true">
+        <LinearLayout
+            android:layout_width="120dp"
+            android:layout_height="match_parent">
 
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/fuddy"
-                android:id="@+id/imgAvatar"
-                android:scaleType="centerCrop"/>
+            <androidx.cardview.widget.CardView
+                android:id="@+id/myCardView"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:layout_gravity="center"
+                app:cardCornerRadius="150dp"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true">
 
-        </androidx.cardview.widget.CardView>
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/fuddy"
+                    android:id="@+id/imgAvatar"
+                    android:scaleType="centerCrop"/>
+
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -82,7 +88,7 @@
 
             <TextView
                 android:id="@+id/txtNotifications"
-                android:layout_width="355dp"
+                android:layout_width="340dp"
                 android:layout_height="match_parent"
                 android:text="Notification"
                 android:textSize="20dp"
@@ -90,9 +96,10 @@
                 android:layout_marginRight="30dp"/>
 
             <Switch
-                android:layout_width="50dp"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
+                android:gravity="center"
                 android:layout_marginLeft="-25dp"
                 android:id="@+id/switchilly"/>
 
@@ -105,8 +112,7 @@
             android:background="@drawable/drop_shadow">
 
             <TextView
-                android:id="@+id/txtPrivacy"
-                android:layout_width="355dp"
+                android:layout_width="340dp"
                 android:layout_height="match_parent"
                 android:text="Privacy"
                 android:textSize="20dp"
@@ -115,7 +121,7 @@
 
             <ImageButton
                 android:id="@+id/ibPrivacy"
-                android:layout_width="50dp"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:layout_marginLeft="-25dp"
@@ -124,6 +130,14 @@
 
         </LinearLayout>
 
+        <TextView
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtPrivacy"
+            style="@style/CodeFont"
+            android:text=""/>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="80dp"
@@ -131,8 +145,7 @@
             android:background="@drawable/drop_shadow">
 
             <TextView
-                android:id="@+id/txtPolicy"
-                android:layout_width="355dp"
+                android:layout_width="340dp"
                 android:layout_height="match_parent"
                 android:text="Policy"
                 android:textSize="20dp"
@@ -141,7 +154,7 @@
 
             <ImageButton
                 android:id="@+id/ibPolicy"
-                android:layout_width="50dp"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:layout_marginLeft="-25dp"
@@ -150,6 +163,14 @@
 
         </LinearLayout>
 
+        <TextView
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtPolicy"
+            style="@style/CodeFont"
+            android:text=""/>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="80dp"
@@ -157,24 +178,30 @@
             android:background="@drawable/drop_shadow">
 
             <TextView
-                android:id="@+id/txtAppVersion"
-                android:layout_width="match_parent"
+                android:layout_width="340dp"
                 android:layout_height="match_parent"
                 android:text="App Version"
                 android:textSize="20dp"
-                android:gravity="center|left" />
+                android:gravity="center|left"
+                android:layout_marginRight="30dp"/>
 
-
-            <TextView
-                android:id="@+id/txtNoAppVersion"
-                android:layout_width="50dp"
+            <ImageButton
+                android:id="@+id/ibAppVersion"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
-                android:gravity="center"
-                android:layout_marginLeft="-53dp"
-                android:text="1.0"
-                android:textSize="20dp"/>
+                android:layout_marginLeft="-25dp"
+                android:src="@drawable/ic_foward"
+                android:backgroundTint="@color/colorWhite"/>
         </LinearLayout>
+
+        <TextView
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtAppVersion"
+            style="@style/CodeFont"
+            android:text=""/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -184,7 +211,7 @@
 
             <TextView
                 android:id="@+id/txtSignOut"
-                android:layout_width="355dp"
+                android:layout_width="340dp"
                 android:layout_height="match_parent"
                 android:text="Sign out"
                 android:textSize="20dp"
