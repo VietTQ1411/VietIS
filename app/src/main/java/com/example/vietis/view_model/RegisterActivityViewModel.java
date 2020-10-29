@@ -29,7 +29,7 @@ public class RegisterActivityViewModel  extends ViewModel implements IUserReposi
             new Handler(Looper.getMainLooper()).post(new Runnable() {
                 @Override
                 public void run() {
-                    RegisterActivityViewModel.this.user.setValue(error==null ? user : User.builder().build());
+                    RegisterActivityViewModel.this.user.setValue(error==null ? user : null);
                 }
             });
         }

@@ -60,8 +60,14 @@ public class UserRepository {
                     String jsonString = response.body().string();
                     JSONObject jsonObject = new JSONObject(jsonString);
                     JSONObject jsonUserObject =jsonObject.getJSONObject("data");
-                    User user = User.createUserFromJSONObject(jsonUserObject);
-                    iUserRepository.afterLogin(user,null);
+                    String result = jsonObject.getString("result");
+                    if(result.equals("ok")){
+                        User user = User.createUserFromJSONObject(jsonUserObject);
+                        iUserRepository.afterLogin(user,null);
+                    }else{
+                        iUserRepository.afterLogin(null,new JSONException(result));
+                    }
+
                 }catch (JSONException e){
                     iUserRepository.afterLogin(null, e);
                 }
@@ -94,8 +100,14 @@ public class UserRepository {
                     String jsonString = response.body().string();
                     JSONObject jsonObject = new JSONObject(jsonString);
                     JSONObject jsonUserObject =jsonObject.getJSONObject("data");
-                    User user = User.createUserFromJSONObject(jsonUserObject);
-                    iUserRepository.afterRegister(user,null);
+                    String result = jsonObject.getString("result");
+                    if(result.equals("ok")){
+                        User user = User.createUserFromJSONObject(jsonUserObject);
+                        iUserRepository.afterRegister(user,null);
+                    }else{
+                        iUserRepository.afterRegister(null,new JSONException(result));
+                    }
+
                 }catch (JSONException e){
                     iUserRepository.afterRegister(null, e);
                 }
