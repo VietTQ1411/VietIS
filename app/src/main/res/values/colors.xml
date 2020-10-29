@@ -9,4 +9,5 @@
     <color name="colorVoucher">#FF2000</color>
     <color name="colorVoucherBorder">#A9A9A9</color>
     <color name="colorWhite">#FFFFFF</color>
+    <color name="colorEdit">#52C84B</color>
 </resources>
