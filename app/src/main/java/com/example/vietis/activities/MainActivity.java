@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity implements IView {
                 Toast.makeText(MainActivity.this, msg,Toast.LENGTH_LONG).show();
             }
         });
-        createNotificationChannels();
+//        createNotificationChannels();
         setContentView(R.layout.activity_main);
 //        FirebaseAuth auth = FirebaseAuth.getInstance();
 //        String email = "huypham1700@gmail.com";
