@@ -12,9 +12,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 
 import com.example.vietis.R;
-import com.example.vietis.entity.User;
-import com.example.vietis.inteface.IView;
-import com.example.vietis.view_model.LoginActivityViewModel;
+import com.example.vietis.Data.entity.User;
+import com.example.vietis.Data.view_model.LoginActivityViewModel;
 
 public class LoginActivity extends AppCompatActivity implements IView {
     private EditText txtEmail;

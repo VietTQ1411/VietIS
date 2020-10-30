@@ -13,9 +13,8 @@ import androidx.lifecycle.Observer;
 
 import com.example.vietis.R;
 import com.example.vietis.database.Database;
-import com.example.vietis.entity.User;
-import com.example.vietis.inteface.IView;
-import com.example.vietis.view_model.RegisterActivityViewModel;
+import com.example.vietis.Data.entity.User;
+import com.example.vietis.Data.view_model.RegisterActivityViewModel;
 
 public class RegisterActivity extends AppCompatActivity implements IView {
     private EditText txtEmail;
