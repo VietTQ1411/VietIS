@@ -1,6 +1,6 @@
 package com.example.vietis.Data.entity;
 
-import com.example.vietis.Data.inteface.repository.Config;
+import com.example.vietis.Data.IRepository.repository.Config;
 
 import org.json.JSONObject;
 
