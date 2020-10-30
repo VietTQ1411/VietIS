@@ -36,7 +36,7 @@ public class SettingActivity extends AppCompatActivity {
         btnEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(SettingActivity.this,EditProfileActivity.class));
+//                startActivity(new Intent(SettingActivity.this,EditProfileActivity.class));
             }
         });
     }
