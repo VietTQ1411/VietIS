@@ -27,7 +27,7 @@
             </intent-filter>
         </activity>
         <service
-            android:name=".notifications.MyFirebaseMessagingService"
+            android:name=".Utilities.notifications.MyFirebaseMessagingService"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
@@ -48,9 +48,11 @@
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_channel_id"
             android:value="@string/default_notification_channel_id" />
-        <receiver android:name=".notifications.MyBroadcastReceiver" />
+        <receiver android:name=".Utilities.notifications.MyBroadcastReceiver" />
+
+
         <service
-            android:name=".notifications.MyFirebaseMessagingService"
+            android:name=".Utilities.notifications.MyFirebaseMessagingService"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />

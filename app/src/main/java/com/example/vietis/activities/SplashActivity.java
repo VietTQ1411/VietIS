@@ -19,13 +19,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.vietis.R;
-import com.example.vietis.inteface.IView;
-import com.example.vietis.notifications.MyFirebaseMessagingService;
-import com.example.vietis.view_model.SplashActivityViewModel;
+import com.example.vietis.Utilities.notifications.MyFirebaseMessagingService;
+import com.example.vietis.Data.view_model.SplashActivityViewModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.messaging.FirebaseMessaging;
-import com.google.firebase.messaging.FirebaseMessagingService;
 
 public class SplashActivity extends AppCompatActivity implements IView {
 
