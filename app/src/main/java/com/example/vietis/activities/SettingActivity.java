@@ -41,7 +41,7 @@ public class SettingActivity extends AppCompatActivity {
         btnEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                startActivity(new Intent(SettingActivity.this,EditProfileActivity.class));
+                startActivity(new Intent(SettingActivity.this,EditProfileActivity.class));
             }
         });
         ibSignOut.setOnClickListener(new View.OnClickListener() {
@@ -51,6 +51,19 @@ public class SettingActivity extends AppCompatActivity {
             }
         });
 
+        ibPrivacy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                isVisible = !isVisible;
+                if(isVisible){
+                    txtPrivacy.setText("");
+                    txtStoreDescription.setVisibility(View.VISIBLE);
+                }else{
+                    txtDescriptionVisible.setText("Description ►");
+                    txtStoreDescription.setVisibility(View.GONE);
+                }
+            }
+        });
     }
 
     private void mappingUI() {
