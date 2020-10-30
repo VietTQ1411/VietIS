@@ -11,6 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.example.vietis.Data.inteface.repository.Config;
 import com.example.vietis.R;
 
 public class HomeActivity extends AppCompatActivity implements IView {
@@ -46,6 +47,7 @@ public class HomeActivity extends AppCompatActivity implements IView {
             }
         };
         setSearchViewOnClickListener(searchViewSearch, listener);
+        Config.setChildViewOnClickListener(searchViewSearch,listener);
     }
 
     private void setSearchViewOnClickListener(View v, View.OnClickListener listener) {

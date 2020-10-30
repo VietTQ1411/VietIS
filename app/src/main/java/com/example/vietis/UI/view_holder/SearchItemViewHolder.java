@@ -1,6 +1,10 @@
 package com.example.vietis.UI.view_holder;
 
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -32,4 +36,5 @@ public class SearchItemViewHolder extends RecyclerView.ViewHolder implements IVi
     @Override
     public void setupUI() {
     }
+
 }

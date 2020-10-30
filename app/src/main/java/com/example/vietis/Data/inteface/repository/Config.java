@@ -2,7 +2,10 @@ package com.example.vietis.Data.inteface.repository;
 
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
@@ -47,5 +50,21 @@ public class Config {
         int width = wantedSize;
         int height = Math.round(width / ratio);
         return Bitmap.createScaledBitmap(bitmapOrigin, width, height, filter);
+    }
+
+    //add onClickEvent cho toàn bộ phần tử con nè, để tạm ở đây.
+    public static void setChildViewOnClickListener(View v, View.OnClickListener listener) {
+        if (v instanceof ViewGroup) {
+            ViewGroup group = (ViewGroup) v;
+            int count = group.getChildCount();
+            for (int i = 0; i < count; i++) {
+                View child = group.getChildAt(i);
+                if (child instanceof TextView) {
+                    TextView text = (TextView) child;
+                    text.setFocusable(false);
+                }
+                child.setOnClickListener(listener);
+            }
+        }
     }
 }
