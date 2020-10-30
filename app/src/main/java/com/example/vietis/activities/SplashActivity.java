@@ -68,7 +68,7 @@ public class SplashActivity extends AppCompatActivity implements IView {
                     @Override
                     public void onChanged(String msg) {
                         if(!msg.equals("")){
-                            Toast.makeText(SplashActivity.this,msg,Toast.LENGTH_LONG).show();
+                            Log.d("NOTIFICATIONS",msg);
                         }
                     }
                 });
