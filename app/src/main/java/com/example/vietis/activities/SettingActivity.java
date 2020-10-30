@@ -25,6 +25,7 @@ public class SettingActivity extends AppCompatActivity {
     Switch switchilly;
     ImageButton ibPrivacy;
     ImageButton ibPolicy;
+    ImageButton ibAppVersion;
     ImageButton ibSignOut;
 
     private boolean isVisible = true;
@@ -56,11 +57,39 @@ public class SettingActivity extends AppCompatActivity {
             public void onClick(View v) {
                 isVisible = !isVisible;
                 if(isVisible){
-                    txtPrivacy.setText("");
-                    txtStoreDescription.setVisibility(View.VISIBLE);
+                    txtPrivacy.setVisibility(View.VISIBLE);
+                    ibPrivacy.setImageResource(R.drawable.ic_right);
                 }else{
-                    txtDescriptionVisible.setText("Description ►");
-                    txtStoreDescription.setVisibility(View.GONE);
+                    ibPrivacy.setImageResource(R.drawable.ic_foward);
+                    txtPrivacy.setVisibility(View.GONE);
+                }
+            }
+        });
+
+        ibPolicy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                isVisible = !isVisible;
+                if(isVisible){
+                    txtPolicy.setVisibility(View.VISIBLE);
+                    ibPolicy.setImageResource(R.drawable.ic_right);
+                }else{
+                    ibPolicy.setImageResource(R.drawable.ic_foward);
+                    txtPolicy.setVisibility(View.GONE);
+                }
+            }
+        });
+
+        ibAppVersion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                isVisible = !isVisible;
+                if(isVisible){
+                    txtAppVersion.setVisibility(View.VISIBLE);
+                    ibAppVersion.setImageResource(R.drawable.ic_right);
+                }else{
+                    ibAppVersion.setImageResource(R.drawable.ic_foward);
+                    txtAppVersion.setVisibility(View.GONE);
                 }
             }
         });
@@ -77,6 +106,7 @@ public class SettingActivity extends AppCompatActivity {
         switchilly = findViewById(R.id.switchilly);
         ibPrivacy = findViewById(R.id.ibPrivacy);
         ibPolicy = findViewById(R.id.ibPolicy);
+        ibAppVersion = findViewById(R.id.ibAppVersion);
         ibSignOut = findViewById(R.id.ibSignOut);
     }
 }

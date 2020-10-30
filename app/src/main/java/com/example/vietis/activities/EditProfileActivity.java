@@ -2,7 +2,9 @@ package com.example.vietis.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -29,6 +31,15 @@ public class EditProfileActivity extends AppCompatActivity {
     }
 
     private void setupUI() {
+        ibBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(EditProfileActivity.this,SettingActivity.class));
+            }
+        });
+    }
+
+    private void mappingUI() {
         btnSave = findViewById(R.id.btnSave);
         ibBack = findViewById(R.id.ibBack);
         ibAvatar = findViewById(R.id.ibAvatar);
@@ -37,8 +48,5 @@ public class EditProfileActivity extends AppCompatActivity {
         edtName = findViewById(R.id.edtName);
         edtPhoneNumber = findViewById(R.id.edtPhoneNumber);
         edtAddress = findViewById(R.id.edtAddress);
-    }
-
-    private void mappingUI() {
     }
 }

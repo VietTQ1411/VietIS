@@ -62,7 +62,7 @@
 
             <Button
                 android:id="@+id/btnEdit"
-                android:layout_width="90dp"
+                android:layout_width="150dp"
                 android:layout_height="35dp"
                 android:layout_gravity="center|bottom"
                 android:layout_marginLeft="-20dp"
@@ -136,7 +136,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/txtPrivacy"
             style="@style/CodeFont"
-            android:text=""/>
+            android:text="Day la privacy cua app neeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -169,7 +169,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/txtPolicy"
             style="@style/CodeFont"
-            android:text=""/>
+            android:text="Day la Policy cua app neeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -201,7 +201,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/txtAppVersion"
             style="@style/CodeFont"
-            android:text=""/>
+            android:text="1.0"/>
 
         <LinearLayout
             android:layout_width="match_parent"
