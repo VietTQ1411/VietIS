@@ -9,13 +9,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.vietis.R;
-import com.example.vietis.adapter.SearchAdapter;
-import com.example.vietis.entity.Shop;
-import com.example.vietis.inteface.IView;
-import com.example.vietis.view_model.ListActivityModel;
+import com.example.vietis.UI.adapter.SearchAdapter;
+import com.example.vietis.UI.dialog.RatingFragment;
+import com.example.vietis.Data.entity.Shop;
+import com.example.vietis.Data.view_model.ListActivityModel;
+// To display a message in the log (logcat)
 
 import java.util.ArrayList;
 
@@ -25,6 +27,8 @@ public class StoreDetailActivity extends AppCompatActivity implements IView {
     private NestedScrollView nsvStoreView;
     private TextView txtStoreDescription;
     private TextView txtDescriptionVisible;
+    private String TAG = "Store Detail";
+    private LinearLayout rate;
 
     //RecyclerView components
     private SearchAdapter searchAdapter;
@@ -51,8 +55,7 @@ public class StoreDetailActivity extends AppCompatActivity implements IView {
         txtStoreDescription = findViewById(R.id.txtStoreDescription);
         nsvStoreView = findViewById(R.id.nsvStoreView);
         txtDescriptionVisible = findViewById(R.id.txtDescriptionVisible);
-
-
+        rate = findViewById(R.id.rate);
 
 
         txtStoreDescription.setText(createIndentedText("Với người mới mở quán kinh doanh cafe, viết quảng cáo cho quán cafe là điều không hề dễ dàng. Đặc biệt là tại các thành phố lớn với sự cạnh tranh gay gắt giữa các quán cafe, chi phí đầu tư, thuê mặt bằng đắt đỏ… nếu kinh doanh cafe mà không biết cách quảng cáo mục tiêu của quán đến người dùng, việc kinh doanh lâu dài sẽ gặp nhiều khó khăn. Do đó, bạn cần đầu tư vào việc viết quảng cáo cho quán cafe tốt nhất."
@@ -91,6 +94,13 @@ public class StoreDetailActivity extends AppCompatActivity implements IView {
                 }
             }
         });
-
+        rate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                RatingFragment dialog = new RatingFragment(StoreDetailActivity.this);
+                dialog.show();
+            }
+        });
     }
+
 }

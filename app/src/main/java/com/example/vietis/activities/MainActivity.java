@@ -3,12 +3,7 @@ package com.example.vietis.activities;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
 import android.content.Intent;
-import android.graphics.Color;
-import android.nfc.Tag;
-import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -17,13 +12,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.vietis.R;
-import com.example.vietis.inteface.IView;
-import com.example.vietis.notifications.MyFirebaseMessagingService;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.messaging.FirebaseMessaging;
-import com.google.firebase.messaging.FirebaseMessagingService;
 
 public class MainActivity extends AppCompatActivity implements IView {
 
@@ -53,6 +44,7 @@ public class MainActivity extends AppCompatActivity implements IView {
         });
 
        // createNotificationChannels();
+
 
 //        createNotificationChannels();
 

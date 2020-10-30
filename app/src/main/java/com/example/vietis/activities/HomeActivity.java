@@ -12,7 +12,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.vietis.R;
-import com.example.vietis.inteface.IView;
 
 public class HomeActivity extends AppCompatActivity implements IView {
 
