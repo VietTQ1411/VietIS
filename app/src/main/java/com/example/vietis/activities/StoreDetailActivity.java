@@ -7,20 +7,17 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.vietis.R;
-import com.example.vietis.adapter.SearchAdapter;
-import com.example.vietis.dialog.RatingFragment;
-import com.example.vietis.entity.Shop;
-import com.example.vietis.inteface.IView;
-import com.example.vietis.view_model.ListActivityModel;
+import com.example.vietis.UI.adapter.SearchAdapter;
+import com.example.vietis.UI.dialog.RatingFragment;
+import com.example.vietis.Data.entity.Shop;
+import com.example.vietis.Data.view_model.ListActivityModel;
 // To display a message in the log (logcat)
-import android.util.Log;
 
 import java.util.ArrayList;
 

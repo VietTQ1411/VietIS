@@ -12,10 +12,9 @@ import android.view.View;
 import android.widget.ImageButton;
 
 import com.example.vietis.R;
-import com.example.vietis.adapter.SearchAdapter;
-import com.example.vietis.entity.Shop;
-import com.example.vietis.inteface.IView;
-import com.example.vietis.view_model.ListActivityModel;
+import com.example.vietis.UI.adapter.SearchAdapter;
+import com.example.vietis.Data.entity.Shop;
+import com.example.vietis.Data.view_model.ListActivityModel;
 
 import java.util.ArrayList;
 

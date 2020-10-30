@@ -6,7 +6,7 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
 import com.example.vietis.dao.UserDAO;
-import com.example.vietis.entity.User;
+import com.example.vietis.Data.entity.User;
 
 @androidx.room.Database(entities = {User.class}, version = 1)
 public abstract class Database extends RoomDatabase {
