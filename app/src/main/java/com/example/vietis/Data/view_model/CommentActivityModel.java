@@ -33,6 +33,11 @@ public class CommentActivityModel extends ViewModel implements ICommentRepositor
 
 
     @Override
+    public void getCommentLimit(ArrayList<Comment> arrayListComment, Exception error) {
+
+    }
+
+    @Override
     public void getCommentData(final ArrayList<Comment> arrayListComment, final Exception error) {
         final CommentActivityModel that = this;
         new Handler(Looper.getMainLooper()).post(new Runnable() {
