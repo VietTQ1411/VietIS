@@ -75,7 +75,9 @@ public class StoreRepository {
         call.enqueue(new Callback() {
             @Override
             public void onFailure(@NotNull Call call, @NotNull IOException ioException) {
-                iStoreDeatilRepository.getStoreDeatil(null, ioException);
+                /**
+                 * Chuyển qua trang error or thoát ứng dụng
+                 * */
             }
 
             @Override
@@ -117,7 +119,9 @@ public class StoreRepository {
                     }
                     iStoreDeatilRepository.getStoreDeatil(null, new Exception("GET API FAILED - DATA NULL"));
                 } catch (JSONException e) {
-                    iStoreDeatilRepository.getStoreDeatil(null, e);
+                    /**
+                     * Chuyển qua trang error or thoát ứng dụng
+                     * */
                 }
             }
         });
