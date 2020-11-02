@@ -7,6 +7,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.vietis.R;
+
 public class NotificationViewHolder extends RecyclerView.ViewHolder {
     private ImageView imageShop;
     private TextView txtShopName;
@@ -14,5 +16,9 @@ public class NotificationViewHolder extends RecyclerView.ViewHolder {
 
     public NotificationViewHolder(@NonNull View itemView) {
         super(itemView);
+        imageShop = itemView.findViewById(R.id.shopImage);
+        txtShopName = itemView.findViewById(R.id.textShopName);
+        txtNotification = itemView.findViewById(R.id.txtNotifications);
     }
+    public void setNotification()
 }
