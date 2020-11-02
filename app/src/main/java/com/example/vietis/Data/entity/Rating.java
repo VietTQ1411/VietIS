@@ -1,5 +1,7 @@
 package com.example.vietis.Data.entity;
 
+import org.json.JSONObject;
+
 import lombok.Builder;
 import lombok.Data;
 
@@ -23,4 +25,16 @@ public class Rating {
      * Rating(id,starNumber) -> rating of user
      * Rating(starNumber,voteCount) -> rating for food or store
      */
+
+
+    public static Rating generateRatingCount(int starNumber,JSONObject jsonObject) {
+        try {
+            return Rating.builder()
+                    .starNumber(starNumber)
+                    .voteCount(Integer.parseInt(jsonObject.getString("count")))
+                    .build();
+        } catch (Exception e) {
+            return null;
+        }
+    }
 }

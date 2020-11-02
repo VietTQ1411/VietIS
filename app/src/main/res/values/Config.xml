@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    /*
+        URL config
+    */
+    <string name="HOST_NAME">10.1.35.170</string>
+    <string name="POST">3000</string>
+
+    /*
+        Result API Code
+    */
+    <string name="SUCCESS_REQUEST">SC</string>
+
+    /*
+        URL path
+    */
+    <string name="GET_DETAIL_STORE">store/detailStore</string>
+    <string name="GET">store/detailStore</string>
+</resources>

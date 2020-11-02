@@ -1,5 +1,7 @@
 package com.example.vietis.Data.entity;
 
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 
 import lombok.Builder;
@@ -29,6 +31,20 @@ public class Comment {
      */
     private String dateCreate;
 
+
+    public static Comment generateCommentFroJSon(JSONObject jsonObject) {
+        try {
+            return Comment.builder()
+                    .id(Integer.parseInt(jsonObject.getString("id")))
+                    .userName(jsonObject.getString("userName"))
+                    .imgUserURL(jsonObject.getString("imgUserURL"))
+                    .Content(jsonObject.getString("Content"))
+                    .dateCreate(jsonObject.getString("dateCreate"))
+                    .build();
+        } catch (Exception e) {
+            return null;
+        }
+    }
     public static ArrayList<Comment> generateFoodArray() {
         ArrayList<Comment> list = new ArrayList<>();
         list.add(Comment.builder()

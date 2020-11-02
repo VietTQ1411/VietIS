@@ -3,6 +3,7 @@ package com.example.vietis.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -146,6 +147,16 @@ public class StoreDetailActivity extends AppCompatActivity implements IView {
         FoodRecyclerView = findViewById(R.id.FoodRecyclerView);
         searchAdapter = new SearchAdapter(new ArrayList<Shop>());
         listActivityModel = new ViewModelProvider(this).get(ListActivityModel.class);
+
+        /**
+         * Layout RecyclerView
+         */
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext(),
+                LinearLayoutManager.VERTICAL, false);
+        RecyclerView.LayoutManager layoutManager2 = new LinearLayoutManager(getApplicationContext(),
+                LinearLayoutManager.VERTICAL, false);
+        FoodRecyclerView.setLayoutManager(layoutManager);
+        CommentRecyclerView.setLayoutManager(layoutManager2);
     }
 
     /**
@@ -177,6 +188,9 @@ public class StoreDetailActivity extends AppCompatActivity implements IView {
             @Override
             public void onClick(View v) {
                 RatingFragment dialog = new RatingFragment(StoreDetailActivity.this);
+                int width = (int)(getResources().getDisplayMetrics().widthPixels);
+                int height = (int)(getResources().getDisplayMetrics().heightPixels*0.5);
+                dialog.getWindow().setLayout(width,height);
                 dialog.show();
             }
         });
@@ -187,21 +201,15 @@ public class StoreDetailActivity extends AppCompatActivity implements IView {
      */
     public void setUpData() {
         /**
-         *  get data form API and activity
+         *  get store detail
          */
         Intent parent = getIntent();
         int id = Integer.parseInt(parent.getStringExtra("id"));
-        //get User form API
 
 
-
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext(),
-                LinearLayoutManager.VERTICAL, false);
-        RecyclerView.LayoutManager layoutManager2 = new LinearLayoutManager(getApplicationContext(),
-                LinearLayoutManager.VERTICAL, false);
-        FoodRecyclerView.setLayoutManager(layoutManager);
-        CommentRecyclerView.setLayoutManager(layoutManager2);
-
+        /**
+         *  input data
+         */
         listActivityModel.init(false, false);
         listActivityModel.getShopData().observe(this, new Observer<ArrayList<Shop>>() {
             @Override
@@ -222,8 +230,13 @@ public class StoreDetailActivity extends AppCompatActivity implements IView {
                 nsvStoreView.scrollTo(0, 0);
             }
         });
-        txtStoreDescription.setText(createIndentedText("Với người mới mở quán kinh doanh cafe, viết quảng cáo cho quán cafe là điều không hề dễ dàng. Đặc biệt là tại các thành phố lớn với sự cạnh tranh gay gắt giữa các quán cafe, chi phí đầu tư, thuê mặt bằng đắt đỏ… nếu kinh doanh cafe mà không biết cách quảng cáo mục tiêu của quán đến người dùng, việc kinh doanh lâu dài sẽ gặp nhiều khó khăn. Do đó, bạn cần đầu tư vào việc viết quảng cáo cho quán cafe tốt nhất."
-                + "\nTrước tiên để viết được quảng cáo cho quán cafe, bạn cần nắm được ý tưởng và đặc trưng phong cách của quán ví dụ như quán theo phong cách retro, cafe shop, vintage, racer, cafe bụi v.v… Tiếp theo bạn nên thử thưởng thức hương vị của quán để đưa ra đánh giá tốt nhất. Hiện nay, mỗi quán cafe đều có các gu khác nhau, vậy nên bài đánh giá không chỉ nói về không gian, thức uống mà còn cả phong cách phục vụ và tất cả các chi tiết."
-        ));
+    }
+
+    public void fillDetailStore(Shop store){
+        imageStoreDetailIcon = findViewById(R.id.imageStoreDetailIcon);
+        txtStoreName.setText(store.getName());
+        txtStoreAddress.setText(store.getAddress());
+        txtStorePhone.setText("Hotline: " +store.getPhoneNumber());
+        txtStoreDescription.setText(createIndentedText(store.getDescription()));
     }
 }
