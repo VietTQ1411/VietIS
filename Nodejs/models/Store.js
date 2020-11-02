@@ -52,6 +52,15 @@ module.exports = sequelize => {
                 key: "id",
                 model: "Image_model"
             }
+        },
+        description: {
+            type: DataTypes.TEXT,
+            allowNull: true,
+            defaultValue: null,
+            primaryKey: false,
+            autoIncrement: false,
+            comment: null,
+            field: "description"
         }
     };
     const options = {

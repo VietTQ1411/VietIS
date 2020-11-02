@@ -1,5 +1,6 @@
 package com.example.vietis.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -185,6 +186,15 @@ public class StoreDetailActivity extends AppCompatActivity implements IView {
      *
      */
     public void setUpData() {
+        /**
+         *  get data form API and activity
+         */
+        Intent parent = getIntent();
+        int id = Integer.parseInt(parent.getStringExtra("id"));
+        //get User form API
+
+
+
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext(),
                 LinearLayoutManager.VERTICAL, false);
         RecyclerView.LayoutManager layoutManager2 = new LinearLayoutManager(getApplicationContext(),

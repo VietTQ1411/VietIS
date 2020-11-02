@@ -13,6 +13,19 @@ module.exports = sequelize => {
             comment: null,
             field: "id"
         },
+        userId: {
+            type: DataTypes.INTEGER,
+            allowNull: true,
+            defaultValue: null,
+            primaryKey: false,
+            autoIncrement: false,
+            comment: null,
+            field: "userId",
+            references: {
+                key: "id",
+                model: "User_model"
+            }
+        },
         storeId: {
             type: DataTypes.INTEGER,
             allowNull: true,
