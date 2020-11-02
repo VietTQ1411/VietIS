@@ -22,7 +22,6 @@ public class MainActivity extends AppCompatActivity implements IView {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_main);
 //        FirebaseAuth auth = FirebaseAuth.getInstance();
 //        String email = "huypham1700@gmail.com";
