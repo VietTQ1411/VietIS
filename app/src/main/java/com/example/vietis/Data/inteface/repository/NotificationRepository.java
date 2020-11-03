@@ -1,12 +1,16 @@
 package com.example.vietis.Data.inteface.repository;
 
+import com.example.vietis.Data.entity.Notification;
 import com.example.vietis.Data.inteface.INotiRepository;
 
 import org.jetbrains.annotations.NotNull;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -21,6 +25,7 @@ public class NotificationRepository {
     private INotiRepository iNotiRepository;
     private String msg;
     public static final String URL_NOTI ="http://"+ Config.HOST_NAME+":"+Config.PORT+"/noti/addTokenKey";
+    public static final String URL_LIST_NOTI ="http://"+Config.HOST_NAME+":"+Config.PORT+"/noti/listNoti";
     private NotificationRepository (INotiRepository iNotiRepository){
         this.iNotiRepository=iNotiRepository;
     }
@@ -30,6 +35,7 @@ public class NotificationRepository {
         }
         return instance;
     }
+
     public void deviceRegister(String tokenKey, String userId){
         OkHttpClient okHttpClient = new OkHttpClient();
         RequestBody requestBody = new MultipartBody.Builder()
@@ -61,5 +67,39 @@ public class NotificationRepository {
                 }
             }
         });
+    }
+
+    public void getListNoti(){
+        final ArrayList<Notification> notifications = new ArrayList<>();
+        OkHttpClient okHttpClient = new OkHttpClient();
+        Request request = new Request.Builder()
+                .url(URL_LIST_NOTI)
+                .get()
+                .build();
+        Call call = okHttpClient.newCall(request);
+        call.enqueue(new Callback() {
+            @Override
+            public void onFailure(@NotNull Call call, @NotNull IOException e) {
+                iNotiRepository.getNotiList(null,e);
+            }
+
+            @Override
+            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+                try{
+                    String jsonString = response.body().string();
+                    JSONObject jsonObject = new JSONObject(jsonString);
+                    JSONArray jsonNotificationObject = jsonObject.getJSONArray("data");
+                    for (int i=0;i<jsonNotificationObject.length();i++){
+                        notifications.add(Notification.createNotificationFromJSONObject(
+                                jsonNotificationObject.getJSONObject(i)
+                        ));
+                    }
+                    iNotiRepository.getNotiList(notifications,null);
+                }catch (JSONException jsonException){
+                    iNotiRepository.getNotiList(null,jsonException);
+                }
+            }
+        });
+
     }
 }
