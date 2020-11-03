@@ -24,6 +24,7 @@ android {
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
+    implementation 'com.google.firebase:firebase-installations:16.3.3'
     implementation('com.google.firebase:firebase-database:19.5.1')
     implementation('com.google.firebase:firebase-messaging:21.0.0')
     implementation platform('com.google.firebase:firebase-bom:25.12.0')

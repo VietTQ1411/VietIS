@@ -47,7 +47,7 @@ public class RegisterActivity extends AppCompatActivity implements IView {
                 new Observer<User>() {
                     @Override
                     public void onChanged(User user) {
-                        Database db =Database.getInstance(RegisterActivity.this);
+                        Database db = Database.getInstance(RegisterActivity.this);
                             db.userDAO().insertUser(user);
                             if(db.userDAO().getAll() != null){
                                 Log.d("USER","REGISTER SUCCESS");
@@ -58,7 +58,6 @@ public class RegisterActivity extends AppCompatActivity implements IView {
                             Intent intent = new Intent(RegisterActivity.this,SearchActivity.class);
                             RegisterActivity.this.startActivity(intent);
                         }
-
                     }
                 });
     }

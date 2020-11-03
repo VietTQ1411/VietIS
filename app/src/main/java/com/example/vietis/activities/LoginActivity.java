@@ -41,8 +41,9 @@ public class LoginActivity extends AppCompatActivity implements IView {
         loginActivityViewModel = new LoginActivityViewModel();
     }
 
-    public void navigateToHomeActivity(){
+    public void navigateToHomeActivity(User user){
         Intent intent = new Intent(LoginActivity.this,HomeActivity.class);
+        intent.putExtra("userid", user.getId());
         this.startActivity(intent);
     }
 
@@ -56,7 +57,7 @@ public class LoginActivity extends AppCompatActivity implements IView {
                     public void onChanged(User user) {
 
                         if(user!= null){
-                            LoginActivity.this.navigateToHomeActivity();
+                            LoginActivity.this.navigateToHomeActivity(user);
                         }
                     }
 

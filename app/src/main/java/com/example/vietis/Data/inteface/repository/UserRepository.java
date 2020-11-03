@@ -1,5 +1,6 @@
 package com.example.vietis.Data.inteface.repository;
 
+import com.example.vietis.Data.entity.Image;
 import com.example.vietis.Data.entity.User;
 import com.example.vietis.Data.inteface.IUserRepository;
 
@@ -8,6 +9,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import okhttp3.Call;
@@ -25,6 +27,7 @@ public class UserRepository {
     public static final String URL_LOGIN =
             "http://"+ Config.HOST_NAME+":"+Config.PORT+"/users/login";
     public static final String URL_REGISTER="http://"+ Config.HOST_NAME+":"+Config.PORT+"/users/register";
+    public static final String URL_SETTING ="http://" + Config.HOST_NAME+":"+Config.PORT+"/users/setting";
     private UserRepository(IUserRepository iUserRepository) {
         this.iUserRepository = iUserRepository;
     }
@@ -96,6 +99,37 @@ public class UserRepository {
                     iUserRepository.afterRegister(user,null);
                 }catch (JSONException e){
                     iUserRepository.afterRegister(null, e);
+                }
+            }
+        });
+    }
+    public void getSettingData(User user){
+        OkHttpClient okHttpClient = new OkHttpClient();
+        RequestBody requestBody = new MultipartBody.Builder()
+                .setType(MultipartBody.FORM)
+                .addFormDataPart("userid", String.valueOf(user.getId()))
+                .build();
+        Request request = new Request.Builder()
+                .url(URL_SETTING)
+                .post(requestBody)
+                .build();
+        Call call = okHttpClient.newCall(request);
+        call.enqueue(new Callback() {
+            @Override
+            public void onFailure(@NotNull Call call, @NotNull IOException e) {
+                    iUserRepository.getSettingData(null,e);
+            }
+
+            @Override
+            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+                try {
+                    String jsonString = response.body().string();
+                    JSONObject jsonObject = new JSONObject(jsonString);
+                    JSONObject jsonUserObject =jsonObject.getJSONObject("data");
+                    User user = User.createUserFromJSONObject(jsonUserObject);
+                    iUserRepository.getSettingData(user,null);
+                } catch (JSONException e) {
+                    iUserRepository.getSettingData(null,e);
                 }
             }
         });

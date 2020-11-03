@@ -33,5 +33,11 @@ public class RegisterActivityViewModel  extends ViewModel implements IUserReposi
                 }
             });
         }
+
+    @Override
+    public void getSettingData(User user, Exception error) {
+
     }
+
+}
 
