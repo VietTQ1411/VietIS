@@ -1,4 +1,4 @@
-package com.example.vietis.Data.IRepository;
+package com.example.vietis.Data.inteface;
 
 import com.example.vietis.Data.entity.Image;
 import com.example.vietis.Data.entity.User;

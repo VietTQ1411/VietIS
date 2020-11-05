@@ -16,7 +16,7 @@ import com.example.vietis.Data.view_model.SettingActivityViewModel;
 import com.example.vietis.R;
 import com.example.vietis.database.Database;
 
-public class EditProfileActivity extends AppCompatActivity {
+public class EditProfileActivity extends AppCompatActivity implements IView{
 
     Button btnSave;
     ImageButton ibBack;
@@ -41,7 +41,24 @@ public class EditProfileActivity extends AppCompatActivity {
         setupUI();
     }
 
-    private void setupUI() {
+    @Override
+    public void mappingUI() {
+        btnSave = findViewById(R.id.btnSave);
+        ibBack = findViewById(R.id.ibBack);
+        ibAvatar = findViewById(R.id.ibAvatar);
+        ibEditPassword = findViewById(R.id.ibEditPassword);
+        edtEmail = findViewById(R.id.edtEmail);
+        edtPassword = findViewById(R.id.edtPassword);
+        edtName = findViewById(R.id.edtName);
+        edtPhoneNumber = findViewById(R.id.edtPhoneNumber);
+        edtAddress = findViewById(R.id.edtAddress);
+        settingActivityViewModel = new SettingActivityViewModel();
+        llPassword = findViewById(R.id.llPassword);
+    }
+
+    @Override
+    public void setupUI() {
+        getSettingData();
         ibBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -61,20 +78,6 @@ public class EditProfileActivity extends AppCompatActivity {
         });
     }
 
-    private void mappingUI() {
-        btnSave = findViewById(R.id.btnSave);
-        ibBack = findViewById(R.id.ibBack);
-        ibAvatar = findViewById(R.id.ibAvatar);
-        ibEditPassword = findViewById(R.id.ibEditPassword);
-        edtEmail = findViewById(R.id.edtEmail);
-        edtPassword = findViewById(R.id.edtPassword);
-        edtName = findViewById(R.id.edtName);
-        edtPhoneNumber = findViewById(R.id.edtPhoneNumber);
-        edtAddress = findViewById(R.id.edtAddress);
-        settingActivityViewModel = new SettingActivityViewModel();
-        llPassword = findViewById(R.id.llPassword);
-    }
-
     public void getSettingData(){
         settingActivityViewModel.getSettingUser().observe(this, new Observer<User>() {
             @Override
@@ -84,7 +87,6 @@ public class EditProfileActivity extends AppCompatActivity {
                 db.userDAO().getSettingUser(intent.getIntExtra("userid",0));
                 if(db.userDAO().getSettingUser(intent.getIntExtra("userid",0)) != null){
                     edtEmail.setHint(user.getEmail());
-                    edtPassword.setHint(user.getHashedPassword());
                     edtName.setHint(user.getName());
                     edtPhoneNumber.setHint(user.getPhoneNumber());
                     edtAddress.setHint(user.getAddress());

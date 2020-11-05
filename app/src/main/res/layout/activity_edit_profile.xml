@@ -188,6 +188,7 @@
                 android:background="@drawable/drop_shadow" />
 
             <Button
+                android:id="@+id/btnSavePassword"
                 android:layout_width="100dp"
                 android:layout_height="40dp"
                 android:layout_gravity="right"
@@ -216,6 +217,7 @@
                 android:background="@drawable/drop_shadow" />
 
             <ImageButton
+                android:id="@+id/ibEditName"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:layout_gravity="right|center"
@@ -223,6 +225,28 @@
                 android:layout_marginRight="25dp"
                 android:background="@drawable/ic_edit" />
 
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llName"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="160dp"
+                android:layout_height="25dp"
+                android:layout_marginTop="5dp"
+                android:text="Enter New Name:"
+                android:textSize="15dp" />
+
+            <EditText
+                android:layout_width="250dp"
+                android:layout_height="23dp"
+                android:layout_gravity="right"
+                android:layout_marginTop="-25dp"
+                android:layout_marginRight="50dp"
+                android:background="@drawable/drop_shadow" />
         </LinearLayout>
 
         <LinearLayout
@@ -244,6 +268,7 @@
                 android:background="@drawable/drop_shadow" />
 
             <ImageButton
+                android:id="@+id/ibEditPhoneNumber"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:layout_gravity="right|center"
@@ -272,6 +297,7 @@
                 android:background="@drawable/drop_shadow" />
 
             <ImageButton
+                android:id="@+id/ibEditAddress"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:layout_gravity="right|center"
