@@ -9,19 +9,33 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.vietis.Data.entity.Notification;
 import com.example.vietis.R;
+import com.example.vietis.activities.NotificationActivity;
 import com.squareup.picasso.Picasso;
 
 public class NotificationViewHolder extends RecyclerView.ViewHolder {
     private ImageView imageShop;
     private TextView txtShopName;
     private TextView txtNotification;
+    private NotificationActivity notificationActivity;
 
     public NotificationViewHolder(@NonNull View itemView) {
         super(itemView);
         imageShop = itemView.findViewById(R.id.shopImage);
         txtShopName = itemView.findViewById(R.id.textShopName);
         txtNotification = itemView.findViewById(R.id.txtNotifications);
+        itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NotificationViewHolder.this.notificationActivity.navigateToDetailActivities(getLayoutPosition());
+
+            }
+        });
     }
+
+    public void setNotificationActivity(NotificationActivity notificationActivity) {
+        this.notificationActivity = notificationActivity;
+    }
+
     public void setNotification(Notification notification){
         Picasso.get().load(notification.getImageUrl())
                 .placeholder(R.drawable.ic_notification)

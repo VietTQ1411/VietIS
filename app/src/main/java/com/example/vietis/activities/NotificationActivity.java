@@ -1,5 +1,6 @@
 package com.example.vietis.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -19,6 +20,7 @@ import java.util.ArrayList;
 public class NotificationActivity extends AppCompatActivity implements IView {
     private RecyclerView notiRecyclerView;
     private NotificationActivityViewModel notificationActivityViewModel = new NotificationActivityViewModel();
+    private static ArrayList<Notification> notifications;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,25 +32,43 @@ public class NotificationActivity extends AppCompatActivity implements IView {
     @Override
     public void mappingUI() {
         notiRecyclerView = findViewById(R.id.notification_recycler_view);
+
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(
                 getApplicationContext(),
                 RecyclerView.VERTICAL,false
         );
         notiRecyclerView.setLayoutManager(layoutManager);
+
         notificationActivityViewModel.getListNoti();
         notificationActivityViewModel.getNotifications().observe(this, new Observer<ArrayList<Notification>>() {
             @Override
             public void onChanged(ArrayList<Notification> notifications) {
+                NotificationActivity.notifications = notifications;
                 NotificationAdapter notiAdapter = new NotificationAdapter(
                         NotificationActivity.this,
                         notifications);
+                notiAdapter.setNotificationActivity(NotificationActivity.this);
                 notiRecyclerView.setAdapter(notiAdapter);
             }
         });
+
     }
 
     @Override
     public void setupUI() {
 
+    }
+    public void navigateToDetailActivities(Integer position){
+//        if(notifications.get(position).getIdType().equals("store")) {
+            Intent intent = new Intent(NotificationActivity.this, StoreDetailActivity.class);
+            Notification selectedNotification = notifications.get(position);
+            intent.putExtra("id", selectedNotification.getStoreId());
+            this.startActivity(intent);
+//        }else{
+//            Intent intent = new Intent(NotificationActivity.this, FoodDetailActivity.class);
+//            Notification selectedNotification = notifications.get(position);
+//            intent.putExtra("id", selectedNotification.getFoodId());
+//            this.startActivity(intent);
+//        }
     }
 }

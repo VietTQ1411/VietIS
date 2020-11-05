@@ -3,6 +3,9 @@ package com.example.vietis.Data.entity;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+
 import lombok.Builder;
 import lombok.Data;
 import lombok.Getter;
@@ -10,7 +13,7 @@ import lombok.Getter;
 @Data
 @Builder
 @Getter
-public class Notification {
+public class Notification implements Serializable {
     @Builder.Default
     private String title="";
     @Builder.Default
@@ -38,5 +41,39 @@ public class Notification {
         }catch (JSONException jsonException){
             return null;
         }
+    }
+    public static final ArrayList<Notification> fakeNoti(){
+        ArrayList<Notification> notifications = new ArrayList<>();
+        notifications.add(
+                Notification.builder().
+                title("1")
+                .imageUrl("abc")
+                .content("new")
+                .storeId(1)
+                .foodId(2)
+                .idType("food")
+                .build()
+                );
+        notifications.add(
+                Notification.builder().
+                        title("2")
+                        .imageUrl("abc")
+                        .content("new")
+                        .storeId(1)
+                        .foodId(2)
+                        .idType("food")
+                        .build()
+        );
+        notifications.add(
+                Notification.builder().
+                        title("3")
+                        .imageUrl("abc")
+                        .content("new")
+                        .storeId(1)
+                        .foodId(2)
+                        .idType("food")
+                        .build()
+        );
+        return notifications;
     }
 }
