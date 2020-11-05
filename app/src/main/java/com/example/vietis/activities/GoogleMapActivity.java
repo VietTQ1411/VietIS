@@ -5,7 +5,7 @@ import androidx.fragment.app.FragmentManager;
 
 import android.os.Bundle;
 
-import com.example.vietis.Fragment.MapsFragment;
+import com.example.vietis.UI.dialog.MapsFragment;
 import com.example.vietis.R;
 
 public class GoogleMapActivity extends AppCompatActivity {

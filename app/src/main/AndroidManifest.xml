@@ -41,14 +41,17 @@
 
         <activity android:name=".activities.GoogleMapActivity">
         </activity>
-        <activity android:name=".activities.SplashActivity" >
+
+        <activity android:name=".activities.SplashActivity" />
+        <activity android:name=".activities.EditProfileActivity">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.EditProfileActivity" />
+
         <activity android:name=".activities.SettingActivity">
 
         </activity>

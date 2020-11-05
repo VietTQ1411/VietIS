@@ -165,6 +165,7 @@
                 android:textSize="15dp" />
 
             <EditText
+                android:id="@+id/edtNewPassword"
                 android:layout_width="200dp"
                 android:layout_height="23dp"
                 android:layout_gravity="right"
@@ -230,7 +231,7 @@
         <LinearLayout
             android:id="@+id/llName"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="60dp"
             android:orientation="vertical">
 
             <TextView
@@ -247,6 +248,26 @@
                 android:layout_marginTop="-25dp"
                 android:layout_marginRight="50dp"
                 android:background="@drawable/drop_shadow" />
+                android:text="Enter new name:"
+                android:textSize="15dp" />
+
+            <EditText
+                android:id="@+id/edtNewName"
+                android:layout_width="230dp"
+                android:layout_height="23dp"
+                android:layout_gravity="right"
+                android:layout_marginTop="-25dp"
+                android:layout_marginRight="60dp"
+                android:background="@drawable/drop_shadow" />
+
+            <Button
+                android:layout_width="100dp"
+                android:layout_height="40dp"
+                android:layout_gravity="right"
+                android:layout_marginRight="44dp"
+                android:text="Save"
+                android:textSize="15dp" />
+
         </LinearLayout>
 
         <LinearLayout
@@ -265,6 +286,7 @@
                 android:id="@+id/edtPhoneNumber"
                 android:layout_width="350dp"
                 android:layout_height="match_parent"
+                android:inputType="number"
                 android:background="@drawable/drop_shadow" />
 
             <ImageButton
@@ -275,6 +297,32 @@
                 android:layout_marginTop="-30dp"
                 android:layout_marginRight="25dp"
                 android:background="@drawable/ic_edit" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llPhoneNumber"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="175dp"
+                android:layout_height="25dp"
+                android:layout_marginTop="5dp"
+                android:text="Enter new phone number:"
+                android:textSize="15dp" />
+
+            <EditText
+                android:id="@+id/edtNewPhoneNumber"
+                android:layout_width="180dp"
+                android:layout_height="23dp"
+                android:inputType="number"
+                android:layout_gravity="right"
+                android:layout_marginTop="-25dp"
+                android:layout_marginRight="60dp"
+                android:background="@drawable/drop_shadow" />
 
         </LinearLayout>
 
@@ -304,6 +352,31 @@
                 android:layout_marginTop="-30dp"
                 android:layout_marginRight="25dp"
                 android:background="@drawable/ic_edit" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llAddress"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="130dp"
+                android:layout_height="25dp"
+                android:layout_marginTop="5dp"
+                android:text="Enter new address:"
+                android:textSize="15dp" />
+
+            <EditText
+                android:id="@+id/edtNewAddress"
+                android:layout_width="220dp"
+                android:layout_height="23dp"
+                android:layout_gravity="right"
+                android:layout_marginTop="-25dp"
+                android:layout_marginRight="60dp"
+                android:background="@drawable/drop_shadow" />
 
         </LinearLayout>
 

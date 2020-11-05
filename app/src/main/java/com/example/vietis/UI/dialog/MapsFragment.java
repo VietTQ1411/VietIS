@@ -1,4 +1,4 @@
-package com.example.vietis.Fragment;
+package com.example.vietis.UI.dialog;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
