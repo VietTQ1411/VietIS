@@ -7,21 +7,18 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.vietis.Data.entity.User;
 import com.example.vietis.Data.IRepository.IUserRepository;
 import com.example.vietis.Data.IRepository.repository.UserRepository;
+import com.example.vietis.Data.entity.User;
 
-public class RegisterActivityViewModel extends ViewModel implements IUserRepository {
+public class RegisterActivityViewModel  extends ViewModel implements IUserRepository {
     private MutableLiveData<User> user = new MutableLiveData<>();
-
-    public LiveData<User> getUser() {
+    public LiveData<User> getUser(){
         return user;
     }
-
-    public void register(String email, String password, String name, String userType) {
-        UserRepository.getInstance(this).register(email, password, name, userType);
+    public void register(String email, String password,String name, String userType) {
+        UserRepository.getInstance(this).register(email, password,name,userType);
     }
-
     @Override
     public void afterLogin(final User user, final Exception error) {
 
@@ -32,9 +29,13 @@ public class RegisterActivityViewModel extends ViewModel implements IUserReposit
         new Handler(Looper.getMainLooper()).post(new Runnable() {
             @Override
             public void run() {
-                RegisterActivityViewModel.this.user.setValue(error == null ? user : User.builder().build());
+                RegisterActivityViewModel.this.user.setValue(error==null ? user : User.builder().build());
             }
         });
     }
-}
 
+    @Override
+    public void getSettingData(User user, Exception error) {
+
+    }
+}

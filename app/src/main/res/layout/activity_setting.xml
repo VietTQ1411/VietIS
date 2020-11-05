@@ -29,7 +29,6 @@
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/fuddy"
                     android:id="@+id/imgAvatar"
                     android:scaleType="centerCrop"/>
 
@@ -48,14 +47,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="70dp"
                 android:layout_marginTop="8dp"
-                android:text="Low G"
                 android:textSize="24dp"
                 android:gravity="bottom"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:text="LowG@gmail.com"
                 android:textSize="20dp"
                 android:textColor="@color/colorGray"
                 android:id="@+id/txtProfileAccount"/>

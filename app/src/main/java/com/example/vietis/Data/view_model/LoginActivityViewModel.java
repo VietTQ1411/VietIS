@@ -36,4 +36,11 @@ public class LoginActivityViewModel extends ViewModel implements IUserRepository
     public void afterRegister(User user, Exception error) {
 
     }
+
+    @Override
+    public void getSettingData(User user, Exception error) {
+
+    }
+
+
 }

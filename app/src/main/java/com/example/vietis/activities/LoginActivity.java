@@ -41,8 +41,20 @@ public class LoginActivity extends AppCompatActivity implements IView {
         loginActivityViewModel = new LoginActivityViewModel();
     }
 
-    public void navigateToHomeActivity() {
-        Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+    @Override
+    public void setupUI() {
+        btnLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                login();
+            }
+        });
+    }
+
+
+    public void navigateToHomeActivity(User user){
+        Intent intent = new Intent(LoginActivity.this,HomeActivity.class);
+        intent.putExtra("userid", user.getId());
         this.startActivity(intent);
     }
 
@@ -60,22 +72,13 @@ public class LoginActivity extends AppCompatActivity implements IView {
                 new Observer<User>() {
                     @Override
                     public void onChanged(User user) {
-
+                        if(user!= null){
+                            LoginActivity.this.navigateToHomeActivity(user);
                         if (user != null) {
-                            LoginActivity.this.navigateToHomeActivity();
+                            LoginActivity.this.navigateToHomeActivity(user);
                         }
                     }
-
-                });
-    }
-
-    @Override
-    public void setupUI() {
-        btnLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                login();
-            }
-        });
-    }
+                }
+    });
+}
 }
