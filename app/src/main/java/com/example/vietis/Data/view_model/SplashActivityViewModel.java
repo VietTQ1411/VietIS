@@ -6,8 +6,8 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.vietis.Data.inteface.INotiRepository;
-import com.example.vietis.Data.inteface.repository.NotificationRepository;
+import com.example.vietis.Data.IRepository.INotiRepository;
+import com.example.vietis.Data.IRepository.repository.NotificationRepository;
 
 import android.os.Handler;
 

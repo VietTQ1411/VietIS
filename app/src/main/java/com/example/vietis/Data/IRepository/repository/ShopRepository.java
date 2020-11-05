@@ -1,7 +1,7 @@
-package com.example.vietis.Data.inteface.repository;
+package com.example.vietis.Data.IRepository.repository;
 
 import com.example.vietis.Data.entity.Shop;
-import com.example.vietis.Data.inteface.IShopRepository;
+import com.example.vietis.Data.IRepository.IShopRepository;
 
 import org.jetbrains.annotations.NotNull;
 import org.json.JSONArray;

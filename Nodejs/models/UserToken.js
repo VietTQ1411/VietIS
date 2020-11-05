@@ -38,7 +38,7 @@ module.exports = sequelize => {
         createAt: {
             type: DataTypes.DATEONLY,
             allowNull: true,
-            defaultValue: null,
+            defaultValue: "(getdate())",
             primaryKey: false,
             autoIncrement: false,
             comment: null,

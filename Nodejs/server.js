@@ -31,7 +31,8 @@ const StoreRouter = require('./routings/Store')
 app.use('/store', StoreRouter)
 const NotiRouter = require('./routings/Noti')
 app.use('/noti', NotiRouter)
-
+const RatingRouter = require('./routings/Rating')
+app.use('/rating', RatingRouter)
 
 
 /*
