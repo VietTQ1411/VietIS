@@ -17,8 +17,7 @@ import java.util.ArrayList;
 public class NotificationAdapter extends RecyclerView.Adapter<NotificationViewHolder> {
     private ArrayList<Notification> notifications;
     private Context context;
-    private final View.OnClickListener navigateNotification = new View.OnClickListener();
-    }
+
     public NotificationAdapter(Context context,ArrayList<Notification> notifications){
         this.context=context;
         this.notifications=notifications;
@@ -28,7 +27,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationViewHo
     public NotificationViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.view_notification_item,parent,false);
-        view.setOnClickListener();
+
         return new NotificationViewHolder(view);
     }
 
