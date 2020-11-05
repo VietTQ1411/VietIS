@@ -45,6 +45,7 @@ public class Comment {
             return null;
         }
     }
+
     public static ArrayList<Comment> generateFoodArray() {
         ArrayList<Comment> list = new ArrayList<>();
         list.add(Comment.builder()
