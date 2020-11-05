@@ -2,30 +2,41 @@ package com.example.vietis.UI.view_holder;
 
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.vietis.Data.IRepository.repository.Config;
 import com.example.vietis.R;
 import com.example.vietis.Data.entity.Shop;
+import com.example.vietis.activities.IListView;
 import com.example.vietis.activities.IView;
 import com.squareup.picasso.Picasso;
 
 public class ShopItemViewHolder extends RecyclerView.ViewHolder implements IView {
 
     //UI holders
+    private LinearLayout linearLayoutShopItem;
     private ImageView imageViewShopIcon;
     private TextView textViewShopName;
     private TextView textViewShopAddress;
     private RatingBar ratingBarShopRating;
     private TextView textViewVoucher;
 
+    //Parent
+    private IListView parent;
+
     public ShopItemViewHolder(@NonNull View itemView) {
         super(itemView);
         mappingUI();
         setupUI();
+    }
+
+    public void setParent(IListView parent) {
+        this.parent = parent;
     }
 
     public void setShopItem(Shop shop, int pos) {
@@ -41,6 +52,7 @@ public class ShopItemViewHolder extends RecyclerView.ViewHolder implements IView
 
     @Override
     public void mappingUI() {
+        linearLayoutShopItem = itemView.findViewById(R.id.linearShopItem);
         imageViewShopIcon = itemView.findViewById(R.id.imageViewShopIcon);
         textViewShopName = itemView.findViewById(R.id.textViewShopName);
         textViewShopAddress = itemView.findViewById(R.id.textViewShopAddress);
@@ -50,6 +62,14 @@ public class ShopItemViewHolder extends RecyclerView.ViewHolder implements IView
 
     @Override
     public void setupUI() {
-
+        View.OnClickListener listener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (parent != null) {
+                    parent.navigateToShopDetail(getLayoutPosition());
+                }
+            }
+        };
+        Config.setChildViewOnClickListener(linearLayoutShopItem, listener);
     }
 }

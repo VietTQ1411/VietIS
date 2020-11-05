@@ -5,6 +5,7 @@ import com.example.vietis.Data.IRepository.repository.Config;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import lombok.Builder;
@@ -14,7 +15,7 @@ import lombok.Getter;
 @Data
 @Builder
 @Getter
-public class Shop {
+public class Shop implements Serializable {
     @Builder.Default
     private int ID = 1;
     @Builder.Default
