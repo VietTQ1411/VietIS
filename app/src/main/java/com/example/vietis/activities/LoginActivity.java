@@ -53,7 +53,7 @@ public class LoginActivity extends AppCompatActivity implements IView {
 
 
     public void navigateToHomeActivity(User user){
-        Intent intent = new Intent(LoginActivity.this,HomeActivity.class);
+        Intent intent = new Intent(LoginActivity.this, Home2Activity.class);
         intent.putExtra("userid", user.getId());
         this.startActivity(intent);
     }
