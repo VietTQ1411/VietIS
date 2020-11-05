@@ -14,7 +14,6 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.example.vietis.Data.entity.User;
-import com.example.vietis.Data.inteface.IListView;
 import com.example.vietis.R;
 import com.example.vietis.UI.adapter.ShopAdapter;
 import com.example.vietis.Data.entity.Shop;
@@ -22,7 +21,7 @@ import com.example.vietis.Data.view_model.ListActivityModel;
 
 import java.util.ArrayList;
 
-public class ShopListActivity extends AppCompatActivity implements IView, IListView {
+public class ShopListActivity extends AppCompatActivity implements IView,IListView{
 
     //UI holders
     private ImageButton imageBtnShopList;
@@ -59,7 +58,6 @@ public class ShopListActivity extends AppCompatActivity implements IView, IListV
         Intent intent = getIntent();
 //        this.foodField = intent.getStringExtra("food_field");
         this.foodField = "Pho";
-//        this.user = (User) intent.getSerializableExtra("user");
         textViewShopField.setText(foodField == null ? "Food" : foodField);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext(),
                 LinearLayoutManager.VERTICAL, false);
@@ -89,7 +87,7 @@ public class ShopListActivity extends AppCompatActivity implements IView, IListV
         Log.i("LogTest","YAYA");
         Intent intent = new Intent(ShopListActivity.this, StoreDetailActivity.class);
         Shop selectedShop = shopAdapter.getShopArray().get(position);
-        intent.putExtra("id",selectedShop.getID());
+        intent.putExtra("id",selectedShop.getID()+"");
         Log.i("LogTest",selectedShop.getName()+"YAYA");
         startActivity(intent);
     }

@@ -7,8 +7,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import com.example.vietis.Data.IRepository.repository.Config;
 import com.example.vietis.Data.entity.User;
-import com.example.vietis.Data.inteface.repository.Config;
 import com.example.vietis.R;
 
 public class HomeActivity extends AppCompatActivity implements IView {

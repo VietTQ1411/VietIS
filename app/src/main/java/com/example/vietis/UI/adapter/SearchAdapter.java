@@ -7,10 +7,10 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.vietis.Data.inteface.IListView;
 import com.example.vietis.R;
 import com.example.vietis.Data.entity.Shop;
 import com.example.vietis.UI.view_holder.SearchItemViewHolder;
+import com.example.vietis.activities.IListView;
 
 import java.util.ArrayList;
 
@@ -20,6 +20,10 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchItemViewHolder> {
 
     public SearchAdapter(IListView parent, ArrayList<Shop> arrayListShop) {
         this.parent = parent;
+        this.arrayListShop = arrayListShop;
+    }
+
+    public SearchAdapter(ArrayList<Shop> arrayListShop) {
         this.arrayListShop = arrayListShop;
     }
 
@@ -39,6 +43,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchItemViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull SearchItemViewHolder holder, int position) {
         holder.getShopItemViewHolder().setShopItem(this.arrayListShop.get(position), position);
+        holder.getShopItemViewHolder().setParent(parent != null ? parent : null);
     }
 
     @Override

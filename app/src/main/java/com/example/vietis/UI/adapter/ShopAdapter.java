@@ -1,6 +1,5 @@
 package com.example.vietis.UI.adapter;
 
-import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,11 +7,10 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.vietis.Data.entity.User;
-import com.example.vietis.Data.inteface.IListView;
 import com.example.vietis.R;
 import com.example.vietis.Data.entity.Shop;
 import com.example.vietis.UI.view_holder.ShopItemViewHolder;
+import com.example.vietis.activities.IListView;
 
 import java.util.ArrayList;
 
@@ -47,6 +45,7 @@ public class ShopAdapter extends RecyclerView.Adapter<ShopItemViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull ShopItemViewHolder holder, int position) {
         holder.setShopItem(this.arrayListShop.get(position), position);
+        holder.setParent(parent != null ? parent : null);
     }
 
     @Override

@@ -7,10 +7,10 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.example.vietis.Data.IRepository.IStoreRepository;
 import com.example.vietis.Data.entity.Food;
 import com.example.vietis.Data.entity.Shop;
 import com.example.vietis.Data.IRepository.IFoodRespository;
-import com.example.vietis.Data.IRepository.IShopRepository;
 import com.example.vietis.Data.IRepository.repository.ShopRepository;
 
 import java.util.ArrayList;

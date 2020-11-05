@@ -1,9 +1,6 @@
 package com.example.vietis.UI.view_holder;
 
-import android.content.Intent;
-import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
@@ -12,13 +9,11 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.vietis.Data.inteface.IListView;
-import com.example.vietis.Data.inteface.repository.Config;
+import com.example.vietis.Data.IRepository.repository.Config;
 import com.example.vietis.R;
 import com.example.vietis.Data.entity.Shop;
-import com.example.vietis.activities.HomeActivity;
+import com.example.vietis.activities.IListView;
 import com.example.vietis.activities.IView;
-import com.example.vietis.activities.SearchActivity;
 import com.squareup.picasso.Picasso;
 
 public class ShopItemViewHolder extends RecyclerView.ViewHolder implements IView {
@@ -70,7 +65,9 @@ public class ShopItemViewHolder extends RecyclerView.ViewHolder implements IView
         View.OnClickListener listener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                parent.navigateToShopDetail(getLayoutPosition());
+                if (parent != null) {
+                    parent.navigateToShopDetail(getLayoutPosition());
+                }
             }
         };
         Config.setChildViewOnClickListener(linearLayoutShopItem, listener);

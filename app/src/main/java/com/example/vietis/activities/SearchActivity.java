@@ -12,7 +12,6 @@ import android.view.View;
 import android.widget.ImageButton;
 
 import com.example.vietis.Data.entity.User;
-import com.example.vietis.Data.inteface.IListView;
 import com.example.vietis.R;
 import com.example.vietis.UI.adapter.SearchAdapter;
 import com.example.vietis.Data.entity.Shop;
