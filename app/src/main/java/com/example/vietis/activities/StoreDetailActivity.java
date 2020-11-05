@@ -18,15 +18,18 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.vietis.Data.entity.Comment;
+import com.example.vietis.Data.entity.Rating;
 import com.example.vietis.Data.entity.Shop;
 import com.example.vietis.Data.view_model.CommentActivityModel;
 import com.example.vietis.Data.view_model.ListActivityModel;
+import com.example.vietis.Data.view_model.StoreDeatilActivityModel;
 import com.example.vietis.R;
 import com.example.vietis.UI.adapter.CommentAdapter;
 import com.example.vietis.UI.adapter.SearchAdapter;
 import com.example.vietis.UI.dialog.RatingFragment;
 
 import java.util.ArrayList;
+import java.util.List;
 
 // To display a message in the log (logcat)
 
@@ -85,9 +88,16 @@ public class StoreDetailActivity extends AppCompatActivity implements IView {
     //UI holders
     private RecyclerView FoodRecyclerView;
     //RecyclerView components
-    private SearchAdapter searchAdapter;
+    private SearchAdapter foodAdapter;
     //View Model
-    private ListActivityModel listActivityModel;
+    private ListActivityModel foodActivityModel;
+
+    /**
+     * Store Repository of store
+     */
+    private Shop store = null;
+    private List<Rating> listRate = null;
+    private StoreDeatilActivityModel storeDeatilActivityModel;
 
 
     @Override
@@ -145,8 +155,8 @@ public class StoreDetailActivity extends AppCompatActivity implements IView {
          * Food of store
          */
         FoodRecyclerView = findViewById(R.id.FoodRecyclerView);
-        searchAdapter = new SearchAdapter(new ArrayList<Shop>());
-        listActivityModel = new ViewModelProvider(this).get(ListActivityModel.class);
+        foodAdapter = new SearchAdapter(new ArrayList<Shop>());
+        foodActivityModel = new ViewModelProvider(this).get(ListActivityModel.class);
 
         /**
          * Layout RecyclerView
@@ -157,6 +167,9 @@ public class StoreDetailActivity extends AppCompatActivity implements IView {
                 LinearLayoutManager.VERTICAL, false);
         FoodRecyclerView.setLayoutManager(layoutManager);
         CommentRecyclerView.setLayoutManager(layoutManager2);
+
+
+        storeDeatilActivityModel = new StoreDeatilActivityModel();
     }
 
     /**
@@ -210,13 +223,13 @@ public class StoreDetailActivity extends AppCompatActivity implements IView {
         /**
          *  input data
          */
-        listActivityModel.init(false, false);
-        listActivityModel.getShopData().observe(this, new Observer<ArrayList<Shop>>() {
+        foodActivityModel.init(false, false);
+        foodActivityModel.getShopData().observe(this, new Observer<ArrayList<Shop>>() {
             @Override
             public void onChanged(ArrayList<Shop> arrayList) {
-                searchAdapter = new SearchAdapter(arrayList);
-                searchAdapter.notifyDataSetChanged();
-                FoodRecyclerView.setAdapter(searchAdapter);
+                foodAdapter = new SearchAdapter(arrayList);
+                foodAdapter.notifyDataSetChanged();
+                FoodRecyclerView.setAdapter(foodAdapter);
                 nsvStoreView.scrollTo(0, 0);
             }
         });
@@ -238,5 +251,20 @@ public class StoreDetailActivity extends AppCompatActivity implements IView {
         txtStoreAddress.setText(store.getAddress());
         txtStorePhone.setText("Hotline: " +store.getPhoneNumber());
         txtStoreDescription.setText(createIndentedText(store.getDescription()));
+    }
+
+    private void setUpStoreDetail(){
+        //Store description
+        txtStoreName.setText(store.getName());
+        txtStoreAddress.setText(store.getAddress());
+        txtStorePhone.setText("Hotline: "+ store.getPhoneNumber());
+        txtStoreDescription.setText(store.getDescription());
+
+        //Rating section
+        txtRating1.setText(listRate.get(0).getVoteCount() + " lượt đánh giá");
+        txtRating2.setText(listRate.get(1).getVoteCount() + " lượt đánh giá");
+        txtRating3.setText(listRate.get(2).getVoteCount() + " lượt đánh giá");
+        txtRating4.setText(listRate.get(3).getVoteCount() + " lượt đánh giá");
+        txtRating5.setText(listRate.get(4).getVoteCount() + " lượt đánh giá");
     }
 }
