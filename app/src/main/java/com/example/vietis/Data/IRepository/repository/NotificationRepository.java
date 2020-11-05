@@ -22,7 +22,6 @@ import okhttp3.Response;
 public class NotificationRepository {
     private static NotificationRepository instance = null;
     private INotiRepository iNotiRepository;
-    private String msg;
     public static final String URL_NOTI ="http://"+ Config.HOST_NAME+":"+Config.PORT+"/noti/addTokenKey";
     public static final String URL_LIST_NOTI ="http://"+Config.HOST_NAME+":"+Config.PORT+"/noti/listNoti";
     private NotificationRepository (INotiRepository iNotiRepository){
