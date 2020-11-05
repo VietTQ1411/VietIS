@@ -1,4 +1,4 @@
-package com.example.vietis.Data.inteface;
+package com.example.vietis.Data.IRepository;
 
 import com.example.vietis.Data.entity.Food;
 

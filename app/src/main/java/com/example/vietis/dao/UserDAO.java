@@ -7,6 +7,7 @@ import androidx.room.Query;
 import com.example.vietis.Data.entity.User;
 
 import java.util.List;
+
 @Dao
 public interface UserDAO {
     @Query("SELECT * FROM User")

@@ -6,11 +6,9 @@ import androidx.appcompat.widget.SearchView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
 
+import com.example.vietis.Data.IRepository.repository.Config;
+import com.example.vietis.Data.entity.User;
 import com.example.vietis.R;
 
 public class HomeActivity extends AppCompatActivity implements IView {
@@ -21,6 +19,7 @@ public class HomeActivity extends AppCompatActivity implements IView {
     //RecyclerView components
 
     //View Model
+    private User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,9 +29,14 @@ public class HomeActivity extends AppCompatActivity implements IView {
         setupUI();
     }
 
+    public String getUserTokenKey(){
+        return this.user.getTokenKey();
+    }
+
 
     @Override
     public void mappingUI() {
+        user = (User) getIntent().getSerializableExtra("user");
         searchViewSearch = findViewById(R.id.searchViewHome);
     }
 
@@ -42,28 +46,10 @@ public class HomeActivity extends AppCompatActivity implements IView {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(HomeActivity.this, SearchActivity.class);
+                intent.putExtra("user",user);
                 HomeActivity.this.startActivity(intent);
             }
         };
-        setSearchViewOnClickListener(searchViewSearch, listener);
-    }
-
-    private void setSearchViewOnClickListener(View v, View.OnClickListener listener) {
-        if (v instanceof ViewGroup) {
-            ViewGroup group = (ViewGroup) v;
-            int count = group.getChildCount();
-            for (int i = 0; i < count; i++) {
-                View child = group.getChildAt(i);
-                if (child instanceof LinearLayout || child instanceof RelativeLayout) {
-                    setSearchViewOnClickListener(child, listener);
-                }
-
-                if (child instanceof TextView) {
-                    TextView text = (TextView) child;
-                    text.setFocusable(false);
-                }
-                child.setOnClickListener(listener);
-            }
-        }
+        Config.setChildViewOnClickListener(searchViewSearch,listener);
     }
 }

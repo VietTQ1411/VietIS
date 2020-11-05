@@ -41,28 +41,6 @@ public class LoginActivity extends AppCompatActivity implements IView {
         loginActivityViewModel = new LoginActivityViewModel();
     }
 
-    public void navigateToHomeActivity(User user){
-        Intent intent = new Intent(LoginActivity.this,HomeActivity.class);
-        intent.putExtra("userid", user.getId());
-        this.startActivity(intent);
-    }
-
-    public String getEmail(){return txtEmail.getText().toString().trim();}
-    public String getPassword(){return txtPassword.getText().toString().trim();}
-    private void login(){
-        loginActivityViewModel.login(getEmail(),getPassword());
-        loginActivityViewModel.getUser().observe(this,
-                new Observer<User>() {
-                    @Override
-                    public void onChanged(User user) {
-
-                        if(user!= null){
-                            LoginActivity.this.navigateToHomeActivity(user);
-                        }
-                    }
-
-                });
-    }
     @Override
     public void setupUI() {
         btnLogin.setOnClickListener(new View.OnClickListener() {
@@ -72,4 +50,35 @@ public class LoginActivity extends AppCompatActivity implements IView {
             }
         });
     }
+
+
+    public void navigateToHomeActivity(User user){
+        Intent intent = new Intent(LoginActivity.this,HomeActivity.class);
+        intent.putExtra("userid", user.getId());
+        this.startActivity(intent);
+    }
+
+    public String getEmail() {
+        return txtEmail.getText().toString().trim();
+    }
+
+    public String getPassword() {
+        return txtPassword.getText().toString().trim();
+    }
+
+    private void login() {
+        loginActivityViewModel.login(getEmail(), getPassword());
+        loginActivityViewModel.getUser().observe(this,
+                new Observer<User>() {
+                    @Override
+                    public void onChanged(User user) {
+                        if(user!= null){
+                            LoginActivity.this.navigateToHomeActivity(user);
+                        if (user != null) {
+                            LoginActivity.this.navigateToHomeActivity(user);
+                        }
+                    }
+                }
+    });
+}
 }

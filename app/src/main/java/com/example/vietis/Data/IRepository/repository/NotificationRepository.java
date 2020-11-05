@@ -1,6 +1,6 @@
-package com.example.vietis.Data.inteface.repository;
+package com.example.vietis.Data.IRepository.repository;
 
-import com.example.vietis.Data.inteface.INotiRepository;
+import com.example.vietis.Data.IRepository.INotiRepository;
 
 import org.jetbrains.annotations.NotNull;
 import org.json.JSONException;
@@ -20,22 +20,25 @@ public class NotificationRepository {
     private static NotificationRepository instance = null;
     private INotiRepository iNotiRepository;
     private String msg;
-    public static final String URL_NOTI ="http://"+ Config.HOST_NAME+":"+Config.PORT+"/noti/addTokenKey";
-    private NotificationRepository (INotiRepository iNotiRepository){
-        this.iNotiRepository=iNotiRepository;
+    public static final String URL_NOTI = "http://" + Config.HOST_NAME + ":" + Config.PORT + "/noti/addTokenKey";
+
+    private NotificationRepository(INotiRepository iNotiRepository) {
+        this.iNotiRepository = iNotiRepository;
     }
-    public static NotificationRepository getInstance(INotiRepository iNotiRepository){
-        if(instance==null){
-            instance= new NotificationRepository(iNotiRepository);
+
+    public static NotificationRepository getInstance(INotiRepository iNotiRepository) {
+        if (instance == null) {
+            instance = new NotificationRepository(iNotiRepository);
         }
         return instance;
     }
-    public void deviceRegister(String tokenKey, String userId){
+
+    public void deviceRegister(String tokenKey, String userId) {
         OkHttpClient okHttpClient = new OkHttpClient();
         RequestBody requestBody = new MultipartBody.Builder()
                 .setType(MultipartBody.FORM)
-                .addFormDataPart("userId",userId)
-                .addFormDataPart("tokenKey",tokenKey)
+                .addFormDataPart("userId", userId)
+                .addFormDataPart("tokenKey", tokenKey)
                 .build();
         Request request = new Request.Builder()
                 .url(URL_NOTI)
@@ -45,18 +48,18 @@ public class NotificationRepository {
         call.enqueue(new Callback() {
             @Override
             public void onFailure(@NotNull Call call, @NotNull IOException ioException) {
-                iNotiRepository.getNotiMessage(null,ioException);
+                iNotiRepository.getNotiMessage(null, ioException);
             }
 
             @Override
             public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
-                try{
+                try {
                     String jsonString = response.body().string();
                     JSONObject jsonNotiMsg = new JSONObject(jsonString);
                     String msg = jsonNotiMsg.getString("message");
-                    iNotiRepository.getNotiMessage(msg,null);
-                }catch (JSONException e){
-                    iNotiRepository.getNotiMessage(null,e);
+                    iNotiRepository.getNotiMessage(msg, null);
+                } catch (JSONException e) {
+                    iNotiRepository.getNotiMessage(null, e);
                     System.out.println(e.toString());
                 }
             }

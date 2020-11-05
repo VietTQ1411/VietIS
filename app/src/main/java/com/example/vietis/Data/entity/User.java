@@ -7,6 +7,8 @@ import androidx.room.PrimaryKey;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.Serializable;
+
 import lombok.Builder;
 import lombok.Data;
 import lombok.Getter;
@@ -15,7 +17,7 @@ import lombok.Getter;
 @Builder
 @Getter
 @Entity
-public class User {
+public class User implements Serializable {
     @PrimaryKey(autoGenerate = true)
     private int id;
     @ColumnInfo(name = "email")
@@ -38,7 +40,7 @@ public class User {
     @Builder.Default
     private String tokenKey = "";
     @Builder.Default
-    private String expireDate ="";
+    private String expireDate = "";
 
     public User(int id, String email, String password, String hashedPassword,
                 String name, int imageId, String phoneNumber, String address, int userType, String tokenKey, String expireDate) {
