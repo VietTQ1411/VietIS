@@ -27,6 +27,7 @@ import com.example.vietis.R;
 import com.example.vietis.UI.adapter.CommentAdapter;
 import com.example.vietis.UI.adapter.SearchAdapter;
 import com.example.vietis.UI.dialog.RatingFragment;
+import com.example.vietis.Utilities.helpers.UserApp;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -80,7 +81,6 @@ public class StoreDetailActivity extends AppCompatActivity implements IView {
      */
     private TextView txtStoreDescription;
     private TextView txtDescriptionVisible;
-    private CommentActivityModel commentActivityModel;
 
     /**
      * Food of store
@@ -143,7 +143,7 @@ public class StoreDetailActivity extends AppCompatActivity implements IView {
          */
         CommentRecyclerView = findViewById(R.id.CommentRecyclerView);
         commentAdapter = new CommentAdapter(new ArrayList<Comment>());
-        commentActivityModel = new ViewModelProvider(this).get(CommentActivityModel.class);
+
 
         /**
          * Description for store
@@ -169,11 +169,12 @@ public class StoreDetailActivity extends AppCompatActivity implements IView {
         CommentRecyclerView.setLayoutManager(layoutManager2);
 
 
-        storeDeatilActivityModel = new StoreDeatilActivityModel();
+        storeDeatilActivityModel = new ViewModelProvider(this).get(StoreDeatilActivityModel.class);
     }
 
     /**
      * format description
+     *
      * @param description
      * @return
      */
@@ -201,9 +202,9 @@ public class StoreDetailActivity extends AppCompatActivity implements IView {
             @Override
             public void onClick(View v) {
                 RatingFragment dialog = new RatingFragment(StoreDetailActivity.this);
-                int width = (int)(getResources().getDisplayMetrics().widthPixels);
-                int height = (int)(getResources().getDisplayMetrics().heightPixels*0.5);
-                dialog.getWindow().setLayout(width,height);
+                int width = (int) (getResources().getDisplayMetrics().widthPixels);
+                int height = (int) (getResources().getDisplayMetrics().heightPixels * 0.5);
+                dialog.getWindow().setLayout(width, height);
                 dialog.show();
             }
         });
@@ -217,9 +218,34 @@ public class StoreDetailActivity extends AppCompatActivity implements IView {
          *  get store detail
          */
         Intent parent = getIntent();
-        int id = Integer.parseInt(parent.getStringExtra("id"));
+        Bundle b = parent.getExtras();
+        String id = null;
+        if (b != null) {
+            id = b.getString("id");
 
-
+        }
+        UserApp.user.setTokenKey("m8`q9v(`eS1uR.=|");
+        storeDeatilActivityModel.getStoreDetail(UserApp.user.getTokenKey(), id);
+        storeDeatilActivityModel.getData().observe(this, new Observer<List<Object>>() {
+            @Override
+            public void onChanged(List<Object> objects) {
+                store = (Shop) objects.get(0);
+                listRate = new ArrayList<>();
+                for (int i = 1; i < objects.size(); i++) {
+                    listRate.add((Rating) objects.get(i));
+                }
+                setUpStoreDetail();
+            }
+        });
+        storeDeatilActivityModel.getCommentData().observe(this, new Observer<ArrayList<Comment>>() {
+            @Override
+            public void onChanged(ArrayList<Comment> comments) {
+                commentAdapter = new CommentAdapter(comments);
+                commentAdapter.notifyDataSetChanged();
+                CommentRecyclerView.setAdapter(commentAdapter);
+                nsvStoreView.scrollTo(0, 0);
+            }
+        });
         /**
          *  input data
          */
@@ -233,31 +259,21 @@ public class StoreDetailActivity extends AppCompatActivity implements IView {
                 nsvStoreView.scrollTo(0, 0);
             }
         });
-        commentActivityModel.init();
-        commentActivityModel.getCommentData().observe(this, new Observer<ArrayList<Comment>>() {
-            @Override
-            public void onChanged(ArrayList<Comment> arrayList) {
-                commentAdapter = new CommentAdapter(arrayList);
-                commentAdapter.notifyDataSetChanged();
-                CommentRecyclerView.setAdapter(commentAdapter);
-                nsvStoreView.scrollTo(0, 0);
-            }
-        });
     }
 
-    public void fillDetailStore(Shop store){
+    public void fillDetailStore(Shop store) {
         imageStoreDetailIcon = findViewById(R.id.imageStoreDetailIcon);
         txtStoreName.setText(store.getName());
         txtStoreAddress.setText(store.getAddress());
-        txtStorePhone.setText("Hotline: " +store.getPhoneNumber());
+        txtStorePhone.setText("Hotline: " + store.getPhoneNumber());
         txtStoreDescription.setText(createIndentedText(store.getDescription()));
     }
 
-    private void setUpStoreDetail(){
+    private void setUpStoreDetail() {
         //Store description
         txtStoreName.setText(store.getName());
         txtStoreAddress.setText(store.getAddress());
-        txtStorePhone.setText("Hotline: "+ store.getPhoneNumber());
+        txtStorePhone.setText("Hotline: " + store.getPhoneNumber());
         txtStoreDescription.setText(store.getDescription());
 
         //Rating section

@@ -42,7 +42,7 @@ public class SettingActivity extends AppCompatActivity {
         btnEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(SettingActivity.this,EditProfileActivity.class));
+                startActivity(new Intent(SettingActivity.this, EditProfileActivity.class));
             }
         });
         ibSignOut.setOnClickListener(new View.OnClickListener() {
@@ -56,10 +56,10 @@ public class SettingActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 isVisible = !isVisible;
-                if(isVisible){
+                if (isVisible) {
                     txtPrivacy.setVisibility(View.VISIBLE);
                     ibPrivacy.setImageResource(R.drawable.ic_right);
-                }else{
+                } else {
                     ibPrivacy.setImageResource(R.drawable.ic_foward);
                     txtPrivacy.setVisibility(View.GONE);
                 }
@@ -70,10 +70,10 @@ public class SettingActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 isVisible = !isVisible;
-                if(isVisible){
+                if (isVisible) {
                     txtPolicy.setVisibility(View.VISIBLE);
                     ibPolicy.setImageResource(R.drawable.ic_right);
-                }else{
+                } else {
                     ibPolicy.setImageResource(R.drawable.ic_foward);
                     txtPolicy.setVisibility(View.GONE);
                 }
@@ -84,10 +84,10 @@ public class SettingActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 isVisible = !isVisible;
-                if(isVisible){
+                if (isVisible) {
                     txtAppVersion.setVisibility(View.VISIBLE);
                     ibAppVersion.setImageResource(R.drawable.ic_right);
-                }else{
+                } else {
                     ibAppVersion.setImageResource(R.drawable.ic_foward);
                     txtAppVersion.setVisibility(View.GONE);
                 }

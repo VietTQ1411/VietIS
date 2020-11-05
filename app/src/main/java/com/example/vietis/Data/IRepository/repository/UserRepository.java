@@ -23,23 +23,26 @@ public class UserRepository {
     private IUserRepository iUserRepository;
     private List<User> users;
     public static final String URL_LOGIN =
-            "http://"+ Config.HOST_NAME+":"+Config.PORT+"/users/login";
-    public static final String URL_REGISTER="http://"+ Config.HOST_NAME+":"+Config.PORT+"/users/register";
+            "http://" + Config.HOST_NAME + ":" + Config.PORT + "/users/login";
+    public static final String URL_REGISTER = "http://" + Config.HOST_NAME + ":" + Config.PORT + "/users/register";
+
     private UserRepository(IUserRepository iUserRepository) {
         this.iUserRepository = iUserRepository;
     }
+
     public static UserRepository getInstance(IUserRepository iUserRepository) {
-        if(instance == null) {
+        if (instance == null) {
             instance = new UserRepository(iUserRepository);
         }
         return instance;
     }
-    public void login(String email, String password){
+
+    public void login(String email, String password) {
         OkHttpClient okHttpClient = new OkHttpClient();
         RequestBody requestBody = new MultipartBody.Builder()
                 .setType(MultipartBody.FORM)
-                .addFormDataPart("email",email)
-                .addFormDataPart("password",password)
+                .addFormDataPart("email", email)
+                .addFormDataPart("password", password)
                 .build();
         Request request = new Request.Builder()
                 .url(URL_LOGIN)
@@ -54,25 +57,26 @@ public class UserRepository {
 
             @Override
             public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
-                try{
+                try {
                     String jsonString = response.body().string();
                     JSONObject jsonObject = new JSONObject(jsonString);
-                    JSONObject jsonUserObject =jsonObject.getJSONObject("data");
+                    JSONObject jsonUserObject = jsonObject.getJSONObject("data");
                     User user = User.createUserFromJSONObject(jsonUserObject);
-                    iUserRepository.afterLogin(user,null);
-                }catch (JSONException e){
+                    iUserRepository.afterLogin(user, null);
+                } catch (JSONException e) {
                     iUserRepository.afterLogin(null, e);
                 }
             }
         });
     }
-    public void register(String email, String password, String name, String userType){
+
+    public void register(String email, String password, String name, String userType) {
         OkHttpClient okHttpClient = new OkHttpClient();
         RequestBody requestBody = new MultipartBody.Builder()
                 .setType(MultipartBody.FORM)
-                .addFormDataPart("email",email)
-                .addFormDataPart("password",password)
-                .addFormDataPart("name",name)
+                .addFormDataPart("email", email)
+                .addFormDataPart("password", password)
+                .addFormDataPart("name", name)
                 .addFormDataPart("userType", userType)
                 .build();
         Request request = new Request.Builder()
@@ -88,13 +92,13 @@ public class UserRepository {
 
             @Override
             public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
-                try{
+                try {
                     String jsonString = response.body().string();
                     JSONObject jsonObject = new JSONObject(jsonString);
-                    JSONObject jsonUserObject =jsonObject.getJSONObject("data");
+                    JSONObject jsonUserObject = jsonObject.getJSONObject("data");
                     User user = User.createUserFromJSONObject(jsonUserObject);
-                    iUserRepository.afterRegister(user,null);
-                }catch (JSONException e){
+                    iUserRepository.afterRegister(user, null);
+                } catch (JSONException e) {
                     iUserRepository.afterRegister(null, e);
                 }
             }

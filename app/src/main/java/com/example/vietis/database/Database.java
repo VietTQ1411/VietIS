@@ -10,14 +10,15 @@ import com.example.vietis.Data.entity.User;
 
 @androidx.room.Database(entities = {User.class}, version = 1)
 public abstract class Database extends RoomDatabase {
-    private static String DB_NAME="Fuddy";
+    private static String DB_NAME = "Fuddy";
     private static Database instance;
 
-    public static synchronized  Database getInstance(Context context){
-        if (instance==null){
-            instance = Room.databaseBuilder(context.getApplicationContext(), Database.class,DB_NAME).allowMainThreadQueries().build();
+    public static synchronized Database getInstance(Context context) {
+        if (instance == null) {
+            instance = Room.databaseBuilder(context.getApplicationContext(), Database.class, DB_NAME).allowMainThreadQueries().build();
         }
         return instance;
     }
+
     public abstract UserDAO userDAO();
 }
