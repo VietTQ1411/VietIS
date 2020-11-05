@@ -8,8 +8,8 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.vietis.Data.entity.User;
-import com.example.vietis.Data.inteface.IUserRepository;
-import com.example.vietis.Data.inteface.repository.UserRepository;
+import com.example.vietis.Data.IRepository.IUserRepository;
+import com.example.vietis.Data.IRepository.repository.UserRepository;
 
 public class LoginActivityViewModel extends ViewModel implements IUserRepository {
     private MutableLiveData<User> user = new MutableLiveData<>();

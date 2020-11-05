@@ -1,7 +1,7 @@
-package com.example.vietis.Data.inteface.repository;
+package com.example.vietis.Data.IRepository.repository;
 
 import com.example.vietis.Data.entity.User;
-import com.example.vietis.Data.inteface.IUserRepository;
+import com.example.vietis.Data.IRepository.IUserRepository;
 
 import org.jetbrains.annotations.NotNull;
 import org.json.JSONException;

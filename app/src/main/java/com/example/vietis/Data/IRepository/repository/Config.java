@@ -1,4 +1,4 @@
-package com.example.vietis.Data.inteface.repository;
+package com.example.vietis.Data.IRepository.repository;
 
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;

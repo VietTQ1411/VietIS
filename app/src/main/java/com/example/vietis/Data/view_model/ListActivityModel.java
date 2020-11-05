@@ -9,9 +9,9 @@ import androidx.lifecycle.ViewModel;
 
 import com.example.vietis.Data.entity.Food;
 import com.example.vietis.Data.entity.Shop;
-import com.example.vietis.Data.inteface.IFoodRespository;
-import com.example.vietis.Data.inteface.IStoreRepository;
-import com.example.vietis.Data.inteface.repository.ShopRepository;
+import com.example.vietis.Data.IRepository.IFoodRespository;
+import com.example.vietis.Data.IRepository.IShopRepository;
+import com.example.vietis.Data.IRepository.repository.ShopRepository;
 
 import java.util.ArrayList;
 
