@@ -10,6 +10,7 @@ public interface ICommentRepository {
     /**
      * get limit of list comment for store or food to show in detail
      * remain : 3 elements
+     *
      * @param arrayListComment
      * @param error
      */
@@ -19,6 +20,7 @@ public interface ICommentRepository {
     /**
      * get max 10 elements for each time call function show all of comment in comment dialog
      * remain: 10 elements each time
+     *
      * @param arrayListComment
      * @param error
      */

@@ -54,7 +54,7 @@ public class SearchActivity extends AppCompatActivity implements IView {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext(),
                 LinearLayoutManager.VERTICAL, false);
         recyclerViewSearch.setLayoutManager(layoutManager);
-        listActivityModel.init(true,true);
+        listActivityModel.init(true, true);
         listActivityModel.getShopData().observe(this, new Observer<ArrayList<Shop>>() {
             @Override
             public void onChanged(ArrayList<Shop> arrayList) {

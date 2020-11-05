@@ -40,6 +40,6 @@ public class ShopAdapter extends RecyclerView.Adapter<ShopItemViewHolder> {
 
     @Override
     public int getItemCount() {
-      return arrayListShop.size();
+        return arrayListShop.size();
     }
 }

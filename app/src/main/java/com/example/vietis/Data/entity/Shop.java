@@ -2,6 +2,7 @@ package com.example.vietis.Data.entity;
 
 import com.example.vietis.Data.IRepository.repository.Config;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -41,6 +42,23 @@ public class Shop {
 
     public static Shop generateShopFromJSON(JSONObject jsonObject) {
         try {
+            return Shop.builder()
+                    .ID(jsonObject.getInt("id"))
+                    .name(jsonObject.getString("name"))
+                    .address(jsonObject.getString("address"))
+                    .phoneNumber(jsonObject.getString("phoneNumber"))
+                    .imageURL(jsonObject.getJSONObject("Image_model").getString("imageURL"))
+                    .description(jsonObject.getString("description"))
+                    .build();
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    public static Shop generateShopFromJSON(JSONArray jsonArray) {
+
+        try {
+            JSONObject jsonObject = jsonArray.getJSONObject(0);
             return Shop.builder()
                     .ID(jsonObject.getInt("id"))
                     .name(jsonObject.getString("name"))

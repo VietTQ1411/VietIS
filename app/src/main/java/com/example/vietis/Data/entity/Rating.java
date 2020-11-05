@@ -27,7 +27,7 @@ public class Rating {
      */
 
 
-    public static Rating generateRatingCount(int starNumber,JSONObject jsonObject) {
+    public static Rating generateRatingCount(int starNumber, JSONObject jsonObject) {
         try {
             return Rating.builder()
                     .starNumber(starNumber)

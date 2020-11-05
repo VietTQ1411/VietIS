@@ -34,7 +34,7 @@ public class SplashActivity extends AppCompatActivity implements IView {
     private SplashActivityViewModel splashActivityViewModel = new SplashActivityViewModel();
 
     private void createNotificationChannels() {
-        if(Build.VERSION.SDK_INT > Build.VERSION_CODES.O) {
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.O) {
             NotificationChannel channel1 = new NotificationChannel(
                     MyFirebaseMessagingService.CHANNEL_1_ID,
                     "Channel 1",
@@ -49,6 +49,7 @@ public class SplashActivity extends AppCompatActivity implements IView {
             manager.createNotificationChannel(channel1);
         }
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,17 +57,17 @@ public class SplashActivity extends AppCompatActivity implements IView {
         FirebaseMessaging.getInstance().getToken().addOnCompleteListener(new OnCompleteListener<String>() {
             @Override
             public void onComplete(@NonNull Task<String> task) {
-                if (!task.isSuccessful()){
-                    Log.w(TAG,"Fetching FCM registration token failed",task.getException());
+                if (!task.isSuccessful()) {
+                    Log.w(TAG, "Fetching FCM registration token failed", task.getException());
                     return;
                 }
                 String token = task.getResult();
-                splashActivityViewModel.deviceRegister(token,"");
+                splashActivityViewModel.deviceRegister(token, "");
                 splashActivityViewModel.getMsg().observe(SplashActivity.this, new Observer<String>() {
                     @Override
                     public void onChanged(String msg) {
-                        if(!msg.equals("")){
-                            Toast.makeText(SplashActivity.this,msg,Toast.LENGTH_LONG).show();
+                        if (!msg.equals("")) {
+                            Toast.makeText(SplashActivity.this, msg, Toast.LENGTH_LONG).show();
                         }
                     }
                 });
@@ -80,7 +81,7 @@ public class SplashActivity extends AppCompatActivity implements IView {
             public void run() {
                 startAnimation();
             }
-        },2000);
+        }, 2000);
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -93,22 +94,22 @@ public class SplashActivity extends AppCompatActivity implements IView {
                 startActivity(new Intent(SplashActivity.this, MainActivity.class));
                 finish();
             }
-        },6000);
+        }, 6000);
     }
 
     private void exitAnimation() {
-        imageView.startAnimation(AnimationUtils.loadAnimation(this,R.anim.image_out));
-        textView.startAnimation(AnimationUtils.loadAnimation(this,R.anim.text_out));
-        textView2.startAnimation(AnimationUtils.loadAnimation(this,R.anim.text_out));
+        imageView.startAnimation(AnimationUtils.loadAnimation(this, R.anim.image_out));
+        textView.startAnimation(AnimationUtils.loadAnimation(this, R.anim.text_out));
+        textView2.startAnimation(AnimationUtils.loadAnimation(this, R.anim.text_out));
         imageView.setVisibility(View.INVISIBLE);
         textView.setVisibility(View.INVISIBLE);
         textView2.setVisibility(View.INVISIBLE);
     }
 
     private void startAnimation() {
-        imageView.startAnimation(AnimationUtils.loadAnimation(this,R.anim.image_in));
-        textView.startAnimation(AnimationUtils.loadAnimation(this,R.anim.text_in));
-        textView2.startAnimation(AnimationUtils.loadAnimation(this,R.anim.text_in));
+        imageView.startAnimation(AnimationUtils.loadAnimation(this, R.anim.image_in));
+        textView.startAnimation(AnimationUtils.loadAnimation(this, R.anim.text_in));
+        textView2.startAnimation(AnimationUtils.loadAnimation(this, R.anim.text_in));
         imageView.setVisibility(View.VISIBLE);
         textView.setVisibility(View.VISIBLE);
         textView2.setVisibility(View.VISIBLE);

@@ -1,6 +1,8 @@
 package com.example.vietis.Data.IRepository.repository;
 
 
+import android.util.Log;
+
 import com.example.vietis.Data.IRepository.ICommentRepository;
 import com.example.vietis.Data.IRepository.IStoreDeatilRepository;
 import com.example.vietis.Data.entity.Comment;
@@ -15,6 +17,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.Console;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -31,7 +34,7 @@ public class StoreRepository {
     private static StoreRepository instance = null;
     private ICommentRepository iCommentRepository;
     private IStoreDeatilRepository iStoreDeatilRepository;
-    private List<Object> dataStore;
+    private List<Object> dataStore = new ArrayList<>();
 
 
     /**
@@ -78,6 +81,7 @@ public class StoreRepository {
                 /**
                  * Chuyển qua trang error or thoát ứng dụng
                  * */
+                Log.d("log","log log log");
             }
 
             @Override
@@ -90,14 +94,14 @@ public class StoreRepository {
                         JSONObject jsonStoreObject = jsonObject.getJSONObject("data");
 
                         //detail shop
-                        Object storeDetailObject = jsonStoreObject.get("foundStore");
-                        Shop store = Shop.generateShopFromJSON((JSONObject) storeDetailObject);
+                        JSONArray storeDetailObject = jsonStoreObject.getJSONArray("foundStore");
+                        Shop store = Shop.generateShopFromJSON( storeDetailObject);
                         dataStore.add(store);
 
                         //rating star
                         for (int i = 5; i > 0; i--) {
-                            Object result = jsonStoreObject.get("result" + i);
-                            Rating rating = Rating.generateRatingCount(i, (JSONObject) result);
+                            JSONObject result = jsonStoreObject.getJSONObject("result" + i);
+                            Rating rating = Rating.generateRatingCount(i, result);
                             dataStore.add(rating);
                         }
 
@@ -117,11 +121,12 @@ public class StoreRepository {
                         }
                         iStoreDeatilRepository.getStoreDeatil(dataStore, null);
                     }
-                    iStoreDeatilRepository.getStoreDeatil(null, new Exception("GET API FAILED - DATA NULL"));
+                    //iStoreDeatilRepository.getStoreDeatil(null, new Exception("GET API FAILED - DATA NULL"));
                 } catch (JSONException e) {
                     /**
                      * Chuyển qua trang error or thoát ứng dụng
                      * */
+                    Log.d("lỗi rồi ",e.getMessage());
                 }
             }
         });

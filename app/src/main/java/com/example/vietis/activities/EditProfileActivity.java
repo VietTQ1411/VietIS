@@ -34,7 +34,7 @@ public class EditProfileActivity extends AppCompatActivity {
         ibBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(EditProfileActivity.this,SettingActivity.class));
+                startActivity(new Intent(EditProfileActivity.this, SettingActivity.class));
             }
         });
     }
