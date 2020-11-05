@@ -69,14 +69,6 @@ router.post('/register', validateRegisterUser(), async(req, res) => {
 
 
 
-
-
-
-
-
-
-
-
 //http://192.168.1.142:3000/users/login
 router.post('/login', validateLogin(), async(req, res) => {
     //validate du lieu tu client gui len    

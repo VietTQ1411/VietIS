@@ -16,16 +16,20 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
+            <!--
+               About for store
+           -->
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
                 android:gravity="center"
                 android:orientation="horizontal"
-                android:padding="10dp"
-                android:layout_marginTop="20dp">
+                android:padding="10dp">
 
                 <ImageView
-                    android:id="@+id/imageViewShopIcon"
+                    android:id="@+id/imageStoreDetailIcon"
                     android:layout_width="150dp"
                     android:layout_height="150dp"
                     android:src="@mipmap/ic_launcher"
@@ -41,7 +45,7 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/textViewName"
+                        android:id="@+id/txtStoreName"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Cửa hàng bún đậu mắm tôm"
@@ -50,17 +54,17 @@
                         android:textStyle="bold" />
 
                     <TextView
-                        android:id="@+id/textViewAuthor"
+                        android:id="@+id/txtStoreAddress"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Hoa lạc resort đường láng quang việt"
+                        android:text="Store Address"
                         android:textColor="@color/colorBlack" />
 
                     <TextView
-                        android:id="@+id/phone"
+                        android:id="@+id/txtStorePhone"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Hotline: 12345678"
+                        android:text="Hotline: Phone"
 
                         android:textColor="@color/colorBlack" />
 
@@ -69,14 +73,16 @@
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:orientation="horizontal">
+
                         <Button
-                            android:id="@+id/button"
+                            android:id="@+id/btnOrder"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
                             android:text="Chọn món" />
+
                         <Button
-                            android:id="@+id/button1"
+                            android:id="@+id/btnGGMap"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
@@ -84,175 +90,200 @@
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
+
+            <!--
+                Rating for store
+            -->
             <TextView
                 android:id="@+id/txtRating"
                 style="@style/CodeFont"
                 android:layout_marginLeft="0dp"
-                android:text="Đánh giá của cửa hàng:"/>
+                android:text="Đánh giá của cửa hàng:" />
+            <LinearLayout
+                android:id="@+id/rate"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="30dp"
+                android:orientation="vertical">
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="0dp"
+                    android:orientation="horizontal">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:layout_marginLeft="30dp"
-            android:id="@+id/rate">
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:layout_marginBottom="0dp">
-                <RatingBar
-                    android:id="@+id/ratingBar1"
-                    style="?android:attr/ratingBarStyleSmall"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:scaleX="1.3"
-                    android:scaleY="1.3"
-                    android:transformPivotX="0dp"
-                    android:transformPivotY="0dp"
-                    android:max="5"
-                    android:progressTint="@color/colorGold"
-                    android:rating="5"
-                    android:stepSize="1.0"
-                    android:layout_marginBottom="5dp"/>
-                <TextView
-                    android:id="@+id/txtRating1"
-                    style="@style/CodeFont3"
-                    android:text="10 lượt đánh giá"/>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:layout_marginBottom="0dp">
-                <RatingBar
-                    android:id="@+id/ratingBar2"
-                    style="?android:attr/ratingBarStyleSmall"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:scaleX="1.3"
-                    android:scaleY="1.3"
-                    android:transformPivotX="0dp"
-                    android:transformPivotY="0dp"
-                    android:max="5"
-                    android:progressTint="@color/colorGold"
-                    android:rating="4"
-                    android:stepSize="1.0"
-                    android:layout_marginBottom="5dp"/>
-                <TextView
-                    android:id="@+id/txtRating2"
-                    style="@style/CodeFont3"
-                    android:text="10 lượt đánh giá"/>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:layout_marginBottom="0dp">
-                <RatingBar
-                    android:id="@+id/ratingBar3"
-                    style="?android:attr/ratingBarStyleSmall"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:scaleX="1.3"
-                    android:scaleY="1.3"
-                    android:transformPivotX="0dp"
-                    android:transformPivotY="0dp"
-                    android:max="5"
-                    android:progressTint="@color/colorGold"
-                    android:rating="3"
-                    android:stepSize="1.0"
-                    android:layout_marginBottom="5dp"/>
-                <TextView
-                    android:id="@+id/txtRating3"
-                    style="@style/CodeFont3"
-                    android:text="10 lượt đánh giá"/>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:layout_marginBottom="0dp">
-                <RatingBar
-                    android:id="@+id/ratingBar4"
-                    style="?android:attr/ratingBarStyleSmall"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:scaleX="1.3"
-                    android:scaleY="1.3"
-                    android:transformPivotX="0dp"
-                    android:transformPivotY="0dp"
-                    android:max="5"
-                    android:progressTint="@color/colorGold"
-                    android:rating="2"
-                    android:stepSize="1.0"
-                    android:layout_marginBottom="5dp"/>
-                <TextView
-                    android:id="@+id/txtRating4"
-                    style="@style/CodeFont3"
-                    android:text="10 lượt đánh giá"/>
-            </LinearLayout>
-            <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"
-                android:layout_marginBottom="0dp">
-            <RatingBar
-                android:id="@+id/ratingBar5"
-                style="?android:attr/ratingBarStyleSmall"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:scaleX="1.3"
-                android:scaleY="1.3"
-                android:transformPivotX="0dp"
-                android:transformPivotY="0dp"
-                android:max="5"
-                android:progressTint="@color/colorGold"
-                android:rating="1"
-                android:stepSize="1.0"
-                android:layout_marginBottom="5dp"/>
-            <TextView
-                android:id="@+id/txtRating5"
-                style="@style/CodeFont3"
-                android:text="10 lượt đánh giá"/>
-        </LinearLayout>
+                    <RatingBar
+                        android:id="@+id/ratingBar1"
+                        style="?android:attr/ratingBarStyleSmall"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dp"
+                        android:max="5"
+                        android:progressTint="@color/colorGold"
+                        android:rating="5"
+                        android:scaleX="1.3"
+                        android:scaleY="1.3"
+                        android:stepSize="1.0"
+                        android:transformPivotX="0dp"
+                        android:transformPivotY="0dp" />
 
-        </LinearLayout>
+                    <TextView
+                        android:id="@+id/txtRating1"
+                        style="@style/CodeFont3"
+                        android:text="10 lượt đánh giá" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="0dp"
+                    android:orientation="horizontal">
+
+                    <RatingBar
+                        android:id="@+id/ratingBar2"
+                        style="?android:attr/ratingBarStyleSmall"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dp"
+                        android:max="5"
+                        android:progressTint="@color/colorGold"
+                        android:rating="4"
+                        android:scaleX="1.3"
+                        android:scaleY="1.3"
+                        android:stepSize="1.0"
+                        android:transformPivotX="0dp"
+                        android:transformPivotY="0dp" />
+
+                    <TextView
+                        android:id="@+id/txtRating2"
+                        style="@style/CodeFont3"
+                        android:text="10 lượt đánh giá" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="0dp"
+                    android:orientation="horizontal">
+
+                    <RatingBar
+                        android:id="@+id/ratingBar3"
+                        style="?android:attr/ratingBarStyleSmall"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dp"
+                        android:max="5"
+                        android:progressTint="@color/colorGold"
+                        android:rating="3"
+                        android:scaleX="1.3"
+                        android:scaleY="1.3"
+                        android:stepSize="1.0"
+                        android:transformPivotX="0dp"
+                        android:transformPivotY="0dp" />
+
+                    <TextView
+                        android:id="@+id/txtRating3"
+                        style="@style/CodeFont3"
+                        android:text="10 lượt đánh giá" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="0dp"
+                    android:orientation="horizontal">
+
+                    <RatingBar
+                        android:id="@+id/ratingBar4"
+                        style="?android:attr/ratingBarStyleSmall"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dp"
+                        android:max="5"
+                        android:progressTint="@color/colorGold"
+                        android:rating="2"
+                        android:scaleX="1.3"
+                        android:scaleY="1.3"
+                        android:stepSize="1.0"
+                        android:transformPivotX="0dp"
+                        android:transformPivotY="0dp" />
+
+                    <TextView
+                        android:id="@+id/txtRating4"
+                        style="@style/CodeFont3"
+                        android:text="10 lượt đánh giá" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="0dp"
+                    android:orientation="horizontal">
+
+                    <RatingBar
+                        android:id="@+id/ratingBar5"
+                        style="?android:attr/ratingBarStyleSmall"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dp"
+                        android:max="5"
+                        android:progressTint="@color/colorGold"
+                        android:rating="1"
+                        android:scaleX="1.3"
+                        android:scaleY="1.3"
+                        android:stepSize="1.0"
+                        android:transformPivotX="0dp"
+                        android:transformPivotY="0dp" />
+
+                    <TextView
+                        android:id="@+id/txtRating5"
+                        style="@style/CodeFont3"
+                        android:text="10 lượt đánh giá" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <!--
+                Comment for store
+            -->
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/CommentRecyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:nestedScrollingEnabled="false"
                 android:layout_marginTop="20dp"
-                >
-            </androidx.recyclerview.widget.RecyclerView>
+                android:nestedScrollingEnabled="false"></androidx.recyclerview.widget.RecyclerView>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-            <TextView
-                android:id="@+id/txtDescriptionVisible"
-                style="@style/CodeFont2"
-                android:text="Description ▼"/>
-            <TextView
-                android:id="@+id/txtStoreDescription"
-                style="@style/CodeFont"
-                android:text=""/>
-        </LinearLayout>
+            <!--
+                Description for store
+            -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/txtDescriptionVisible"
+                    style="@style/CodeFont2"
+                    android:text="Description ▼" />
+                <TextView
+                    android:id="@+id/txtStoreDescription"
+                    style="@style/CodeFont"
+                    android:text="" />
+            </LinearLayout>
+
+            <!--
+               Food of store
+           -->
 
             <TextView
                 android:id="@+id/abc"
                 style="@style/CodeFont2"
-                android:text="Món ăn nổi bật"/>
+                android:text="Món ăn nổi bật" />
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/FoodRecyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:nestedScrollingEnabled="false"
-                >
-            </androidx.recyclerview.widget.RecyclerView>
+                android:nestedScrollingEnabled="false"></androidx.recyclerview.widget.RecyclerView>
         </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>

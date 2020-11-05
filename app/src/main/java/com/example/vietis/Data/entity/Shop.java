@@ -1,6 +1,6 @@
 package com.example.vietis.Data.entity;
 
-import com.example.vietis.Data.inteface.repository.Config;
+import com.example.vietis.Data.IRepository.repository.Config;
 
 import org.json.JSONObject;
 
@@ -26,6 +26,9 @@ public class Shop {
     private String phoneNumber = "";
     @Builder.Default
     private String imageURL = "";
+    @Builder.Default
+    private String description = "";
+
 
     public boolean shopContainQuery(String query) {
         return Config.containIgnoreCase(this.toString(), query);
@@ -42,9 +45,9 @@ public class Shop {
                     .ID(jsonObject.getInt("id"))
                     .name(jsonObject.getString("name"))
                     .address(jsonObject.getString("address"))
-                    .rating((float) jsonObject.getDouble("rating"))
                     .phoneNumber(jsonObject.getString("phoneNumber"))
                     .imageURL(jsonObject.getJSONObject("Image_model").getString("imageURL"))
+                    .description(jsonObject.getString("description"))
                     .build();
         } catch (Exception e) {
             return null;

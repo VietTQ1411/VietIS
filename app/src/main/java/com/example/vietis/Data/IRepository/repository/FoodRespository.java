@@ -1,9 +1,9 @@
-package com.example.vietis.Data.inteface.repository;
+package com.example.vietis.Data.IRepository.repository;
 
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.vietis.Data.entity.Food;
-import com.example.vietis.Data.inteface.IFoodRespository;
+import com.example.vietis.Data.IRepository.IFoodRespository;
 
 import java.util.ArrayList;
 

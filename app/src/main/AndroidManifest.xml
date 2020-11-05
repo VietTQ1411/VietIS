@@ -62,8 +62,7 @@
             android:value="@string/default_notification_channel_id" />
 
         <receiver android:name=".Utilities.notifications.MyBroadcastReceiver" />
-
-        <service
+ <service
             android:name=".Utilities.notifications.MyFirebaseMessagingService"
             android:exported="false">
             <intent-filter>
