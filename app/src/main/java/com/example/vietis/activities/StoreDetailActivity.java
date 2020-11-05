@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.vietis.Data.inteface.IListView;
 import com.example.vietis.R;
 import com.example.vietis.UI.adapter.SearchAdapter;
 import com.example.vietis.UI.dialog.RatingFragment;
@@ -21,7 +22,7 @@ import com.example.vietis.Data.view_model.ListActivityModel;
 
 import java.util.ArrayList;
 
-public class StoreDetailActivity extends AppCompatActivity implements IView {
+public class StoreDetailActivity extends AppCompatActivity implements IView, IListView {
     //UI holders
     private RecyclerView FoodRecyclerView;
     private NestedScrollView nsvStoreView;
@@ -50,7 +51,7 @@ public class StoreDetailActivity extends AppCompatActivity implements IView {
     @Override
     public void mappingUI() {
         FoodRecyclerView = findViewById(R.id.FoodRecyclerView);
-        searchAdapter = new SearchAdapter(new ArrayList<Shop>());
+        searchAdapter = new SearchAdapter(this,new ArrayList<Shop>());
         listActivityModel = new ViewModelProvider(this).get(ListActivityModel.class);
         txtStoreDescription = findViewById(R.id.txtStoreDescription);
         nsvStoreView = findViewById(R.id.nsvStoreView);
@@ -75,7 +76,7 @@ public class StoreDetailActivity extends AppCompatActivity implements IView {
         listActivityModel.getShopData().observe(this, new Observer<ArrayList<Shop>>() {
             @Override
             public void onChanged(ArrayList<Shop> arrayList) {
-                searchAdapter = new SearchAdapter(arrayList);
+                searchAdapter.setShopArray(arrayList);
                 searchAdapter.notifyDataSetChanged();
                 FoodRecyclerView.setAdapter(searchAdapter);
                 nsvStoreView.scrollTo(0, 0);
@@ -103,4 +104,13 @@ public class StoreDetailActivity extends AppCompatActivity implements IView {
         });
     }
 
+    @Override
+    public void navigateToShopDetail(Integer position) {
+
+    }
+
+    @Override
+    public void navigateToFoodDetail() {
+
+    }
 }

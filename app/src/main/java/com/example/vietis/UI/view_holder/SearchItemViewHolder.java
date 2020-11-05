@@ -17,7 +17,6 @@ public class SearchItemViewHolder extends RecyclerView.ViewHolder implements IVi
     //UI holders
     private ShopItemViewHolder shopItemViewHolder;
 
-
     public SearchItemViewHolder(@NonNull View itemView) {
         super(itemView);
         this.shopItemViewHolder = new ShopItemViewHolder(itemView);

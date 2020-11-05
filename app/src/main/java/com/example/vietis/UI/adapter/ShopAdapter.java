@@ -1,5 +1,6 @@
 package com.example.vietis.UI.adapter;
 
+import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -7,6 +8,8 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.vietis.Data.entity.User;
+import com.example.vietis.Data.inteface.IListView;
 import com.example.vietis.R;
 import com.example.vietis.Data.entity.Shop;
 import com.example.vietis.UI.view_holder.ShopItemViewHolder;
@@ -15,13 +18,19 @@ import java.util.ArrayList;
 
 public class ShopAdapter extends RecyclerView.Adapter<ShopItemViewHolder> {
     private ArrayList<Shop> arrayListShop;
+    private IListView parent;
 
-    public ShopAdapter(ArrayList<Shop> arrayListShop) {
+    public ShopAdapter(IListView parent, ArrayList<Shop> arrayListShop) {
+        this.parent = parent;
         this.arrayListShop = arrayListShop;
     }
 
     public void setShopArray(ArrayList<Shop> list) {
         this.arrayListShop = list;
+    }
+
+    public ArrayList<Shop> getShopArray() {
+        return this.arrayListShop;
     }
 
     @NonNull
@@ -30,7 +39,9 @@ public class ShopAdapter extends RecyclerView.Adapter<ShopItemViewHolder> {
         View view = LayoutInflater
                 .from(parent.getContext())
                 .inflate(R.layout.view_search_item, parent, false);
-        return new ShopItemViewHolder(view);
+        ShopItemViewHolder itemHolder = new ShopItemViewHolder(view);
+        itemHolder.setParent(this.parent);
+        return itemHolder;
     }
 
     @Override
@@ -40,6 +51,6 @@ public class ShopAdapter extends RecyclerView.Adapter<ShopItemViewHolder> {
 
     @Override
     public int getItemCount() {
-      return arrayListShop.size();
+        return arrayListShop.size();
     }
 }

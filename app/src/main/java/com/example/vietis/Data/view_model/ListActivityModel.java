@@ -10,12 +10,12 @@ import androidx.lifecycle.ViewModel;
 import com.example.vietis.Data.entity.Food;
 import com.example.vietis.Data.entity.Shop;
 import com.example.vietis.Data.inteface.IFoodRespository;
-import com.example.vietis.Data.inteface.IShopRepository;
+import com.example.vietis.Data.inteface.IStoreRepository;
 import com.example.vietis.Data.inteface.repository.ShopRepository;
 
 import java.util.ArrayList;
 
-public class ListActivityModel extends ViewModel implements IShopRepository, IFoodRespository {
+public class ListActivityModel extends ViewModel implements IStoreRepository, IFoodRespository {
     private MutableLiveData<ArrayList<Food>> mutableLiveDataFood = null;
     private MutableLiveData<ArrayList<Shop>> mutableLiveDataShop = null;
 

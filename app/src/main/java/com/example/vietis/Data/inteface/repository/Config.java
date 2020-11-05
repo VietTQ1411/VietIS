@@ -5,6 +5,8 @@ import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
@@ -19,7 +21,7 @@ public class Config {
     public static final String PORT = "3000";
 
     // Không biết để method này ở đâu nên để tạm ở đây - anhnt
-    public static boolean containIgnoreCase(String s1, String s2){
+    public static boolean containIgnoreCase(String s1, String s2) {
         return Pattern.compile(Pattern.quote(s2), Pattern.CASE_INSENSITIVE).matcher(s1).find();
     }
 
@@ -45,6 +47,7 @@ public class Config {
         };
         Picasso.get().load(url).into(target);
     }
+
     public static Bitmap scaleDown(Bitmap bitmapOrigin, int wantedSize, boolean filter) {
         float ratio = bitmapOrigin.getWidth() / (float) bitmapOrigin.getHeight();
         int width = wantedSize;
@@ -59,6 +62,9 @@ public class Config {
             int count = group.getChildCount();
             for (int i = 0; i < count; i++) {
                 View child = group.getChildAt(i);
+                if (child instanceof LinearLayout || child instanceof RelativeLayout) {
+                    setChildViewOnClickListener(child, listener);
+                }
                 if (child instanceof TextView) {
                     TextView text = (TextView) child;
                     text.setFocusable(false);
