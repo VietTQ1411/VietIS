@@ -106,6 +106,7 @@ public class UserRepository {
             }
         });
     }
+
     public void getSettingData(User user){
         OkHttpClient okHttpClient = new OkHttpClient();
         RequestBody requestBody = new MultipartBody.Builder()
@@ -122,7 +123,6 @@ public class UserRepository {
             public void onFailure(@NotNull Call call, @NotNull IOException e) {
                 iUserRepository.getSettingData(null,e);
             }
-
             @Override
             public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
                 try {

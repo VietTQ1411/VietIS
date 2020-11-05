@@ -152,12 +152,10 @@ public class EditProfileActivity extends AppCompatActivity implements IView{
                 Intent intent = new Intent();
                 db.userDAO().getSettingUser(intent.getIntExtra("userid",0));
                 if(db.userDAO().getSettingUser(intent.getIntExtra("userid",0)) != null){
-
                     edtEmail.setText(user.getEmail());
                     edtName.setText(user.getName());
                     edtPhoneNumber.setText(user.getPhoneNumber());
                     edtAddress.setText(user.getAddress());
-
                 }
             }
         });
