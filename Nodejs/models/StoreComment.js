@@ -47,6 +47,15 @@ module.exports = sequelize => {
             autoIncrement: false,
             comment: null,
             field: "content"
+        },
+        createAt: {
+            type: DataTypes.DATEONLY,
+            allowNull: true,
+            defaultValue: null,
+            primaryKey: false,
+            autoIncrement: false,
+            comment: null,
+            field: "createAt"
         }
     };
     const options = {
