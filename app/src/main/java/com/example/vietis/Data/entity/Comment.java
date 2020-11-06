@@ -36,10 +36,10 @@ public class Comment {
         try {
             return Comment.builder()
                     .id(Integer.parseInt(jsonObject.getString("id")))
-                    .userName(jsonObject.getString("userName"))
-                    .imgUserURL(jsonObject.getString("imgUserURL"))
-                    .Content(jsonObject.getString("Content"))
-                    .dateCreate(jsonObject.getString("dateCreate"))
+                    .userName(jsonObject.getJSONObject("User_model").getString("name"))
+                    .imgUserURL(jsonObject.getJSONObject("User_model").getJSONObject("Image_model").getString("imageURL"))
+                    .Content(jsonObject.getString("content"))
+                    .dateCreate(jsonObject.getString("createAt"))
                     .build();
         } catch (Exception e) {
             return null;
