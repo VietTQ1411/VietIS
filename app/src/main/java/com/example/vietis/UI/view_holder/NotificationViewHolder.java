@@ -22,7 +22,7 @@ public class NotificationViewHolder extends RecyclerView.ViewHolder {
         super(itemView);
         imageShop = itemView.findViewById(R.id.shopImage);
         txtShopName = itemView.findViewById(R.id.textShopName);
-        txtNotification = itemView.findViewById(R.id.txtNotifications);
+        txtNotification = itemView.findViewById(R.id.textNotification);
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -39,7 +39,6 @@ public class NotificationViewHolder extends RecyclerView.ViewHolder {
     public void setNotification(Notification notification){
         Picasso.get().load(notification.getImageUrl())
                 .placeholder(R.drawable.ic_notification)
-                .centerCrop()
                 .into(imageShop);
         txtShopName.setText(notification.getTitle());
         txtNotification.setText(notification.getContent());

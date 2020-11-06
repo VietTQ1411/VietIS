@@ -25,10 +25,7 @@
         </activity>
         <activity android:name=".activities.EditProfileActivity"></activity>
         <activity android:name=".activities.SettingActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+
         </activity>
 
         <service
@@ -67,6 +64,12 @@
         </activity>
 
         <activity android:name=".activities.StoreDetailActivity">
+        </activity>
+        <activity android:name=".activities.NotificationActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
     </application>
 </manifest>
