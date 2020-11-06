@@ -39,7 +39,17 @@ public class ShopItemViewHolder extends RecyclerView.ViewHolder implements IView
         this.parent = parent;
     }
 
-    public void setShopItem(Shop shop, int pos) {
+    public void setShopItem(final Shop shop, int pos) {
+        View.OnClickListener listener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (parent != null) {
+                    parent.navigateToShopDetail(shop.getID());
+                }
+            }
+        };
+        Config.setChildViewOnClickListener(linearLayoutShopItem, listener);
+
         Picasso.get().load(shop.getImageURL())
                 .placeholder(R.drawable.ic_launcher_foreground)
                 .resize(100, 100)
@@ -62,14 +72,6 @@ public class ShopItemViewHolder extends RecyclerView.ViewHolder implements IView
 
     @Override
     public void setupUI() {
-        View.OnClickListener listener = new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (parent != null) {
-                    parent.navigateToShopDetail(getLayoutPosition());
-                }
-            }
-        };
-        Config.setChildViewOnClickListener(linearLayoutShopItem, listener);
+
     }
 }

@@ -1,5 +1,6 @@
 package com.example.vietis.activities.Home.ui.home;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -20,8 +21,10 @@ import com.example.vietis.Data.entity.User;
 import com.example.vietis.Data.view_model.ListActivityModel;
 import com.example.vietis.R;
 import com.example.vietis.UI.adapter.SearchAdapter;
+import com.example.vietis.activities.Home.ui.store.StoreDetailActivity;
 import com.example.vietis.activities.IListView;
 import com.example.vietis.activities.IView;
+import com.example.vietis.activities.MainActivity;
 
 import java.util.ArrayList;
 
@@ -93,8 +96,10 @@ public class HomeFragment extends Fragment implements IView, IListView {
     }
 
     @Override
-    public void navigateToShopDetail(Integer position) {
-
+    public void navigateToShopDetail(Integer shopID) {
+        Intent i = new Intent(getActivity(), StoreDetailActivity.class);
+        i.putExtra("id", shopID + "");
+        startActivity(i);
     }
 
     @Override
