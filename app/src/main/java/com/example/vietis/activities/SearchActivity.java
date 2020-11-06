@@ -67,6 +67,7 @@ public class SearchActivity extends AppCompatActivity implements IView, IListVie
         recyclerViewSearch.setAdapter(searchAdapter);
 
         //SearchView action
+        searchViewSearch.clearFocus();
         searchViewSearch.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
