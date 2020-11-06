@@ -60,8 +60,7 @@
 
         <!--Activity-->
         <activity android:name=".activities.SplashActivity"/>
-        <activity android:name=".activities.EditProfileActivity"/>
-        <activity android:name=".activities.SettingActivity"/>
+        <activity android:name=".activities.Home.ui.dashboard.EditProfileActivity"/>
         <activity android:name=".activities.Home2Activity" />
         <activity android:name=".activities.LoginActivity" />
         <activity android:name=".activities.RegisterActivity" />

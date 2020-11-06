@@ -1,4 +1,4 @@
-package com.example.vietis.activities;
+package com.example.vietis.activities.Home.ui.dashboard;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
@@ -10,36 +10,34 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import com.example.vietis.Data.entity.User;
 import com.example.vietis.Data.view_model.SettingActivityViewModel;
 import com.example.vietis.R;
+import com.example.vietis.activities.IView;
 import com.example.vietis.database.Database;
 
-public class EditProfileActivity extends AppCompatActivity implements IView{
+public class EditProfileActivity extends AppCompatActivity implements IView {
 
-    Button btnSave;
-    ImageButton ibBack;
-    ImageButton ibAvatar;
-    ImageButton ibEditPassword;
-    ImageButton ibEditName;
-    ImageButton ibEditPhoneNumber;
-    ImageButton ibEditAddress;
-    EditText edtEmail;
-    EditText edtPassword;
-    EditText edtName;
-    EditText edtPhoneNumber;
-    EditText edtAddress;
-    EditText edtNewPassword;
-    EditText edtNewName;
-    EditText edtNewPhoneNumber;
-    EditText edtNewAddress;
-    LinearLayout llPassword;
-    LinearLayout llName;
-    LinearLayout llPhoneNumber;
-    LinearLayout llAddress;
-    User user;
+    private Button btnSave;
+    private ImageButton ibAvatar;
+    private ImageButton ibEditPassword;
+    private ImageButton ibEditName;
+    private ImageButton ibEditPhoneNumber;
+    private ImageButton ibEditAddress;
+    private EditText edtEmail;
+    private EditText edtPassword;
+    private EditText edtName;
+    private EditText edtPhoneNumber;
+    private EditText edtAddress;
+    private EditText edtNewPassword;
+    private EditText edtNewName;
+    private EditText edtNewPhoneNumber;
+    private EditText edtNewAddress;
+    private LinearLayout llPassword;
+    private LinearLayout llName;
+    private LinearLayout llPhoneNumber;
+    private LinearLayout llAddress;
 
     private Boolean isVisible = true;
 
@@ -57,7 +55,6 @@ public class EditProfileActivity extends AppCompatActivity implements IView{
     @Override
     public void mappingUI() {
         btnSave = findViewById(R.id.btnSave);
-        ibBack = findViewById(R.id.ibBack);
         ibAvatar = findViewById(R.id.ibAvatar);
         ibEditPassword = findViewById(R.id.ibEditPassword);
         ibEditName = findViewById(R.id.ibEditName);
@@ -82,12 +79,6 @@ public class EditProfileActivity extends AppCompatActivity implements IView{
     @Override
     public void setupUI(){
         getSettingData();
-        ibBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(EditProfileActivity.this, SettingActivity.class));
-            }
-        });
         ibEditPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -135,11 +126,7 @@ public class EditProfileActivity extends AppCompatActivity implements IView{
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                user.setPassword(String.valueOf(edtNewPassword.getText()));
-                user.setName(String.valueOf(edtNewName.getText()));
-                user.setPhoneNumber(String.valueOf(edtNewPhoneNumber.getText()));
-                user.setAddress(String.valueOf(edtNewAddress.getText()));
-                Toast.makeText(EditProfileActivity.this, "Save thanh cong",Toast.LENGTH_SHORT).show();
+
             }
         });
     }

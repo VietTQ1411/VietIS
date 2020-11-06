@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".activities.EditProfileActivity">
+    tools:context=".activities.Home.ui.dashboard.EditProfileActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -40,15 +40,6 @@
                 android:textAlignment="center"
                 android:textColor="@color/colorWhite"
                 android:textSize="20dp" />
-
-            <ImageButton
-                android:id="@+id/ibBack"
-                android:layout_width="80dp"
-                android:layout_height="45dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginLeft="-251dp"
-                android:background="@android:color/transparent"
-                android:src="@drawable/ic_arrow_forward" />
 
         </LinearLayout>
 
