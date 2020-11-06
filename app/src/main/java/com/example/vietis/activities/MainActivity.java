@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.vietis.R;
+import com.example.vietis.activities.Home.HomeAppActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.messaging.FirebaseMessaging;
@@ -32,18 +33,18 @@ public class MainActivity extends AppCompatActivity implements IView {
         FirebaseMessaging.getInstance().getToken().addOnCompleteListener(new OnCompleteListener<String>() {
             @Override
             public void onComplete(@NonNull Task<String> task) {
-                if (!task.isSuccessful()){
-                    Log.w(TAG,"Fetching FCM registration token failed",task.getException());
+                if (!task.isSuccessful()) {
+                    Log.w(TAG, "Fetching FCM registration token failed", task.getException());
                     return;
                 }
                 String token = task.getResult();
-                String msg = getString(R.string.msg_token_fmt,token);
-                Log.d(TAG,msg);
-                Toast.makeText(MainActivity.this, msg,Toast.LENGTH_LONG).show();
+                String msg = getString(R.string.msg_token_fmt, token);
+                Log.d(TAG, msg);
+                Toast.makeText(MainActivity.this, msg, Toast.LENGTH_LONG).show();
             }
         });
 
-       // createNotificationChannels();
+        // createNotificationChannels();
 
 
 //        createNotificationChannels();
@@ -76,14 +77,14 @@ public class MainActivity extends AppCompatActivity implements IView {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                Intent intent = new Intent(MainActivity.this, HomeAppActivity.class);
                 MainActivity.this.startActivity(intent);
             }
         });
         signUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this,RegisterActivity.class);
+                Intent intent = new Intent(MainActivity.this, RegisterActivity.class);
                 MainActivity.this.startActivity(intent);
             }
         });

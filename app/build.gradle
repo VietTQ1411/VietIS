@@ -24,6 +24,7 @@ android {
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
+    implementation 'com.google.firebase:firebase-installations:16.3.3'
     implementation('com.google.firebase:firebase-database:19.5.1')
     implementation('com.google.firebase:firebase-messaging:21.0.0')
     implementation platform('com.google.firebase:firebase-bom:25.12.0')
@@ -39,6 +40,7 @@ dependencies {
     implementation 'androidx.preference:preference:1.1.1'
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'com.google.android.gms:play-services-maps:17.0.0'
     compileOnly 'org.projectlombok:lombok:1.18.16'
     annotationProcessor 'org.projectlombok:lombok:1.18.16'
     testImplementation 'junit:junit:4.13.1'

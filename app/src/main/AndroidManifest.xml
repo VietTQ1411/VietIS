@@ -12,6 +12,7 @@
     <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
 
     <application
+        android:name=".Utilities.common.AppResources"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -19,15 +20,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activities.FoodDetailActivity"></activity>
-        <activity android:name=".activities.SplashActivity"></activity>
-        <activity android:name=".activities.EditProfileActivity" />
-        <activity android:name=".activities.SettingActivity"></activity>
+
         <!--
-<activity
-           android:name=".BottomNaviTestActivity"
-           android:label="@string/title_activity_bottom_navi_test">
-<!-            <intent-filter>
+            Service firebase
         -->
         <service
             android:name=".Utilities.notifications.MyFirebaseMessagingService"
@@ -63,19 +58,21 @@
             </intent-filter>
         </service>
 
-        <activity android:name=".activities.HomeActivity"></activity>
+        <!--Activity-->
+        <activity android:name=".activities.SplashActivity"/>
+        <activity android:name=".activities.EditProfileActivity"/>
+        <activity android:name=".activities.SettingActivity"/>
+        <activity android:name=".activities.Home2Activity" />
         <activity android:name=".activities.LoginActivity" />
         <activity android:name=".activities.RegisterActivity" />
         <activity android:name=".activities.SearchActivity" />
-        <activity android:name=".activities.MainActivity" />
-        <activity android:name=".activities.StoreDetailActivity" />
-        <activity android:name=".activities.ShopListActivity">
+        <activity android:name=".activities.Home.HomeAppActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".activities.StoreDetailActivity"/>
     </application>
 
 </manifest>

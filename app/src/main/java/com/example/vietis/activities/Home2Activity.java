@@ -11,7 +11,7 @@ import com.example.vietis.Data.IRepository.repository.Config;
 import com.example.vietis.Data.entity.User;
 import com.example.vietis.R;
 
-public class HomeActivity extends AppCompatActivity implements IView {
+public class Home2Activity extends AppCompatActivity implements IView {
 
     //UI holders
     private SearchView searchViewSearch;
@@ -24,7 +24,7 @@ public class HomeActivity extends AppCompatActivity implements IView {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
+        setContentView(R.layout.activity_home2);
         mappingUI();
         setupUI();
     }
@@ -45,9 +45,9 @@ public class HomeActivity extends AppCompatActivity implements IView {
         View.OnClickListener listener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(HomeActivity.this, SearchActivity.class);
+                Intent intent = new Intent(Home2Activity.this, SearchActivity.class);
                 intent.putExtra("user",user);
-                HomeActivity.this.startActivity(intent);
+                Home2Activity.this.startActivity(intent);
             }
         };
         Config.setChildViewOnClickListener(searchViewSearch,listener);
