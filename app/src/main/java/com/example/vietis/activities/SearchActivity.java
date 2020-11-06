@@ -23,7 +23,6 @@ import java.util.ArrayList;
 public class SearchActivity extends AppCompatActivity implements IView, IListView {
 
     //UI holders
-    private ImageButton imageButtonSearch;
     private SearchView searchViewSearch;
     private RecyclerView recyclerViewSearch;
 
@@ -45,7 +44,7 @@ public class SearchActivity extends AppCompatActivity implements IView, IListVie
     @Override
     public void mappingUI() {
         user = (User) getIntent().getSerializableExtra("user");
-        imageButtonSearch = findViewById(R.id.imageBtnSearch);
+
         searchViewSearch = findViewById(R.id.searchViewSearch);
         recyclerViewSearch = findViewById(R.id.recyclerViewSearch);
         searchAdapter = new SearchAdapter(this, new ArrayList<Shop>());
@@ -66,14 +65,6 @@ public class SearchActivity extends AppCompatActivity implements IView, IListVie
             }
         });
         recyclerViewSearch.setAdapter(searchAdapter);
-
-        //ImageButton action
-        imageButtonSearch.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                SearchActivity.this.finish();
-            }
-        });
 
         //SearchView action
         searchViewSearch.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
