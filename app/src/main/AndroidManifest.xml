@@ -59,19 +59,18 @@
         </service>
 
         <!--Activity-->
-        <activity android:name=".activities.MainActivity">
-
-        </activity>
-        <activity android:name=".activities.SplashActivity" />
-        <activity android:name=".activities.Home.ui.dashboard.EditProfileActivity" />
-        <activity android:name=".activities.LoginActivity" />
-        <activity android:name=".activities.RegisterActivity" />
-        <activity android:name=".activities.SearchActivity" />
-        <activity android:name=".activities.Home.HomeAppActivity">
+        <activity android:name=".activities.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name=".activities.MainActivity"/>
+        <activity android:name=".activities.Home.ui.dashboard.EditProfileActivity"/>
+        <activity android:name=".activities.LoginActivity" />
+        <activity android:name=".activities.RegisterActivity" />
+        <activity android:name=".activities.SearchActivity" />
+        <activity android:name=".activities.Home.HomeAppActivity">
         </activity>
         <activity android:name=".activities.Home.ui.store.StoreDetailActivity" />
     </application>
