@@ -1,6 +1,5 @@
 package com.example.vietis.activities.Home.ui.home;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,15 +8,9 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 
-import com.example.vietis.Data.IRepository.repository.Config;
-import com.example.vietis.Data.entity.User;
 import com.example.vietis.R;
-import com.example.vietis.Utilities.common.AppResources;
-import com.example.vietis.activities.Home2Activity;
 import com.example.vietis.activities.IView;
-import com.example.vietis.activities.SearchActivity;
 
 public class HomeFragment extends Fragment implements IView {
 
@@ -35,7 +28,7 @@ public class HomeFragment extends Fragment implements IView {
 
     @Override
     public void mappingUI() {
-        searchViewSearch = view.findViewById(R.id.searchViewHome);
+     //   searchViewSearch = view.findViewById(R.id.searchViewHome);
     }
 
     @Override

@@ -5,6 +5,7 @@ const { sequelize } = require('../databases/database')
 const StoreModel = require('../models/Store')(sequelize)
 const ImageModel = require('../models/Image')(sequelize)
 const RatingModel = require('../models/RatingStore')(sequelize)
+const UserModel = require('../models/User')(sequelize)
 const CommentStoreModel = require('../models/StoreComment')(sequelize)
 const { validateString } = require('../validations/validate')
 const { validationResult } = require('express-validator')
@@ -15,6 +16,12 @@ StoreModel.belongsTo(ImageModel, { foreignKey: 'imageId' })
 
 StoreModel.hasMany(RatingModel, { foreignKey: 'storeId' })
 RatingModel.belongsTo(StoreModel, { foreignKey: 'storeId' })
+
+ImageModel.hasMany(UserModel, { foreignKey: 'imageId' })
+UserModel.belongsTo(ImageModel, { foreignKey: 'imageId' })
+
+CommentStoreModel.belongsTo(UserModel, { foreignKey: 'userId' })
+UserModel.hasMany(CommentStoreModel, { foreignKey: 'userId' })
 
 /**
  * URL: http://localhost:3000/store/search
@@ -181,6 +188,16 @@ router.post('/detailStore', async(req, res) => {
                     [Op.eq]: foundStore[0].id
                 }
             },
+            include: [{
+                model: UserModel,
+                as: "User_model",
+                attributes: ['name'],
+                include: [{
+                    model: ImageModel,
+                    as: "Image_model",
+                    attributes: ['imageURL']
+                }]
+            }],
             limit: 3,
             order: [
                 ['id', 'DESC']

@@ -1,4 +1,4 @@
-package com.example.vietis.activities;
+package com.example.vietis.activities.Home.ui.home;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
@@ -18,10 +18,13 @@ import com.example.vietis.R;
 import com.example.vietis.UI.adapter.ShopAdapter;
 import com.example.vietis.Data.entity.Shop;
 import com.example.vietis.Data.view_model.ListActivityModel;
+import com.example.vietis.activities.Home.ui.store.StoreDetailActivity;
+import com.example.vietis.activities.IListView;
+import com.example.vietis.activities.IView;
 
 import java.util.ArrayList;
 
-public class ShopListActivity extends AppCompatActivity implements IView,IListView{
+public class ShopListActivity extends AppCompatActivity implements IView, IListView {
 
     //UI holders
     private ImageButton imageBtnShopList;

@@ -1,4 +1,4 @@
-package com.example.vietis.activities;
+package com.example.vietis.activities.Home.ui.store;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -26,6 +26,7 @@ import com.example.vietis.UI.adapter.CommentAdapter;
 import com.example.vietis.UI.adapter.SearchAdapter;
 import com.example.vietis.UI.dialog.RatingFragment;
 import com.example.vietis.Utilities.common.UserApp;
+import com.example.vietis.activities.IView;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.example.vietis.R;
 import com.example.vietis.activities.Home.HomeAppActivity;
+import com.example.vietis.activities.Home.ui.store.StoreDetailActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.messaging.FirebaseMessaging;
@@ -77,7 +78,8 @@ public class MainActivity extends AppCompatActivity implements IView {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, HomeAppActivity.class);
+                Intent intent = new Intent(MainActivity.this, StoreDetailActivity.class);
+                intent.putExtra("id","1");
                 MainActivity.this.startActivity(intent);
             }
         });
