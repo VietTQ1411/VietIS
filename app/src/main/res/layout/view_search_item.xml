@@ -3,5 +3,5 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
-    <include layout="@layout/view_list_item"/>
+    <include layout="@layout/view_shop_item"/>
 </LinearLayout>

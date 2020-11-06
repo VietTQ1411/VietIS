@@ -9,6 +9,6 @@ public class MyBroadcastReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         String data = intent.getStringExtra("data");
-        Toast.makeText(context,data,Toast.LENGTH_LONG).show();
+        Toast.makeText(context, data, Toast.LENGTH_LONG).show();
     }
 }

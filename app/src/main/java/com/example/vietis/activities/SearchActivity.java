@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 
+import com.example.vietis.Data.entity.User;
 import com.example.vietis.R;
 import com.example.vietis.UI.adapter.SearchAdapter;
 import com.example.vietis.Data.entity.Shop;
@@ -19,10 +20,9 @@ import com.example.vietis.Data.view_model.ListActivityModel;
 import java.util.ArrayList;
 
 
-public class SearchActivity extends AppCompatActivity implements IView {
+public class SearchActivity extends AppCompatActivity implements IView, IListView {
 
     //UI holders
-    private ImageButton imageButtonSearch;
     private SearchView searchViewSearch;
     private RecyclerView recyclerViewSearch;
 
@@ -31,6 +31,7 @@ public class SearchActivity extends AppCompatActivity implements IView {
 
     //View Model
     private ListActivityModel listActivityModel;
+    private User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,10 +43,11 @@ public class SearchActivity extends AppCompatActivity implements IView {
 
     @Override
     public void mappingUI() {
-        imageButtonSearch = findViewById(R.id.imageBtnSearch);
+        user = (User) getIntent().getSerializableExtra("user");
+
         searchViewSearch = findViewById(R.id.searchViewSearch);
         recyclerViewSearch = findViewById(R.id.recyclerViewSearch);
-        searchAdapter = new SearchAdapter(new ArrayList<Shop>());
+        searchAdapter = new SearchAdapter(this, new ArrayList<Shop>());
         listActivityModel = new ViewModelProvider(this).get(ListActivityModel.class);
     }
 
@@ -54,7 +56,7 @@ public class SearchActivity extends AppCompatActivity implements IView {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext(),
                 LinearLayoutManager.VERTICAL, false);
         recyclerViewSearch.setLayoutManager(layoutManager);
-        listActivityModel.init(true,true);
+        listActivityModel.init(true, true);
         listActivityModel.getShopData().observe(this, new Observer<ArrayList<Shop>>() {
             @Override
             public void onChanged(ArrayList<Shop> arrayList) {
@@ -64,15 +66,8 @@ public class SearchActivity extends AppCompatActivity implements IView {
         });
         recyclerViewSearch.setAdapter(searchAdapter);
 
-        //ImageButton action
-        imageButtonSearch.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                SearchActivity.this.finish();
-            }
-        });
-
         //SearchView action
+        searchViewSearch.clearFocus();
         searchViewSearch.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -90,6 +85,16 @@ public class SearchActivity extends AppCompatActivity implements IView {
                 return false;
             }
         });
+
+    }
+
+    @Override
+    public void navigateToShopDetail(Integer position) {
+
+    }
+
+    @Override
+    public void navigateToFoodDetail() {
 
     }
 }

@@ -1,7 +1,7 @@
 package com.example.vietis.Data.IRepository.repository;
 
+import com.example.vietis.Data.IRepository.IStoreRepository;
 import com.example.vietis.Data.entity.Shop;
-import com.example.vietis.Data.IRepository.IShopRepository;
 
 import org.jetbrains.annotations.NotNull;
 import org.json.JSONArray;
@@ -24,13 +24,13 @@ public class ShopRepository {
     private static final String URL_SEARCH_SHOP =
             "http://" + Config.HOST_NAME + ":" + Config.PORT + "/store/search";
     private static ShopRepository instance;
-    private IShopRepository iShopRepository;
+    private IStoreRepository iShopRepository;
 
-    private ShopRepository(IShopRepository iShopRepository) {
+    private ShopRepository(IStoreRepository iShopRepository) {
         this.iShopRepository = iShopRepository;
     }
 
-    public static ShopRepository getInstance(IShopRepository iShopRepository) {
+    public static ShopRepository getInstance(IStoreRepository iShopRepository) {
         if (instance == null) {
             instance = new ShopRepository(iShopRepository);
         }
@@ -88,7 +88,7 @@ public class ShopRepository {
         return fakeData;
     }
 
-    public ArrayList<Shop> gennerateFakeShopArray(){
+    public ArrayList<Shop> gennerateFakeShopArray() {
         return Shop.generateRandomShopArray();
     }
 }

@@ -1,9 +1,8 @@
-package com.example.vietis.activities;
+package com.example.vietis.activities.Home.ui.store;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -18,15 +17,19 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.vietis.Data.entity.Comment;
+import com.example.vietis.Data.entity.Rating;
 import com.example.vietis.Data.entity.Shop;
-import com.example.vietis.Data.view_model.CommentActivityModel;
 import com.example.vietis.Data.view_model.ListActivityModel;
+import com.example.vietis.Data.view_model.StoreDeatilActivityModel;
 import com.example.vietis.R;
 import com.example.vietis.UI.adapter.CommentAdapter;
 import com.example.vietis.UI.adapter.SearchAdapter;
 import com.example.vietis.UI.dialog.RatingFragment;
+import com.example.vietis.Utilities.common.UserApp;
+import com.example.vietis.activities.IView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 // To display a message in the log (logcat)
 
@@ -77,7 +80,6 @@ public class StoreDetailActivity extends AppCompatActivity implements IView {
      */
     private TextView txtStoreDescription;
     private TextView txtDescriptionVisible;
-    private CommentActivityModel commentActivityModel;
 
     /**
      * Food of store
@@ -85,9 +87,16 @@ public class StoreDetailActivity extends AppCompatActivity implements IView {
     //UI holders
     private RecyclerView FoodRecyclerView;
     //RecyclerView components
-    private SearchAdapter searchAdapter;
+    private SearchAdapter foodAdapter;
     //View Model
-    private ListActivityModel listActivityModel;
+    private ListActivityModel foodActivityModel;
+
+    /**
+     * Store Repository of store
+     */
+    private Shop store = null;
+    private List<Rating> listRate = null;
+    private StoreDeatilActivityModel storeDeatilActivityModel;
 
 
     @Override
@@ -133,7 +142,7 @@ public class StoreDetailActivity extends AppCompatActivity implements IView {
          */
         CommentRecyclerView = findViewById(R.id.CommentRecyclerView);
         commentAdapter = new CommentAdapter(new ArrayList<Comment>());
-        commentActivityModel = new ViewModelProvider(this).get(CommentActivityModel.class);
+
 
         /**
          * Description for store
@@ -145,8 +154,8 @@ public class StoreDetailActivity extends AppCompatActivity implements IView {
          * Food of store
          */
         FoodRecyclerView = findViewById(R.id.FoodRecyclerView);
-        searchAdapter = new SearchAdapter(new ArrayList<Shop>());
-        listActivityModel = new ViewModelProvider(this).get(ListActivityModel.class);
+        foodAdapter = new SearchAdapter(new ArrayList<Shop>());
+        foodActivityModel = new ViewModelProvider(this).get(ListActivityModel.class);
 
         /**
          * Layout RecyclerView
@@ -157,10 +166,14 @@ public class StoreDetailActivity extends AppCompatActivity implements IView {
                 LinearLayoutManager.VERTICAL, false);
         FoodRecyclerView.setLayoutManager(layoutManager);
         CommentRecyclerView.setLayoutManager(layoutManager2);
+
+
+        storeDeatilActivityModel = new ViewModelProvider(this).get(StoreDeatilActivityModel.class);
     }
 
     /**
      * format description
+     *
      * @param description
      * @return
      */
@@ -188,9 +201,9 @@ public class StoreDetailActivity extends AppCompatActivity implements IView {
             @Override
             public void onClick(View v) {
                 RatingFragment dialog = new RatingFragment(StoreDetailActivity.this);
-                int width = (int)(getResources().getDisplayMetrics().widthPixels);
-                int height = (int)(getResources().getDisplayMetrics().heightPixels*0.5);
-                dialog.getWindow().setLayout(width,height);
+                int width = (int) (getResources().getDisplayMetrics().widthPixels);
+                int height = (int) (getResources().getDisplayMetrics().heightPixels * 0.5);
+                dialog.getWindow().setLayout(width, height);
                 dialog.show();
             }
         });
@@ -204,39 +217,69 @@ public class StoreDetailActivity extends AppCompatActivity implements IView {
          *  get store detail
          */
         Intent parent = getIntent();
-        int id = Integer.parseInt(parent.getStringExtra("id"));
+        Bundle b = parent.getExtras();
+        String id = null;
+        if (b != null) {
+            id = b.getString("id");
 
-
-        /**
-         *  input data
-         */
-        listActivityModel.init(false, false);
-        listActivityModel.getShopData().observe(this, new Observer<ArrayList<Shop>>() {
+        }
+        UserApp.user.setTokenKey("m8`q9v(`eS1uR.=|");
+        storeDeatilActivityModel.getStoreDetail(UserApp.user.getTokenKey(), id);
+        storeDeatilActivityModel.getData().observe(this, new Observer<List<Object>>() {
             @Override
-            public void onChanged(ArrayList<Shop> arrayList) {
-                searchAdapter = new SearchAdapter(arrayList);
-                searchAdapter.notifyDataSetChanged();
-                FoodRecyclerView.setAdapter(searchAdapter);
-                nsvStoreView.scrollTo(0, 0);
+            public void onChanged(List<Object> objects) {
+                store = (Shop) objects.get(0);
+                listRate = new ArrayList<>();
+                for (int i = 1; i < objects.size(); i++) {
+                    listRate.add((Rating) objects.get(i));
+                }
+                setUpStoreDetail();
             }
         });
-        commentActivityModel.init();
-        commentActivityModel.getCommentData().observe(this, new Observer<ArrayList<Comment>>() {
+        storeDeatilActivityModel.getCommentData().observe(this, new Observer<ArrayList<Comment>>() {
             @Override
-            public void onChanged(ArrayList<Comment> arrayList) {
-                commentAdapter = new CommentAdapter(arrayList);
+            public void onChanged(ArrayList<Comment> comments) {
+                commentAdapter = new CommentAdapter(comments);
                 commentAdapter.notifyDataSetChanged();
                 CommentRecyclerView.setAdapter(commentAdapter);
                 nsvStoreView.scrollTo(0, 0);
             }
         });
+        /**
+         *  input data
+         */
+        foodActivityModel.init(false, false);
+        foodActivityModel.getShopData().observe(this, new Observer<ArrayList<Shop>>() {
+            @Override
+            public void onChanged(ArrayList<Shop> arrayList) {
+                foodAdapter = new SearchAdapter(arrayList);
+                foodAdapter.notifyDataSetChanged();
+                FoodRecyclerView.setAdapter(foodAdapter);
+                nsvStoreView.scrollTo(0, 0);
+            }
+        });
     }
 
-    public void fillDetailStore(Shop store){
+    public void fillDetailStore(Shop store) {
         imageStoreDetailIcon = findViewById(R.id.imageStoreDetailIcon);
         txtStoreName.setText(store.getName());
         txtStoreAddress.setText(store.getAddress());
-        txtStorePhone.setText("Hotline: " +store.getPhoneNumber());
+        txtStorePhone.setText("Hotline: " + store.getPhoneNumber());
         txtStoreDescription.setText(createIndentedText(store.getDescription()));
+    }
+
+    private void setUpStoreDetail() {
+        //Store description
+        txtStoreName.setText(store.getName());
+        txtStoreAddress.setText(store.getAddress());
+        txtStorePhone.setText("Hotline: " + store.getPhoneNumber());
+        txtStoreDescription.setText(store.getDescription());
+
+        //Rating section
+        txtRating1.setText(listRate.get(0).getVoteCount() + " lượt đánh giá");
+        txtRating2.setText(listRate.get(1).getVoteCount() + " lượt đánh giá");
+        txtRating3.setText(listRate.get(2).getVoteCount() + " lượt đánh giá");
+        txtRating4.setText(listRate.get(3).getVoteCount() + " lượt đánh giá");
+        txtRating5.setText(listRate.get(4).getVoteCount() + " lượt đánh giá");
     }
 }

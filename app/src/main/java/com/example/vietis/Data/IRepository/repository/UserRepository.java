@@ -1,5 +1,6 @@
 package com.example.vietis.Data.IRepository.repository;
 
+import com.example.vietis.Data.entity.Image;
 import com.example.vietis.Data.entity.User;
 import com.example.vietis.Data.IRepository.IUserRepository;
 
@@ -8,6 +9,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import okhttp3.Call;
@@ -25,21 +27,24 @@ public class UserRepository {
     public static final String URL_LOGIN =
             "http://"+ Config.HOST_NAME+":"+Config.PORT+"/users/login";
     public static final String URL_REGISTER="http://"+ Config.HOST_NAME+":"+Config.PORT+"/users/register";
+    public static final String URL_SETTING ="http://" + Config.HOST_NAME+":"+Config.PORT+"/users/setting";
     private UserRepository(IUserRepository iUserRepository) {
         this.iUserRepository = iUserRepository;
     }
+
     public static UserRepository getInstance(IUserRepository iUserRepository) {
-        if(instance == null) {
+        if (instance == null) {
             instance = new UserRepository(iUserRepository);
         }
         return instance;
     }
-    public void login(String email, String password){
+
+    public void login(String email, String password) {
         OkHttpClient okHttpClient = new OkHttpClient();
         RequestBody requestBody = new MultipartBody.Builder()
                 .setType(MultipartBody.FORM)
-                .addFormDataPart("email",email)
-                .addFormDataPart("password",password)
+                .addFormDataPart("email", email)
+                .addFormDataPart("password", password)
                 .build();
         Request request = new Request.Builder()
                 .url(URL_LOGIN)
@@ -54,7 +59,7 @@ public class UserRepository {
 
             @Override
             public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
-                try{
+                try {
                     String jsonString = response.body().string();
                     JSONObject jsonObject = new JSONObject(jsonString);
                     JSONObject jsonUserObject =jsonObject.getJSONObject("data");
@@ -72,13 +77,14 @@ public class UserRepository {
             }
         });
     }
-    public void register(String email, String password, String name, String userType){
+
+    public void register(String email, String password, String name, String userType) {
         OkHttpClient okHttpClient = new OkHttpClient();
         RequestBody requestBody = new MultipartBody.Builder()
                 .setType(MultipartBody.FORM)
-                .addFormDataPart("email",email)
-                .addFormDataPart("password",password)
-                .addFormDataPart("name",name)
+                .addFormDataPart("email", email)
+                .addFormDataPart("password", password)
+                .addFormDataPart("name", name)
                 .addFormDataPart("userType", userType)
                 .build();
         Request request = new Request.Builder()
@@ -94,7 +100,7 @@ public class UserRepository {
 
             @Override
             public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
-                try{
+                try {
                     String jsonString = response.body().string();
                     JSONObject jsonObject = new JSONObject(jsonString);
                     JSONObject jsonUserObject =jsonObject.getJSONObject("data");
@@ -108,6 +114,37 @@ public class UserRepository {
 
                 }catch (JSONException e){
                     iUserRepository.afterRegister(null, e);
+                }
+            }
+        });
+    }
+
+    public void getSettingData(User user){
+        OkHttpClient okHttpClient = new OkHttpClient();
+        RequestBody requestBody = new MultipartBody.Builder()
+                .setType(MultipartBody.FORM)
+                .addFormDataPart("userid", String.valueOf(user.getId()))
+                .build();
+        Request request = new Request.Builder()
+                .url(URL_SETTING)
+                .post(requestBody)
+                .build();
+        Call call = okHttpClient.newCall(request);
+        call.enqueue(new Callback() {
+            @Override
+            public void onFailure(@NotNull Call call, @NotNull IOException e) {
+                iUserRepository.getSettingData(null,e);
+            }
+            @Override
+            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+                try {
+                    String jsonString = response.body().string();
+                    JSONObject jsonObject = new JSONObject(jsonString);
+                    JSONObject jsonUserObject =jsonObject.getJSONObject("data");
+                    User user = User.createUserFromJSONObject(jsonUserObject);
+                    iUserRepository.getSettingData(user,null);
+                } catch (JSONException e) {
+                    iUserRepository.getSettingData(null,e);
                 }
             }
         });

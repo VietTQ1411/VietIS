@@ -1,4 +1,4 @@
-package com.example.vietis.activities;
+package com.example.vietis.activities.Home.ui.home;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
@@ -8,18 +8,23 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.example.vietis.Data.entity.User;
 import com.example.vietis.R;
 import com.example.vietis.UI.adapter.ShopAdapter;
 import com.example.vietis.Data.entity.Shop;
 import com.example.vietis.Data.view_model.ListActivityModel;
+import com.example.vietis.activities.Home.ui.store.StoreDetailActivity;
+import com.example.vietis.activities.IListView;
+import com.example.vietis.activities.IView;
 
 import java.util.ArrayList;
 
-public class ShopListActivity extends AppCompatActivity implements IView {
+public class ShopListActivity extends AppCompatActivity implements IView, IListView {
 
     //UI holders
     private ImageButton imageBtnShopList;
@@ -28,6 +33,7 @@ public class ShopListActivity extends AppCompatActivity implements IView {
 
     //RecyclerView components
     private String foodField;
+    private User user;
     private ShopAdapter shopAdapter;
 
     //View Model
@@ -37,7 +43,6 @@ public class ShopListActivity extends AppCompatActivity implements IView {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shop_list);
-
         mappingUI();
         setupUI();
     }
@@ -47,7 +52,7 @@ public class ShopListActivity extends AppCompatActivity implements IView {
         imageBtnShopList = findViewById(R.id.imageBtnFoodList);
         textViewShopField = findViewById(R.id.textViewFoodField);
         recyclerViewShopList = findViewById(R.id.recyclerViewFoodList);
-        shopAdapter = new ShopAdapter(new ArrayList<Shop>());
+        shopAdapter = new ShopAdapter(this,new ArrayList<Shop>());
         listActivityModel = new ViewModelProvider(this).get(ListActivityModel.class);
     }
 
@@ -55,6 +60,7 @@ public class ShopListActivity extends AppCompatActivity implements IView {
     public void setupUI() {
         Intent intent = getIntent();
         this.foodField = intent.getStringExtra("food_field");
+//        this.foodField = "Pho";
         textViewShopField.setText(foodField == null ? "Food" : foodField);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext(),
                 LinearLayoutManager.VERTICAL, false);
@@ -77,5 +83,20 @@ public class ShopListActivity extends AppCompatActivity implements IView {
                 ShopListActivity.this.finish();
             }
         });
+    }
+
+    @Override
+    public void navigateToShopDetail(Integer position){
+        Log.i("LogTest","YAYA");
+        Intent intent = new Intent(ShopListActivity.this, StoreDetailActivity.class);
+        Shop selectedShop = shopAdapter.getShopArray().get(position);
+        intent.putExtra("id",selectedShop.getID()+"");
+        Log.i("LogTest",selectedShop.getName()+"YAYA");
+        startActivity(intent);
+    }
+
+    @Override
+    public void navigateToFoodDetail() {
+
     }
 }

@@ -20,13 +20,14 @@ import com.google.firebase.messaging.RemoteMessage;
 import java.util.Map;
 
 public class MyFirebaseMessagingService extends FirebaseMessagingService {
-    private static final String TAG ="FIREBASE MESSAGING";
-    public  static final String CHANNEL_1_ID = "channel1";
+    private static final String TAG = "FIREBASE MESSAGING";
+    public static final String CHANNEL_1_ID = "channel1";
+
     @Override
     public void onMessageReceived(@NonNull RemoteMessage remoteMessage) {
         super.onMessageReceived(remoteMessage);
-        if (remoteMessage.getData().size()>0){
-            Map<String,String> data = remoteMessage.getData();
+        if (remoteMessage.getData().size() > 0) {
+            Map<String, String> data = remoteMessage.getData();
             pushRemoteNotification(data);
         }
     }
@@ -34,8 +35,9 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
     @Override
     public void onNewToken(@NonNull String token) {
         super.onNewToken(token);
-        Log.d(TAG,"Refreshed token: "+token);
+        Log.d(TAG, "Refreshed token: " + token);
     }
+
     public void pushRemoteNotification(Map<String, String> data) {
         Context context = this;
         Intent intent = new Intent(context, ShopListActivity.class);
@@ -44,7 +46,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         Notification notification = new NotificationCompat.Builder(context,CHANNEL_1_ID)
                 .setSmallIcon(R.drawable.ic_notification)
                 .setContentTitle("NEW PRODUCT!!!")
-                .setContentText("Name = "+data.get("name")+", age = "+data.get("age"))
+                .setContentText("Name = " + data.get("name") + ", age = " + data.get("age"))
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .setCategory(NotificationCompat.CATEGORY_MESSAGE)
                 .setContentIntent(contentIntent)
@@ -52,7 +54,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                 .addAction(R.drawable.ic_notification,"OK",
                         contentIntent)
                 .build();
-        NotificationManagerCompat notificationManager =  NotificationManagerCompat.from(context);
+        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
         notificationManager.notify(2, notification);
     }
 }

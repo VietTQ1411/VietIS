@@ -13,10 +13,10 @@ import com.example.vietis.Data.entity.Comment;
 import java.util.ArrayList;
 
 public class CommentActivityModel extends ViewModel implements ICommentRepository {
-    private MutableLiveData<ArrayList<Comment>> mutableLiveDataComment  = null;
+    private MutableLiveData<ArrayList<Comment>> mutableLiveDataComment = null;
 
     public LiveData<ArrayList<Comment>> getCommentData() {
-        fakedata();
+
         return mutableLiveDataComment;
     }
 
@@ -26,11 +26,6 @@ public class CommentActivityModel extends ViewModel implements ICommentRepositor
             this.mutableLiveDataComment = new MutableLiveData<>();
         }
     }
-
-    public void fakedata() {
-        mutableLiveDataComment.setValue(Comment.generateFoodArray());
-    }
-
 
     @Override
     public void getCommentLimit(ArrayList<Comment> arrayListComment, Exception error) {
@@ -44,7 +39,6 @@ public class CommentActivityModel extends ViewModel implements ICommentRepositor
             @Override
             public void run() {
                 that.mutableLiveDataComment.setValue(error == null ? arrayListComment : new ArrayList<Comment>());
-                fakedata();
             }
         });
     }
