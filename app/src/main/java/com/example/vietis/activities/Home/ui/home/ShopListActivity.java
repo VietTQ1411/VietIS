@@ -59,8 +59,8 @@ public class ShopListActivity extends AppCompatActivity implements IView, IListV
     @Override
     public void setupUI() {
         Intent intent = getIntent();
-//        this.foodField = intent.getStringExtra("food_field");
-        this.foodField = "Pho";
+        this.foodField = intent.getStringExtra("food_field");
+//        this.foodField = "Pho";
         textViewShopField.setText(foodField == null ? "Food" : foodField);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext(),
                 LinearLayoutManager.VERTICAL, false);

@@ -49,6 +49,7 @@
             android:value="@string/default_notification_channel_id" />
 
         <receiver android:name=".Utilities.notifications.MyBroadcastReceiver" />
+
         <service
             android:name=".Utilities.notifications.MyFirebaseMessagingService"
             android:exported="false">
@@ -72,4 +73,5 @@
         <activity android:name=".activities.Home.HomeAppActivity" />
         <activity android:name=".activities.Home.ui.store.StoreDetailActivity" />
     </application>
+
 </manifest>
