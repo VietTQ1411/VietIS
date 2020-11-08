@@ -11,9 +11,10 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 
-import com.example.vietis.R;
 import com.example.vietis.Data.entity.User;
 import com.example.vietis.Data.view_model.LoginActivityViewModel;
+import com.example.vietis.R;
+import com.example.vietis.activities.Home.HomeAppActivity;
 
 public class LoginActivity extends AppCompatActivity implements IView {
     private EditText txtEmail;
@@ -52,10 +53,10 @@ public class LoginActivity extends AppCompatActivity implements IView {
     }
 
 
-    public void navigateToHomeActivity(User user){
-//        Intent intent = new Intent(LoginActivity.this, Home2Activity.class);
-     //   intent.putExtra("userid", user.getId());
-      //  this.startActivity(intent);
+    public void navigateToHomeActivity(User user) {
+        Intent intent = new Intent(LoginActivity.this, HomeAppActivity.class);
+        intent.putExtra("userid", user.getId());
+        this.startActivity(intent);
     }
 
     public String getEmail() {
@@ -72,13 +73,13 @@ public class LoginActivity extends AppCompatActivity implements IView {
                 new Observer<User>() {
                     @Override
                     public void onChanged(User user) {
-                        if(user!= null){
-                            LoginActivity.this.navigateToHomeActivity(user);
                         if (user != null) {
                             LoginActivity.this.navigateToHomeActivity(user);
+                            if (user != null) {
+                                LoginActivity.this.navigateToHomeActivity(user);
+                            }
                         }
                     }
-                }
-    });
-}
+                });
+    }
 }

@@ -16,7 +16,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
             <androidx.appcompat.widget.SearchView
-                android:id="@+id/searchViewSearch"
+                android:id="@+id/searchFoodViewSearch"
                 app:queryHint="@string/search_hint"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -30,7 +30,7 @@
                 android:layout_height="match_parent"
                 android:orientation="horizontal">
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerViewSearch"
+                android:id="@+id/recyclerViewFoodSearch"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 tools:layout_editor_absoluteX="1dp"
