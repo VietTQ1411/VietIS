@@ -22,12 +22,14 @@ import com.example.vietis.UI.adapter.SearchAdapter;
 import com.example.vietis.activities.Home.ui.store.StoreDetailActivity;
 import com.example.vietis.activities.IListView;
 import com.example.vietis.activities.IView;
+import com.example.vietis.activities.MainActivity;
 
 import java.util.ArrayList;
 
 public class HomeFragment extends Fragment implements IView, IListView {
 
     //UI holders
+    private View root;
     private SearchView searchViewSearch;
     private View view;
     private RecyclerView recyclerViewSearch;
