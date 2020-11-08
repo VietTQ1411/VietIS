@@ -9,23 +9,34 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.vietis.activities.IListView;
 import com.example.vietis.activities.IView;
 
 
-public class SearchItemViewHolder extends RecyclerView.ViewHolder implements IView {
+public class SearchItemViewHolder<T> extends RecyclerView.ViewHolder implements IView {
 
     //UI holders
     private ShopItemViewHolder shopItemViewHolder;
+    private FoodItemViewHolder foodItemViewHolder;
 
-    public SearchItemViewHolder(@NonNull View itemView) {
+
+    public SearchItemViewHolder(@NonNull View itemView, IListView parent, boolean isStore) {
         super(itemView);
-        this.shopItemViewHolder = new ShopItemViewHolder(itemView);
-        mappingUI();
-        setupUI();
+        if (isStore) {
+            this.shopItemViewHolder = new ShopItemViewHolder(itemView);
+            this.shopItemViewHolder.setParent(parent);
+        } else {
+            this.foodItemViewHolder = new FoodItemViewHolder(itemView);
+            this.foodItemViewHolder.setParent(parent);
+        }
     }
 
     public ShopItemViewHolder getShopItemViewHolder() {
         return shopItemViewHolder;
+    }
+
+    public FoodItemViewHolder getFoodItemViewHolder() {
+        return foodItemViewHolder;
     }
 
     @Override

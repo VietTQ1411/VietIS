@@ -1,8 +1,8 @@
 package com.example.vietis.activities.Home.ui.home;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,9 +15,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.vietis.Data.IRepository.repository.Config;
-import com.example.vietis.Data.entity.Shop;
-import com.example.vietis.Data.entity.User;
+import com.example.vietis.Data.entity.Food;
 import com.example.vietis.Data.view_model.ListActivityModel;
 import com.example.vietis.R;
 import com.example.vietis.UI.adapter.SearchAdapter;
@@ -30,80 +28,99 @@ import java.util.ArrayList;
 
 public class HomeFragment extends Fragment implements IView, IListView {
 
-
     //UI holders
     private View root;
     private SearchView searchViewSearch;
+    private View view;
     private RecyclerView recyclerViewSearch;
 
     //RecyclerView components
-    private SearchAdapter searchAdapter;
-
+    private SearchAdapter<Food> foodAdapter;
     //View Model
-    private ListActivityModel listActivityModel;
-    private User user;
+    private ListActivityModel foodActivityModel;
+    private int PAGE = 0;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        this.root = inflater.inflate(R.layout.fragment_home, container, false);
+        View root = inflater.inflate(R.layout.fragment_home, container, false);
+        view = root;
         mappingUI();
-        setupUI();
+        Log.d("Home", "Start");
         return root;
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        setupUI();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        PAGE = 0;
+        foodActivityModel.clearDataFood();
+    }
+
+    @Override
     public void mappingUI() {
-        searchViewSearch = root.findViewById(R.id.searchViewSearch);
-        recyclerViewSearch = root.findViewById(R.id.recyclerViewSearch);
-        searchAdapter = new SearchAdapter(this, new ArrayList<Shop>());
-        listActivityModel = new ViewModelProvider(this).get(ListActivityModel.class);
+        searchViewSearch = view.findViewById(R.id.searchFoodViewSearch);
+        recyclerViewSearch = view.findViewById(R.id.recyclerViewFoodSearch);
+        foodAdapter = new SearchAdapter(this, new ArrayList<Food>(), Food.class);
+        foodActivityModel = new ViewModelProvider(this).get(ListActivityModel.class);
     }
 
     @Override
     public void setupUI() {
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(root.getContext(),
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(view.getContext(),
                 LinearLayoutManager.VERTICAL, false);
         recyclerViewSearch.setLayoutManager(layoutManager);
-        listActivityModel.init(false, true);
-        listActivityModel.getShopData().observe(getViewLifecycleOwner(), new Observer<ArrayList<Shop>>() {
+        foodActivityModel.searchFoodFormServerWithPage("", PAGE);
+        foodActivityModel.getFoodData().observe(this, new Observer<ArrayList<Food>>() {
             @Override
-            public void onChanged(ArrayList<Shop> arrayList) {
-                searchAdapter.setShopArray(arrayList);
-                searchAdapter.notifyDataSetChanged();
+            public void onChanged(ArrayList<Food> arrayList) {
+                foodAdapter.setObjectArray(arrayList);
+                foodAdapter.notifyDataSetChanged();
+                recyclerViewSearch.setAdapter(foodAdapter);
             }
         });
-        recyclerViewSearch.setAdapter(searchAdapter);
+
 
         //SearchView action
         searchViewSearch.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                listActivityModel.searchShopFromFakeData(query);
+                PAGE = 0;
+                foodActivityModel.searchFoodFormServerWithPage(query, PAGE);
+                PAGE++;
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
                 if (newText.equals("")) {
-                    this.onQueryTextSubmit("");
+                    foodAdapter.setObjectArray(foodActivityModel.getFoodData().getValue());
+                    foodAdapter.notifyDataSetChanged();
+                    recyclerViewSearch.setAdapter(foodAdapter);
                     return false;
                 }
-                listActivityModel.searchShopFromFakeData(newText);
+                foodAdapter.setObjectArray(foodActivityModel.searchFood(newText));
+                foodAdapter.notifyDataSetChanged();
+                recyclerViewSearch.setAdapter(foodAdapter);
                 return false;
             }
         });
-
     }
 
     @Override
-    public void navigateToShopDetail(Integer shopID) {
-        Intent i = new Intent(getActivity(), StoreDetailActivity.class);
-        i.putExtra("id", shopID + "");
-        startActivity(i);
+    public void navigateToStoreDetail(Integer idStore) {
+        /**Not use Function*/
     }
 
     @Override
-    public void navigateToFoodDetail() {
-
+    public void navigateToFoodDetail(Integer idFood) {
+        Intent intent = new Intent(view.getContext(), FoodDetailActivity.class);
+        intent.putExtra("id", idFood + "");
+        startActivity(intent);
     }
 }

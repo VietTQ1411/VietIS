@@ -1,7 +1,15 @@
 package com.example.vietis.Data.IRepository.repository;
 
+import android.util.Log;
+
+import androidx.lifecycle.MutableLiveData;
+
 import com.example.vietis.Data.IRepository.IStoreRepository;
 import com.example.vietis.Data.entity.Shop;
+import com.example.vietis.R;
+import com.example.vietis.Utilities.common.AppResources;
+import com.example.vietis.Utilities.common.UserApp;
+import com.example.vietis.Utilities.helpers.API;
 
 import org.jetbrains.annotations.NotNull;
 import org.json.JSONArray;
@@ -10,6 +18,8 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -20,40 +30,40 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class ShopRepository {
-
-    private static final String URL_SEARCH_SHOP =
-            "http://" + Config.HOST_NAME + ":" + Config.PORT + "/store/search";
+    private MutableLiveData<ArrayList<Shop>> mutableLiveDataShop = null;
     private static ShopRepository instance;
     private IStoreRepository iShopRepository;
 
-    private ShopRepository(IStoreRepository iShopRepository) {
+    private ShopRepository(IStoreRepository iShopRepository,MutableLiveData<ArrayList<Shop>> list) {
         this.iShopRepository = iShopRepository;
+        mutableLiveDataShop = list;
     }
-
-    public static ShopRepository getInstance(IStoreRepository iShopRepository) {
+    public static ShopRepository getInstance(IStoreRepository iShopRepository,MutableLiveData<ArrayList<Shop>> list) {
         if (instance == null) {
-            instance = new ShopRepository(iShopRepository);
+            instance = new ShopRepository(iShopRepository,list);
         }
         return instance;
     }
 
-    public ArrayList<Shop> searchShopOnServer(String token, String query, int page, int pageNumber) {
-        final ArrayList<Shop> list = new ArrayList<>();
+    public void getShopPaging(String query, int page) {
         OkHttpClient okHttpClient = new OkHttpClient();
         RequestBody requestBody = new MultipartBody.Builder()
                 .setType(MultipartBody.FORM)
                 .addFormDataPart("search", query)
+                .addFormDataPart("page", page + "")
+                .addFormDataPart("pageNumber", AppResources.getResourses().getString(R.string.NUMBER_ITEM_GET_FORM_API))
                 .build();
         Request request = new Request.Builder()
-                .url(URL_SEARCH_SHOP)
-                .addHeader("tokenkey", token)
+                .url(API.get_URL_STRING(AppResources.getResourses().getString(R.string.GET_STORE_PAGING)))
+                .addHeader("tokenkey", UserApp.user.getTokenKey())
                 .post(requestBody)
                 .build();
         Call call = okHttpClient.newCall(request);
         call.enqueue(new Callback() {
             @Override
             public void onFailure(@NotNull Call call, @NotNull IOException e) {
-                list.clear();
+                Log.d("Store Ex",e.getMessage());
+                //move Error
             }
 
             @Override
@@ -61,34 +71,39 @@ public class ShopRepository {
                 try {
                     String jsonString = response.body().string();
                     JSONObject jsonObject = new JSONObject(jsonString);
-                    JSONArray jsonShopArray = jsonObject.getJSONArray("data");
-                    for (int i = 0; i < jsonShopArray.length(); i++) {
-                        list.add(Shop.generateShopFromJSON(jsonShopArray.getJSONObject(i)));
+                    String stringResult = jsonObject.getString("result");
+                    if (stringResult.equals(AppResources.getResourses().getString(R.string.SUCCESS_REQUEST))) {
+                        JSONArray jsonShopArray = jsonObject.getJSONArray("data");
+                        ArrayList<Shop> list = mutableLiveDataShop.getValue();
+                        for (int i = 0; i < jsonShopArray.length(); i++) {
+                            list.add(Shop.generateShopFromJSON(jsonShopArray.getJSONObject(i)));
+                        }
+                        iShopRepository.getShopData(list,null);
+                    } else {
+                        //move error
                     }
                 } catch (JSONException e) {
-                    list.clear();
+                    Log.d("Store Ex",e.getMessage());
+                    //move error
                 }
             }
         });
-        return list;
     }
 
-    public ArrayList<Shop> searchShopInFakeData(String query) {
-        if (query.isEmpty()) {
+    /**
+     * Find any shop match with search String in list shop already get form server
+     * @param search
+     * @return
+     */
+    public List<Shop> searchShop(String search) {
+        if (search.isEmpty()) {
             return new ArrayList<>();
         }
-        ArrayList<Shop> fakeData = Shop.generateRandomShopArray();
-        for (int i = 0; i < fakeData.size(); i++) {
-            Shop item = fakeData.get(i);
-            if (!item.shopContainQuery(query)) {
-                fakeData.remove(i);
-                i--;
-            }
-        }
-        return fakeData;
-    }
+        ArrayList<Shop> data = mutableLiveDataShop.getValue();
+       return data.stream().filter(store -> store.getName().contains(search) ||
+                store.getAddress().contains(search) ||
+                store.getPhoneNumber().contains(search))
+                .collect(Collectors.toList());
 
-    public ArrayList<Shop> gennerateFakeShopArray() {
-        return Shop.generateRandomShopArray();
     }
 }
