@@ -12,6 +12,7 @@
     <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
 
     <application
+        android:usesCleartextTraffic="true"
         android:name=".Utilities.common.AppResources"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -61,19 +62,18 @@
 
         <!--Activity-->
         <activity android:name=".activities.MainActivity">
-
         </activity>
-        <activity android:name=".activities.SplashActivity" />
-        <activity android:name=".activities.Home.ui.dashboard.EditProfileActivity" />
-        <activity android:name=".activities.LoginActivity" />
-        <activity android:name=".activities.RegisterActivity" />
-        <activity android:name=".activities.SearchActivity" />
-        <activity android:name=".activities.Home.HomeAppActivity">
+        <activity android:name=".activities.Home.HomeAppActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".activities.Home.ui.dashboard.EditProfileActivity" />
+        <activity android:name=".activities.LoginActivity" />
+        <activity android:name=".activities.RegisterActivity" />
+
+        <activity android:name=".activities.SplashActivity" />
         <activity android:name=".activities.Home.ui.store.StoreDetailActivity" />
     </application>
 

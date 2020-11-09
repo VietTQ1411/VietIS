@@ -1,4 +1,4 @@
-package com.example.vietis.activities;
+package com.example.vietis.activities.Home.ui.home;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
@@ -14,12 +14,13 @@ import com.example.vietis.Data.view_model.FoodDetailViewModel;
 import com.example.vietis.Data.view_model.ListActivityModel;
 import com.example.vietis.R;
 import com.example.vietis.UI.adapter.CommentAdapter;
+import com.example.vietis.activities.IView;
 
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
-public class FoodDetailActivity extends AppCompatActivity implements IView{
+public class FoodDetailActivity extends AppCompatActivity implements IView {
 
     private ImageView imageViewFoodImage;
     private TextView textViewFoodName;

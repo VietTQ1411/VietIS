@@ -14,40 +14,53 @@ import com.example.vietis.activities.IListView;
 
 import java.util.ArrayList;
 
-public class SearchAdapter extends RecyclerView.Adapter<SearchItemViewHolder> {
-    private ArrayList<Shop> arrayListShop;
+public class SearchAdapter<T> extends RecyclerView.Adapter<SearchItemViewHolder> {
+    private ArrayList<T> dataObject;
     private IListView parent;
+    final Class<T> typeParameterClass;
 
-    public SearchAdapter(IListView parent, ArrayList<Shop> arrayListShop) {
+    public SearchAdapter(IListView parent, ArrayList<T> arrayList,Class<T> typeParameterClass) {
         this.parent = parent;
-        this.arrayListShop = arrayListShop;
+        this.dataObject = arrayList;
+        this.typeParameterClass = typeParameterClass;
     }
 
-    public SearchAdapter(ArrayList<Shop> arrayListShop) {
-        this.arrayListShop = arrayListShop;
-    }
 
-    public void setShopArray(ArrayList<Shop> list) {
-        this.arrayListShop = list;
+    /**
+     * set data to list with array list T
+     * @param list
+     */
+    public void setObjectArray(ArrayList<T> list) {
+        this.dataObject = list;
     }
 
     @NonNull
     @Override
     public SearchItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater
-                .from(parent.getContext())
-                .inflate(R.layout.view_search_item, parent, false);
-        return new SearchItemViewHolder(view);
+        View view;
+        if(typeParameterClass.isInstance(Shop.class)) {
+             view = LayoutInflater
+                    .from(parent.getContext())
+                    .inflate(R.layout.view_store_item, parent, false);
+        }else{
+             view = LayoutInflater
+                    .from(parent.getContext())
+                    .inflate(R.layout.view_food_item, parent, false);
+        }
+        return new SearchItemViewHolder(view,this.parent,typeParameterClass.isInstance(Shop.class));
     }
 
     @Override
     public void onBindViewHolder(@NonNull SearchItemViewHolder holder, int position) {
-        holder.getShopItemViewHolder().setShopItem(this.arrayListShop.get(position), position);
-        holder.getShopItemViewHolder().setParent(parent != null ? parent : null);
+        if(typeParameterClass.isInstance(Shop.class)){
+            holder.getShopItemViewHolder().setShopItem((Shop)this.dataObject.get(position), position);
+        }else{
+            holder.getFoodItemViewHolder().setFoodItem((Shop)this.dataObject.get(position), position);
+        }
     }
 
     @Override
     public int getItemCount() {
-        return arrayListShop.size();
+        return dataObject.size();
     }
 }

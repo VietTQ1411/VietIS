@@ -73,8 +73,8 @@ public class RegisterActivity extends AppCompatActivity implements IView {
                             Log.d("USER", "REGISTER FAILED");
                         }
                         if (user != null) {
-                            Intent intent = new Intent(RegisterActivity.this, SearchActivity.class);
-                            RegisterActivity.this.startActivity(intent);
+//                            Intent intent = new Intent(RegisterActivity.this, SearchActivity.class);
+ //                           RegisterActivity.this.startActivity(intent);
                         }
                     }
                 });
