@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.vietis.Data.entity.Notification;
 import com.example.vietis.R;
-import com.example.vietis.activities.NotificationActivity;
+import com.example.vietis.activities.Home.ui.notifications.NotificationActivity;
 import com.squareup.picasso.Picasso;
 
 public class NotificationViewHolder extends RecyclerView.ViewHolder {

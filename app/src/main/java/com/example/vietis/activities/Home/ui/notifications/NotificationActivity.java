@@ -1,11 +1,10 @@
-package com.example.vietis.activities;
+package com.example.vietis.activities.Home.ui.notifications;
 
 import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -13,6 +12,8 @@ import com.example.vietis.Data.entity.Notification;
 import com.example.vietis.Data.view_model.NotificationActivityViewModel;
 import com.example.vietis.R;
 import com.example.vietis.UI.adapter.NotificationAdapter;
+import com.example.vietis.activities.Home.ui.store.StoreDetailActivity;
+import com.example.vietis.activities.IView;
 
 import java.util.ArrayList;
 
