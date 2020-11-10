@@ -132,7 +132,7 @@ const getTokenKey = async() => {
 /**
  * URL: http://localhost:3000/noti/getListNoti
  */
-router.post('/getListNoti',validatePhoneToken(), async(req,res){
+router.post('/getListNoti',validatePhoneToken(), async(req,res)=>{
     let foundListNoti = await NotificationModel.findAll();
     res.json({
         result: 'ok',
