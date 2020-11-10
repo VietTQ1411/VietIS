@@ -104,13 +104,14 @@ public class StoreDetailActivity extends AppCompatActivity implements IView {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_store_detail);
         mappingUI();
-        setUpData();
-        setupUI();
+
     }
 
     @Override
     protected void onResume() {
         super.onResume();
+        setUpData();
+        setupUI();
     }
 
     @Override

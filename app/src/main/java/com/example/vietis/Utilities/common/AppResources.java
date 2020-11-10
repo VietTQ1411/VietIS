@@ -21,7 +21,12 @@ public class AppResources extends Application {
         }
         return res;
     }
-
+    /**
+     * lấy ra Resources
+     */
+    public static Context getContext() {
+        return context;
+    }
     @Override
     public void onCreate() {
         super.onCreate();

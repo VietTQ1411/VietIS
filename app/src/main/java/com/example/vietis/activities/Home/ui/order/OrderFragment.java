@@ -16,8 +16,6 @@ import com.example.vietis.R;
 
 public class OrderFragment extends Fragment {
 
-
-
     public View onCreateView(@NonNull LayoutInflater inflater,
             ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_order, container, false);

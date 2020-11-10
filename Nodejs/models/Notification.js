@@ -50,7 +50,7 @@ module.exports = sequelize => {
             field: "foodId"
         },
         idType: {
-            type: nvarchar(150),
+            type: DataTypes.TEXT,
             allowNull: true,
             defaultValue: null,
             primaryKey: false,
