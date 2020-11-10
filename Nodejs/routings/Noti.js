@@ -87,34 +87,34 @@ router.post('/addTokenKey', validatePhoneToken(), async(req, res) => {
 
 
 
-// //http://192.168.1.142:3000/noti/sendNoti
-router.post('/sendNotiGlobal', validatePhoneToken(), async(req, res) => {
-    //validate du lieu tu client gui len    
+// // //http://192.168.1.142:3000/noti/sendNoti
+// router.post('/sendNotiGlobal', validatePhoneToken(), async(req, res) => {
+//     //validate du lieu tu client gui len    
 
-    const { title, data } = req.body
-    var jsonObj = JSON.parse(data.toString());
-    let foundPhoneToken = await PhoneTokenModel.findAll({
-        attributes: ['tokenKey']
-    })
-    let newNoti = await NotificationModel.create({
-        title,
-        content: jsonObj.content,
-        storeid: jsonObj.storeid,
-        foodid: jsonObj.foodid,
-        idType: jsonObj.idType
-    })
-    await newNoti.save()
-    const listToken = Array.from(foundPhoneToken, x => x.getDataValue('tokenKey'))
-    await sendFirebaseCloudMessage({
-        title: title,
-        data: data,
-        notificationTokens: listToken
-    })
-    res.json({
-        result: 'ok',
-        message: 'Send ok'
-    })
-})
+//     const { title, data } = req.body
+//     var jsonObj = JSON.parse(data.toString());
+//     let foundPhoneToken = await PhoneTokenModel.findAll({
+//         attributes: ['tokenKey']
+//     })
+//     let newNoti = await NotificationModel.create({
+//         title,
+//         content: jsonObj.content,
+//         storeid: jsonObj.storeid,
+//         foodid: jsonObj.foodid,
+//         idType: jsonObj.idType
+//     })
+//     await newNoti.save()
+//     const listToken = Array.from(foundPhoneToken, x => x.getDataValue('tokenKey'))
+//     await sendFirebaseCloudMessage({
+//         title: title,
+//         data: data,
+//         notificationTokens: listToken
+//     })
+//     res.json({
+//         result: 'ok',
+//         message: 'Send ok'
+//     })
+// })
 
 
 
@@ -132,7 +132,7 @@ const getTokenKey = async() => {
 /**
  * URL: http://localhost:3000/noti/getListNoti
  */
-router.post('/getListNoti',validatePhoneToken(), async(req,res)=>{
+router.post('/getListNoti',validatePhoneToken(), async(res)=>{
     let foundListNoti = await NotificationModel.findAll();
     res.json({
         result: 'ok',
