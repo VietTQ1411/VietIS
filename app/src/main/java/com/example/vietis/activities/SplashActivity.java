@@ -16,8 +16,8 @@ import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.example.vietis.Data.inteface.IView;
 import com.example.vietis.R;
 import com.example.vietis.Utilities.notifications.MyFirebaseMessagingService;
 import com.example.vietis.Data.view_model.SplashActivityViewModel;
@@ -66,8 +66,8 @@ public class SplashActivity extends AppCompatActivity implements IView {
                 splashActivityViewModel.getMsg().observe(SplashActivity.this, new Observer<String>() {
                     @Override
                     public void onChanged(String msg) {
-                        if (!msg.equals("")) {
-                            Toast.makeText(SplashActivity.this, msg, Toast.LENGTH_LONG).show();
+                        if(!msg.equals("")){
+                            Log.d("NOTIFICATIONS",msg);
                         }
                     }
                 });

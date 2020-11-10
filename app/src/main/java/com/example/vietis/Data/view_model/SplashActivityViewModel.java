@@ -8,8 +8,11 @@ import androidx.lifecycle.ViewModel;
 
 import com.example.vietis.Data.IRepository.INotiRepository;
 import com.example.vietis.Data.IRepository.repository.NotificationRepository;
+import com.example.vietis.Data.entity.Notification;
 
 import android.os.Handler;
+
+import java.util.ArrayList;
 
 public class SplashActivityViewModel extends ViewModel implements INotiRepository {
     private MutableLiveData<String> msg = new MutableLiveData<>();
@@ -30,5 +33,10 @@ public class SplashActivityViewModel extends ViewModel implements INotiRepositor
                 SplashActivityViewModel.this.msg.setValue(error == null ? msg : "");
             }
         });
+    }
+
+    @Override
+    public void getNotiList(ArrayList<Notification> notifications, Exception error) {
+
     }
 }
