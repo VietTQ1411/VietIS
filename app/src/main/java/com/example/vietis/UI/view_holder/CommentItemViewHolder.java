@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.vietis.Data.entity.Comment;
 import com.example.vietis.R;
-import com.example.vietis.activities.IView;
+import com.example.vietis.Data.inteface.IView;
 import com.squareup.picasso.Picasso;
 
 public class CommentItemViewHolder extends RecyclerView.ViewHolder implements IView {

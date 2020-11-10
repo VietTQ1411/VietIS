@@ -27,7 +27,7 @@ public class LoginActivityViewModel extends ViewModel implements IUserRepository
         new Handler(Looper.getMainLooper()).post(new Runnable() {
             @Override
             public void run() {
-                LoginActivityViewModel.this.user.setValue(error == null ? user : User.builder().build());
+                LoginActivityViewModel.this.user.setValue(error==null ? user : null);
             }
         });
     }

@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel;
 
 
 import com.example.vietis.Data.entity.User;
-import com.example.vietis.Data.inteface.IUserRepository;
+import com.example.vietis.Data.IRepository.IUserRepository;
 
 
 public class SettingActivityViewModel extends ViewModel implements IUserRepository {

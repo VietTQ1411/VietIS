@@ -1,16 +1,12 @@
 package com.example.vietis.UI.view_holder;
 
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.vietis.activities.IListView;
-import com.example.vietis.activities.IView;
+import com.example.vietis.Data.inteface.IListView;
+import com.example.vietis.Data.inteface.IView;
 
 
 public class SearchItemViewHolder<T> extends RecyclerView.ViewHolder implements IView {

@@ -13,6 +13,7 @@ import androidx.core.app.NotificationManagerCompat;
 
 import com.example.vietis.R;
 import com.example.vietis.activities.MainActivity;
+import com.example.vietis.activities.ShopListActivity;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
@@ -39,16 +40,10 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
     public void pushRemoteNotification(Map<String, String> data) {
         Context context = this;
-        Intent intent = new Intent(context, MainActivity.class);
+        Intent intent = new Intent(context, ShopListActivity.class);
         intent.setAction("OK");
-        PendingIntent contentIntent = PendingIntent.getActivity(context, 0, intent, 0);
-        Intent broadcastIntent = new Intent(context, MyBroadcastReceiver.class);
-        broadcastIntent.putExtra("data", "haha");
-
-        PendingIntent actionIntent = PendingIntent.getBroadcast(context, 0, broadcastIntent,
-                PendingIntent.FLAG_UPDATE_CURRENT);
-
-        Notification notification = new NotificationCompat.Builder(context, CHANNEL_1_ID)
+        PendingIntent contentIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        Notification notification = new NotificationCompat.Builder(context,CHANNEL_1_ID)
                 .setSmallIcon(R.drawable.ic_notification)
                 .setContentTitle("NEW PRODUCT!!!")
                 .setContentText("Name = " + data.get("name") + ", age = " + data.get("age"))
@@ -56,8 +51,8 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                 .setCategory(NotificationCompat.CATEGORY_MESSAGE)
                 .setContentIntent(contentIntent)
                 .setColor(Color.BLUE)
-                .addAction(R.drawable.ic_notification, "OK",
-                        actionIntent)
+                .addAction(R.drawable.ic_notification,"OK",
+                        contentIntent)
                 .build();
         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
         notificationManager.notify(2, notification);

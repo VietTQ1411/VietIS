@@ -19,8 +19,8 @@ import com.example.vietis.Data.entity.Shop;
 import com.example.vietis.Data.view_model.ListActivityModel;
 import com.example.vietis.R;
 import com.example.vietis.UI.adapter.SearchAdapter;
-import com.example.vietis.activities.IListView;
-import com.example.vietis.activities.IView;
+import com.example.vietis.Data.inteface.IListView;
+import com.example.vietis.Data.inteface.IView;
 
 import java.util.ArrayList;
 
@@ -74,13 +74,10 @@ public class StoreFragment extends Fragment implements IView, IListView {
                 LinearLayoutManager.VERTICAL, false);
         recyclerStoreViewSearch.setLayoutManager(layoutManager);
         storeActivityModel.searchStoreFormServerWithPage("", PAGE);
-        storeActivityModel.getShopData().observe(this, new Observer<ArrayList<Shop>>() {
-            @Override
-            public void onChanged(ArrayList<Shop> arrayList) {
-                storeAdapter.setObjectArray(arrayList);
-                storeAdapter.notifyDataSetChanged();
-                recyclerStoreViewSearch.setAdapter(storeAdapter);
-            }
+        storeActivityModel.getShopData().observe(this, arrayList -> {
+            storeAdapter.setObjectArray(arrayList);
+            storeAdapter.notifyDataSetChanged();
+            recyclerStoreViewSearch.setAdapter(storeAdapter);
         });
 
 
