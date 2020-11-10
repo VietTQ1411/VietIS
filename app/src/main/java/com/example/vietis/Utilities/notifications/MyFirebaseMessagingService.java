@@ -12,8 +12,7 @@ import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
 import com.example.vietis.R;
-import com.example.vietis.activities.MainActivity;
-import com.example.vietis.activities.ShopListActivity;
+import com.example.vietis.activities.Home.ui.store.StoreFragment;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
@@ -40,7 +39,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
     public void pushRemoteNotification(Map<String, String> data) {
         Context context = this;
-        Intent intent = new Intent(context, ShopListActivity.class);
+        Intent intent = new Intent(context, StoreFragment.class);
         intent.setAction("OK");
         PendingIntent contentIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         Notification notification = new NotificationCompat.Builder(context,CHANNEL_1_ID)

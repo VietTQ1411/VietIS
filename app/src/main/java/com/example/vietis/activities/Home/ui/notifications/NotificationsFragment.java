@@ -37,9 +37,16 @@ public class NotificationsFragment extends Fragment implements IView {
             ViewGroup container, Bundle savedInstanceState) {
 
         View root = inflater.inflate(R.layout.fragment_notifications, container, false);
-
         view = root;
+        mappingUI();
+        setupUI();
         return root;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        setupUI();
     }
 
     @Override
@@ -55,7 +62,7 @@ public class NotificationsFragment extends Fragment implements IView {
     @Override
     public void setupUI() {
         notificationActivityViewModel.getListNoti();
-        notificationActivityViewModel.getNotifications().observe(this, new Observer<ArrayList<Notification>>() {
+        notificationActivityViewModel.getNotifications().observe(getViewLifecycleOwner(), new Observer<ArrayList<Notification>>() {
             @Override
             public void onChanged(ArrayList<Notification> notifications) {
                 NotificationsFragment.this.notifications = notifications;

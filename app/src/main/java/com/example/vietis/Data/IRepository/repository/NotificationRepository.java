@@ -2,6 +2,8 @@ package com.example.vietis.Data.IRepository.repository;
 
 import com.example.vietis.Data.entity.Notification;
 import com.example.vietis.Data.IRepository.INotiRepository;
+import com.example.vietis.Utilities.helpers.API;
+
 import org.jetbrains.annotations.NotNull;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -22,8 +24,8 @@ import okhttp3.Response;
 public class NotificationRepository {
     private static NotificationRepository instance = null;
     private INotiRepository iNotiRepository;
-    private String msg;
-    public static final String URL_NOTI = "http://" + Config.HOST_NAME + ":" + Config.PORT + "/noti/addTokenKey";
+    public static final String URL_NOTI = API.get_URL_STRING("/noti/addTokenKey");
+    public static final String URL_LIST_NOTI = API.get_URL_STRING("noti/getListNoti");
 
     private NotificationRepository(INotiRepository iNotiRepository) {
         this.iNotiRepository = iNotiRepository;
