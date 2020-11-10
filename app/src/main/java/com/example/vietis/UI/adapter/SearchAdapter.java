@@ -7,10 +7,11 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.vietis.Data.entity.Food;
 import com.example.vietis.R;
 import com.example.vietis.Data.entity.Shop;
 import com.example.vietis.UI.view_holder.SearchItemViewHolder;
-import com.example.vietis.activities.IListView;
+import com.example.vietis.Data.inteface.IListView;
 
 import java.util.ArrayList;
 
@@ -55,7 +56,7 @@ public class SearchAdapter<T> extends RecyclerView.Adapter<SearchItemViewHolder>
         if(typeParameterClass.isInstance(Shop.class)){
             holder.getShopItemViewHolder().setShopItem((Shop)this.dataObject.get(position), position);
         }else{
-            holder.getFoodItemViewHolder().setFoodItem((Shop)this.dataObject.get(position), position);
+            holder.getFoodItemViewHolder().setFoodItem((Food) this.dataObject.get(position), position);
         }
     }
 

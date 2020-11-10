@@ -51,15 +51,6 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
         <receiver android:name=".Utilities.notifications.MyBroadcastReceiver" />
-
-        <service
-            android:name=".Utilities.notifications.MyFirebaseMessagingService"
-            android:exported="false">
-            <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT" />
-            </intent-filter>
-        </service>
-
         <!--Activity-->
         <activity android:name=".activities.MainActivity">
         </activity>
@@ -69,6 +60,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity android:name=".activities.Home.ui.dashboard.EditProfileActivity" />
         <activity android:name=".activities.LoginActivity" />
         <activity android:name=".activities.RegisterActivity" />

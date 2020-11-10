@@ -1,6 +1,5 @@
 package com.example.vietis.activities;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -11,6 +10,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 
+import com.example.vietis.Data.inteface.IView;
 import com.example.vietis.R;
 import com.example.vietis.database.Database;
 import com.example.vietis.Data.entity.User;

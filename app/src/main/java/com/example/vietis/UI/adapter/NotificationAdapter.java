@@ -1,6 +1,5 @@
 package com.example.vietis.UI.adapter;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,21 +10,19 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.vietis.Data.entity.Notification;
 import com.example.vietis.R;
 import com.example.vietis.UI.view_holder.NotificationViewHolder;
-import com.example.vietis.activities.Home.ui.notifications.NotificationActivity;
+import com.example.vietis.activities.Home.ui.notifications.NotificationsFragment;
 
 import java.util.ArrayList;
 
 public class NotificationAdapter extends RecyclerView.Adapter<NotificationViewHolder> {
     private ArrayList<Notification> notifications;
-    private Context context;
-    private NotificationActivity notificationActivity;
+    private NotificationsFragment notificationActivity;
 
-    public NotificationAdapter(Context context,ArrayList<Notification> notifications){
-        this.context=context;
+    public NotificationAdapter(ArrayList<Notification> notifications){
         this.notifications=notifications;
     }
 
-    public void setNotificationActivity(NotificationActivity notificationActivity) {
+    public void setNotificationActivity(NotificationsFragment notificationActivity) {
         this.notificationActivity = notificationActivity;
     }
 

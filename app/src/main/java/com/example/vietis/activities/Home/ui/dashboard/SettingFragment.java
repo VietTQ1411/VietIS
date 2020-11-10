@@ -19,7 +19,7 @@ import androidx.lifecycle.Observer;
 import com.example.vietis.Data.entity.User;
 import com.example.vietis.Data.view_model.SettingActivityViewModel;
 import com.example.vietis.R;
-import com.example.vietis.activities.IView;
+import com.example.vietis.Data.inteface.IView;
 import com.example.vietis.activities.LoginActivity;
 import com.example.vietis.database.Database;
 
@@ -85,74 +85,52 @@ public class SettingFragment extends Fragment implements IView {
     @Override
     public void setupUI() {
         getSettingData();
-        btnEdit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getContext(), EditProfileActivity.class));
-            }
-        });
-        isOut.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity((new Intent(getContext(), LoginActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)));
+        btnEdit.setOnClickListener(v -> startActivity(new Intent(getContext(), EditProfileActivity.class)));
+        isOut.setOnClickListener(v -> startActivity((new Intent(getContext(), LoginActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP))));
+
+        isPrivacy.setOnClickListener(v -> {
+            isVisiblePrivacy = !isVisiblePrivacy;
+            if (isVisiblePrivacy) {
+                txtPrivacy.setVisibility(View.VISIBLE);
+                ibPrivacy.setImageResource(R.drawable.ic_foward);
+            } else {
+                ibPrivacy.setImageResource(R.drawable.ic_right);
+                txtPrivacy.setVisibility(View.GONE);
             }
         });
 
-        isPrivacy.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                isVisiblePrivacy = !isVisiblePrivacy;
-                if (isVisiblePrivacy) {
-                    txtPrivacy.setVisibility(View.VISIBLE);
-                    ibPrivacy.setImageResource(R.drawable.ic_foward);
-                } else {
-                    ibPrivacy.setImageResource(R.drawable.ic_right);
-                    txtPrivacy.setVisibility(View.GONE);
-                }
+        isPolicy.setOnClickListener(v -> {
+            isVisiblePolicy = !isVisiblePolicy;
+            if (isVisiblePolicy) {
+                txtPolicy.setVisibility(View.VISIBLE);
+                ibPolicy.setImageResource(R.drawable.ic_foward);
+            } else {
+                ibPolicy.setImageResource(R.drawable.ic_right);
+                txtPolicy.setVisibility(View.GONE);
             }
         });
 
-        isPolicy.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                isVisiblePolicy = !isVisiblePolicy;
-                if (isVisiblePolicy) {
-                    txtPolicy.setVisibility(View.VISIBLE);
-                    ibPolicy.setImageResource(R.drawable.ic_foward);
-                } else {
-                    ibPolicy.setImageResource(R.drawable.ic_right);
-                    txtPolicy.setVisibility(View.GONE);
-                }
-            }
-        });
-
-        isApp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                isVisibleApp = !isVisibleApp;
-                if (isVisibleApp) {
-                    txtAppVersion.setVisibility(View.VISIBLE);
-                    ibAppVersion.setImageResource(R.drawable.ic_foward);
-                } else {
-                    ibAppVersion.setImageResource(R.drawable.ic_right);
-                    txtAppVersion.setVisibility(View.GONE);
-                }
+        isApp.setOnClickListener(v -> {
+            isVisibleApp = !isVisibleApp;
+            if (isVisibleApp) {
+                txtAppVersion.setVisibility(View.VISIBLE);
+                ibAppVersion.setImageResource(R.drawable.ic_foward);
+            } else {
+                ibAppVersion.setImageResource(R.drawable.ic_right);
+                txtAppVersion.setVisibility(View.GONE);
             }
         });
     }
 
     public void getSettingData(){
-        settingActivityViewModel.getSettingUser().observe(getViewLifecycleOwner(), new Observer<User>() {
-            @Override
-            public void onChanged(User user) {
-                Database db = Database.getInstance(getContext());
-                Intent intent = new Intent();
-                db.userDAO().getSettingUser(intent.getIntExtra("userid",0));
-                if(db.userDAO().getSettingUser(intent.getIntExtra("userid",0)) != null){
-                    txtProfileName.setText(user.getName());
-                    txtProfileAccount.setText(user.getEmail());
-                    imgAvatar.setImageResource(user.getImageId());
-                }
+        settingActivityViewModel.getSettingUser().observe(getViewLifecycleOwner(), user -> {
+            Database db = Database.getInstance(getContext());
+            Intent intent = new Intent();
+            db.userDAO().getSettingUser(intent.getIntExtra("userid",0));
+            if(db.userDAO().getSettingUser(intent.getIntExtra("userid",0)) != null){
+                txtProfileName.setText(user.getName());
+                txtProfileAccount.setText(user.getEmail());
+                imgAvatar.setImageResource(user.getImageId());
             }
         });
     }

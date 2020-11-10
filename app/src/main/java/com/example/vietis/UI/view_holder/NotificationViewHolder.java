@@ -9,14 +9,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.vietis.Data.entity.Notification;
 import com.example.vietis.R;
-import com.example.vietis.activities.Home.ui.notifications.NotificationActivity;
+import com.example.vietis.activities.Home.ui.notifications.NotificationsFragment;
 import com.squareup.picasso.Picasso;
 
 public class NotificationViewHolder extends RecyclerView.ViewHolder {
     private ImageView imageShop;
     private TextView txtShopName;
     private TextView txtNotification;
-    private NotificationActivity notificationActivity;
+    private NotificationsFragment notificationActivity;
 
     public NotificationViewHolder(@NonNull View itemView) {
         super(itemView);
@@ -32,7 +32,7 @@ public class NotificationViewHolder extends RecyclerView.ViewHolder {
         });
     }
 
-    public void setNotificationActivity(NotificationActivity notificationActivity) {
+    public void setNotificationActivity(NotificationsFragment notificationActivity) {
         this.notificationActivity = notificationActivity;
     }
 

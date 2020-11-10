@@ -12,8 +12,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.vietis.Data.IRepository.repository.Config;
 import com.example.vietis.R;
 import com.example.vietis.Data.entity.Shop;
-import com.example.vietis.activities.IListView;
-import com.example.vietis.activities.IView;
+import com.example.vietis.Data.inteface.IListView;
+import com.example.vietis.Data.inteface.IView;
 import com.squareup.picasso.Picasso;
 
 public class ShopItemViewHolder extends RecyclerView.ViewHolder implements IView {
@@ -44,7 +44,7 @@ public class ShopItemViewHolder extends RecyclerView.ViewHolder implements IView
             @Override
             public void onClick(View v) {
                 if (parent != null) {
-                    parent.navigateToShopDetail(shop.getID());
+                    parent.navigateToStoreDetail(shop.getID());
                 }
             }
         };

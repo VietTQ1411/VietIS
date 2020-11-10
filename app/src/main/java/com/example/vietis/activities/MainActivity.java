@@ -11,9 +11,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.vietis.Data.inteface.IView;
 import com.example.vietis.R;
-import com.example.vietis.activities.Home.HomeAppActivity;
-import com.example.vietis.activities.Home.ui.store.StoreDetailActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.messaging.FirebaseMessaging;
