@@ -9,7 +9,7 @@ const UserModel = require('../models/User')(sequelize)
 const CommentStoreModel = require('../models/StoreComment')(sequelize)
 const { validateString } = require('../validations/validate')
 const { validationResult } = require('express-validator')
-const { Op } = require("sequelize");
+const { Op, INTEGER } = require("sequelize");
 
 ImageModel.hasMany(StoreModel, { foreignKey: 'imageId' })
 StoreModel.belongsTo(ImageModel, { foreignKey: 'imageId' })
@@ -32,9 +32,7 @@ router.post('/search', validateString(), async(req, res) => {
     const isValidToken = await checkToken({ tokenkey })
     if (isValidToken == false) {
         res.json({
-            result: "failed",
-            data: null,
-            message: 'Token is invalid'
+            result: "TK01"
         })
         return;
     }
@@ -76,21 +74,19 @@ router.post('/search', validateString(), async(req, res) => {
                     as: "RatingStore_models",
                 }
             ],
-            limit: pageNumber,
-            offset: pageNumber * page,
+            limit: parseInt(pageNumber),
+            offset: parseInt(pageNumber) * parseInt(page),
         })
 
         res.json({
-            result: 'ok',
+            result: 'SC',
             data: foundStore,
             message: 'Find successfully'
         })
     } catch (exception) {
         res.status(500).json({
-            result: 'failed 500',
-            data: {},
-            message: `Error details: ${exception.toString()}`,
-            errors: []
+            result: 'E500',
+            message: `Error details: ${exception.toString()}`
         })
     }
 })

@@ -16,9 +16,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
-import com.example.vietis.R;
 import com.example.vietis.Data.entity.User;
 import com.example.vietis.Data.view_model.LoginActivityViewModel;
+import com.example.vietis.R;
 import com.example.vietis.activities.Home.HomeAppActivity;
 
 public class LoginActivity extends AppCompatActivity implements IView {
@@ -60,8 +60,8 @@ public class LoginActivity extends AppCompatActivity implements IView {
     public void navigateToHomeActivity(User user){
 
 //        Intent intent = new Intent(LoginActivity.this, Home2Activity.class);
-     //   intent.putExtra("userid", user.getId());
-      //  this.startActivity(intent);
+        //   intent.putExtra("userid", user.getId());
+        //  this.startActivity(intent);
 
         Intent intent = new Intent(LoginActivity.this, HomeAppActivity.class);
         intent.putExtra("userid",user.getId());
@@ -83,15 +83,16 @@ public class LoginActivity extends AppCompatActivity implements IView {
                 new Observer<User>() {
                     @Override
                     public void onChanged(User user) {
-                        if(user!= null){
-                            LoginActivity.this.navigateToHomeActivity(user);
                         if (user != null) {
                             LoginActivity.this.navigateToHomeActivity(user);
+                            if (user != null) {
+                                LoginActivity.this.navigateToHomeActivity(user);
+                            }
                         }
                     }
-                }
-    });
-}
+                });
+    }
+
 
     private BroadcastReceiver mMessageReceiver = new BroadcastReceiver() {
         @Override

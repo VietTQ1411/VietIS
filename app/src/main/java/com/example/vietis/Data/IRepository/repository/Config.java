@@ -25,6 +25,11 @@ public class Config {
         return Pattern.compile(Pattern.quote(s2), Pattern.CASE_INSENSITIVE).matcher(s1).find();
     }
 
+    /**
+     * Picasso Function
+     * @param url
+     * @param imageViewParent
+     */
     //Picasso không biết vứt đâu nên vứt vào đây - anhnt
     public static void loadImage(String url, ImageView imageViewParent) {
         final ImageView imageView = imageViewParent;
@@ -34,7 +39,6 @@ public class Config {
                 bitmap = scaleDown(bitmap, 525, true);
                 imageView.setImageBitmap(bitmap);
             }
-
             @Override
             public void onBitmapFailed(Exception e, Drawable errorDrawable) {
 

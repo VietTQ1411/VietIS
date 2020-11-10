@@ -109,6 +109,11 @@ public class StoreDetailActivity extends AppCompatActivity implements IView {
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+    }
+
+    @Override
     public void mappingUI() {
         nsvStoreView = findViewById(R.id.nsvStoreView);
 
@@ -154,7 +159,7 @@ public class StoreDetailActivity extends AppCompatActivity implements IView {
          * Food of store
          */
         FoodRecyclerView = findViewById(R.id.FoodRecyclerView);
-        foodAdapter = new SearchAdapter(new ArrayList<Shop>());
+//        foodAdapter = new SearchAdapter(new ArrayList<Shop>());
         foodActivityModel = new ViewModelProvider(this).get(ListActivityModel.class);
 
         /**
@@ -248,11 +253,11 @@ public class StoreDetailActivity extends AppCompatActivity implements IView {
         /**
          *  input data
          */
-        foodActivityModel.init(false, false);
+
         foodActivityModel.getShopData().observe(this, new Observer<ArrayList<Shop>>() {
             @Override
             public void onChanged(ArrayList<Shop> arrayList) {
-                foodAdapter = new SearchAdapter(arrayList);
+//                foodAdapter = new SearchAdapter(arrayList);
                 foodAdapter.notifyDataSetChanged();
                 FoodRecyclerView.setAdapter(foodAdapter);
                 nsvStoreView.scrollTo(0, 0);
