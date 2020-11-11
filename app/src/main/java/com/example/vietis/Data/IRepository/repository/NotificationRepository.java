@@ -72,11 +72,15 @@ public class NotificationRepository {
     }
 
     public void getListNoti(){
-        final ArrayList<Notification> notifications = new ArrayList<>();
+        ArrayList<Notification> notifications = new ArrayList<>();
         OkHttpClient okHttpClient = new OkHttpClient();
+        RequestBody requestBody = new MultipartBody.Builder()
+                .setType(MultipartBody.FORM)
+                .addFormDataPart("nothing","")
+                .build();
         Request request = new Request.Builder()
                 .url(URL_LIST_NOTI)
-                .get()
+                .post(requestBody)
                 .build();
         Call call = okHttpClient.newCall(request);
         call.enqueue(new Callback() {

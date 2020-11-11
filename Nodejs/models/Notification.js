@@ -62,6 +62,7 @@ module.exports = sequelize => {
     const options = {
         tableName: "Notification",
         comment: "",
+        timestamps: false,
         indexes: []
     };
     const NotificationModel = sequelize.define("Notification_model", attributes, options);

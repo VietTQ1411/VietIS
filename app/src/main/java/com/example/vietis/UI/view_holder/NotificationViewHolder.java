@@ -37,9 +37,9 @@ public class NotificationViewHolder extends RecyclerView.ViewHolder {
     }
 
     public void setNotification(Notification notification){
-        Picasso.get().load(notification.getImageUrl())
-                .placeholder(R.drawable.ic_notification)
-                .into(imageShop);
+//        Picasso.get().load(notification.getImageUrl())
+//                .placeholder(R.drawable.ic_notification)
+//                .into(imageShop);
         txtShopName.setText(notification.getTitle());
         txtNotification.setText(notification.getContent());
 
