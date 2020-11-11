@@ -62,27 +62,23 @@ public class NotificationsFragment extends Fragment implements IView {
     @Override
     public void setupUI() {
         notificationActivityViewModel.getListNoti();
-        notificationActivityViewModel.getNotifications().observe(getViewLifecycleOwner(), new Observer<ArrayList<Notification>>() {
-            @Override
-            public void onChanged(ArrayList<Notification> notifications) {
-                NotificationsFragment.this.notifications = notifications;
-            NotificationAdapter notificationAdapter = new NotificationAdapter(notifications);
-            notificationAdapter.setNotificationActivity(NotificationsFragment.this);
+        notificationActivityViewModel.getNotifications().observe(getViewLifecycleOwner(), arrayList ->  {
+            NotificationsFragment.this.notifications = arrayList;
+            NotificationAdapter notificationAdapter = new NotificationAdapter(arrayList);
             notificationRecyclerView.setAdapter(notificationAdapter);
-            }
         });
+
     }
     public void navigateToDetailActivities(Integer position){
+        Intent intent;
+        Notification selectedNotification = notifications.get(position);
         if(notifications.get(position).getIdType().equals("store")) {
-            Intent intent = new Intent(view.getContext(), StoreDetailActivity.class);
-            Notification selectedNotification = notifications.get(position);
+            intent = new Intent(view.getContext(), StoreDetailActivity.class);
             intent.putExtra("id", selectedNotification.getStoreId() +"");
-            this.startActivity(intent);
         }else{
-            Intent intent = new Intent(view.getContext(), FoodDetailActivity.class);
-            Notification selectedNotification = notifications.get(position);
-            intent.putExtra("id", selectedNotification.getFoodId());
-            this.startActivity(intent);
+            intent = new Intent(view.getContext(), FoodDetailActivity.class);
+            intent.putExtra("id", selectedNotification.getFoodId()+"");
         }
+        this.startActivity(intent);
     }
 }

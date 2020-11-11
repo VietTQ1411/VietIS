@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.vietis.Data.entity.Notification;
+import com.example.vietis.Data.inteface.IListView;
 import com.example.vietis.R;
 import com.example.vietis.activities.Home.ui.notifications.NotificationsFragment;
 import com.squareup.picasso.Picasso;
@@ -17,6 +18,7 @@ public class NotificationViewHolder extends RecyclerView.ViewHolder {
     private TextView txtShopName;
     private TextView txtNotification;
     private NotificationsFragment notificationActivity;
+    private IListView parent;
 
     public NotificationViewHolder(@NonNull View itemView) {
         super(itemView);
