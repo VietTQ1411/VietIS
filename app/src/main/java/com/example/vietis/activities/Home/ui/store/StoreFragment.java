@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.vietis.Data.entity.Shop;
 import com.example.vietis.Data.view_model.ListActivityModel;
+import com.example.vietis.Data.view_model.MutableArray;
 import com.example.vietis.R;
 import com.example.vietis.UI.adapter.SearchAdapter;
 import com.example.vietis.Data.inteface.IListView;
@@ -57,7 +58,6 @@ public class StoreFragment extends Fragment implements IView, IListView {
     public void onStop() {
         super.onStop();
         PAGE = 0;
-        storeActivityModel.clearDataShop();
     }
 
     @Override
@@ -65,21 +65,16 @@ public class StoreFragment extends Fragment implements IView, IListView {
         storeSearchViewSearch = view.findViewById(R.id.storeSearchViewSearch);
         recyclerStoreViewSearch = view.findViewById(R.id.recyclerStoreViewSearch);
         storeAdapter = new SearchAdapter(this, new ArrayList<Shop>(), Shop.class);
-        storeActivityModel = new ViewModelProvider(this).get(ListActivityModel.class);
+        storeActivityModel = new ListActivityModel(this);
+
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(view.getContext(),
+                LinearLayoutManager.VERTICAL, false);
+        recyclerStoreViewSearch.setLayoutManager(layoutManager);
     }
 
     @Override
     public void setupUI() {
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(view.getContext(),
-                LinearLayoutManager.VERTICAL, false);
-        recyclerStoreViewSearch.setLayoutManager(layoutManager);
         storeActivityModel.searchStoreFormServerWithPage("", PAGE);
-        storeActivityModel.getShopData().observe(this, arrayList -> {
-            storeAdapter.setObjectArray(arrayList);
-            storeAdapter.notifyDataSetChanged();
-            recyclerStoreViewSearch.setAdapter(storeAdapter);
-        });
-
 
         //SearchView action
         storeSearchViewSearch.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -94,7 +89,7 @@ public class StoreFragment extends Fragment implements IView, IListView {
             @Override
             public boolean onQueryTextChange(String newText) {
                 if (newText.equals("")) {
-                    storeAdapter.setObjectArray(storeActivityModel.getShopData().getValue());
+                   // storeAdapter.setObjectArray(storeActivityModel.getShopData().getValue());
                     storeAdapter.notifyDataSetChanged();
                     recyclerStoreViewSearch.setAdapter(storeAdapter);
                     return false;
@@ -105,6 +100,12 @@ public class StoreFragment extends Fragment implements IView, IListView {
                 return false;
             }
         });
+    }
+
+    public void setUpData(ArrayList<Shop> list) {
+        storeAdapter.setObjectArray(list);
+        storeAdapter.notifyDataSetChanged();
+        recyclerStoreViewSearch.setAdapter(storeAdapter);
     }
 
     @Override

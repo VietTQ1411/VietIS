@@ -126,7 +126,6 @@ public class ShopRepository {
                 store.getAddress().contains(search) ||
                 store.getPhoneNumber().contains(search))
                 .collect(Collectors.toList());
-
     }
 
     //String request Method.POST
