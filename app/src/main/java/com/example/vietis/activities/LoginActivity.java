@@ -1,7 +1,11 @@
 package com.example.vietis.activities;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -10,6 +14,7 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.example.vietis.Data.entity.User;
 import com.example.vietis.Data.inteface.IView;
@@ -53,11 +58,16 @@ public class LoginActivity extends AppCompatActivity implements IView {
         });
     }
 
+    public void navigateToHomeActivity(User user){
 
-    public void navigateToHomeActivity(User user) {
+//        Intent intent = new Intent(LoginActivity.this, Home2Activity.class);
+        //   intent.putExtra("userid", user.getId());
+        //  this.startActivity(intent);
+
         Intent intent = new Intent(LoginActivity.this, HomeAppActivity.class);
-        intent.putExtra("userid", user.getId());
+        intent.putExtra("userid",user.getId());
         this.startActivity(intent);
+
     }
 
     public String getEmail() {
@@ -76,11 +86,23 @@ public class LoginActivity extends AppCompatActivity implements IView {
                     public void onChanged(User user) {
                         if (user != null) {
                             LoginActivity.this.navigateToHomeActivity(user);
-                            if (user != null) {
-                                LoginActivity.this.navigateToHomeActivity(user);
-                            }
                         }
                     }
                 });
+    }
+
+
+    private BroadcastReceiver mMessageReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            //do your code snippet here.
+            finish();
+        }
+    };
+
+    @Override
+    protected void onDestroy() {
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(mMessageReceiver);
+        super.onDestroy();
     }
 }

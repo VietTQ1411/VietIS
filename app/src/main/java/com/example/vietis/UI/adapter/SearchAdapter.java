@@ -56,7 +56,7 @@ public class SearchAdapter<T> extends RecyclerView.Adapter<SearchItemViewHolder>
         if(typeParameterClass.isInstance(Shop.class)){
             holder.getShopItemViewHolder().setShopItem((Shop)this.dataObject.get(position), position);
         }else{
-            holder.getFoodItemViewHolder().setFoodItem((Food) this.dataObject.get(position), position);
+            holder.getFoodItemViewHolder().setFoodItem((Food)this.dataObject.get(position), position);
         }
     }
 
