@@ -4,17 +4,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background"
+    android:background="@drawable/splash"
+    android:backgroundTint="@color/colorBEP"
+    android:backgroundTintMode="multiply"
     tools:context=".activities.MainActivity">
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="363dp"
-        android:layout_height="215dp"
+        android:layout_width="300dp"
+        android:layout_height="180dp"
+        android:contentDescription="logo"
         android:src="@mipmap/logo_foreground"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteY="4dp" />
 
     <Button
         android:id="@+id/main_facebook"

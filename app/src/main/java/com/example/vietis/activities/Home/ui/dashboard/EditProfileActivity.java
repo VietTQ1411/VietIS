@@ -19,7 +19,6 @@ import com.example.vietis.database.Database;
 
 public class EditProfileActivity extends AppCompatActivity implements IView {
 
-    private Button btnSave;
     private ImageButton ibAvatar;
     private ImageButton ibEditPassword;
     private ImageButton ibEditName;
@@ -54,7 +53,6 @@ public class EditProfileActivity extends AppCompatActivity implements IView {
 
     @Override
     public void mappingUI() {
-        btnSave = findViewById(R.id.btnSave);
         ibAvatar = findViewById(R.id.ibAvatar);
         ibEditPassword = findViewById(R.id.ibEditPassword);
         ibEditName = findViewById(R.id.ibEditName);
@@ -121,12 +119,6 @@ public class EditProfileActivity extends AppCompatActivity implements IView {
                 }else{
                     llAddress.setVisibility(View.GONE);
                 }
-            }
-        });
-        btnSave.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
             }
         });
     }

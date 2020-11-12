@@ -86,9 +86,6 @@ public class LoginActivity extends AppCompatActivity implements IView {
                     public void onChanged(User user) {
                         if (user != null) {
                             LoginActivity.this.navigateToHomeActivity(user);
-                            if (user != null) {
-                                LoginActivity.this.navigateToHomeActivity(user);
-                            }
                         }
                     }
                 });
