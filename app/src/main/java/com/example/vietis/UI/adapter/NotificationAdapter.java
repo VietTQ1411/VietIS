@@ -15,7 +15,7 @@ import com.example.vietis.activities.Home.ui.notifications.NotificationsFragment
 import java.util.ArrayList;
 
 public class NotificationAdapter extends RecyclerView.Adapter<NotificationViewHolder> {
-    private ArrayList<Notification> notifications;
+    final private ArrayList<Notification> notifications;
     private NotificationsFragment notificationActivity;
 
     public NotificationAdapter(ArrayList<Notification> notifications){

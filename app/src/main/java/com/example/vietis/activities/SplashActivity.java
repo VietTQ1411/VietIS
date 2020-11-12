@@ -29,7 +29,6 @@ public class SplashActivity extends AppCompatActivity implements IView {
 
     private static final String TAG = "Notification";
     private ImageView imageView;
-    private TextView textView;
     private TextView textView2;
     private SplashActivityViewModel splashActivityViewModel = new SplashActivityViewModel();
 
@@ -99,26 +98,21 @@ public class SplashActivity extends AppCompatActivity implements IView {
 
     private void exitAnimation() {
         imageView.startAnimation(AnimationUtils.loadAnimation(this, R.anim.image_out));
-        textView.startAnimation(AnimationUtils.loadAnimation(this, R.anim.text_out));
         textView2.startAnimation(AnimationUtils.loadAnimation(this, R.anim.text_out));
         imageView.setVisibility(View.INVISIBLE);
-        textView.setVisibility(View.INVISIBLE);
         textView2.setVisibility(View.INVISIBLE);
     }
 
     private void startAnimation() {
         imageView.startAnimation(AnimationUtils.loadAnimation(this, R.anim.image_in));
-        textView.startAnimation(AnimationUtils.loadAnimation(this, R.anim.text_in));
         textView2.startAnimation(AnimationUtils.loadAnimation(this, R.anim.text_in));
         imageView.setVisibility(View.VISIBLE);
-        textView.setVisibility(View.VISIBLE);
         textView2.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void mappingUI() {
         imageView = findViewById(R.id.imageView);
-        textView = findViewById(R.id.textView);
         textView2 = findViewById(R.id.textView2);
     }
 

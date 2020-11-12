@@ -1,7 +1,11 @@
 package com.example.vietis.activities.Home.ui.dashboard;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +19,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.example.vietis.Data.entity.User;
 import com.example.vietis.Data.view_model.SettingActivityViewModel;
@@ -24,6 +29,8 @@ import com.example.vietis.Utilities.common.UserApp;
 import com.example.vietis.activities.LoginActivity;
 import com.example.vietis.database.Database;
 import com.squareup.picasso.Picasso;
+
+import static androidx.core.app.ActivityCompat.finishAffinity;
 
 public class SettingFragment extends Fragment implements IView {
 
@@ -75,7 +82,6 @@ public class SettingFragment extends Fragment implements IView {
         ibPolicy = view.findViewById(R.id.ibPolicy);
         ibAppVersion = view.findViewById(R.id.ibAppVersion);
         ibSignOut = view.findViewById(R.id.ibSignOut);
-
         isNotification = view.findViewById(R.id.isNotification);
         isPrivacy = view.findViewById(R.id.isPrivacy);
         isPolicy = view.findViewById(R.id.isPolicy);
@@ -87,6 +93,18 @@ public class SettingFragment extends Fragment implements IView {
     @Override
     public void setupUI() {
         getSettingData();
+        btnEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getContext(), EditProfileActivity.class));
+            }
+        });
+        isOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
         btnEdit.setOnClickListener(v -> startActivity(new Intent(getContext(), EditProfileActivity.class)));
         isOut.setOnClickListener(v -> startActivity((new Intent(getContext(), LoginActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP))));
 

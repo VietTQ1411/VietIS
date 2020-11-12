@@ -14,7 +14,7 @@ import com.example.vietis.Data.IRepository.repository.NotificationRepository;
 import java.util.ArrayList;
 
 public class NotificationActivityViewModel extends ViewModel implements INotiRepository {
-    private MutableLiveData<ArrayList<Notification>> notifications = new MutableLiveData<>();
+    private MutableLiveData<ArrayList<Notification>> notifications = new MutableLiveData<>(new ArrayList<>());
     public LiveData<ArrayList<Notification>> getNotifications(){return notifications;}
     public void getListNoti(){
         NotificationRepository.getInstance(this).getListNoti();
