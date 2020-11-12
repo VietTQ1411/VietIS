@@ -26,7 +26,7 @@ import com.example.vietis.UI.adapter.CommentAdapter;
 import com.example.vietis.UI.adapter.SearchAdapter;
 import com.example.vietis.UI.dialog.RatingFragment;
 import com.example.vietis.Utilities.common.UserApp;
-import com.example.vietis.activities.IView;
+import com.example.vietis.Data.inteface.IView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -104,13 +104,14 @@ public class StoreDetailActivity extends AppCompatActivity implements IView {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_store_detail);
         mappingUI();
-        setUpData();
-        setupUI();
+
     }
 
     @Override
     protected void onResume() {
         super.onResume();
+        setUpData();
+        setupUI();
     }
 
     @Override

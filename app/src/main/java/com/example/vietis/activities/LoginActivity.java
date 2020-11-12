@@ -17,6 +17,7 @@ import androidx.lifecycle.Observer;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.example.vietis.Data.entity.User;
+import com.example.vietis.Data.inteface.IView;
 import com.example.vietis.Data.view_model.LoginActivityViewModel;
 import com.example.vietis.R;
 import com.example.vietis.activities.Home.HomeAppActivity;

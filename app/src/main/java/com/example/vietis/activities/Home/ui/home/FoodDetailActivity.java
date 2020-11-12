@@ -11,12 +11,9 @@ import android.widget.TextView;
 
 import com.example.vietis.Data.entity.Comment;
 import com.example.vietis.Data.view_model.FoodDetailViewModel;
-import com.example.vietis.Data.view_model.ListActivityModel;
 import com.example.vietis.R;
 import com.example.vietis.UI.adapter.CommentAdapter;
-import com.example.vietis.activities.IView;
-
-import org.w3c.dom.Text;
+import com.example.vietis.Data.inteface.IView;
 
 import java.util.ArrayList;
 

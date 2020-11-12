@@ -11,7 +11,7 @@ import com.example.vietis.Data.entity.Food;
 import com.example.vietis.R;
 import com.example.vietis.Data.entity.Shop;
 import com.example.vietis.UI.view_holder.SearchItemViewHolder;
-import com.example.vietis.activities.IListView;
+import com.example.vietis.Data.inteface.IListView;
 
 import java.util.ArrayList;
 

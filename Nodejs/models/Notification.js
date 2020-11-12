@@ -50,7 +50,7 @@ module.exports = sequelize => {
             field: "foodId"
         },
         idType: {
-            type: nvarchar(150),
+            type: DataTypes.TEXT,
             allowNull: true,
             defaultValue: null,
             primaryKey: false,
@@ -62,6 +62,7 @@ module.exports = sequelize => {
     const options = {
         tableName: "Notification",
         comment: "",
+        timestamps: false,
         indexes: []
     };
     const NotificationModel = sequelize.define("Notification_model", attributes, options);

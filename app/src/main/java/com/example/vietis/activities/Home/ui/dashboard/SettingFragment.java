@@ -24,7 +24,7 @@ import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import com.example.vietis.Data.entity.User;
 import com.example.vietis.Data.view_model.SettingActivityViewModel;
 import com.example.vietis.R;
-import com.example.vietis.activities.IView;
+import com.example.vietis.Data.inteface.IView;
 import com.example.vietis.activities.LoginActivity;
 import com.example.vietis.database.Database;
 
@@ -103,46 +103,39 @@ public class SettingFragment extends Fragment implements IView {
 
             }
         });
+        btnEdit.setOnClickListener(v -> startActivity(new Intent(getContext(), EditProfileActivity.class)));
+        isOut.setOnClickListener(v -> startActivity((new Intent(getContext(), LoginActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP))));
 
-        isPrivacy.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                isVisiblePrivacy = !isVisiblePrivacy;
-                if (isVisiblePrivacy) {
-                    txtPrivacy.setVisibility(View.VISIBLE);
-                    ibPrivacy.setImageResource(R.drawable.ic_foward);
-                } else {
-                    ibPrivacy.setImageResource(R.drawable.ic_right);
-                    txtPrivacy.setVisibility(View.GONE);
-                }
+        isPrivacy.setOnClickListener(v -> {
+            isVisiblePrivacy = !isVisiblePrivacy;
+            if (isVisiblePrivacy) {
+                txtPrivacy.setVisibility(View.VISIBLE);
+                ibPrivacy.setImageResource(R.drawable.ic_foward);
+            } else {
+                ibPrivacy.setImageResource(R.drawable.ic_right);
+                txtPrivacy.setVisibility(View.GONE);
             }
         });
 
-        isPolicy.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                isVisiblePolicy = !isVisiblePolicy;
-                if (isVisiblePolicy) {
-                    txtPolicy.setVisibility(View.VISIBLE);
-                    ibPolicy.setImageResource(R.drawable.ic_foward);
-                } else {
-                    ibPolicy.setImageResource(R.drawable.ic_right);
-                    txtPolicy.setVisibility(View.GONE);
-                }
+        isPolicy.setOnClickListener(v -> {
+            isVisiblePolicy = !isVisiblePolicy;
+            if (isVisiblePolicy) {
+                txtPolicy.setVisibility(View.VISIBLE);
+                ibPolicy.setImageResource(R.drawable.ic_foward);
+            } else {
+                ibPolicy.setImageResource(R.drawable.ic_right);
+                txtPolicy.setVisibility(View.GONE);
             }
         });
 
-        isApp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                isVisibleApp = !isVisibleApp;
-                if (isVisibleApp) {
-                    txtAppVersion.setVisibility(View.VISIBLE);
-                    ibAppVersion.setImageResource(R.drawable.ic_foward);
-                } else {
-                    ibAppVersion.setImageResource(R.drawable.ic_right);
-                    txtAppVersion.setVisibility(View.GONE);
-                }
+        isApp.setOnClickListener(v -> {
+            isVisibleApp = !isVisibleApp;
+            if (isVisibleApp) {
+                txtAppVersion.setVisibility(View.VISIBLE);
+                ibAppVersion.setImageResource(R.drawable.ic_foward);
+            } else {
+                ibAppVersion.setImageResource(R.drawable.ic_right);
+                txtAppVersion.setVisibility(View.GONE);
             }
         });
     }
