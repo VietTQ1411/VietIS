@@ -15,6 +15,7 @@ import com.example.vietis.Data.entity.User;
 import com.example.vietis.Data.inteface.IView;
 import com.example.vietis.Data.view_model.LoginActivityViewModel;
 import com.example.vietis.R;
+import com.example.vietis.Utilities.common.UserApp;
 import com.example.vietis.activities.Home.HomeAppActivity;
 
 public class LoginActivity extends AppCompatActivity implements IView {
@@ -35,12 +36,12 @@ public class LoginActivity extends AppCompatActivity implements IView {
     @Override
     public void mappingUI() {
         txtEmail = findViewById(R.id.login_username);
-        txtEmail.setText("vettq@gmail.com");
+        txtEmail.setText("viettqhe@gmail.com");
         txtPassword = findViewById(R.id.login_password);
         txtPassword.setText("123456");
         btnLogin = findViewById(R.id.button_login);
         forgotPassword = findViewById(R.id.forgot_password);
-        loginActivityViewModel = new LoginActivityViewModel();
+        loginActivityViewModel = new LoginActivityViewModel(this);
     }
 
     @Override
@@ -56,7 +57,12 @@ public class LoginActivity extends AppCompatActivity implements IView {
 
     public void navigateToHomeActivity(User user) {
         Intent intent = new Intent(LoginActivity.this, HomeAppActivity.class);
-        intent.putExtra("userid", user.getId());
+        UserApp.user.setTokenKey(user.getTokenKey());
+        UserApp.user.setAddress(user.getAddress());
+        UserApp.user.setName(user.getName());
+        UserApp.user.setImageId(user.getImageId());
+        UserApp.user.setPhoneNumber(user.getPhoneNumber());
+        UserApp.user.setImageURL(user.getImageURL());
         this.startActivity(intent);
     }
 
@@ -70,17 +76,5 @@ public class LoginActivity extends AppCompatActivity implements IView {
 
     private void login() {
         loginActivityViewModel.login(getEmail(), getPassword());
-        loginActivityViewModel.getUser().observe(this,
-                new Observer<User>() {
-                    @Override
-                    public void onChanged(User user) {
-                        if (user != null) {
-                            LoginActivity.this.navigateToHomeActivity(user);
-                            if (user != null) {
-                                LoginActivity.this.navigateToHomeActivity(user);
-                            }
-                        }
-                    }
-                });
     }
 }

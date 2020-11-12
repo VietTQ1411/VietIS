@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Fuddy</string>
     <string name="login">Login</string>
+    <string name="register">Register</string>
     <string name="shop_name">This is the name of a shop</string>
     <string name="food_name">This is the name of a shop</string>
     <string name="shop_address">3A Building, Duy Tan, Cau Giay</string>

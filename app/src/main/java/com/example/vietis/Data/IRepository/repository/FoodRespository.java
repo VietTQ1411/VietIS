@@ -4,8 +4,15 @@ import android.util.Log;
 
 import androidx.lifecycle.MutableLiveData;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
 import com.example.vietis.Data.IRepository.IFoodRespository;
 import com.example.vietis.Data.entity.Food;
+import com.example.vietis.Data.entity.Shop;
+import com.example.vietis.Data.view_model.MutableArray;
 import com.example.vietis.R;
 import com.example.vietis.Utilities.common.AppResources;
 import com.example.vietis.Utilities.common.UserApp;
@@ -18,78 +25,84 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
-import okhttp3.Request;
 import okhttp3.RequestBody;
-import okhttp3.Response;
 
 public class FoodRespository {
+    private static final String TAG = "FoodRepo";
     private static FoodRespository instance;
     private IFoodRespository iFoodRespository;
-    private MutableLiveData<ArrayList<Food>> mutableLiveDataFood = null;
 
-    private FoodRespository(IFoodRespository iFoodRespository, MutableLiveData<ArrayList<Food>> list) {
+    private FoodRespository(IFoodRespository iFoodRespository) {
         this.iFoodRespository = iFoodRespository;
-        mutableLiveDataFood = list;
     }
 
-    public static FoodRespository getInstance(IFoodRespository iFoodRespository, MutableLiveData<ArrayList<Food>> list) {
+    public static FoodRespository getInstance(IFoodRespository iFoodRespository) {
         if (instance == null) {
-            instance = new FoodRespository(iFoodRespository, list);
+            instance = new FoodRespository(iFoodRespository);
         }
         return instance;
     }
 
     public void getFoodPaging(String query, int page) {
-        OkHttpClient okHttpClient = new OkHttpClient();
-        RequestBody requestBody = new MultipartBody.Builder()
-                .setType(MultipartBody.FORM)
-                .addFormDataPart("search", query)
-                .addFormDataPart("page", page + "")
-                .addFormDataPart("pageNumber", AppResources.getResourses().getString(R.string.NUMBER_ITEM_GET_FORM_API))
-                .build();
-        Request request = new Request.Builder()
-                .url(API.get_URL_STRING(AppResources.getResourses().getString(R.string.GET_FOOD_PAGING)))
-                .addHeader("tokenkey", UserApp.user.getTokenKey())
-                .post(requestBody)
-                .build();
-        Call call = okHttpClient.newCall(request);
-        call.enqueue(new Callback() {
+        StringRequest jsonObjectRequest = new StringRequest(Request.Method.POST,
+                API.get_URL_STRING(AppResources.getResourses().getString(R.string.GET_FOOD_PAGING))
+                , new Response.Listener<String>() {
             @Override
-            public void onFailure(@NotNull Call call, @NotNull IOException e) {
-                Log.d("Store Ex", e.getMessage());
-                //move Error
-            }
+            public void onResponse(String StringResponse) {
+                Log.v("LOG_VOLLEY", StringResponse);
 
-            @Override
-            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
                 try {
-                    String jsonString = response.body().string();
-                    JSONObject jsonObject = new JSONObject(jsonString);
-                    String stringResult = jsonObject.getString("result");
+                    JSONObject response = new JSONObject(StringResponse);
+                    String stringResult = response.getString("result");
                     if (stringResult.equals(AppResources.getResourses().getString(R.string.SUCCESS_REQUEST))) {
-                        JSONArray jsonShopArray = jsonObject.getJSONArray("data");
-                        ArrayList<Food> list = mutableLiveDataFood.getValue();
+                        JSONArray jsonShopArray = response.getJSONArray("data");
                         for (int i = 0; i < jsonShopArray.length(); i++) {
-                            list.add(Food.generateFoodFromJSON(jsonShopArray.getJSONObject(i)));
+                            MutableArray.getArrayList().add(Food.generateFoodFromJSON(jsonShopArray.getJSONObject(i)));
                         }
-                        iFoodRespository.getFoodData(list, null);
+                        iFoodRespository.getFoodData();
                     } else {
                         //move error
                     }
                 } catch (JSONException e) {
-                    Log.d("Store Ex", e.getMessage());
-                    //move error
+                    e.printStackTrace();
                 }
             }
-        });
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e(TAG, "JsonObjectRequest onErrorResponse: " + error.getMessage());
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("search", query);
+                params.put("page", page + "");
+                params.put("pageNumber", AppResources.getResourses().getString(R.string.NUMBER_ITEM_GET_FORM_API));
+                return params;
+            }
+
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("Content-Type", "application/x-www-form-urlencoded");
+                params.put("tokenkey", UserApp.user.getTokenKey());
+                return params;
+            }
+        };
+        jsonObjectRequest.setTag(TAG);
+        VolleySingleton.getInstance(AppResources.getContext()).getRequestQueue().add(jsonObjectRequest);
     }
+
 
     /**
      * Find any Food match with search String in list shop already get form server
@@ -97,11 +110,10 @@ public class FoodRespository {
      * @param search
      * @return
      */
-    public List<Food> searchFood(String search) {
+    public List<Food> searchFood(ArrayList<Food> data,String search) {
         if (search.isEmpty()) {
             return new ArrayList<>();
         }
-        ArrayList<Food> data = mutableLiveDataFood.getValue();
         return data.stream().filter(food -> food.getName().contains(search))
                 .collect(Collectors.toList());
 

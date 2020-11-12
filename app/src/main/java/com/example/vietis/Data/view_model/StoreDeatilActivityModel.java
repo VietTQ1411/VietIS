@@ -47,6 +47,7 @@ public class StoreDeatilActivityModel extends ViewModel implements ICommentRepos
     }
 
     @Override
+
     public void getCommentData(ArrayList<Comment> arrayListComment, Exception error) {
 
     }

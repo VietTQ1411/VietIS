@@ -26,13 +26,11 @@ import com.example.vietis.Data.inteface.IView;
 import java.util.ArrayList;
 
 public class StoreFragment extends Fragment implements IView, IListView {
-
-
+    private static StoreFragment intance;
     //UI holders
     private SearchView storeSearchViewSearch;
     private View view;
     private RecyclerView recyclerStoreViewSearch;
-
     //RecyclerView components
     private SearchAdapter<Shop> storeAdapter;
     //View Model
@@ -48,9 +46,11 @@ public class StoreFragment extends Fragment implements IView, IListView {
         return root;
     }
 
+
     @Override
     public void onResume() {
         super.onResume();
+        Log.d("Home", "resume");
         setupUI();
     }
 
@@ -58,23 +58,20 @@ public class StoreFragment extends Fragment implements IView, IListView {
     public void onStop() {
         super.onStop();
         PAGE = 0;
+        MutableArray.clearData();
     }
 
     @Override
     public void mappingUI() {
         storeSearchViewSearch = view.findViewById(R.id.storeSearchViewSearch);
-        recyclerStoreViewSearch = view.findViewById(R.id.recyclerStoreViewSearch);
         storeAdapter = new SearchAdapter(this, new ArrayList<Shop>(), Shop.class);
         storeActivityModel = new ListActivityModel(this);
-
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(view.getContext(),
-                LinearLayoutManager.VERTICAL, false);
-        recyclerStoreViewSearch.setLayoutManager(layoutManager);
+        recyclerStoreViewSearch = view.findViewById(R.id.recyclerStoreViewSearch);
+        recyclerStoreViewSearch.setAdapter(storeAdapter);
     }
 
     @Override
     public void setupUI() {
-        storeActivityModel.searchStoreFormServerWithPage("", PAGE);
 
         //SearchView action
         storeSearchViewSearch.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -89,7 +86,7 @@ public class StoreFragment extends Fragment implements IView, IListView {
             @Override
             public boolean onQueryTextChange(String newText) {
                 if (newText.equals("")) {
-                   // storeAdapter.setObjectArray(storeActivityModel.getShopData().getValue());
+                    // storeAdapter.setObjectArray(storeActivityModel.getShopData().getValue());
                     storeAdapter.notifyDataSetChanged();
                     recyclerStoreViewSearch.setAdapter(storeAdapter);
                     return false;
@@ -100,11 +97,12 @@ public class StoreFragment extends Fragment implements IView, IListView {
                 return false;
             }
         });
+        storeActivityModel.searchStoreFormServerWithPage("", PAGE++);
     }
+
 
     public void setUpData(ArrayList<Shop> list) {
         storeAdapter.setObjectArray(list);
-        storeAdapter.notifyDataSetChanged();
         recyclerStoreViewSearch.setAdapter(storeAdapter);
     }
 

@@ -159,9 +159,9 @@ public class StoreDetailActivity extends AppCompatActivity implements IView {
         /**
          * Food of store
          */
-        FoodRecyclerView = findViewById(R.id.FoodRecyclerView);
+  //      FoodRecyclerView = findViewById(R.id.FoodRecyclerView);
 //        foodAdapter = new SearchAdapter(new ArrayList<Shop>());
-        foodActivityModel = new ViewModelProvider(this).get(ListActivityModel.class);
+//        foodActivityModel = new ViewModelProvider(this).get(ListActivityModel.class);
 
         /**
          * Layout RecyclerView
@@ -170,7 +170,7 @@ public class StoreDetailActivity extends AppCompatActivity implements IView {
                 LinearLayoutManager.VERTICAL, false);
         RecyclerView.LayoutManager layoutManager2 = new LinearLayoutManager(getApplicationContext(),
                 LinearLayoutManager.VERTICAL, false);
-        FoodRecyclerView.setLayoutManager(layoutManager);
+        //FoodRecyclerView.setLayoutManager(layoutManager);
         CommentRecyclerView.setLayoutManager(layoutManager2);
 
 
@@ -255,15 +255,15 @@ public class StoreDetailActivity extends AppCompatActivity implements IView {
          *  input data
          */
 
-        foodActivityModel.getShopData().observe(this, new Observer<ArrayList<Shop>>() {
-            @Override
-            public void onChanged(ArrayList<Shop> arrayList) {
-//                foodAdapter = new SearchAdapter(arrayList);
-                foodAdapter.notifyDataSetChanged();
-                FoodRecyclerView.setAdapter(foodAdapter);
-                nsvStoreView.scrollTo(0, 0);
-            }
-        });
+//        foodActivityModel.getShopData().observe(this, new Observer<ArrayList<Shop>>() {
+//            @Override
+//            public void onChanged(ArrayList<Shop> arrayList) {
+////                foodAdapter = new SearchAdapter(arrayList);
+//                foodAdapter.notifyDataSetChanged();
+//                FoodRecyclerView.setAdapter(foodAdapter);
+//                nsvStoreView.scrollTo(0, 0);
+//            }
+//        });
     }
 
     public void fillDetailStore(Shop store) {

@@ -12,6 +12,10 @@ public class MutableArray {
         return listData;
     }
     public static void clearData(){
+        if (listData == null) {
+            listData = new ArrayList<>();
+        }
+        else
         listData.clear();
     }
 }

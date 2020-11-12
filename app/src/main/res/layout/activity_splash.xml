@@ -39,7 +39,7 @@
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="VietIS Android FU_210920"
+        android:text="Viet Dep Trai"
         android:textSize="20dp"
         android:textColor="@color/colorPrimaryDark"
         app:layout_constraintBottom_toBottomOf="parent"

@@ -10,9 +10,15 @@ import androidx.lifecycle.ViewModel;
 import com.example.vietis.Data.entity.User;
 import com.example.vietis.Data.IRepository.IUserRepository;
 import com.example.vietis.Data.IRepository.repository.UserRepository;
+import com.example.vietis.activities.LoginActivity;
 
 public class LoginActivityViewModel extends ViewModel implements IUserRepository {
     private MutableLiveData<User> user = new MutableLiveData<>();
+    private LoginActivity loginActivity;
+
+    public LoginActivityViewModel(LoginActivity loginActivity) {
+        this.loginActivity = loginActivity;
+    }
 
     public LiveData<User> getUser() {
         return user;
@@ -27,7 +33,7 @@ public class LoginActivityViewModel extends ViewModel implements IUserRepository
         new Handler(Looper.getMainLooper()).post(new Runnable() {
             @Override
             public void run() {
-                LoginActivityViewModel.this.user.setValue(error==null ? user : null);
+                loginActivity.navigateToHomeActivity(user);
             }
         });
     }

@@ -72,14 +72,5 @@ public class ShopItemViewHolder extends RecyclerView.ViewHolder implements IView
 
     @Override
     public void setupUI() {
-        View.OnClickListener listener = new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (parent != null) {
-                    parent.navigateToStoreDetail(getLayoutPosition());
-                }
-            }
-        };
-        Config.setChildViewOnClickListener(linearLayoutShopItem, listener);
     }
 }

@@ -7,22 +7,22 @@ import com.android.volley.toolbox.Volley;
 
 public class VolleySingleton {
     private static final String TAG = "VolleySingleton";
-    private static VolleySingleton sInstance;
-    private RequestQueue mRequestQueue;
+    private static VolleySingleton volley;
+    private RequestQueue Request;
 
     private VolleySingleton(Context context) {
-        if (mRequestQueue == null) {
-            mRequestQueue = Volley.newRequestQueue(context.getApplicationContext());
+        if (Request == null) {
+            Request = Volley.newRequestQueue(context.getApplicationContext());
         }
     }
 
     public static synchronized VolleySingleton getInstance(Context context) {
-        if (sInstance == null)
-            sInstance = new VolleySingleton(context);
-        return sInstance;
+        if (volley == null)
+            volley = new VolleySingleton(context);
+        return volley;
     }
 
     public RequestQueue getRequestQueue() {
-        return mRequestQueue;
+        return Request;
     }
 }

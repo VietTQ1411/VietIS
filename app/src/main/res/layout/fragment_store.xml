@@ -31,6 +31,7 @@ tools:context=".activities.Home.ui.store.StoreFragment" >
             android:orientation="horizontal">
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerStoreViewSearch"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 tools:layout_editor_absoluteX="1dp"

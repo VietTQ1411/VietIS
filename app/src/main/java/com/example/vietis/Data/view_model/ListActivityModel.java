@@ -14,6 +14,7 @@ import com.example.vietis.Data.entity.Food;
 import com.example.vietis.Data.entity.Shop;
 import com.example.vietis.Data.IRepository.IFoodRespository;
 import com.example.vietis.Data.IRepository.repository.ShopRepository;
+import com.example.vietis.activities.Home.ui.home.HomeFragment;
 import com.example.vietis.activities.Home.ui.store.StoreFragment;
 
 import java.util.ArrayList;
@@ -21,12 +22,17 @@ import java.util.ArrayList;
 public class ListActivityModel extends ViewModel implements IStoreRepository, IFoodRespository {
 
     ArrayList<Shop> list = new ArrayList<>();
-    private StoreFragment fragment;
+    private StoreFragment storefragment;
 
     public ListActivityModel(StoreFragment fragment) {
-        this.fragment = fragment;
+        this.storefragment = fragment;
     }
+    private HomeFragment homefragment;
+    ArrayList<Food> listfood = new ArrayList<>();
 
+    public ListActivityModel(HomeFragment homefragment) {
+        this.homefragment = homefragment;
+    }
     /**
      * @param query
      */
@@ -64,7 +70,7 @@ public class ListActivityModel extends ViewModel implements IStoreRepository, IF
      * @param page
      */
     public void searchStoreFormServerWithPage(String search, int page) {
-        //ShopRepository.getInstance(this,mutableLiveDataShop).getShopPaging(search,page);
+        ShopRepository.getInstance(this).getShopPaging(search,page);
     }
 
     /**
@@ -72,24 +78,35 @@ public class ListActivityModel extends ViewModel implements IStoreRepository, IF
      * @param page
      */
     public void searchFoodFormServerWithPage(String search, int page) {
-        // FoodRespository.getInstance(this,mutableLiveDataFood).getFoodPaging(search,page);
+        FoodRespository.getInstance(this).getFoodPaging(search,page);
     }
 
     @Override
-    public void getFoodData(final ArrayList<Food> arrayListFood, final Exception error) {
+    public void getFoodData() {
+
+                homefragment.setUpData(getFooodData());
 
     }
 
     @Override
-    public void getShopData(final ArrayList<Shop> arrayListShop, final Exception error) {
-        fragment.setUpData(getData());
+    public void getShopData() {
+                storefragment.setUpData(getStoreData());
+
     }
 
-    public ArrayList<Shop> getData() {
+    public ArrayList<Shop> getStoreData() {
         list.clear();
         for (Object t : MutableArray.getArrayList()) {
             list.add((Shop) t);
         }
         return list;
+    }
+
+    public ArrayList<Food> getFooodData() {
+        listfood.clear();
+        for (Object t : MutableArray.getArrayList()) {
+            listfood.add((Food) t);
+        }
+        return listfood;
     }
 }
