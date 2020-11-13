@@ -2,12 +2,15 @@ package com.example.vietis.Data.IRepository.repository;
 
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
+import android.text.Layout;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
@@ -66,7 +69,7 @@ public class Config {
             int count = group.getChildCount();
             for (int i = 0; i < count; i++) {
                 View child = group.getChildAt(i);
-                if (child instanceof LinearLayout || child instanceof RelativeLayout) {
+                if (child instanceof LinearLayout || child instanceof RelativeLayout || child instanceof ConstraintLayout) {
                     setChildViewOnClickListener(child, listener);
                 }
                 if (child instanceof TextView) {

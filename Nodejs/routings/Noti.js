@@ -116,15 +116,16 @@ router.post('/sendNotiGlobal', validatePhoneToken(), async(req, res) => {
  * URL: http://localhost:3000/foods/getfood
  */
 const getTokenKey = async() => {
-        let foundPhoneToken = await PhoneTokenModel.findAll({
-            attributes: ['tokenKey']
-        })
-        return foundPhoneToken
+    let foundPhoneToken = await PhoneTokenModel.findAll({
+        attributes: ['tokenKey']
+    })
+    return foundPhoneToken
 
-    }
-    /**
-     * URL: http://localhost:3000/noti/getListNoti
-     */
+}
+
+/**
+ * URL: http://localhost:3000/noti/getListNoti
+ */
 router.post('/getListNoti', validatePhoneToken(), async(req, res) => {
     let foundListNoti = await NotificationModel.findAll();
     res.json({

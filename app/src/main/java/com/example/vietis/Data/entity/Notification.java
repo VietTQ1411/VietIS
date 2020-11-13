@@ -31,10 +31,9 @@ public class Notification implements Serializable {
         try{
             return Notification.builder()
                     .title(jsonObject.getString("title"))
-                    .imageUrl(jsonObject.getString("imageUrl"))
                     .content(jsonObject.getString("content"))
                     .storeId(jsonObject.getInt("storeId"))
-                    .foodId(jsonObject.getInt("foodId"))
+                    .foodId((jsonObject.getInt("foodId")))
                     .idType(jsonObject.getString("idType"))
                     .build();
 

@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.vietis.Data.entity.Notification;
+import com.example.vietis.Data.inteface.IListView;
 import com.example.vietis.Data.inteface.IView;
 import com.example.vietis.Data.view_model.NotificationActivityViewModel;
 import com.example.vietis.R;
@@ -26,7 +27,7 @@ import com.example.vietis.activities.Home.ui.store.StoreDetailActivity;
 
 import java.util.ArrayList;
 
-public class NotificationsFragment extends Fragment implements IView {
+public class NotificationsFragment extends Fragment implements IView, IListView {
     private View view;
     private RecyclerView notificationRecyclerView;
     private NotificationActivityViewModel notificationActivityViewModel;
@@ -62,14 +63,17 @@ public class NotificationsFragment extends Fragment implements IView {
     @Override
     public void setupUI() {
         notificationActivityViewModel.getListNoti();
-        notificationActivityViewModel.getNotifications().observe(getViewLifecycleOwner(), arrayList ->  {
-            NotificationsFragment.this.notifications = arrayList;
-            NotificationAdapter notificationAdapter = new NotificationAdapter(arrayList);
-            notificationRecyclerView.setAdapter(notificationAdapter);
+        notificationActivityViewModel.getNotifications().observe(getViewLifecycleOwner(), new Observer<ArrayList<Notification>>() {
+            @Override
+            public void onChanged(ArrayList<Notification> arrayList) {
+                NotificationsFragment.this.notifications = arrayList;
+                NotificationAdapter notificationAdapter = new NotificationAdapter(arrayList);
+                notificationRecyclerView.setAdapter(notificationAdapter);
+            }
         });
 
     }
-    public void navigateToDetailActivities(Integer position){
+    public void navigateToDetailActivities(int position){
         Intent intent;
         Notification selectedNotification = notifications.get(position);
         if(notifications.get(position).getIdType().equals("store")) {
@@ -80,5 +84,15 @@ public class NotificationsFragment extends Fragment implements IView {
             intent.putExtra("id", selectedNotification.getFoodId()+"");
         }
         this.startActivity(intent);
+    }
+
+    @Override
+    public void navigateToStoreDetail(Integer idStore) {
+
+    }
+
+    @Override
+    public void navigateToFoodDetail(Integer idFood) {
+
     }
 }
