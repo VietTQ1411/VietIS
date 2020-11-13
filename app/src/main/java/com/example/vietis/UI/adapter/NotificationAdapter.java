@@ -15,7 +15,7 @@ import com.example.vietis.activities.Home.ui.notifications.NotificationsFragment
 import java.util.ArrayList;
 
 public class NotificationAdapter extends RecyclerView.Adapter<NotificationViewHolder> {
-    private ArrayList<Notification> notifications;
+    final private ArrayList<Notification> notifications;
     private NotificationsFragment notificationActivity;
 
     public NotificationAdapter(ArrayList<Notification> notifications){
@@ -32,7 +32,6 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationViewHo
         View view = LayoutInflater.from(itemView.getContext())
                 .inflate(R.layout.view_notification_item,itemView,false);
         NotificationViewHolder notificationViewHolder = new NotificationViewHolder(view);
-        notificationViewHolder.setNotificationActivity(this.notificationActivity);
         return notificationViewHolder;
     }
 

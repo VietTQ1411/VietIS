@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="300dp">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/fuddybackground"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hamburger"
+            android:textSize="40dp"
+            android:layout_marginTop="20dp"
+            android:layout_gravity="center"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="$30"
+            android:layout_gravity="center"
+            android:textSize="30dp"/>
+
+        <LinearLayout
+            android:layout_width="350dp"
+            android:layout_height="70dp"
+            android:orientation="horizontal"
+            android:background="@drawable/drop_shadow"
+            android:layout_gravity="center">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Quantity"
+                android:textSize="30dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="10dp"/>
+
+            <ImageButton
+                android:layout_width="50dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center|right"
+                android:layout_marginLeft="50dp"
+                android:layout_marginRight="-15dp"
+                android:background="@drawable/drop_shadow2"
+                android:backgroundTint="@color/colorShoppingCart"
+                android:src="@drawable/minus" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1"
+                android:textSize="20dp"
+                android:inputType="number"
+                android:layout_marginLeft="40dp"
+                android:layout_marginTop="-3dp"
+                android:layout_gravity="center|right" />
+
+            <ImageButton
+                android:layout_width="50dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="30dp"
+                android:src="@drawable/plus"
+                android:backgroundTint="@color/colorShoppingCart"
+                android:background="@drawable/drop_shadow2"
+                android:layout_gravity="center|right"/>
+
+        </LinearLayout>
+
+        <Button
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="200dp"
+            android:text="Order"
+            android:textSize="20dp"
+            android:textColor="@color/colorWhite"
+            android:background="@drawable/drop_shadow2"
+            android:textStyle="normal"/>
+
+    </LinearLayout>
+
+</LinearLayout>

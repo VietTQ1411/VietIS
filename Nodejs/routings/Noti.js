@@ -87,7 +87,7 @@ router.post('/addTokenKey', validatePhoneToken(), async(req, res) => {
 
 
 
-// //http://192.168.1.142:3000/noti/sendNoti
+// // //http://192.168.1.142:3000/noti/sendNoti
 router.post('/sendNotiGlobal', validatePhoneToken(), async(req, res) => {
     //validate du lieu tu client gui len    
 

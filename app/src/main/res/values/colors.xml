@@ -11,5 +11,7 @@
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorEdit">#52C84B</color>
     <color name="colorBEP">#CD5B5C</color>
-    <color name="colorSetting">#B5B1B1</color>
+    <color name="colorSetting">#FFF5EE</color>
+    <color name="colorShoppingCart">#B0C4DE</color>
+    <color name="colorRed">#8B0000</color>
 </resources>
