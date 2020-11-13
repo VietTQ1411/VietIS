@@ -29,9 +29,9 @@ public class NotificationViewHolder extends RecyclerView.ViewHolder implements I
 
     }
     public void setNotification(Notification notification){
-        Picasso.get().load(notification.getImageUrl())
-                .placeholder(R.drawable.ic_notification)
-                .into(imageShop);
+//        Picasso.get().load(notification.getImageUrl())
+//                .placeholder(R.drawable.ic_notification)
+//                .into(imageShop);
         txtShopName.setText(notification.getTitle());
         txtNotification.setText(notification.getContent());
 
@@ -39,6 +39,7 @@ public class NotificationViewHolder extends RecyclerView.ViewHolder implements I
 
     @Override
     public void mappingUI() {
+        linearLayoutShopItem = itemView.findViewById(R.id.notification_layout);
         imageShop = itemView.findViewById(R.id.shopImage);
         txtShopName = itemView.findViewById(R.id.textShopName);
         txtNotification = itemView.findViewById(R.id.textNotification);

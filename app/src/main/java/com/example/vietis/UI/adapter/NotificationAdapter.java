@@ -15,15 +15,10 @@ import com.example.vietis.activities.Home.ui.notifications.NotificationsFragment
 import java.util.ArrayList;
 
 public class NotificationAdapter extends RecyclerView.Adapter<NotificationViewHolder> {
-    final private ArrayList<Notification> notifications;
-    private NotificationsFragment notificationActivity;
+    private ArrayList<Notification> notifications;
 
     public NotificationAdapter(ArrayList<Notification> notifications){
         this.notifications=notifications;
-    }
-
-    public void setNotificationActivity(NotificationsFragment notificationActivity) {
-        this.notificationActivity = notificationActivity;
     }
 
     @NonNull
@@ -31,13 +26,12 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationViewHo
     public NotificationViewHolder onCreateViewHolder(@NonNull ViewGroup itemView, int viewType) {
         View view = LayoutInflater.from(itemView.getContext())
                 .inflate(R.layout.view_notification_item,itemView,false);
-        NotificationViewHolder notificationViewHolder = new NotificationViewHolder(view);
-        return notificationViewHolder;
+        return new NotificationViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull NotificationViewHolder holder, int position) {
-        holder.setNotification(this.notifications.get(position));
+         holder.setNotification(notifications.get(position));
     }
 
     @Override
