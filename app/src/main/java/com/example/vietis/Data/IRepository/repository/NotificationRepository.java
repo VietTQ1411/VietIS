@@ -24,7 +24,7 @@ import okhttp3.Response;
 public class NotificationRepository {
     private static NotificationRepository instance = null;
     private INotiRepository iNotiRepository;
-    public static final String URL_NOTI = API.get_URL_STRING("/noti/addTokenKey");
+    public static final String URL_NOTI = API.get_URL_STRING("noti/addTokenKey");
     public static final String URL_LIST_NOTI = API.get_URL_STRING("noti/getListNoti");
 
     private NotificationRepository(INotiRepository iNotiRepository) {
@@ -46,7 +46,7 @@ public class NotificationRepository {
                 .addFormDataPart("tokenKey", tokenKey)
                 .build();
         Request request = new Request.Builder()
-                .url(URL_NOTI)
+                .url(API.get_URL_STRING("noti/addTokenKey"))
                 .post(requestBody)
                 .build();
         Call call = okHttpClient.newCall(request);

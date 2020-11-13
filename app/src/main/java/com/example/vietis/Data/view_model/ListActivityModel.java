@@ -27,12 +27,14 @@ public class ListActivityModel extends ViewModel implements IStoreRepository, IF
     public ListActivityModel(StoreFragment fragment) {
         this.storefragment = fragment;
     }
+
     private HomeFragment homefragment;
     ArrayList<Food> listfood = new ArrayList<>();
 
     public ListActivityModel(HomeFragment homefragment) {
         this.homefragment = homefragment;
     }
+
     /**
      * @param query
      */
@@ -51,26 +53,13 @@ public class ListActivityModel extends ViewModel implements IStoreRepository, IF
         return null;
     }
 
-    /**
-     *
-     */
-    public void clearDataShop() {
-        //mutableLiveDataShop.setValue(new ArrayList<>());
-    }
-
-    /**
-     *
-     */
-    public void clearDataFood() {
-        // mutableLiveDataFood.setValue(new ArrayList<>());
-    }
 
     /**
      * @param search
      * @param page
      */
     public void searchStoreFormServerWithPage(String search, int page) {
-        ShopRepository.getInstance(this).getShopPaging(search,page);
+        ShopRepository.getInstance(this).getShopPaging(search, page);
     }
 
     /**
@@ -78,20 +67,19 @@ public class ListActivityModel extends ViewModel implements IStoreRepository, IF
      * @param page
      */
     public void searchFoodFormServerWithPage(String search, int page) {
-        FoodRespository.getInstance(this).getFoodPaging(search,page);
+        FoodRespository.getInstance(this).getFoodPaging(search, page);
     }
 
     @Override
     public void getFoodData() {
 
-                homefragment.setUpData(getFooodData());
+        homefragment.setUpData(getFooodData());
 
     }
 
     @Override
     public void getShopData() {
-                storefragment.setUpData(getStoreData());
-
+        storefragment.setUpData(getStoreData());
     }
 
     public ArrayList<Shop> getStoreData() {

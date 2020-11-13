@@ -45,10 +45,11 @@ public class FoodRespository {
         this.iFoodRespository = iFoodRespository;
     }
 
-    public static FoodRespository getInstance(IFoodRespository iFoodRespository) {
+    public static FoodRespository getInstance(IFoodRespository iFoodRespo) {
         if (instance == null) {
-            instance = new FoodRespository(iFoodRespository);
+            instance = new FoodRespository(iFoodRespo);
         }
+        instance.iFoodRespository = iFoodRespo;
         return instance;
     }
 
@@ -103,6 +104,54 @@ public class FoodRespository {
         VolleySingleton.getInstance(AppResources.getContext()).getRequestQueue().add(jsonObjectRequest);
     }
 
+    public void getFoodDetail(String query) {
+        StringRequest jsonObjectRequest = new StringRequest(Request.Method.POST,
+                API.get_URL_STRING(AppResources.getResourses().getString(R.string.GET_FOOD_DETAIL))
+                , new Response.Listener<String>() {
+            @Override
+            public void onResponse(String StringResponse) {
+                Log.v("LOG_VOLLEY", StringResponse);
+                MutableArray.clearData();
+                try {
+                    JSONObject response = new JSONObject(StringResponse);
+                    String stringResult = response.getString("result");
+                    if (stringResult.equals(AppResources.getResourses().getString(R.string.SUCCESS_REQUEST))) {
+                        JSONArray jsonShopArray = response.getJSONArray("data");
+                        for (int i = 0; i < jsonShopArray.length(); i++) {
+                            MutableArray.getArrayList().add(Food.generateFoodFromJSON(jsonShopArray.getJSONObject(i)));
+                        }
+                        iFoodRespository.getFoodData();
+                    } else {
+                        //move error
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e(TAG, "JsonObjectRequest onErrorResponse: " + error.getMessage());
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("id", query);
+                return params;
+            }
+
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("Content-Type", "application/x-www-form-urlencoded");
+                params.put("tokenkey", UserApp.user.getTokenKey());
+                return params;
+            }
+        };
+        jsonObjectRequest.setTag(TAG);
+        VolleySingleton.getInstance(AppResources.getContext()).getRequestQueue().add(jsonObjectRequest);
+    }
 
     /**
      * Find any Food match with search String in list shop already get form server
@@ -110,7 +159,7 @@ public class FoodRespository {
      * @param search
      * @return
      */
-    public List<Food> searchFood(ArrayList<Food> data,String search) {
+    public List<Food> searchFood(ArrayList<Food> data, String search) {
         if (search.isEmpty()) {
             return new ArrayList<>();
         }

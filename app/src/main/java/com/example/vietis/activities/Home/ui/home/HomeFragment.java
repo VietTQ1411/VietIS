@@ -30,7 +30,7 @@ public class HomeFragment extends Fragment implements IView, IListView {
 
     //UI holders
     private SearchView searchViewSearch;
-    private View view;
+    private static View view;
     private RecyclerView recyclerViewSearch;
 
     //RecyclerView components
@@ -39,20 +39,31 @@ public class HomeFragment extends Fragment implements IView, IListView {
     private ListActivityModel foodActivityModel;
     private int PAGE = 0;
 
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.fragment_home, container, false);
-        view = root;
-        mappingUI();
-        Log.d("Home", "Start");
-        return root;
+        if (view == null) {
+            View root = inflater.inflate(R.layout.fragment_home, container, false);
+            view = root;
+
+            new Thread(new Runnable() {
+                public void run() {
+                    mappingUI();
+                    setupUI();
+                    getData();
+                }
+            }).start();
+            return root;
+        }else{
+            getData();
+        }
+        return view;
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        Log.d("Home", "resume");
-        setupUI();
+
     }
 
     @Override
@@ -60,8 +71,6 @@ public class HomeFragment extends Fragment implements IView, IListView {
         super.onStop();
         PAGE = 0;
         MutableArray.clearData();
-        foodAdapter.setObjectArray(new ArrayList<Food>());
-        foodAdapter.notifyDataSetChanged();
     }
 
 
@@ -80,8 +89,6 @@ public class HomeFragment extends Fragment implements IView, IListView {
 
     @Override
     public void setupUI() {
-        foodActivityModel.searchFoodFormServerWithPage("", PAGE);
-
         searchViewSearch.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -105,10 +112,15 @@ public class HomeFragment extends Fragment implements IView, IListView {
                 return false;
             }
         });
+        getData();
+    }
+
+    public void getData() {
+        foodActivityModel = new ListActivityModel(HomeFragment.this);
+        foodActivityModel.searchFoodFormServerWithPage("", PAGE);
     }
 
     public void setUpData(ArrayList<Food> list) {
-        foodAdapter = new SearchAdapter(this, new ArrayList<Food>(), Food.class);
         foodAdapter.setObjectArray(list);
         foodAdapter.notifyItemInserted(list.size());
         foodAdapter.notifyDataSetChanged();

@@ -12,6 +12,8 @@ import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
 import com.example.vietis.R;
+import com.example.vietis.activities.Home.ui.home.FoodDetailActivity;
+import com.example.vietis.activities.Home.ui.store.StoreDetailActivity;
 import com.example.vietis.activities.Home.ui.store.StoreFragment;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
@@ -39,18 +41,25 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
     public void pushRemoteNotification(Map<String, String> data) {
         Context context = this;
-        Intent intent = new Intent(context, StoreFragment.class);
-        intent.setAction("OK");
+        Intent intent;
+        if (data.get("idType").equals("2")) {
+            intent = new Intent(context, FoodDetailActivity.class);
+            intent.putExtra("id", data.get("foodId"));
+        } else {
+            intent = new Intent(context, StoreDetailActivity.class);
+            intent.putExtra("id", data.get("storeId"));
+        }
         PendingIntent contentIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-        Notification notification = new NotificationCompat.Builder(context,CHANNEL_1_ID)
+        Notification notification = new NotificationCompat.Builder(context, CHANNEL_1_ID)
                 .setSmallIcon(R.drawable.ic_notification)
-                .setContentTitle("NEW PRODUCT!!!")
-                .setContentText("Name = " + data.get("name") + ", age = " + data.get("age"))
+                .setContentTitle(data.get("title"))
+                .setContentText(data.get("content"))
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .setCategory(NotificationCompat.CATEGORY_MESSAGE)
                 .setContentIntent(contentIntent)
+                .setAutoCancel(true)
                 .setColor(Color.BLUE)
-                .addAction(R.drawable.ic_notification,"OK",
+                .addAction(R.drawable.ic_notification, "OK",
                         contentIntent)
                 .build();
         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);

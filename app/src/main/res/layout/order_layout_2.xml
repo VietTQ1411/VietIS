@@ -6,16 +6,23 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="300dp">
+        android:layout_height="250dp"
+        android:orientation="horizontal"
+        android:background="@drawable/ic_launcher_background">>
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/fuddybackground"/>
+            android:id="@+id/img"
+            android:layout_width="250dp"
+            android:layout_height="250dp"
+            android:layout_gravity="center_horizontal"
+            android:src="@drawable/fuddybackground"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -23,19 +30,27 @@
         android:orientation="vertical">
         
         <TextView
+            android:id="@+id/txtOrderFood"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Hamburger"
-            android:textSize="40dp"
+            android:textSize="30dp"
             android:layout_marginTop="20dp"
             android:layout_gravity="center"/>
-
         <TextView
+            android:id="@+id/txtOrderAddress"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="$30"
+            android:text="Address: 10 đường láng"
             android:layout_gravity="center"
-            android:textSize="30dp"/>
+            android:textSize="25dp"/>
+        <TextView
+            android:id="@+id/txtOrderPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Total: $30"
+            android:layout_gravity="center"
+            android:textSize="25dp"/>
 
         <LinearLayout
             android:layout_width="350dp"
@@ -48,11 +63,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Quantity"
-                android:textSize="30dp"
+                android:textSize="25dp"
                 android:layout_gravity="center"
                 android:layout_marginLeft="10dp"/>
 
             <ImageButton
+                android:id="@+id/btnDown"
                 android:layout_width="50dp"
                 android:layout_height="40dp"
                 android:layout_gravity="center|right"
@@ -63,16 +79,18 @@
                 android:src="@drawable/minus" />
 
             <TextView
+                android:id="@+id/txtOrderQuantityChange"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="1"
-                android:textSize="20dp"
+                android:textSize="30dp"
                 android:inputType="number"
                 android:layout_marginLeft="40dp"
                 android:layout_marginTop="-3dp"
                 android:layout_gravity="center|right" />
 
             <ImageButton
+                android:id="@+id/btnUp"
                 android:layout_width="50dp"
                 android:layout_height="40dp"
                 android:layout_marginLeft="30dp"
@@ -84,10 +102,11 @@
         </LinearLayout>
 
         <Button
+            android:id="@+id/btnSummit"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="200dp"
+            android:layout_marginTop="50dp"
             android:text="Order"
             android:textSize="20dp"
             android:textColor="@color/colorWhite"

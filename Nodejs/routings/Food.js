@@ -138,6 +138,54 @@ router.post('/search', async(req, res) => {
     }
 });
 
+/**
+ * URL: http://localhost:3000/foods/search
+ */
 
+router.post('/detail', async(req, res) => {
+    const { tokenkey } = req.headers
+    const isValidToken = await checkToken({ tokenkey })
+    if (isValidToken == false) {
+        res.json({
+            result: "TK01"
+        })
+        return;
+    }
+    const { id } = req.body
+    try {
+        let foundBooks = await FoodModel.findAll({
+            where: {
+                id: {
+                    [Op.eq]: id
+                }
+            },
+            include: [{
+                    model: ImageModel,
+                    as: "Image_model",
+                    attributes: ['imageURL']
+                },
+                {
+                    model: CategoryModel,
+                    as: "Category_model",
+                    attributes: ['name']
+                },
+                {
+                    model: StoreModel,
+                    as: "Store_model",
+                    attributes: ['address']
+                }
+            ]
+        })
+        res.json({
+            result: "SC",
+            data: foundBooks
+        })
+    } catch (exception) {
+        res.status(500).json({
+            result: 'E500',
+            message: `Error details: ${exception.toString()}`
+        })
+    }
+});
 
 module.exports = router

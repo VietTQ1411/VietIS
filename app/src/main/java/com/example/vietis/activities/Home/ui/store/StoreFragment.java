@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
@@ -22,14 +23,14 @@ import com.example.vietis.R;
 import com.example.vietis.UI.adapter.SearchAdapter;
 import com.example.vietis.Data.inteface.IListView;
 import com.example.vietis.Data.inteface.IView;
+import com.example.vietis.Utilities.common.AppResources;
 
 import java.util.ArrayList;
 
 public class StoreFragment extends Fragment implements IView, IListView {
-    private static StoreFragment intance;
     //UI holders
     private SearchView storeSearchViewSearch;
-    private View view;
+    private static View view;
     private RecyclerView recyclerStoreViewSearch;
     //RecyclerView components
     private SearchAdapter<Shop> storeAdapter;
@@ -39,19 +40,26 @@ public class StoreFragment extends Fragment implements IView, IListView {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.fragment_store, container, false);
-        view = root;
-        mappingUI();
-        Log.d("Home", "Start");
-        return root;
+        if (view == null) {
+            View root = inflater.inflate(R.layout.fragment_store, container, false);
+            view = root;
+            new Thread(new Runnable() {
+                public void run() {
+                    mappingUI();
+                    setupUI();
+                }
+            }).start();
+            return root;
+        }else{
+            callData();
+        }
+        return view;
     }
 
 
     @Override
     public void onResume() {
         super.onResume();
-        Log.d("Home", "resume");
-        setupUI();
     }
 
     @Override
@@ -67,6 +75,10 @@ public class StoreFragment extends Fragment implements IView, IListView {
         storeAdapter = new SearchAdapter(this, new ArrayList<Shop>(), Shop.class);
         storeActivityModel = new ListActivityModel(this);
         recyclerStoreViewSearch = view.findViewById(R.id.recyclerStoreViewSearch);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(view.getContext(),
+                LinearLayoutManager.VERTICAL, false);
+        recyclerStoreViewSearch.setLayoutManager(layoutManager);
+
         recyclerStoreViewSearch.setAdapter(storeAdapter);
     }
 
@@ -97,18 +109,24 @@ public class StoreFragment extends Fragment implements IView, IListView {
                 return false;
             }
         });
+        callData();
+    }
+
+    public void callData() {
+        storeActivityModel = new ListActivityModel(this);
         storeActivityModel.searchStoreFormServerWithPage("", PAGE++);
     }
 
 
     public void setUpData(ArrayList<Shop> list) {
         storeAdapter.setObjectArray(list);
-        recyclerStoreViewSearch.setAdapter(storeAdapter);
+        storeAdapter.notifyItemInserted(list.size());
+        storeAdapter.notifyDataSetChanged();
     }
 
     @Override
     public void navigateToStoreDetail(Integer idStore) {
-        Intent intent = new Intent(view.getContext(), StoreDetailActivity.class);
+        Intent intent = new Intent(AppResources.getContext(), StoreDetailActivity.class);
         intent.putExtra("id", idStore + "");
         startActivity(intent);
     }

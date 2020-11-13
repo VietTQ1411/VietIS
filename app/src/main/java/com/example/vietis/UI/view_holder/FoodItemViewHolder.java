@@ -25,7 +25,6 @@ public class FoodItemViewHolder extends RecyclerView.ViewHolder implements IView
     private TextView txtFoodAddress;
     private RatingBar ratingBarFoodRating;
     private TextView txtPrice;
-
     //Parent
     private IListView parent;
 
@@ -39,7 +38,18 @@ public class FoodItemViewHolder extends RecyclerView.ViewHolder implements IView
         this.parent = parent;
     }
 
-    public void setFoodItem(Food food, int pos) {
+    public void setFoodItem(final Food food, int pos) {
+
+            View.OnClickListener listener = new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (parent != null) {
+                        parent.navigateToFoodDetail(food.getID());
+                    }
+                }
+            };
+            Config.setChildViewOnClickListener(linearFoodItem, listener);
+
         Picasso.get().load(food.getImageURL())
                 .placeholder(R.drawable.ic_launcher_foreground)
                 .resize(100, 100)
@@ -60,17 +70,7 @@ public class FoodItemViewHolder extends RecyclerView.ViewHolder implements IView
         ratingBarFoodRating = itemView.findViewById(R.id.ratingBarFoodRating);
         txtPrice = itemView.findViewById(R.id.txtPrice);
     }
-
     @Override
-    public void setupUI() {
-        View.OnClickListener listener = new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (parent != null) {
-                    parent.navigateToFoodDetail(getLayoutPosition());
-                }
-            }
-        };
-        Config.setChildViewOnClickListener(linearFoodItem, listener);
-    }
+    public void setupUI() {}
+
 }

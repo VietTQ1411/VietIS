@@ -28,7 +28,7 @@ public class CommentActivityModel extends ViewModel implements ICommentRepositor
     }
 
     @Override
-    public void getCommentLimit(ArrayList<Comment> arrayListComment, Exception error) {
+    public void getCommentLimit(ArrayList<Comment> arrayListComment) {
 
     }
 
