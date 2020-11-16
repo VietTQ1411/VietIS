@@ -25,8 +25,10 @@ import com.example.vietis.Data.entity.User;
 import com.example.vietis.Data.view_model.SettingActivityViewModel;
 import com.example.vietis.R;
 import com.example.vietis.Data.inteface.IView;
+import com.example.vietis.Utilities.common.UserApp;
 import com.example.vietis.activities.LoginActivity;
 import com.example.vietis.database.Database;
+import com.squareup.picasso.Picasso;
 
 import static androidx.core.app.ActivityCompat.finishAffinity;
 
@@ -38,12 +40,12 @@ public class SettingFragment extends Fragment implements IView {
     private TextView txtPrivacy;
     private TextView txtPolicy;
     private TextView txtAppVersion;
-    private  Button btnEdit;
-    private  Switch switchilly;
+    private Button btnEdit;
+    private Switch switchilly;
     private ImageButton ibPrivacy;
-    private  ImageButton ibPolicy;
-    private  ImageButton ibAppVersion;
-    private  ImageButton ibSignOut;
+    private ImageButton ibPolicy;
+    private ImageButton ibAppVersion;
+    private ImageButton ibSignOut;
     private LinearLayout isNotification;
     private LinearLayout isPrivacy;
     private LinearLayout isPolicy;
@@ -57,7 +59,7 @@ public class SettingFragment extends Fragment implements IView {
     private View view;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
-            ViewGroup container, Bundle savedInstanceState) {
+                             ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_setting, container, false);
         view = root;
         mappingUI();
@@ -140,26 +142,19 @@ public class SettingFragment extends Fragment implements IView {
         });
     }
 
-
-    public void getSettingData(){
-        settingActivityViewModel.getSettingUser().observe(getViewLifecycleOwner(), new Observer<User>() {
-            @Override
-            public void onChanged(User user) {
-                Database db = Database.getInstance(getContext());
-                Intent intent = new Intent();
-                db.userDAO().getSettingUser(intent.getIntExtra("userid",user.getId()));
-                if(db.userDAO().getSettingUser(intent.getIntExtra("userid",user.getId())) != null){
-                    txtProfileName.setText(user.getName());
-                    txtProfileAccount.setText(user.getEmail());
-                    imgAvatar.setImageResource(user.getImageId());
-                }
-            }
-        });
+    public void getSettingData() {
+        txtProfileName.setText(UserApp.user.getName());
+        txtProfileAccount.setText(UserApp.user.getEmail());
+        Picasso.get().load(UserApp.user.getImageURL())
+                .placeholder(R.drawable.ic_launcher_foreground)
+                .resize(100, 100)
+                .centerCrop()
+                .into(imgAvatar);
     }
 
-    public void setData(){
-        txtAppVersion.setText("Version: 1.0");
-        txtPolicy.setText("Developers of Fuddy apps:\n + Trần Quang Việt\n + ...");
+    public void setData() {
+        txtAppVersion.setText("Version: 1.69");
+        txtPolicy.setText("Developers of Fuddy apps:\n + Trần Quang Việt\n + Nguyễn Danh Tùng\n + Đào Công Sơn\n + Nguyễn Anh Tuấn");
         txtPrivacy.setText("Do not irresponsibly cancel your order because it affects the others behind you");
     }
 }

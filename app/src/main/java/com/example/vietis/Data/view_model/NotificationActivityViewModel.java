@@ -10,13 +10,20 @@ import androidx.lifecycle.ViewModel;
 import com.example.vietis.Data.entity.Notification;
 import com.example.vietis.Data.IRepository.INotiRepository;
 import com.example.vietis.Data.IRepository.repository.NotificationRepository;
+import com.example.vietis.Data.entity.Order;
+import com.example.vietis.activities.Home.ui.notifications.NotificationsFragment;
 
 import java.util.ArrayList;
 
 public class NotificationActivityViewModel extends ViewModel implements INotiRepository {
-    private MutableLiveData<ArrayList<Notification>> notifications = new MutableLiveData<>(new ArrayList<>());
-    public LiveData<ArrayList<Notification>> getNotifications(){return notifications;}
-    public void getListNoti(){
+    NotificationsFragment parent;
+    private ArrayList<Notification> listfood = new ArrayList<>();
+
+    public NotificationActivityViewModel(NotificationsFragment in) {
+        this.parent = in;
+    }
+
+    public void getList() {
         NotificationRepository.getInstance(this).getListNoti();
     }
 
@@ -26,12 +33,16 @@ public class NotificationActivityViewModel extends ViewModel implements INotiRep
     }
 
     @Override
-    public void getNotiList(final ArrayList<Notification> notifications,final Exception error) {
-        new Handler(Looper.getMainLooper()).post(new Runnable() {
-            @Override
-            public void run() {
-                NotificationActivityViewModel.this.notifications.setValue(error==null ? notifications : new ArrayList<Notification>());
-            }
-        });
+    public void getAllNotiList() {
+        parent.setUpData(getNotiData());
+    }
+
+
+    public ArrayList<Notification> getNotiData() {
+        listfood.clear();
+        for (Object t : MutableArray.getArrayList()) {
+            listfood.add((Notification) t);
+        }
+        return listfood;
     }
 }

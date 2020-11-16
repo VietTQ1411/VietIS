@@ -3,13 +3,19 @@ package com.example.vietis.Data.IRepository.repository;
 
 import android.util.Log;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
 import com.example.vietis.Data.IRepository.ICommentRepository;
 import com.example.vietis.Data.IRepository.IStoreDeatilRepository;
 import com.example.vietis.Data.entity.Comment;
 import com.example.vietis.Data.entity.Rating;
 import com.example.vietis.Data.entity.Shop;
+import com.example.vietis.Data.entity.User;
+import com.example.vietis.Data.view_model.MutableArray;
 import com.example.vietis.R;
 import com.example.vietis.Utilities.common.AppResources;
+import com.example.vietis.Utilities.common.UserApp;
 import com.example.vietis.Utilities.helpers.API;
 
 import org.jetbrains.annotations.NotNull;
@@ -20,7 +26,9 @@ import org.json.JSONObject;
 import java.io.Console;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -34,8 +42,7 @@ public class StoreRepository {
     private static StoreRepository instance = null;
     private ICommentRepository iCommentRepository;
     private IStoreDeatilRepository iStoreDeatilRepository;
-    private List<Object> dataStore = new ArrayList<>();
-
+    private final String TAG = "Store Deatil Repository";
 
     /**
      * Constructor
@@ -61,48 +68,28 @@ public class StoreRepository {
      * @param id
      */
     public void getDetailStore(String token, String id) {
-        //Prepare
-        OkHttpClient okHttpClient = new OkHttpClient();
-        RequestBody requestBody = new MultipartBody.Builder()
-                .setType(MultipartBody.FORM)
-                .addFormDataPart("id", id)
-                .build();
-        Request request = new Request.Builder()
-                .url(API.get_URL_STRING(AppResources.getResourses().getString(R.string.GET_DETAIL_STORE)))
-                .addHeader("tokenkey", token)
-                .post(requestBody)
-                .build();
-
-        //Execute
-        Call call = okHttpClient.newCall(request);
-        call.enqueue(new Callback() {
+        StringRequest jsonObjectRequest = new StringRequest(com.android.volley.Request.Method.POST,
+                API.get_URL_STRING(AppResources.getResourses().getString(R.string.GET_DETAIL_STORE))
+                , new com.android.volley.Response.Listener<String>() {
             @Override
-            public void onFailure(@NotNull Call call, @NotNull IOException ioException) {
-                /**
-                 * Chuyển qua trang error or thoát ứng dụng
-                 * */
-                Log.d("log","log log log");
-            }
-
-            @Override
-            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+            public void onResponse(String StringResponse) {
                 try {
-                    String jsonString = response.body().string();
-                    JSONObject jsonObject = new JSONObject(jsonString);
+                    JSONObject jsonObject = new JSONObject(StringResponse);
                     String stringResult = jsonObject.getString("result");
                     if (stringResult.equals(AppResources.getResourses().getString(R.string.SUCCESS_REQUEST))) {
+                        MutableArray.clearData();
                         JSONObject jsonStoreObject = jsonObject.getJSONObject("data");
 
                         //detail shop
                         JSONArray storeDetailObject = jsonStoreObject.getJSONArray("foundStore");
-                        Shop store = Shop.generateShopFromJSON( storeDetailObject);
-                        dataStore.add(store);
+                        Shop store = Shop.generateShopFromJSON(storeDetailObject);
+                        MutableArray.getArrayList().add(store);
 
                         //rating star
                         for (int i = 5; i > 0; i--) {
                             JSONObject result = jsonStoreObject.getJSONObject("result" + i);
                             Rating rating = Rating.generateRatingCount(i, result);
-                            dataStore.add(rating);
+                            MutableArray.getArrayList().add(rating);
                         }
 
                         //3 comments
@@ -115,20 +102,40 @@ public class StoreRepository {
                             }
                         }
                         if (listComment.size() > 0) {
-                            iCommentRepository.getCommentLimit(listComment, null);
+                            iCommentRepository.getCommentLimit(listComment);
                         } else {
-                            iCommentRepository.getCommentLimit(null, new Exception("NO COMMENT"));
+                            iCommentRepository.getCommentLimit(null);
                         }
-                        iStoreDeatilRepository.getStoreDeatil(dataStore, null);
+                        iStoreDeatilRepository.getStoreDeatil();
+                    }else{
+
                     }
-                    //iStoreDeatilRepository.getStoreDeatil(null, new Exception("GET API FAILED - DATA NULL"));
                 } catch (JSONException e) {
-                    /**
-                     * Chuyển qua trang error or thoát ứng dụng
-                     * */
-                    Log.d("lỗi rồi ",e.getMessage());
+                    Log.e(TAG, "JsonObjectRequest onErrorResponse: " + e.getMessage());
                 }
             }
-        });
+        }, new com.android.volley.Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e(TAG, "JsonObjectRequest onErrorResponse: " + error.getMessage());
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("id", id);
+                return params;
+            }
+
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("tokenkey", UserApp.user.getTokenKey());
+                params.put("Content-Type", "application/x-www-form-urlencoded");
+                return params;
+            }
+        };
+        jsonObjectRequest.setTag(TAG);
+        VolleySingleton.getInstance(AppResources.getContext()).getRequestQueue().add(jsonObjectRequest);
     }
 }

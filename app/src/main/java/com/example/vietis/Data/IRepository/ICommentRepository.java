@@ -12,9 +12,9 @@ public interface ICommentRepository {
      * remain : 3 elements
      *
      * @param arrayListComment
-     * @param error
+
      */
-    public void getCommentLimit(ArrayList<Comment> arrayListComment, Exception error);
+    public void getCommentLimit(ArrayList<Comment> arrayListComment);
 
 
     /**

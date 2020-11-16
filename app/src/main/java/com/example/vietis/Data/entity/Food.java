@@ -44,6 +44,7 @@ public class Food {
         try {
             return Food.builder()
                     .ID(jsonObject.getInt("id"))
+                    .imageID(jsonObject.getInt("imageId"))
                     .name(jsonObject.getString("name"))
                     .address(jsonObject.getJSONObject("Store_model").getString("address"))
                     .category(jsonObject.getJSONObject("Category_model").getString("name"))

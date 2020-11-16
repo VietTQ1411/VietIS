@@ -14,20 +14,25 @@ import com.example.vietis.Data.entity.Food;
 import com.example.vietis.Data.entity.Shop;
 import com.example.vietis.Data.IRepository.IFoodRespository;
 import com.example.vietis.Data.IRepository.repository.ShopRepository;
+import com.example.vietis.activities.Home.ui.home.HomeFragment;
+import com.example.vietis.activities.Home.ui.store.StoreFragment;
 
 import java.util.ArrayList;
 
 public class ListActivityModel extends ViewModel implements IStoreRepository, IFoodRespository {
-    private MutableLiveData<ArrayList<Food>> mutableLiveDataFood = new MutableLiveData<>(new ArrayList<>());
-    private MutableLiveData<ArrayList<Shop>> mutableLiveDataShop = new MutableLiveData<>(new ArrayList<>());
 
+    ArrayList<Shop> list = new ArrayList<>();
+    private StoreFragment storefragment;
 
-    public LiveData<ArrayList<Food>> getFoodData() {
-        return mutableLiveDataFood;
+    public ListActivityModel(StoreFragment fragment) {
+        this.storefragment = fragment;
     }
 
-    public LiveData<ArrayList<Shop>> getShopData() {
-        return mutableLiveDataShop;
+    private HomeFragment homefragment;
+    ArrayList<Food> listfood = new ArrayList<>();
+
+    public ListActivityModel(HomeFragment homefragment) {
+        this.homefragment = homefragment;
     }
 
     /**
@@ -35,7 +40,7 @@ public class ListActivityModel extends ViewModel implements IStoreRepository, IF
      */
     public ArrayList<Shop> searchShop(String query) {
         return (ArrayList<Shop>) ShopRepository
-                .getInstance(this,mutableLiveDataShop).searchShop(query);
+                .getInstance(this).searchShop(getStoreData(),query);
     }
 
     /**
@@ -43,55 +48,49 @@ public class ListActivityModel extends ViewModel implements IStoreRepository, IF
      */
     public ArrayList<Food> searchFood(String query) {
         return (ArrayList<Food>) FoodRespository
-                .getInstance(this,mutableLiveDataFood).searchFood(query);
+               .getInstance(this).searchFood(getFooodData(),query);
     }
 
-    /**
-     */
-    public void clearDataShop() {
-        mutableLiveDataShop.setValue(new ArrayList<>());
-    }
 
     /**
-     *
+     * @param search
+     * @param page
      */
-    public void clearDataFood() {
-        mutableLiveDataFood.setValue(new ArrayList<>());
+    public void searchStoreFormServerWithPage(String search, int page) {
+        ShopRepository.getInstance(this).getShopPaging(search, page);
     }
 
     /**
      * @param search
      * @param page
      */
-    public void searchStoreFormServerWithPage(String search,int page) {
-        ShopRepository.getInstance(this,mutableLiveDataShop).getShopPaging(search,page);
-    }
-    /**
-     * @param search
-     * @param page
-     */
-    public void searchFoodFormServerWithPage(String search,int page) {
-        FoodRespository.getInstance(this,mutableLiveDataFood).getFoodPaging(search,page);
-    }
-    @Override
-    public void getFoodData(final ArrayList<Food> arrayListFood, final Exception error) {
-        final ListActivityModel that = this;
-        new Handler(Looper.getMainLooper()).post(new Runnable() {
-            @Override
-            public void run() {
-                that.mutableLiveDataFood.setValue(error == null ? arrayListFood : new ArrayList<>());
-            }
-        });
+    public void searchFoodFormServerWithPage(String search, int page) {
+        FoodRespository.getInstance(this).getFoodPaging(search, page);
     }
 
     @Override
-    public void getShopData(final ArrayList<Shop> arrayListShop, final Exception error) {
-        final ListActivityModel that = this;
-        new Handler(Looper.getMainLooper()).post(new Runnable() {
-            @Override
-            public void run() {
-                that.mutableLiveDataShop.setValue(error == null ? arrayListShop : new ArrayList<>());
-            }
-        });
+    public void getFoodData() {
+        homefragment.setUpData(getFooodData());
+    }
+
+    @Override
+    public void getShopData() {
+        storefragment.setUpData(getStoreData());
+    }
+
+    public ArrayList<Shop> getStoreData() {
+        list.clear();
+        for (Object t : MutableArray.getArrayList()) {
+            list.add((Shop) t);
+        }
+        return list;
+    }
+
+    public ArrayList<Food> getFooodData() {
+        listfood.clear();
+        for (Object t : MutableArray.getArrayList()) {
+            listfood.add((Food) t);
+        }
+        return listfood;
     }
 }

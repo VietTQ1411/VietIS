@@ -30,8 +30,10 @@ public class RatingFragment extends Dialog {
             public void onClick(View v) {
                 int noofstars = userRatingBar.getNumStars();
                 float getrating = userRatingBar.getRating();
-                System.out.println(getrating + " viet dep trai" + noofstars);
+                RatingFragment.this.dismiss();
+                //update
             }
+
         });
     }
 }

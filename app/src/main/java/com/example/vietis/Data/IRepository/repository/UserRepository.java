@@ -1,16 +1,30 @@
 package com.example.vietis.Data.IRepository.repository;
 
+import android.util.Log;
+
+import com.android.volley.AuthFailureError;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
 import com.example.vietis.Data.entity.Image;
+import com.example.vietis.Data.entity.Shop;
 import com.example.vietis.Data.entity.User;
 import com.example.vietis.Data.IRepository.IUserRepository;
+import com.example.vietis.Data.view_model.MutableArray;
+import com.example.vietis.R;
+import com.example.vietis.Utilities.common.AppResources;
+import com.example.vietis.Utilities.common.UserApp;
+import com.example.vietis.Utilities.helpers.API;
 
 import org.jetbrains.annotations.NotNull;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -24,10 +38,8 @@ public class UserRepository {
     private static UserRepository instance = null;
     private IUserRepository iUserRepository;
     private List<User> users;
-    public static final String URL_LOGIN =
-            "http://"+ Config.HOST_NAME+":"+Config.PORT+"/users/login";
-    public static final String URL_REGISTER="http://"+ Config.HOST_NAME+":"+Config.PORT+"/users/register";
-    public static final String URL_SETTING ="http://" + Config.HOST_NAME+":"+Config.PORT+"/users/setting";
+    private final String TAG = "User Repository";
+
     private UserRepository(IUserRepository iUserRepository) {
         this.iUserRepository = iUserRepository;
     }
@@ -40,111 +52,126 @@ public class UserRepository {
     }
 
     public void login(String email, String password) {
-        OkHttpClient okHttpClient = new OkHttpClient();
-        RequestBody requestBody = new MultipartBody.Builder()
-                .setType(MultipartBody.FORM)
-                .addFormDataPart("email", email)
-                .addFormDataPart("password", password)
-                .build();
-        Request request = new Request.Builder()
-                .url(URL_LOGIN)
-                .post(requestBody)
-                .build();
-        Call call = okHttpClient.newCall(request);
-        call.enqueue(new Callback() {
+        StringRequest jsonObjectRequest = new StringRequest(com.android.volley.Request.Method.POST,
+                API.get_URL_STRING(AppResources.getResourses().getString(R.string.USER_LOGIN))
+                , new com.android.volley.Response.Listener<String>() {
             @Override
-            public void onFailure(@NotNull Call call, @NotNull IOException ioException) {
-                iUserRepository.afterLogin(null, ioException);
-            }
-
-            @Override
-            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+            public void onResponse(String StringResponse) {
                 try {
-                    String jsonString = response.body().string();
-                    JSONObject jsonObject = new JSONObject(jsonString);
-                    JSONObject jsonUserObject =jsonObject.getJSONObject("data");
-                    String result = jsonObject.getString("result");
-                    if(result.equals("ok")){
+                    JSONObject jsonObject = new JSONObject(StringResponse);
+                    String stringResult = jsonObject.getString("result");
+                    if (stringResult.equals(AppResources.getResourses().getString(R.string.SUCCESS_REQUEST))) {
+                        JSONObject jsonUserObject = jsonObject.getJSONObject("data");
                         User user = User.createUserFromJSONObject(jsonUserObject);
-                        iUserRepository.afterLogin(user,null);
-                    }else{
-                        iUserRepository.afterLogin(null,new JSONException(result));
+                        user.setImageURL(jsonUserObject.getJSONObject("Image_model").getString("imageURL"));
+                        iUserRepository.afterLogin(user, null);
+                    } else {
+                        //move error
                     }
-
-                }catch (JSONException e){
-                    iUserRepository.afterLogin(null, e);
+                } catch (JSONException e) {
+                    e.printStackTrace();
                 }
             }
-        });
+        }, new com.android.volley.Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e(TAG, "JsonObjectRequest onErrorResponse: " + error.getMessage());
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("email", email);
+                params.put("password", password);
+                return params;
+            }
+
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("Content-Type", "application/x-www-form-urlencoded");
+                return params;
+            }
+        };
+        jsonObjectRequest.setTag(TAG);
+        VolleySingleton.getInstance(AppResources.getContext()).getRequestQueue().add(jsonObjectRequest);
     }
 
     public void register(String email, String password, String name, String userType) {
-        OkHttpClient okHttpClient = new OkHttpClient();
-        RequestBody requestBody = new MultipartBody.Builder()
-                .setType(MultipartBody.FORM)
-                .addFormDataPart("email", email)
-                .addFormDataPart("password", password)
-                .addFormDataPart("name", name)
-                .addFormDataPart("userType", userType)
-                .build();
-        Request request = new Request.Builder()
-                .url(URL_REGISTER)
-                .post(requestBody)
-                .build();
-        Call call = okHttpClient.newCall(request);
-        call.enqueue(new Callback() {
+        StringRequest jsonObjectRequest = new StringRequest(com.android.volley.Request.Method.POST,
+                API.get_URL_STRING(AppResources.getResourses().getString(R.string.USER_REGISTER))
+                , new com.android.volley.Response.Listener<String>() {
             @Override
-            public void onFailure(@NotNull Call call, @NotNull IOException ioException) {
-                iUserRepository.afterRegister(null, ioException);
-            }
-
-            @Override
-            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+            public void onResponse(String StringResponse) {
                 try {
-                    String jsonString = response.body().string();
-                    JSONObject jsonObject = new JSONObject(jsonString);
-                    JSONObject jsonUserObject =jsonObject.getJSONObject("data");
-                    String result = jsonObject.getString("result");
-                    if(result.equals("ok")){
+                    JSONObject jsonObject = new JSONObject(StringResponse);
+                    String stringResult = jsonObject.getString("result");
+                    if (stringResult.equals(AppResources.getResourses().getString(R.string.SUCCESS_REQUEST))) {
+                        JSONObject jsonUserObject = jsonObject.getJSONObject("data");
                         User user = User.createUserFromJSONObject(jsonUserObject);
-                        iUserRepository.afterRegister(user,null);
-                    }else{
-                        iUserRepository.afterRegister(null,new JSONException(result));
-                    }
 
-                }catch (JSONException e){
-                    iUserRepository.afterRegister(null, e);
+                        iUserRepository.afterRegister(user, null);
+                    } else {
+                        //move error
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
                 }
             }
-        });
+        }, new com.android.volley.Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e(TAG, "JsonObjectRequest onErrorResponse: " + error.getMessage());
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("password", password);
+                params.put("userType", userType);
+                params.put("email", email);
+                params.put("name", name);
+                return params;
+            }
+
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("Content-Type", "application/x-www-form-urlencoded");
+                return params;
+            }
+        };
+        jsonObjectRequest.setTag(TAG);
+        VolleySingleton.getInstance(AppResources.getContext()).getRequestQueue().add(jsonObjectRequest);
     }
 
-    public void getSettingData(User user){
+    public void getSettingData(User user) {
         OkHttpClient okHttpClient = new OkHttpClient();
         RequestBody requestBody = new MultipartBody.Builder()
                 .setType(MultipartBody.FORM)
                 .addFormDataPart("userid", String.valueOf(user.getId()))
                 .build();
         Request request = new Request.Builder()
-                .url(URL_SETTING)
+                .url(API.get_URL_STRING(AppResources.getResourses().getString(R.string.USER_SETTING)))
                 .post(requestBody)
                 .build();
         Call call = okHttpClient.newCall(request);
         call.enqueue(new Callback() {
             @Override
             public void onFailure(@NotNull Call call, @NotNull IOException e) {
-                iUserRepository.getSettingData(null,e);
+                iUserRepository.getSettingData(null, e);
             }
+
             @Override
             public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
                 try {
                     String jsonString = response.body().string();
                     JSONObject jsonObject = new JSONObject(jsonString);
-                    JSONObject jsonUserObject =jsonObject.getJSONObject("data");
+                    JSONObject jsonUserObject = jsonObject.getJSONObject("data");
                     User user = User.createUserFromJSONObject(jsonUserObject);
-                    iUserRepository.getSettingData(user,null);
+                    iUserRepository.getSettingData(user, null);
                 } catch (JSONException e) {
-                    iUserRepository.getSettingData(null,e);
+                    iUserRepository.getSettingData(null, e);
                 }
             }
         });

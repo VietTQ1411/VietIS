@@ -8,7 +8,7 @@ const NotificationModel = require('../models/Notification')(sequelize)
 const { validatePhoneToken } = require('../validations/validate')
 const { validationResult } = require('express-validator')
 const { Op } = require("sequelize");
-
+const { checkToken } = require('../helpers/TokenCheck')
 
 /**
  * URL: http://localhost:3000/noti/addTokenKey
@@ -92,18 +92,11 @@ router.post('/sendNotiGlobal', validatePhoneToken(), async(req, res) => {
     //validate du lieu tu client gui len    
 
     const { title, data } = req.body
-    var jsonObj = JSON.parse(data.toString());
+
     let foundPhoneToken = await PhoneTokenModel.findAll({
         attributes: ['tokenKey']
     })
-    let newNoti = await NotificationModel.create({
-        title,
-        content: jsonObj.content,
-        storeid: jsonObj.storeid,
-        foodid: jsonObj.foodid,
-        idType: jsonObj.idType
-    })
-    await newNoti.save()
+
     const listToken = Array.from(foundPhoneToken, x => x.getDataValue('tokenKey'))
     await sendFirebaseCloudMessage({
         title: title,
@@ -129,14 +122,22 @@ const getTokenKey = async() => {
     return foundPhoneToken
 
 }
+
 /**
  * URL: http://localhost:3000/noti/getListNoti
  */
-router.post('/getListNoti',validatePhoneToken(), async(req,res)=>{
+router.post('/getListNoti', validatePhoneToken(), async(req, res) => {
+    const { tokenkey } = req.headers
+    const isValidToken = await checkToken({ tokenkey })
+    if (isValidToken == false) {
+        res.json({
+            result: "TK01"
+        })
+        return;
+    }
     let foundListNoti = await NotificationModel.findAll();
     res.json({
-        result: 'ok',
-        message: 'success',
+        result: 'SC',
         data: foundListNoti
     })
 })

@@ -44,22 +44,7 @@ public class MainActivity extends AppCompatActivity implements IView {
             }
         });
 
-        // createNotificationChannels();
-
-
-//        createNotificationChannels();
-
         setContentView(R.layout.activity_main);
-//        FirebaseAuth auth = FirebaseAuth.getInstance();
-//        String email = "huypham1700@gmail.com";
-//        auth.sendPasswordResetEmail(email).addOnCompleteListener(new OnCompleteListener<Void>() {
-//            @Override
-//            public void onComplete(@NonNull Task<Void> task) {
-//                if(task.isSuccessful()){
-//                    Log.d("TEST","email sent");
-//                }
-//            }
-//        });
         mappingUI();
         setupUI();
     }

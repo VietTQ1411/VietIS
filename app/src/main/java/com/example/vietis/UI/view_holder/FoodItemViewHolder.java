@@ -11,9 +11,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.vietis.Data.IRepository.repository.Config;
 import com.example.vietis.Data.entity.Food;
-import com.example.vietis.R;
 import com.example.vietis.Data.inteface.IListView;
 import com.example.vietis.Data.inteface.IView;
+import com.example.vietis.R;
 import com.squareup.picasso.Picasso;
 
 public class FoodItemViewHolder extends RecyclerView.ViewHolder implements IView {
@@ -25,7 +25,6 @@ public class FoodItemViewHolder extends RecyclerView.ViewHolder implements IView
     private TextView txtFoodAddress;
     private RatingBar ratingBarFoodRating;
     private TextView txtPrice;
-
     //Parent
     private IListView parent;
 
@@ -39,7 +38,18 @@ public class FoodItemViewHolder extends RecyclerView.ViewHolder implements IView
         this.parent = parent;
     }
 
-    public void setFoodItem(Food food, int pos) {
+    public void setFoodItem(final Food food, int pos) {
+
+        View.OnClickListener listener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (parent != null) {
+                    parent.navigateToFoodDetail(food.getID());
+                }
+            }
+        };
+        Config.setChildViewOnClickListener(linearFoodItem, listener);
+
         Picasso.get().load(food.getImageURL())
                 .placeholder(R.drawable.ic_launcher_foreground)
                 .resize(100, 100)
@@ -48,7 +58,7 @@ public class FoodItemViewHolder extends RecyclerView.ViewHolder implements IView
         txtFoodName.setText(food.getName());
         txtFoodAddress.setText(food.getAddress());
         //ratingBarFoodRating.setRating(food.getRating());
-        txtPrice.setText(food.getPrice()+"");
+        txtPrice.setText(food.getPrice() + "");
     }
 
     @Override
@@ -63,14 +73,6 @@ public class FoodItemViewHolder extends RecyclerView.ViewHolder implements IView
 
     @Override
     public void setupUI() {
-        View.OnClickListener listener = new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (parent != null) {
-                    parent.navigateToFoodDetail(getLayoutPosition());
-                }
-            }
-        };
-        Config.setChildViewOnClickListener(linearFoodItem, listener);
     }
+
 }

@@ -32,6 +32,8 @@ public class User implements Serializable {
     private String name = "";
     private int imageId;
     @Builder.Default
+    private String imageURL = "";
+    @Builder.Default
     private String phoneNumber = "";
     @Builder.Default
     private String address = "";
@@ -43,7 +45,7 @@ public class User implements Serializable {
     private String expireDate = "";
 
     public User(int id, String email, String password, String hashedPassword,
-                String name, int imageId, String phoneNumber, String address, int userType, String tokenKey, String expireDate) {
+                String name, int imageId,String imageURL, String phoneNumber, String address, int userType, String tokenKey, String expireDate) {
         this.id = id;
         this.email = email;
         this.password = password;
@@ -54,6 +56,7 @@ public class User implements Serializable {
         this.address = address;
         this.userType = userType;
         this.tokenKey = tokenKey;
+        this.imageURL = imageURL;
         this.expireDate = expireDate;
     }
 

@@ -7,8 +7,11 @@ const { validateRegisterUser, validateLogin } = require('../validations/validate
 const { Op } = require("sequelize");
 const { sequelize } = require('../databases/database')
 const UserModel = require('../models/User')(sequelize)
+const ImageModel = require('../models/Image')(sequelize)
 
-//http://192.168.1.142:3000/users/register
+ImageModel.hasMany(UserModel, { foreignKey: 'imageId' })
+UserModel.belongsTo(ImageModel, { foreignKey: 'imageId' })
+    //http://192.168.1.142:3000/users/register
 router.post('/register', validateRegisterUser(), async(req, res) => {
     //validate du lieu tu client gui len    
     const errors = validationResult(req);
@@ -53,9 +56,8 @@ router.post('/register', validateRegisterUser(), async(req, res) => {
         await newUser.save()
 
         res.json({
-            result: 'ok',
+            result: 'SC',
             data: newUser,
-            message: 'Register new user successfully'
         })
     } catch (exception) {
         res.status(500).json({
@@ -90,7 +92,12 @@ router.post('/login', validateLogin(), async(req, res) => {
                 email: {
                     [Op.eq]: email
                 }
-            }
+            },
+            include: [{
+                model: ImageModel,
+                as: "Image_model",
+                attributes: ['imageURL']
+            }]
         })
         if (foundUsers.length == 0) {
             res.json({
@@ -112,9 +119,8 @@ router.post('/login', validateLogin(), async(req, res) => {
             await foundUser.save()
             foundUser.hashPassword = "not show"
             res.status(200).json({
-                result: 'ok',
-                data: foundUser,
-                message: 'Login user successfully'
+                result: 'SC',
+                data: foundUser
             })
             return
         } else {

@@ -27,6 +27,7 @@ import com.example.vietis.UI.adapter.SearchAdapter;
 import com.example.vietis.UI.dialog.RatingFragment;
 import com.example.vietis.Utilities.common.UserApp;
 import com.example.vietis.Data.inteface.IView;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -97,21 +98,24 @@ public class StoreDetailActivity extends AppCompatActivity implements IView {
     private Shop store = null;
     private List<Rating> listRate = null;
     private StoreDeatilActivityModel storeDeatilActivityModel;
-
+    private static Boolean saveBundle = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_store_detail);
-        mappingUI();
-
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        setUpData();
-        setupUI();
+        if (saveBundle == false) {
+            saveBundle = true;
+            new Thread(new Runnable() {
+                public void run() {
+                    mappingUI();
+                    setupUI();
+                    setUpData();
+                }
+            }).start();
+        } else {
+            setUpData();
+        }
     }
 
     @Override
@@ -159,9 +163,9 @@ public class StoreDetailActivity extends AppCompatActivity implements IView {
         /**
          * Food of store
          */
-        FoodRecyclerView = findViewById(R.id.FoodRecyclerView);
+        //      FoodRecyclerView = findViewById(R.id.FoodRecyclerView);
 //        foodAdapter = new SearchAdapter(new ArrayList<Shop>());
-        foodActivityModel = new ViewModelProvider(this).get(ListActivityModel.class);
+//        foodActivityModel = new ViewModelProvider(this).get(ListActivityModel.class);
 
         /**
          * Layout RecyclerView
@@ -170,11 +174,11 @@ public class StoreDetailActivity extends AppCompatActivity implements IView {
                 LinearLayoutManager.VERTICAL, false);
         RecyclerView.LayoutManager layoutManager2 = new LinearLayoutManager(getApplicationContext(),
                 LinearLayoutManager.VERTICAL, false);
-        FoodRecyclerView.setLayoutManager(layoutManager);
+        //FoodRecyclerView.setLayoutManager(layoutManager);
         CommentRecyclerView.setLayoutManager(layoutManager2);
 
 
-        storeDeatilActivityModel = new ViewModelProvider(this).get(StoreDeatilActivityModel.class);
+        CommentRecyclerView.setAdapter(commentAdapter);
     }
 
     /**
@@ -229,58 +233,33 @@ public class StoreDetailActivity extends AppCompatActivity implements IView {
             id = b.getString("id");
 
         }
-        UserApp.user.setTokenKey("m8`q9v(`eS1uR.=|");
+        storeDeatilActivityModel = new StoreDeatilActivityModel(this);
         storeDeatilActivityModel.getStoreDetail(UserApp.user.getTokenKey(), id);
-        storeDeatilActivityModel.getData().observe(this, new Observer<List<Object>>() {
-            @Override
-            public void onChanged(List<Object> objects) {
-                store = (Shop) objects.get(0);
-                listRate = new ArrayList<>();
-                for (int i = 1; i < objects.size(); i++) {
-                    listRate.add((Rating) objects.get(i));
-                }
-                setUpStoreDetail();
-            }
-        });
-        storeDeatilActivityModel.getCommentData().observe(this, new Observer<ArrayList<Comment>>() {
-            @Override
-            public void onChanged(ArrayList<Comment> comments) {
-                commentAdapter = new CommentAdapter(comments);
-                commentAdapter.notifyDataSetChanged();
-                CommentRecyclerView.setAdapter(commentAdapter);
-                nsvStoreView.scrollTo(0, 0);
-            }
-        });
-        /**
-         *  input data
-         */
-
-        foodActivityModel.getShopData().observe(this, new Observer<ArrayList<Shop>>() {
-            @Override
-            public void onChanged(ArrayList<Shop> arrayList) {
-//                foodAdapter = new SearchAdapter(arrayList);
-                foodAdapter.notifyDataSetChanged();
-                FoodRecyclerView.setAdapter(foodAdapter);
-                nsvStoreView.scrollTo(0, 0);
-            }
-        });
     }
 
-    public void fillDetailStore(Shop store) {
-        imageStoreDetailIcon = findViewById(R.id.imageStoreDetailIcon);
-        txtStoreName.setText(store.getName());
-        txtStoreAddress.setText(store.getAddress());
-        txtStorePhone.setText("Hotline: " + store.getPhoneNumber());
-        txtStoreDescription.setText(createIndentedText(store.getDescription()));
+    public void setUpStoreComment(ArrayList<Comment> comments) {
+        commentAdapter.setCommentArray(comments);
+        commentAdapter.notifyDataSetChanged();
+        nsvStoreView.scrollTo(0, 0);
     }
 
-    private void setUpStoreDetail() {
+    public void setUpStoreDetail(ArrayList<Object> objects) {
+        store = (Shop) objects.get(0);
+        listRate = new ArrayList<>();
+        for (int i = 1; i < objects.size(); i++) {
+            listRate.add((Rating) objects.get(i));
+        }
+
         //Store description
         txtStoreName.setText(store.getName());
         txtStoreAddress.setText(store.getAddress());
         txtStorePhone.setText("Hotline: " + store.getPhoneNumber());
         txtStoreDescription.setText(store.getDescription());
-
+        Picasso.get().load(store.getImageURL())
+                .placeholder(R.drawable.ic_launcher_foreground)
+                .resize(150, 150)
+                .centerCrop()
+                .into(imageStoreDetailIcon);
         //Rating section
         txtRating1.setText(listRate.get(0).getVoteCount() + " lượt đánh giá");
         txtRating2.setText(listRate.get(1).getVoteCount() + " lượt đánh giá");

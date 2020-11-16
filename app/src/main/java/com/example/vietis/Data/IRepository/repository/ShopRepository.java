@@ -9,6 +9,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.vietis.Data.IRepository.IStoreRepository;
 import com.example.vietis.Data.entity.Shop;
+import com.example.vietis.Data.view_model.MutableArray;
 import com.example.vietis.R;
 import com.example.vietis.Utilities.common.AppResources;
 import com.example.vietis.Utilities.common.UserApp;
@@ -20,6 +21,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -46,70 +48,21 @@ import java.util.Map;
 
 
 public class ShopRepository {
-    private static RequestQueue mRequestQueue;
-    private String TAG = "Store Respon";
-    private MutableLiveData<ArrayList<Shop>> mutableLiveDataShop = null;
+    private String TAG = "StoreRepo";
     private static ShopRepository instance;
     private IStoreRepository iShopRepository;
 
 
-    private ShopRepository(IStoreRepository iShopRepository, MutableLiveData<ArrayList<Shop>> list) {
+    private ShopRepository(IStoreRepository iShopRepository) {
         this.iShopRepository = iShopRepository;
-        mutableLiveDataShop = list;
     }
 
-    public static ShopRepository getInstance(IStoreRepository iShopRepository, MutableLiveData<ArrayList<Shop>> list) {
+    public static ShopRepository getInstance(IStoreRepository iShopRepository) {
         if (instance == null) {
-            mRequestQueue = Volley.newRequestQueue(AppResources.getContext());
-            instance = new ShopRepository(iShopRepository, list);
+            instance = new ShopRepository(iShopRepository);
         }
         return instance;
     }
-
-//    public void getShopPaging(String query, int page) {
-//        OkHttpClient okHttpClient = new OkHttpClient();
-//        RequestBody requestBody = new MultipartBody.Builder()
-//                .setType(MultipartBody.FORM)
-//                .addFormDataPart("search", query)
-//                .addFormDataPart("page", page + "")
-//                .addFormDataPart("pageNumber", AppResources.getResourses().getString(R.string.NUMBER_ITEM_GET_FORM_API))
-//                .build();
-//        Request request = new Request.Builder()
-//                .url(API.get_URL_STRING(AppResources.getResourses().getString(R.string.GET_STORE_PAGING)))
-//                .addHeader("tokenkey", UserApp.user.getTokenKey())
-//                .post(requestBody)
-//                .build();
-//        Call call = okHttpClient.newCall(request);
-//        call.enqueue(new Callback() {
-//            @Override
-//            public void onFailure(@NotNull Call call, @NotNull IOException e) {
-//                Log.d("Store Ex",e.getMessage());
-//                //move Error
-//            }
-//
-//            @Override
-//            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
-//                try {
-//                    String jsonString = response.body().string();
-//                    JSONObject jsonObject = new JSONObject(jsonString);
-//                    String stringResult = jsonObject.getString("result");
-//                    if (stringResult.equals(AppResources.getResourses().getString(R.string.SUCCESS_REQUEST))) {
-//                        JSONArray jsonShopArray = jsonObject.getJSONArray("data");
-//                        ArrayList<Shop> list = mutableLiveDataShop.getValue();
-//                        for (int i = 0; i < jsonShopArray.length(); i++) {
-//                            list.add(Shop.generateShopFromJSON(jsonShopArray.getJSONObject(i)));
-//                        }
-//                        iShopRepository.getShopData(list,null);
-//                    } else {
-//                        //move error
-//                    }
-//                } catch (JSONException e) {
-//                    Log.d("Store Ex",e.getMessage());
-//                    //move error
-//                }
-//            }
-//        });
-//    }
 
     /**
      * Find any shop match with search String in list shop already get form server
@@ -117,179 +70,66 @@ public class ShopRepository {
      * @param search
      * @return
      */
-    public List<Shop> searchShop(String search) {
+    public List<Shop> searchShop(ArrayList<Shop> data, String search) {
         if (search.isEmpty()) {
             return new ArrayList<>();
         }
-        ArrayList<Shop> data = mutableLiveDataShop.getValue();
+        // ArrayList<Shop> data = mutableLiveDataShop.getValue();
         return data.stream().filter(store -> store.getName().contains(search) ||
                 store.getAddress().contains(search) ||
                 store.getPhoneNumber().contains(search))
                 .collect(Collectors.toList());
-
     }
 
     //String request Method.POST
     public void getShopPaging(String query, int page) {
-        JSONObject data = new JSONObject();
-        try {
-            data.put("search", query);
-            data.put("page", page);
-            data.put("pageNumber", AppResources.getResourses().getString(R.string.NUMBER_ITEM_GET_FORM_API));
+        StringRequest jsonObjectRequest = new StringRequest(Request.Method.POST,
+                API.get_URL_STRING(AppResources.getResourses().getString(R.string.GET_STORE_PAGING))
+                , new Response.Listener<String>() {
+            @Override
+            public void onResponse(String StringResponse) {
+                Log.v("LOG_VOLLEY", StringResponse);
 
-            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, API.get_URL_STRING(AppResources.getResourses().getString(R.string.GET_STORE_PAGING)),
-                    data, new Response.Listener<JSONObject>() {
-                @Override
-                public void onResponse(JSONObject response) {
-                    try {
-                        String stringResult = response.getString("result");
-                        if (stringResult.equals(AppResources.getResourses().getString(R.string.SUCCESS_REQUEST))) {
-                            JSONArray jsonShopArray = response.getJSONArray("data");
-                            ArrayList<Shop> list = mutableLiveDataShop.getValue();
-                            for (int i = 0; i < jsonShopArray.length(); i++) {
-                                list.add(Shop.generateShopFromJSON(jsonShopArray.getJSONObject(i)));
-                            }
-                            iShopRepository.getShopData(list, null);
-                        } else {
-                            //move error
+                try {
+                    JSONObject response = new JSONObject(StringResponse);
+                    String stringResult = response.getString("result");
+                    if (stringResult.equals(AppResources.getResourses().getString(R.string.SUCCESS_REQUEST))) {
+                        JSONArray jsonShopArray = response.getJSONArray("data");
+                        for (int i = 0; i < jsonShopArray.length(); i++) {
+                            MutableArray.getArrayList().add(Shop.generateShopFromJSON(jsonShopArray.getJSONObject(i)));
                         }
-                    } catch (JSONException e) {
-                        Log.d("Store Ex", e.getMessage());
+                        iShopRepository.getShopData();
+                    } else {
+                        //move error
                     }
+                } catch (JSONException e) {
+                    e.printStackTrace();
                 }
-            }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    Log.e(TAG, "JsonObjectRequest onErrorResponse: " + error.getMessage());
-                }
-            });
-            mRequestQueue.add(jsonObjectRequest);
-        } catch (Exception e) {
-            Log.d("Store Ex", e.getMessage());
-        }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e(TAG, "JsonObjectRequest onErrorResponse: " + error.getMessage());
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("search", query);
+                params.put("page", page + "");
+                params.put("pageNumber", AppResources.getResourses().getString(R.string.NUMBER_ITEM_GET_FORM_API));
+                return params;
+            }
+
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("Content-Type", "application/x-www-form-urlencoded");
+                params.put("tokenkey", UserApp.user.getTokenKey());
+                return params;
+            }
+        };
+        jsonObjectRequest.setTag(TAG);
+        VolleySingleton.getInstance(AppResources.getContext()).getRequestQueue().add(jsonObjectRequest);
     }
 }
-
-
-//public class MainActivity extends AppCompatActivity {
-//
-//    private static final String TAG = "MainActivity";
-//
-//    @Override
-//    protected void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_main);
-//
-//        //String request Method.GET
-//        volleyStringRequest("NTCDE.COM", "contact@ntcde.com", "https://ntcde.com/wp-content/uploads/2016/12/cropped-2dev4u.comNotes-of-Developer-1.png");
-//
-//        //JsonObject request Method.GET
-//        volleyJsonObjectRequest();
-//
-//        //JsonArray request Method.GET
-//        volleyJsonArrayRequest();
-//
-//        //Image request
-//        volleyImageRequest();
-//    }
-//
-//    private void volleyImageRequest() {
-//        ImageRequest imageRequest = new ImageRequest("https://ntcde.com/wp-content/uploads/2016/10/take-a-selfie-with-js.png", new Response.Listener<Bitmap>() {
-//            @Override
-//            public void onResponse(Bitmap response) {
-//                Log.e(TAG, "ImageRequest onResponse: " + response.toString());
-//            }
-//        }, 0, 0, null, new Response.ErrorListener() {
-//            @Override
-//            public void onErrorResponse(VolleyError error) {
-//                Log.e(TAG, "ImageRequest onErrorResponse: " + error.getMessage());
-//            }
-//        });
-//        VolleySingleton.getInstance(this).getRequestQueue().add(imageRequest);
-//    }
-//
-//    private void volleyJsonArrayRequest() {
-//        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest("http://dev.ntcde.com/news/api.php", new Response.Listener<JSONArray>() {
-//            @Override
-//            public void onResponse(JSONArray response) {
-//                Log.e(TAG, "JsonArrayRequest onResponse: " + response.toString());
-//            }
-//        }, new Response.ErrorListener() {
-//            @Override
-//            public void onErrorResponse(VolleyError error) {
-//                Log.e(TAG, "JsonArrayRequest onErrorResponse: " + error.getMessage());
-//            }
-//        });
-//        VolleySingleton.getInstance(this).getRequestQueue().add(jsonArrayRequest);
-//    }
-//
-//    private void volleyJsonObjectRequest() {
-//        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, "https://api.ipify.org/?format=json", null,
-//                new Response.Listener<JSONObject>() {
-//                    @Override
-//                    public void onResponse(JSONObject response) {
-//                        try {
-//                            Log.e(TAG, "JsonObjectRequest onResponse: " + response.getString("ip").toString());
-//                        } catch (JSONException e) {
-//                            e.printStackTrace();
-//                        }
-//                    }
-//                }, new Response.ErrorListener() {
-//            @Override
-//            public void onErrorResponse(VolleyError error) {
-//                Log.e(TAG, "JsonObjectRequest onErrorResponse: " + error.getMessage());
-//            }
-//        });
-//        VolleySingleton.getInstance(this).getRequestQueue().add(jsonObjectRequest);
-//    }
-//
-//    private void volleyStringRequest(final String name, final String email, final String avatar) {
-//        StringRequest stringRequest = new StringRequest(Request.Method.GET,
-//                "http://dev.ntcde.com/news/api.php?email=" + email,
-//                new Response.Listener<String>() {
-//                    @Override
-//                    public void onResponse(String response) {
-//                        Log.e(TAG, response.toString());
-//                        if (!response.equals("User doesn't exist")) {
-//                            // When user exists will return id_user
-//                            Log.e(TAG, "User is exists: id= " + response);
-//                        } else {
-//                            volleyPostStringRequest(name, email, avatar);
-//                        }
-//                    }
-//                }, new Response.ErrorListener() {
-//            @Override
-//            public void onErrorResponse(VolleyError error) {
-//                Log.e("Volley", error.getMessage());
-//            }
-//        });
-//
-//        VolleySingleton.getInstance(this).getRequestQueue().add(stringRequest);
-//    }
-//
-//    //String request Method.POST
-//    private void volleyPostStringRequest(final String name, final String email, final String avatar) {
-//        StringRequest insertRequest = new StringRequest(Request.Method.POST, "http://dev.ntcde.com/news/api.php", new Response.Listener<String>() {
-//            @Override
-//            public void onResponse(String response) {
-//                Log.e(TAG, "StringRequest Post" + response.toString());
-//            }
-//        }, new Response.ErrorListener() {
-//            @Override
-//            public void onErrorResponse(VolleyError error) {
-//                Log.e(TAG, error.toString());
-//            }
-//        }) {
-//            @Override
-//            protected Map<String, String> getParams() throws AuthFailureError {
-//                Map<String, String> params = new HashMap<String, String>();
-//                params.put("email", email);
-//                params.put("name", name);
-//                params.put("avatar", avatar);
-//
-//                return params;
-//            }
-//        };
-//        VolleySingleton.getInstance(this).getRequestQueue().add(insertRequest);
-//    }
-//}

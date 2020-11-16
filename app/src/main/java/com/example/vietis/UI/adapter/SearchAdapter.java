@@ -26,20 +26,22 @@ public class SearchAdapter<T> extends RecyclerView.Adapter<SearchItemViewHolder>
         this.typeParameterClass = typeParameterClass;
     }
 
-
     /**
      * set data to list with array list T
      * @param list
      */
     public void setObjectArray(ArrayList<T> list) {
-        this.dataObject = list;
+        this.dataObject.clear();
+        this.dataObject.addAll(list);
+        notifyDataSetChanged();
+        notifyItemInserted(0);
     }
 
     @NonNull
     @Override
     public SearchItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view;
-        if(typeParameterClass.isInstance(Shop.class)) {
+        if(typeParameterClass==Shop.class) {
              view = LayoutInflater
                     .from(parent.getContext())
                     .inflate(R.layout.view_store_item, parent, false);
@@ -48,12 +50,12 @@ public class SearchAdapter<T> extends RecyclerView.Adapter<SearchItemViewHolder>
                     .from(parent.getContext())
                     .inflate(R.layout.view_food_item, parent, false);
         }
-        return new SearchItemViewHolder(view,this.parent,typeParameterClass.isInstance(Shop.class));
+        return new SearchItemViewHolder(view,this.parent,typeParameterClass == Shop.class);
     }
 
     @Override
     public void onBindViewHolder(@NonNull SearchItemViewHolder holder, int position) {
-        if(typeParameterClass.isInstance(Shop.class)){
+        if(typeParameterClass == Shop.class){
             holder.getShopItemViewHolder().setShopItem((Shop)this.dataObject.get(position), position);
         }else{
             holder.getFoodItemViewHolder().setFoodItem((Food)this.dataObject.get(position), position);
