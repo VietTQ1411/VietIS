@@ -5,7 +5,7 @@
     10.1.35.170
     192.168.1.107
     */
-    <string name="HOST_NAME">192.168.43.99</string>
+    <string name="HOST_NAME">192.168.1.107</string>
     <string name="POST">3000</string>
     <string name="NUMBER_ITEM_GET_FORM_API">8</string>
 
@@ -20,6 +20,7 @@
     <string name="GET_DETAIL_STORE">store/detailStore</string>
     <string name="GET">store/detailStore</string>
     <string name="GET_STORE_PAGING">store/search</string>
+    <string name="GET_Order">order/getAll</string>
     <string name="GET_FOOD_PAGING">foods/search</string>
     <string name="GET_FOOD_DETAIL">foods/detail</string>
     <string name="USER_LOGIN">users/login</string>
@@ -27,4 +28,6 @@
     <string name="USER_SETTING">users/setting</string>
     <string name="USER_LON">users/login</string>
     <string name="USER_LOGN">users/login</string>
+    <string name="NOTI_GETALL">noti/getListNoti</string>
+    <string name="ADD_Order">order/add</string>
 </resources>

@@ -21,9 +21,9 @@ public class Notification implements Serializable {
     @Builder.Default
     private String content="";
     @Builder.Default
-    private int storeId=0;
+    private String storeId;
     @Builder.Default
-    private int foodId=0;
+    private String foodId;
     @Builder.Default
     private String idType="";
 
@@ -32,8 +32,8 @@ public class Notification implements Serializable {
             return Notification.builder()
                     .title(jsonObject.getString("title"))
                     .content(jsonObject.getString("content"))
-                    .storeId(jsonObject.getInt("storeId"))
-                    .foodId((jsonObject.getInt("foodId")))
+                    .storeId(jsonObject.getString("storeId"))
+                    .foodId((jsonObject.getString("foodId")))
                     .idType(jsonObject.getString("idType"))
                     .build();
 
@@ -41,38 +41,5 @@ public class Notification implements Serializable {
             return null;
         }
     }
-    public static final ArrayList<Notification> fakeNoti(){
-        ArrayList<Notification> notifications = new ArrayList<>();
-        notifications.add(
-                Notification.builder().
-                title("1")
-                .imageUrl("abc")
-                .content("new")
-                .storeId(1)
-                .foodId(2)
-                .idType("food")
-                .build()
-                );
-        notifications.add(
-                Notification.builder().
-                        title("2")
-                        .imageUrl("abc")
-                        .content("new")
-                        .storeId(1)
-                        .foodId(2)
-                        .idType("food")
-                        .build()
-        );
-        notifications.add(
-                Notification.builder().
-                        title("3")
-                        .imageUrl("abc")
-                        .content("new")
-                        .storeId(1)
-                        .foodId(2)
-                        .idType("food")
-                        .build()
-        );
-        return notifications;
-    }
+
 }

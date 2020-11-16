@@ -41,7 +41,6 @@ public class FoodDetailActivity extends AppCompatActivity implements IView {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_food_detail);
         mappingUI();
         setupUI();
@@ -68,7 +67,6 @@ public class FoodDetailActivity extends AppCompatActivity implements IView {
         String id = null;
         if (b != null) {
             id = b.getString("id");
-
         }
 
 
@@ -93,6 +91,7 @@ public class FoodDetailActivity extends AppCompatActivity implements IView {
                 Intent order = new Intent(FoodDetailActivity.this, OrderActivity.class);
                 order.putExtra("price",food.getPrice());
                 order.putExtra("name",food.getName());
+                order.putExtra("imageId",food.getImageID());
                 order.putExtra("img",food.getImageURL());
                 FoodDetailActivity.this.startActivity(order);
             }

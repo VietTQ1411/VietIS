@@ -36,7 +36,6 @@ public class SplashActivityViewModel extends ViewModel implements INotiRepositor
     }
 
     @Override
-    public void getNotiList(ArrayList<Notification> notifications, Exception error) {
-
+    public void getAllNotiList() {
     }
 }

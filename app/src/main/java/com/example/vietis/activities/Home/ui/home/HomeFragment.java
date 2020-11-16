@@ -23,6 +23,7 @@ import com.example.vietis.R;
 import com.example.vietis.UI.adapter.SearchAdapter;
 import com.example.vietis.Data.inteface.IListView;
 import com.example.vietis.Data.inteface.IView;
+import com.example.vietis.Utilities.common.AppResources;
 
 import java.util.ArrayList;
 
@@ -34,7 +35,7 @@ public class HomeFragment extends Fragment implements IView, IListView {
     private RecyclerView recyclerViewSearch;
 
     //RecyclerView components
-    private SearchAdapter<Food> foodAdapter;
+    private static SearchAdapter<Food> foodAdapter;
     //View Model
     private ListActivityModel foodActivityModel;
     private int PAGE = 0;
@@ -45,12 +46,10 @@ public class HomeFragment extends Fragment implements IView, IListView {
         if (view == null) {
             View root = inflater.inflate(R.layout.fragment_home, container, false);
             view = root;
-
             new Thread(new Runnable() {
                 public void run() {
                     mappingUI();
                     setupUI();
-                    getData();
                 }
             }).start();
             return root;
@@ -63,7 +62,6 @@ public class HomeFragment extends Fragment implements IView, IListView {
     @Override
     public void onResume() {
         super.onResume();
-
     }
 
     @Override
@@ -79,7 +77,6 @@ public class HomeFragment extends Fragment implements IView, IListView {
         searchViewSearch = view.findViewById(R.id.searchFoodViewSearch);
         recyclerViewSearch = view.findViewById(R.id.recyclerViewFoodSearch);
         foodAdapter = new SearchAdapter(this, new ArrayList<Food>(), Food.class);
-        foodActivityModel = new ListActivityModel(HomeFragment.this);
 
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(view.getContext(),
                 LinearLayoutManager.VERTICAL, false);
@@ -100,15 +97,11 @@ public class HomeFragment extends Fragment implements IView, IListView {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                if (newText.equals("")) {
-                    //   foodAdapter.setObjectArray(foodActivityModel.getFoodData().getValue());
-                    foodAdapter.notifyDataSetChanged();
-                    recyclerViewSearch.setAdapter(foodAdapter);
+                if (newText.isEmpty()) {
                     return false;
                 }
                 foodAdapter.setObjectArray(foodActivityModel.searchFood(newText));
                 foodAdapter.notifyDataSetChanged();
-                recyclerViewSearch.setAdapter(foodAdapter);
                 return false;
             }
         });
@@ -135,6 +128,7 @@ public class HomeFragment extends Fragment implements IView, IListView {
     public void navigateToFoodDetail(Integer idFood) {
         Intent intent = new Intent(view.getContext(), FoodDetailActivity.class);
         intent.putExtra("id", idFood + "");
-        startActivity(intent);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        AppResources.getContext().startActivity(intent);
     }
 }

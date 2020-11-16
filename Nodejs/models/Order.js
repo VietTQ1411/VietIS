@@ -39,6 +39,15 @@ module.exports = sequelize => {
                 model: "Image_model"
             }
         },
+        reason: {
+            type: DataTypes.TEXT,
+            allowNull: true,
+            defaultValue: null,
+            primaryKey: false,
+            autoIncrement: false,
+            comment: null,
+            field: "reason"
+        },
         description: {
             type: DataTypes.TEXT,
             allowNull: true,
@@ -47,6 +56,24 @@ module.exports = sequelize => {
             autoIncrement: false,
             comment: null,
             field: "description"
+        },
+        quantity: {
+            type: DataTypes.FLOAT,
+            allowNull: true,
+            defaultValue: null,
+            primaryKey: false,
+            autoIncrement: false,
+            comment: null,
+            field: "quantity"
+        },
+        total: {
+            type: DataTypes.FLOAT,
+            allowNull: true,
+            defaultValue: null,
+            primaryKey: false,
+            autoIncrement: false,
+            comment: null,
+            field: "total"
         },
         status: {
             type: DataTypes.INTEGER,

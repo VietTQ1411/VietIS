@@ -33,7 +33,7 @@ public class StoreFragment extends Fragment implements IView, IListView {
     private static View view;
     private RecyclerView recyclerStoreViewSearch;
     //RecyclerView components
-    private SearchAdapter<Shop> storeAdapter;
+    private static SearchAdapter<Shop> storeAdapter;
     //View Model
     private ListActivityModel storeActivityModel;
     private int PAGE = 0;
@@ -84,7 +84,6 @@ public class StoreFragment extends Fragment implements IView, IListView {
 
     @Override
     public void setupUI() {
-
         //SearchView action
         storeSearchViewSearch.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -97,15 +96,11 @@ public class StoreFragment extends Fragment implements IView, IListView {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                if (newText.equals("")) {
-                    // storeAdapter.setObjectArray(storeActivityModel.getShopData().getValue());
-                    storeAdapter.notifyDataSetChanged();
-                    recyclerStoreViewSearch.setAdapter(storeAdapter);
+                if(newText.isEmpty()){
                     return false;
                 }
                 storeAdapter.setObjectArray(storeActivityModel.searchShop(newText));
                 storeAdapter.notifyDataSetChanged();
-                recyclerStoreViewSearch.setAdapter(storeAdapter);
                 return false;
             }
         });
@@ -126,9 +121,10 @@ public class StoreFragment extends Fragment implements IView, IListView {
 
     @Override
     public void navigateToStoreDetail(Integer idStore) {
-        Intent intent = new Intent(AppResources.getContext(), StoreDetailActivity.class);
+        Intent intent = new Intent(view.getContext(), StoreDetailActivity.class);
         intent.putExtra("id", idStore + "");
-        startActivity(intent);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        AppResources.getContext().startActivity(intent);
     }
 
     @Override

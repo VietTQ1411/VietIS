@@ -11,9 +11,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.vietis.Data.IRepository.repository.Config;
 import com.example.vietis.Data.entity.Food;
-import com.example.vietis.R;
 import com.example.vietis.Data.inteface.IListView;
 import com.example.vietis.Data.inteface.IView;
+import com.example.vietis.R;
 import com.squareup.picasso.Picasso;
 
 public class FoodItemViewHolder extends RecyclerView.ViewHolder implements IView {
@@ -40,15 +40,15 @@ public class FoodItemViewHolder extends RecyclerView.ViewHolder implements IView
 
     public void setFoodItem(final Food food, int pos) {
 
-            View.OnClickListener listener = new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (parent != null) {
-                        parent.navigateToFoodDetail(food.getID());
-                    }
+        View.OnClickListener listener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (parent != null) {
+                    parent.navigateToFoodDetail(food.getID());
                 }
-            };
-            Config.setChildViewOnClickListener(linearFoodItem, listener);
+            }
+        };
+        Config.setChildViewOnClickListener(linearFoodItem, listener);
 
         Picasso.get().load(food.getImageURL())
                 .placeholder(R.drawable.ic_launcher_foreground)
@@ -58,7 +58,7 @@ public class FoodItemViewHolder extends RecyclerView.ViewHolder implements IView
         txtFoodName.setText(food.getName());
         txtFoodAddress.setText(food.getAddress());
         //ratingBarFoodRating.setRating(food.getRating());
-        txtPrice.setText(food.getPrice()+"");
+        txtPrice.setText(food.getPrice() + "");
     }
 
     @Override
@@ -70,7 +70,9 @@ public class FoodItemViewHolder extends RecyclerView.ViewHolder implements IView
         ratingBarFoodRating = itemView.findViewById(R.id.ratingBarFoodRating);
         txtPrice = itemView.findViewById(R.id.txtPrice);
     }
+
     @Override
-    public void setupUI() {}
+    public void setupUI() {
+    }
 
 }

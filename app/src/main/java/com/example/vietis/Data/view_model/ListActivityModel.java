@@ -39,18 +39,16 @@ public class ListActivityModel extends ViewModel implements IStoreRepository, IF
      * @param query
      */
     public ArrayList<Shop> searchShop(String query) {
-//        return (ArrayList<Shop>) ShopRepository
-//                .getInstance(this,mutableLiveDataShop).searchShop(query);
-        return null;
+        return (ArrayList<Shop>) ShopRepository
+                .getInstance(this).searchShop(getStoreData(),query);
     }
 
     /**
      * @param query
      */
     public ArrayList<Food> searchFood(String query) {
-        //return (ArrayList<Food>) FoodRespository
-        //       .getInstance(this,mutableLiveDataFood).searchFood(query);
-        return null;
+        return (ArrayList<Food>) FoodRespository
+               .getInstance(this).searchFood(getFooodData(),query);
     }
 
 
@@ -72,9 +70,7 @@ public class ListActivityModel extends ViewModel implements IStoreRepository, IF
 
     @Override
     public void getFoodData() {
-
         homefragment.setUpData(getFooodData());
-
     }
 
     @Override

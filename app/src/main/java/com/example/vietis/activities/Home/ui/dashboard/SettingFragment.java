@@ -153,8 +153,8 @@ public class SettingFragment extends Fragment implements IView {
     }
 
     public void setData() {
-        txtAppVersion.setText("Version: 1.0");
-        txtPolicy.setText("Developers of Fuddy apps:\n + Trần Quang Việt\n + ...");
+        txtAppVersion.setText("Version: 1.69");
+        txtPolicy.setText("Developers of Fuddy apps:\n + Trần Quang Việt\n + Nguyễn Danh Tùng\n + Đào Công Sơn\n + Nguyễn Anh Tuấn");
         txtPrivacy.setText("Do not irresponsibly cancel your order because it affects the others behind you");
     }
 }

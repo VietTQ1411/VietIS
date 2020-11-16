@@ -16,9 +16,11 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.vietis.Data.entity.Food;
 import com.example.vietis.Data.entity.Notification;
 import com.example.vietis.Data.inteface.IListView;
 import com.example.vietis.Data.inteface.IView;
+import com.example.vietis.Data.view_model.MutableArray;
 import com.example.vietis.Data.view_model.NotificationActivityViewModel;
 import com.example.vietis.R;
 import com.example.vietis.UI.adapter.NotificationAdapter;
@@ -27,72 +29,68 @@ import com.example.vietis.activities.Home.ui.store.StoreDetailActivity;
 
 import java.util.ArrayList;
 
-public class NotificationsFragment extends Fragment implements IView, IListView {
-    private View view;
+public class NotificationsFragment extends Fragment implements IView {
+    private static View view;
     private RecyclerView notificationRecyclerView;
     private NotificationActivityViewModel notificationActivityViewModel;
     private ArrayList<Notification> notifications;
-
+    private static NotificationAdapter notificationAdapter;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
-            ViewGroup container, Bundle savedInstanceState) {
+                             ViewGroup container, Bundle savedInstanceState) {
+        if (view == null) {
+            View root = inflater.inflate(R.layout.fragment_notifications, container, false);
+            view = root;
+            new Thread(new Runnable() {
+                public void run() {
+                    mappingUI();
+                    setupUI();
+                }
+            }).start();
+            return root;
+        } else {
+            getData();
+        }
+        return view;
 
-        View root = inflater.inflate(R.layout.fragment_notifications, container, false);
-        view = root;
-        mappingUI();
-        setupUI();
-        return root;
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        setupUI();
     }
 
+    @Override
+    public void onStop() {
+        super.onStop();
+        MutableArray.clearData();
+    }
     @Override
     public void mappingUI() {
         notificationRecyclerView = view.findViewById(R.id.notification_recycler_view);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(
                 view.getContext(),
-                RecyclerView.VERTICAL,false);
+                RecyclerView.VERTICAL, false);
+        notificationAdapter = new NotificationAdapter(new ArrayList<>());
         notificationRecyclerView.setLayoutManager(layoutManager);
-        notificationActivityViewModel = new NotificationActivityViewModel();
+        notificationRecyclerView.setAdapter(notificationAdapter);
     }
 
     @Override
     public void setupUI() {
-        notificationActivityViewModel.getListNoti();
-        notificationActivityViewModel.getNotifications().observe(getViewLifecycleOwner(), new Observer<ArrayList<Notification>>() {
-            @Override
-            public void onChanged(ArrayList<Notification> arrayList) {
-                NotificationsFragment.this.notifications = arrayList;
-                NotificationAdapter notificationAdapter = new NotificationAdapter(arrayList);
-                notificationRecyclerView.setAdapter(notificationAdapter);
-            }
-        });
-
-    }
-    public void navigateToDetailActivities(int position){
-        Intent intent;
-        Notification selectedNotification = notifications.get(position);
-        if(notifications.get(position).getIdType().equals("store")) {
-            intent = new Intent(view.getContext(), StoreDetailActivity.class);
-            intent.putExtra("id", selectedNotification.getStoreId() +"");
-        }else{
-            intent = new Intent(view.getContext(), FoodDetailActivity.class);
-            intent.putExtra("id", selectedNotification.getFoodId()+"");
-        }
-        this.startActivity(intent);
+        getData();
     }
 
-    @Override
-    public void navigateToStoreDetail(Integer idStore) {
-
+    public void getData() {
+        notificationActivityViewModel = new NotificationActivityViewModel(this);
+        notificationActivityViewModel.getList();
     }
 
-    @Override
-    public void navigateToFoodDetail(Integer idFood) {
-
+    public void setUpData(ArrayList<Notification> list) {
+        notificationAdapter.setNotifications(list);
+        notificationAdapter.notifyItemInserted(list.size());
+        notificationAdapter.notifyDataSetChanged();
     }
+
+
 }

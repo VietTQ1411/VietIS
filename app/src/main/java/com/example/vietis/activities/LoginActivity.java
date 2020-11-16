@@ -69,6 +69,7 @@ public class LoginActivity extends AppCompatActivity implements IView {
         UserApp.user.setTokenKey(user.getTokenKey());
         UserApp.user.setAddress(user.getAddress());
         UserApp.user.setName(user.getName());
+        UserApp.user.setId(33);
         UserApp.user.setImageId(user.getImageId());
         UserApp.user.setPhoneNumber(user.getPhoneNumber());
         UserApp.user.setImageURL(user.getImageURL());

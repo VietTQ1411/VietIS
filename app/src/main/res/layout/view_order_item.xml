@@ -26,9 +26,16 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:layout_marginBottom="10dp">
 
-
+                <TextView
+                    android:id="@+id/txtCode"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="#CODE001"
+                    android:textColor="#2E2D2D"
+                    android:textSize="13dp" />
                 <TextView
                     android:id="@+id/txtDateCreate"
                     android:layout_width="match_parent"
@@ -44,15 +51,8 @@
                 android:id="@+id/txtOrderDescription"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/shop_address"
+                android:text="Ship to:"
                 android:textSize="12dp" />
-            <TextView
-                android:id="@+id/txtAddress"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Ship to: Hưng Yên"
-                android:textSize="12dp" />
-
             <TextView
                 android:id="@+id/txtOrderStatus"
                 android:layout_width="match_parent"
@@ -60,7 +60,12 @@
                 android:text="Đang ship"
                 android:textSize="12dp"
                 android:gravity="bottom"/>
-
+            <TextView
+                android:id="@+id/txtReason"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="thích thế"
+                android:textSize="12dp" />
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

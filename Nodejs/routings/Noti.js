@@ -8,7 +8,7 @@ const NotificationModel = require('../models/Notification')(sequelize)
 const { validatePhoneToken } = require('../validations/validate')
 const { validationResult } = require('express-validator')
 const { Op } = require("sequelize");
-
+const { checkToken } = require('../helpers/TokenCheck')
 
 /**
  * URL: http://localhost:3000/noti/addTokenKey
@@ -127,10 +127,17 @@ const getTokenKey = async() => {
  * URL: http://localhost:3000/noti/getListNoti
  */
 router.post('/getListNoti', validatePhoneToken(), async(req, res) => {
+    const { tokenkey } = req.headers
+    const isValidToken = await checkToken({ tokenkey })
+    if (isValidToken == false) {
+        res.json({
+            result: "TK01"
+        })
+        return;
+    }
     let foundListNoti = await NotificationModel.findAll();
     res.json({
-        result: 'ok',
-        message: 'success',
+        result: 'SC',
         data: foundListNoti
     })
 })
