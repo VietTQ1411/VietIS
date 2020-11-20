@@ -1,22 +1,36 @@
 package com.example.vietis.activities.Home.ui.order;
 
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.vietis.Data.entity.Food;
 import com.example.vietis.Data.entity.Order;
-import com.example.vietis.Data.inteface.IView;
+import com.example.vietis.Data.entity.Shop;
+import com.example.vietis.Data.view_model.ListActivityModel;
 import com.example.vietis.Data.view_model.MutableArray;
 import com.example.vietis.Data.view_model.OrderActivityModel;
 import com.example.vietis.R;
 import com.example.vietis.UI.adapter.OrderAdapter;
+import com.example.vietis.UI.adapter.SearchAdapter;
+import com.example.vietis.Data.inteface.IListView;
+import com.example.vietis.Data.inteface.IView;
 
 import java.util.ArrayList;
 

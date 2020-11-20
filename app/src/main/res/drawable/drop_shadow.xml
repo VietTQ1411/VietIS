@@ -28,10 +28,10 @@
                 </shape>
             </item>
             <!-- CONTENT LAYER -->
-            <item android:bottom="3dp" android:top="3dp" android:left="3dp" android:right="3dp">
+            <item android:bottom="3dp" android:left="3dp" android:right="3dp" android:top="3dp">
                 <shape>
                     <solid android:color="#ffffff" />
-                    <corners android:radius="10dp"/>
+                    <corners android:radius="6dp" />
                 </shape>
             </item>
         </layer-list>
