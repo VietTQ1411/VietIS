@@ -70,7 +70,7 @@ public class HomeFragment extends Fragment implements IView, IListView {
         PAGE = 0;
         MutableArray.clearData();
     }
-
+    
 
     @Override
     public void mappingUI() {
