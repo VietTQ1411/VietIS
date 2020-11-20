@@ -67,6 +67,11 @@
 
         <LinearLayout
             android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="70dp"
             android:orientation="vertical">
 
@@ -118,7 +123,7 @@
         <LinearLayout
             android:id="@+id/llPassword"
             android:layout_width="match_parent"
-            android:layout_height="120dp"
+            android:layout_height="182dp"
             android:orientation="vertical"
             android:visibility="gone">
 
@@ -130,12 +135,22 @@
                 android:textSize="15dp" />
 
             <EditText
+                android:id="@+id/edtCurrentPassword"
                 android:layout_width="200dp"
                 android:layout_height="23dp"
                 android:layout_gravity="right"
                 android:layout_marginTop="-25dp"
                 android:layout_marginRight="50dp"
                 android:background="@drawable/drop_shadow" />
+
+            <TextView
+                android:id="@+id/txtWhy"
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:layout_marginTop="5dp"
+                android:text=""
+                android:textColor="@color/colorRed"
+                android:visibility="gone"/>
 
             <TextView
                 android:layout_width="160dp"
@@ -161,12 +176,22 @@
                 android:textSize="15dp" />
 
             <EditText
+                android:id="@+id/edtConfirmPassword"
                 android:layout_width="200dp"
                 android:layout_height="23dp"
                 android:layout_gravity="right"
                 android:layout_marginTop="-25dp"
                 android:layout_marginRight="50dp"
                 android:background="@drawable/drop_shadow" />
+
+            <TextView
+                android:id="@+id/txtWhy1"
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:layout_marginTop="5dp"
+                android:text=""
+                android:textColor="@color/colorRed"
+                android:visibility="gone"/>
 
             <Button
                 android:id="@+id/btnSavePassword"
@@ -232,6 +257,7 @@
                 android:background="@drawable/drop_shadow" />
 
             <Button
+                android:id="@+id/btnSaveName"
                 android:layout_width="100dp"
                 android:layout_height="40dp"
                 android:layout_gravity="right"
@@ -296,6 +322,7 @@
                 android:background="@drawable/drop_shadow" />
 
             <Button
+                android:id="@+id/btnSavePhoneNumber"
                 android:layout_width="100dp"
                 android:layout_height="40dp"
                 android:layout_gravity="right"
@@ -331,6 +358,42 @@
                 android:layout_marginTop="-30dp"
                 android:layout_marginRight="25dp"
                 android:background="@drawable/ic_edit" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llAddress"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="130dp"
+                android:layout_height="25dp"
+                android:layout_marginTop="5dp"
+                android:text="Enter new address:"
+                android:textSize="15dp" />
+
+            <EditText
+                android:id="@+id/edtNewAddress"
+                android:layout_width="220dp"
+                android:layout_height="23dp"
+                android:layout_gravity="right"
+                android:layout_marginTop="-25dp"
+                android:layout_marginRight="60dp"
+                android:background="@drawable/drop_shadow" />
+
+            <Button
+                android:id="@+id/btnSaveAddress"
+                android:layout_width="100dp"
+                android:layout_height="40dp"
+                android:layout_gravity="right"
+                android:layout_marginRight="44dp"
+                android:text="Save"
+                android:textSize="15dp" />
+
+        </LinearLayout>
 
         </LinearLayout>
 
