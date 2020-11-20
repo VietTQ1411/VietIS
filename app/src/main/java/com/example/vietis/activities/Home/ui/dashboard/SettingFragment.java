@@ -1,15 +1,12 @@
 package com.example.vietis.activities.Home.ui.dashboard;
 
-import android.content.BroadcastReceiver;
-import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -18,19 +15,15 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.localbroadcastmanager.content.LocalBroadcastManager;
+import androidx.fragment.app.FragmentManager;
 
-import com.example.vietis.Data.entity.User;
+import com.example.vietis.Data.inteface.IView;
 import com.example.vietis.Data.view_model.SettingActivityViewModel;
 import com.example.vietis.R;
-import com.example.vietis.Data.inteface.IView;
 import com.example.vietis.Utilities.common.UserApp;
 import com.example.vietis.activities.LoginActivity;
-import com.example.vietis.database.Database;
 import com.squareup.picasso.Picasso;
 
-import static androidx.core.app.ActivityCompat.finishAffinity;
 
 public class SettingFragment extends Fragment implements IView {
 
@@ -55,17 +48,29 @@ public class SettingFragment extends Fragment implements IView {
     private boolean isVisiblePrivacy = false;
     private boolean isVisiblePolicy = false;
     private boolean isVisibleApp = false;
+    private FragmentManager fragmentManager;
 
     private View view;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.fragment_setting, container, false);
-        view = root;
-        mappingUI();
-        setupUI();
-        setData();
-        return root;
+        if (view == null) {
+            View root = inflater.inflate(R.layout.fragment_setting, container, false);
+            view = root;
+            new Thread(new Runnable() {
+                public void run() {
+                    mappingUI();
+                    setupUI();
+                }
+            }).start();
+            return root;
+        }
+        return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
     }
 
     @Override
@@ -93,20 +98,32 @@ public class SettingFragment extends Fragment implements IView {
     @Override
     public void setupUI() {
         getSettingData();
+        switchilly.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    //turn on notification
+                } else {
+                    //turn off notification
+                }
+            }
+        });
+
         btnEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getContext(), EditProfileActivity.class));
             }
         });
+        btnEdit.setOnClickListener(v -> startActivity(new Intent(getContext(), EditProfileActivity.class)));
         isOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(getActivity(), LoginActivity.class);
+                startActivity(intent);
+                fragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
             }
         });
-        btnEdit.setOnClickListener(v -> startActivity(new Intent(getContext(), EditProfileActivity.class)));
-        isOut.setOnClickListener(v -> startActivity((new Intent(getContext(), LoginActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP))));
 
         isPrivacy.setOnClickListener(v -> {
             isVisiblePrivacy = !isVisiblePrivacy;
@@ -142,19 +159,22 @@ public class SettingFragment extends Fragment implements IView {
         });
     }
 
+
     public void getSettingData() {
         txtProfileName.setText(UserApp.user.getName());
         txtProfileAccount.setText(UserApp.user.getEmail());
-        Picasso.get().load(UserApp.user.getImageURL())
-                .placeholder(R.drawable.ic_launcher_foreground)
-                .resize(100, 100)
-                .centerCrop()
-                .into(imgAvatar);
+        if (UserApp.user.getImageURL() != null && !UserApp.user.getImageURL().isEmpty()) {
+            Picasso.get().load(UserApp.user.getImageURL())
+                    .placeholder(R.drawable.ic_launcher_foreground)
+                    .resize(100, 100)
+                    .centerCrop()
+                    .into(imgAvatar);
+        }
     }
 
-    public void setData() {
-        txtAppVersion.setText("Version: 1.69");
-        txtPolicy.setText("Developers of Fuddy apps:\n + Trần Quang Việt\n + Nguyễn Danh Tùng\n + Đào Công Sơn\n + Nguyễn Anh Tuấn");
-        txtPrivacy.setText("Do not irresponsibly cancel your order because it affects the others behind you");
+        public void setData () {
+            txtAppVersion.setText("Version: 2");
+            txtPolicy.setText("Developers of Fuddy apps:\n + Trần Quang Việt\n + Nguyễn Thanh Tùng\n + Pham Huy");
+            txtPrivacy.setText("Do not irresponsibly cancel your order because it affects the others behind you");
+        }
     }
-}

@@ -5,23 +5,17 @@ import android.util.Log;
 import com.android.volley.AuthFailureError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.example.vietis.Data.entity.Image;
-import com.example.vietis.Data.entity.Shop;
-import com.example.vietis.Data.entity.User;
 import com.example.vietis.Data.IRepository.IUserRepository;
-import com.example.vietis.Data.view_model.MutableArray;
+import com.example.vietis.Data.entity.User;
 import com.example.vietis.R;
 import com.example.vietis.Utilities.common.AppResources;
-import com.example.vietis.Utilities.common.UserApp;
 import com.example.vietis.Utilities.helpers.API;
 
 import org.jetbrains.annotations.NotNull;
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

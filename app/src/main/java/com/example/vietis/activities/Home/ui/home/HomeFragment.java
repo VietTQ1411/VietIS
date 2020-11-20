@@ -2,27 +2,24 @@ package com.example.vietis.activities.Home.ui.home;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.vietis.Data.entity.Food;
-import com.example.vietis.Data.entity.Shop;
+import com.example.vietis.Data.inteface.IListView;
+import com.example.vietis.Data.inteface.IView;
 import com.example.vietis.Data.view_model.ListActivityModel;
 import com.example.vietis.Data.view_model.MutableArray;
 import com.example.vietis.R;
 import com.example.vietis.UI.adapter.SearchAdapter;
-import com.example.vietis.Data.inteface.IListView;
-import com.example.vietis.Data.inteface.IView;
 import com.example.vietis.Utilities.common.AppResources;
 
 import java.util.ArrayList;
@@ -33,12 +30,14 @@ public class HomeFragment extends Fragment implements IView, IListView {
     private SearchView searchViewSearch;
     private static View view;
     private RecyclerView recyclerViewSearch;
+    private ImageButton ibSearch;
 
     //RecyclerView components
     private static SearchAdapter<Food> foodAdapter;
     //View Model
     private ListActivityModel foodActivityModel;
     private int PAGE = 0;
+    private boolean isVisible = true;
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -82,6 +81,7 @@ public class HomeFragment extends Fragment implements IView, IListView {
                 LinearLayoutManager.VERTICAL, false);
         recyclerViewSearch.setLayoutManager(layoutManager);
         recyclerViewSearch.setAdapter(foodAdapter);
+        ibSearch = view.findViewById(R.id.ibSearch);
     }
 
     @Override
@@ -106,6 +106,17 @@ public class HomeFragment extends Fragment implements IView, IListView {
             }
         });
         getData();
+        ibSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                isVisible = !isVisible;
+                if(isVisible){
+                    searchViewSearch.setVisibility(View.VISIBLE);
+                }else{
+                    searchViewSearch.setVisibility(View.GONE);
+                }
+            }
+        });
     }
 
     public void getData() {
