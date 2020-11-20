@@ -22,10 +22,10 @@ import java.util.List;
 /**
  *
  */
-public class StoreDeatilActivityModel extends ViewModel implements ICommentRepository, IStoreDeatilRepository {
+public class StoreDetailActivityModel extends ViewModel implements ICommentRepository, IStoreDeatilRepository {
     private StoreDetailActivity storefragment;
 
-    public StoreDeatilActivityModel(StoreDetailActivity fragment) {
+    public StoreDetailActivityModel(StoreDetailActivity fragment) {
         this.storefragment = fragment;
     }
 
@@ -46,7 +46,7 @@ public class StoreDeatilActivityModel extends ViewModel implements ICommentRepos
     }
 
     @Override
-    public void getStoreDeatil() {
+    public void getStoreDetail() {
         storefragment.setUpStoreDetail(MutableArray.getArrayList());
     }
 }

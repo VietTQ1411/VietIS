@@ -33,4 +33,5 @@ public class HomeAppActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(HomeAppActivity.this, R.id.nav_host_fragment);
         NavigationUI.setupWithNavController(navView, navController);
     }
+
 }

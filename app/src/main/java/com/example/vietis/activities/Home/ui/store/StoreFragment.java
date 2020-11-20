@@ -3,6 +3,7 @@ package com.example.vietis.activities.Home.ui.store;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.InflateException;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,10 +38,14 @@ public class StoreFragment extends Fragment implements IView, IListView {
     //View Model
     private ListActivityModel storeActivityModel;
     private int PAGE = 0;
-
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        if (view == null) {
+        if (view != null) {
+            ViewGroup parent = (ViewGroup) view.getParent();
+            if(parent!=null){
+                parent.removeView(view);
+            }
+        }
             View root = inflater.inflate(R.layout.fragment_store, container, false);
             view = root;
             new Thread(new Runnable() {
@@ -50,10 +55,6 @@ public class StoreFragment extends Fragment implements IView, IListView {
                 }
             }).start();
             return root;
-        }else{
-            callData();
-        }
-        return view;
     }
 
 
@@ -62,12 +63,7 @@ public class StoreFragment extends Fragment implements IView, IListView {
         super.onResume();
     }
 
-    @Override
-    public void onStop() {
-        super.onStop();
-        PAGE = 0;
-        MutableArray.clearData();
-    }
+
 
     @Override
     public void mappingUI() {

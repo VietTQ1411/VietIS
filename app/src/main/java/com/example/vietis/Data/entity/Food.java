@@ -1,6 +1,9 @@
 package com.example.vietis.Data.entity;
 
 
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -12,12 +15,14 @@ import lombok.Getter;
 @Data
 @Builder
 @Getter
+@Entity
 public class Food {
+    @PrimaryKey
     @Builder.Default
-    private int ID = 1;
+    private int ID = 0;
 
     @Builder.Default
-    private int shopID = 1;
+    private int shopID = 0;
 
     @Builder.Default
     private String name = "default name";
@@ -38,7 +43,19 @@ public class Food {
     private String description = "default description";
 
     @Builder.Default
-    private int imageID = 1;
+    private int imageID = 0;
+
+    public Food(int ID, int shopID, String name, String address, String category, float price, String imageURL, String description, int imageID) {
+        this.ID = ID;
+        this.shopID = shopID;
+        this.name = name;
+        this.address = address;
+        this.category = category;
+        this.price = price;
+        this.imageURL = imageURL;
+        this.description = description;
+        this.imageID = imageID;
+    }
 
     public static Food generateFoodFromJSON(JSONObject jsonObject) {
         try {

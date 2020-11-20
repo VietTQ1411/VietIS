@@ -1,7 +1,6 @@
 package com.example.vietis.activities.Home.ui.home;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
@@ -11,18 +10,13 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.vietis.Data.entity.Comment;
 import com.example.vietis.Data.entity.Food;
 import com.example.vietis.Data.view_model.FoodDetailViewModel;
-import com.example.vietis.Data.view_model.StoreDeatilActivityModel;
 import com.example.vietis.R;
 import com.example.vietis.UI.adapter.CommentAdapter;
 import com.example.vietis.Data.inteface.IView;
-import com.example.vietis.Utilities.common.UserApp;
 import com.example.vietis.activities.Home.ui.order.OrderActivity;
 import com.squareup.picasso.Picasso;
-
-import java.util.ArrayList;
 
 public class FoodDetailActivity extends AppCompatActivity implements IView {
 
@@ -48,7 +42,7 @@ public class FoodDetailActivity extends AppCompatActivity implements IView {
 
     @Override
     public void mappingUI() {
-        imageStoreDetailIcon = findViewById(R.id.imageStoreDetailIcon);
+        imageStoreDetailIcon = findViewById(R.id.imageStore2DetailIcon);
         txtDetailFoodName = findViewById(R.id.txtDetailFoodName);
         txtDetailFoodAddress = findViewById(R.id.txtDetailFoodAddress);
         txtDetailFoodCategory = findViewById(R.id.txtDetailFoodCategory);
@@ -74,7 +68,7 @@ public class FoodDetailActivity extends AppCompatActivity implements IView {
         foodDetailViewModel.getFoodDetail(id);
     }
 
-    public void setupData(Food food) {
+    public void  setupData(Food food) {
         Picasso.get().load(food.getImageURL())
                 .placeholder(R.drawable.ic_launcher_foreground)
                 .resize(250, 250)

@@ -9,5 +9,5 @@ public interface IStoreDeatilRepository {
      * get store detail by store id switch over from Parent intent
      *
      */
-    public void getStoreDeatil();
+    public void getStoreDetail();
 }
