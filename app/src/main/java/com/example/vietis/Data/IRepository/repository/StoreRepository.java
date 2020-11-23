@@ -11,32 +11,19 @@ import com.example.vietis.Data.IRepository.IStoreDeatilRepository;
 import com.example.vietis.Data.entity.Comment;
 import com.example.vietis.Data.entity.Rating;
 import com.example.vietis.Data.entity.Shop;
-import com.example.vietis.Data.entity.User;
 import com.example.vietis.Data.view_model.MutableArray;
 import com.example.vietis.R;
 import com.example.vietis.Utilities.common.AppResources;
 import com.example.vietis.Utilities.common.UserApp;
 import com.example.vietis.Utilities.helpers.API;
 
-import org.jetbrains.annotations.NotNull;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.Console;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-
-import okhttp3.Call;
-import okhttp3.Callback;
-import okhttp3.MultipartBody;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.RequestBody;
-import okhttp3.Response;
 
 public class StoreRepository {
     private static StoreRepository instance = null;
@@ -106,9 +93,7 @@ public class StoreRepository {
                         } else {
                             iCommentRepository.getCommentLimit(null);
                         }
-                        iStoreDeatilRepository.getStoreDeatil();
-                    }else{
-
+                        iStoreDeatilRepository.getStoreDetail();
                     }
                 } catch (JSONException e) {
                     Log.e(TAG, "JsonObjectRequest onErrorResponse: " + e.getMessage());

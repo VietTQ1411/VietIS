@@ -11,8 +11,6 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.widget.NestedScrollView;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -20,7 +18,7 @@ import com.example.vietis.Data.entity.Comment;
 import com.example.vietis.Data.entity.Rating;
 import com.example.vietis.Data.entity.Shop;
 import com.example.vietis.Data.view_model.ListActivityModel;
-import com.example.vietis.Data.view_model.StoreDeatilActivityModel;
+import com.example.vietis.Data.view_model.StoreDetailActivityModel;
 import com.example.vietis.R;
 import com.example.vietis.UI.adapter.CommentAdapter;
 import com.example.vietis.UI.adapter.SearchAdapter;
@@ -97,7 +95,7 @@ public class StoreDetailActivity extends AppCompatActivity implements IView {
      */
     private Shop store = null;
     private List<Rating> listRate = null;
-    private StoreDeatilActivityModel storeDeatilActivityModel;
+    private StoreDetailActivityModel storeDeatilActivityModel;
     private static Boolean saveBundle = false;
 
     @Override
@@ -116,6 +114,11 @@ public class StoreDetailActivity extends AppCompatActivity implements IView {
         } else {
             setUpData();
         }
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
     }
 
     @Override
@@ -233,7 +236,7 @@ public class StoreDetailActivity extends AppCompatActivity implements IView {
             id = b.getString("id");
 
         }
-        storeDeatilActivityModel = new StoreDeatilActivityModel(this);
+        storeDeatilActivityModel = new StoreDetailActivityModel(this);
         storeDeatilActivityModel.getStoreDetail(UserApp.user.getTokenKey(), id);
     }
 

@@ -13,11 +13,13 @@ import com.example.vietis.activities.Home.ui.home.FoodDetailActivity;
 import com.example.vietis.activities.Home.ui.order.OrderActivity;
 import com.example.vietis.activities.Home.ui.store.StoreDetailActivity;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 
 public class FoodDetailViewModel extends ViewModel implements IFoodRespository {
 
     private FoodDetailActivity foodDetailActivity;
+    private WeakReference<FoodDetailActivity> = new
 
     public FoodDetailViewModel(FoodDetailActivity fragment) {
         this.foodDetailActivity = fragment;
