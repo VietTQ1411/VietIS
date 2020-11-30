@@ -11,8 +11,6 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.widget.NestedScrollView;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -20,7 +18,7 @@ import com.example.vietis.Data.entity.Comment;
 import com.example.vietis.Data.entity.Rating;
 import com.example.vietis.Data.entity.Shop;
 import com.example.vietis.Data.view_model.ListActivityModel;
-import com.example.vietis.Data.view_model.StoreDeatilActivityModel;
+import com.example.vietis.Data.view_model.StoreDetailActivityModel;
 import com.example.vietis.R;
 import com.example.vietis.UI.adapter.CommentAdapter;
 import com.example.vietis.UI.adapter.SearchAdapter;
@@ -97,27 +95,25 @@ public class StoreDetailActivity extends AppCompatActivity implements IView {
      */
     private Shop store = null;
     private List<Rating> listRate = null;
-    private StoreDeatilActivityModel storeDeatilActivityModel;
+    private StoreDetailActivityModel storeDeatilActivityModel;
     private static Boolean saveBundle = false;
-
+    private TextView testText;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_store_detail);
-        if (saveBundle == false) {
-            saveBundle = true;
+        setContentView(R.layout.test_layout);
+
             new Thread(new Runnable() {
                 public void run() {
-                    mappingUI();
-                    setupUI();
+//                    mappingUI();
+                    testText = findViewById(R.id.testText);
+//                    setupUI();
+
                     setUpData();
                 }
             }).start();
-        } else {
-            setUpData();
-        }
-    }
 
+    }
     @Override
     public void mappingUI() {
         nsvStoreView = findViewById(R.id.nsvStoreView);
@@ -233,7 +229,7 @@ public class StoreDetailActivity extends AppCompatActivity implements IView {
             id = b.getString("id");
 
         }
-        storeDeatilActivityModel = new StoreDeatilActivityModel(this);
+        storeDeatilActivityModel = new StoreDetailActivityModel(this);
         storeDeatilActivityModel.getStoreDetail(UserApp.user.getTokenKey(), id);
     }
 
@@ -245,26 +241,27 @@ public class StoreDetailActivity extends AppCompatActivity implements IView {
 
     public void setUpStoreDetail(ArrayList<Object> objects) {
         store = (Shop) objects.get(0);
-        listRate = new ArrayList<>();
-        for (int i = 1; i < objects.size(); i++) {
-            listRate.add((Rating) objects.get(i));
-        }
-
-        //Store description
-        txtStoreName.setText(store.getName());
-        txtStoreAddress.setText(store.getAddress());
-        txtStorePhone.setText("Hotline: " + store.getPhoneNumber());
-        txtStoreDescription.setText(store.getDescription());
-        Picasso.get().load(store.getImageURL())
-                .placeholder(R.drawable.ic_launcher_foreground)
-                .resize(150, 150)
-                .centerCrop()
-                .into(imageStoreDetailIcon);
-        //Rating section
-        txtRating1.setText(listRate.get(0).getVoteCount() + " lượt đánh giá");
-        txtRating2.setText(listRate.get(1).getVoteCount() + " lượt đánh giá");
-        txtRating3.setText(listRate.get(2).getVoteCount() + " lượt đánh giá");
-        txtRating4.setText(listRate.get(3).getVoteCount() + " lượt đánh giá");
-        txtRating5.setText(listRate.get(4).getVoteCount() + " lượt đánh giá");
+//        listRate = new ArrayList<>();
+//        for (int i = 1; i < objects.size(); i++) {
+//            listRate.add((Rating) objects.get(i));
+//        }
+//
+//        //Store description
+//        txtStoreName.setText(store.getName());
+//        txtStoreAddress.setText(store.getAddress());
+//        txtStorePhone.setText("Hotline: " + store.getPhoneNumber());
+//        txtStoreDescription.setText(store.getDescription());
+//        Picasso.get().load(store.getImageURL())
+//                .placeholder(R.drawable.ic_launcher_foreground)
+//                .resize(150, 150)
+//                .centerCrop()
+//                .into(imageStoreDetailIcon);
+//        //Rating section
+//        txtRating1.setText(listRate.get(0).getVoteCount() + " lượt đánh giá");
+//        txtRating2.setText(listRate.get(1).getVoteCount() + " lượt đánh giá");
+//        txtRating3.setText(listRate.get(2).getVoteCount() + " lượt đánh giá");
+//        txtRating4.setText(listRate.get(3).getVoteCount() + " lượt đánh giá");
+//        txtRating5.setText(listRate.get(4).getVoteCount() + " lượt đánh giá");
+        testText.setText(store.getName());
     }
 }

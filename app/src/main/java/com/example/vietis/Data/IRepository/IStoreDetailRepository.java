@@ -4,10 +4,10 @@ import com.example.vietis.Data.entity.Shop;
 
 import java.util.List;
 
-public interface IStoreDeatilRepository {
+public interface IStoreDetailRepository {
     /**
      * get store detail by store id switch over from Parent intent
      *
      */
-    public void getStoreDeatil();
+    public void getStoreDetail();
 }

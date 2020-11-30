@@ -97,6 +97,6 @@ public class ListActivityModel extends ViewModel implements IStoreRepository, IF
     }
     @Override
     public void getFoodData() {
-
+        homefragment.setUpData(getFooodData());
     }
 }

@@ -1,31 +1,22 @@
 package com.example.vietis.Data.view_model;
 
-import android.os.Handler;
-import android.os.Looper;
-
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.vietis.Data.IRepository.ICommentRepository;
-import com.example.vietis.Data.IRepository.IStoreDeatilRepository;
+import com.example.vietis.Data.IRepository.IStoreDetailRepository;
 import com.example.vietis.Data.IRepository.repository.StoreRepository;
-import com.example.vietis.Data.IRepository.repository.UserRepository;
 import com.example.vietis.Data.entity.Comment;
-import com.example.vietis.Data.entity.Shop;
 import com.example.vietis.activities.Home.ui.store.StoreDetailActivity;
-import com.example.vietis.activities.Home.ui.store.StoreFragment;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  *
  */
-public class StoreDeatilActivityModel extends ViewModel implements ICommentRepository, IStoreDeatilRepository {
+public class StoreDetailActivityModel extends ViewModel implements ICommentRepository, IStoreDetailRepository {
     private StoreDetailActivity storefragment;
 
-    public StoreDeatilActivityModel(StoreDetailActivity fragment) {
+    public StoreDetailActivityModel(StoreDetailActivity fragment) {
         this.storefragment = fragment;
     }
 
@@ -46,7 +37,7 @@ public class StoreDeatilActivityModel extends ViewModel implements ICommentRepos
     }
 
     @Override
-    public void getStoreDeatil() {
+    public void getStoreDetail() {
         storefragment.setUpStoreDetail(MutableArray.getArrayList());
     }
 }
