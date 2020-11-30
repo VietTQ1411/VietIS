@@ -14,10 +14,13 @@ import com.example.vietis.Data.entity.Food;
 import com.example.vietis.Data.entity.Shop;
 import com.example.vietis.Data.IRepository.IFoodRespository;
 import com.example.vietis.Data.IRepository.repository.ShopRepository;
+import com.example.vietis.Utilities.common.AppResources;
 import com.example.vietis.activities.Home.ui.home.HomeFragment;
 import com.example.vietis.activities.Home.ui.store.StoreFragment;
+import com.example.vietis.database.Database;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ListActivityModel extends ViewModel implements IStoreRepository, IFoodRespository {
 
@@ -48,7 +51,8 @@ public class ListActivityModel extends ViewModel implements IStoreRepository, IF
      */
     public ArrayList<Food> searchFood(String query) {
         return (ArrayList<Food>) FoodRespository
-               .getInstance(this).searchFood(getFooodData(),query);
+               .getInstance(this).searchFood(
+                       getFooodData(),query);
     }
 
 
@@ -68,10 +72,7 @@ public class ListActivityModel extends ViewModel implements IStoreRepository, IF
         FoodRespository.getInstance(this).getFoodPaging(search, page);
     }
 
-    @Override
-    public void getFoodData() {
-        homefragment.setUpData(getFooodData());
-    }
+
 
     @Override
     public void getShopData() {
@@ -86,11 +87,16 @@ public class ListActivityModel extends ViewModel implements IStoreRepository, IF
         return list;
     }
 
-    public ArrayList<Food> getFooodData() {
+
+    public ArrayList<Food> getFooodData(){
         listfood.clear();
-        for (Object t : MutableArray.getArrayList()) {
+        for(Object t: MutableArray.getArrayList()){
             listfood.add((Food) t);
         }
-        return listfood;
+        return  listfood;
+    }
+    @Override
+    public void getFoodData() {
+
     }
 }
