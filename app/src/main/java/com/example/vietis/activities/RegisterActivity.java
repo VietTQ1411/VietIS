@@ -1,46 +1,32 @@
 package com.example.vietis.activities;
 
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Observer;
 
 import com.example.vietis.Data.inteface.IView;
-import com.example.vietis.R;
-import com.example.vietis.database.Database;
-import com.example.vietis.Data.entity.User;
 import com.example.vietis.Data.view_model.RegisterActivityViewModel;
+import com.example.vietis.R;
 
 public class RegisterActivity extends AppCompatActivity implements IView {
-    private EditText txtEmail;
-    private EditText txtName;
-    private EditText txtPassword;
-    private Button btnRegister;
+
     private RegisterActivityViewModel registerActivityViewModel;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-        mappingUI();
-        setupUI();
+        //mappingUI();
+        //setupUI();
     }
 
     @Override
     public void mappingUI() {
-        txtEmail = findViewById(R.id.register_email);
-        txtName = findViewById(R.id.register_username);
-        txtPassword = findViewById(R.id.register_password);
-        btnRegister = findViewById(R.id.btnRegister);
-        registerActivityViewModel = new RegisterActivityViewModel();
+        //registerActivityViewModel = new RegisterActivityViewModel();
     }
 
-    private String getEmail() {
+    /*private String getEmail() {
         return txtEmail.getText().toString().trim();
     }
 
@@ -77,15 +63,15 @@ public class RegisterActivity extends AppCompatActivity implements IView {
                         }
                     }
                 });
-    }
+    }*/
 
     @Override
     public void setupUI() {
-        btnRegister.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                register();
-            }
-        });
+        //btnRegister.setOnClickListener(new View.OnClickListener() {
+           // @Override
+           // public void onClick(View v) {
+           //     register();
+            //}
+       // });
     }
 }

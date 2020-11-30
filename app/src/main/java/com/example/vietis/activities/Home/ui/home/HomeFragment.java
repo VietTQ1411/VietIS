@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.SearchView;
@@ -30,7 +29,6 @@ public class HomeFragment extends Fragment implements IView, IListView {
     private SearchView searchViewSearch;
     private static View view;
     private RecyclerView recyclerViewSearch;
-    private ImageButton ibSearch;
 
     //RecyclerView components
     private static SearchAdapter<Food> foodAdapter;
@@ -81,7 +79,6 @@ public class HomeFragment extends Fragment implements IView, IListView {
                 LinearLayoutManager.VERTICAL, false);
         recyclerViewSearch.setLayoutManager(layoutManager);
         recyclerViewSearch.setAdapter(foodAdapter);
-        ibSearch = view.findViewById(R.id.ibSearch);
     }
 
     @Override
@@ -106,17 +103,6 @@ public class HomeFragment extends Fragment implements IView, IListView {
             }
         });
         getData();
-        ibSearch.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                isVisible = !isVisible;
-                if(isVisible){
-                    searchViewSearch.setVisibility(View.VISIBLE);
-                }else{
-                    searchViewSearch.setVisibility(View.GONE);
-                }
-            }
-        });
     }
 
     public void getData() {

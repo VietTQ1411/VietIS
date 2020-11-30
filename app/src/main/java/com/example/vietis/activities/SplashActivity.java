@@ -1,9 +1,5 @@
 package com.example.vietis.activities;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Observer;
-
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Intent;
@@ -12,15 +8,15 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
-import android.view.View;
-import android.view.animation.AnimationUtils;
-import android.widget.ImageView;
-import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
 
 import com.example.vietis.Data.inteface.IView;
+import com.example.vietis.Data.view_model.SplashActivityViewModel;
 import com.example.vietis.R;
 import com.example.vietis.Utilities.notifications.MyFirebaseMessagingService;
-import com.example.vietis.Data.view_model.SplashActivityViewModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.messaging.FirebaseMessaging;
@@ -28,8 +24,6 @@ import com.google.firebase.messaging.FirebaseMessaging;
 public class SplashActivity extends AppCompatActivity implements IView {
 
     private static final String TAG = "Notification";
-    private ImageView imageView;
-    private TextView textView2;
     private SplashActivityViewModel splashActivityViewModel = new SplashActivityViewModel();
 
     private void createNotificationChannels() {
@@ -78,42 +72,15 @@ public class SplashActivity extends AppCompatActivity implements IView {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                startAnimation();
-            }
-        }, 2000);
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                exitAnimation();
-            }
-        }, 5000);
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                startActivity(new Intent(SplashActivity.this, MainActivity.class));
+                startActivity(new Intent(SplashActivity.this, LoginActivity.class));
                 finish();
             }
-        }, 6000);
-    }
-
-    private void exitAnimation() {
-        imageView.startAnimation(AnimationUtils.loadAnimation(this, R.anim.image_out));
-        textView2.startAnimation(AnimationUtils.loadAnimation(this, R.anim.text_out));
-        imageView.setVisibility(View.INVISIBLE);
-        textView2.setVisibility(View.INVISIBLE);
-    }
-
-    private void startAnimation() {
-        imageView.startAnimation(AnimationUtils.loadAnimation(this, R.anim.image_in));
-        textView2.startAnimation(AnimationUtils.loadAnimation(this, R.anim.text_in));
-        imageView.setVisibility(View.VISIBLE);
-        textView2.setVisibility(View.VISIBLE);
+        }, 3000);
     }
 
     @Override
     public void mappingUI() {
-        imageView = findViewById(R.id.imageView);
-        textView2 = findViewById(R.id.textView2);
+
     }
 
     @Override
