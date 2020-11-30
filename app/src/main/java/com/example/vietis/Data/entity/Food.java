@@ -45,6 +45,19 @@ public class Food {
     @Builder.Default
     private int imageID = 0;
 
+
+    public Food(int ID, int shopID, String name, String address, String category, float price, String imageURL, String description, int imageID) {
+        this.ID = ID;
+        this.shopID = shopID;
+        this.name = name;
+        this.address = address;
+        this.category = category;
+        this.price = price;
+        this.imageURL = imageURL;
+        this.description = description;
+        this.imageID = imageID;
+    }
+
     public static Food generateFoodFromJSON(JSONObject jsonObject) {
         try {
             return Food.builder()

@@ -17,6 +17,7 @@ import com.example.vietis.R;
 import com.example.vietis.Utilities.common.AppResources;
 import com.example.vietis.Utilities.common.UserApp;
 import com.example.vietis.Utilities.helpers.API;
+import com.example.vietis.database.Database;
 
 import org.jetbrains.annotations.NotNull;
 import org.json.JSONArray;
@@ -67,9 +68,10 @@ public class FoodRespository {
                     if (stringResult.equals(AppResources.getResourses().getString(R.string.SUCCESS_REQUEST))) {
                         JSONArray jsonShopArray = response.getJSONArray("data");
                         for (int i = 0; i < jsonShopArray.length(); i++) {
-                            MutableArray.getArrayList().add(Food.generateFoodFromJSON(jsonShopArray.getJSONObject(i)));
+                            Database.getInstance(AppResources.getContext()).foodDAO().insertFood(Food.generateFoodFromJSON(jsonShopArray.getJSONObject(i)) );
                         }
-                        iFoodRespository.getFoodData();
+                        ArrayList<Food> foods = new ArrayList<>(Database.getInstance(AppResources.getContext()).foodDAO().getAllFood());
+                        iFoodRespository.getAllFood(foods);
                     } else {
                         //move error
                     }
@@ -93,7 +95,7 @@ public class FoodRespository {
             }
 
             @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
+            public Map<String, String> getHeaders() {
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("Content-Type", "application/x-www-form-urlencoded");
                 params.put("tokenkey", UserApp.user.getTokenKey());
@@ -116,11 +118,9 @@ public class FoodRespository {
                     JSONObject response = new JSONObject(StringResponse);
                     String stringResult = response.getString("result");
                     if (stringResult.equals(AppResources.getResourses().getString(R.string.SUCCESS_REQUEST))) {
-                        JSONArray jsonShopArray = response.getJSONArray("data");
-                        for (int i = 0; i < jsonShopArray.length(); i++) {
-                            MutableArray.getArrayList().add(Food.generateFoodFromJSON(jsonShopArray.getJSONObject(i)));
-                        }
-                        iFoodRespository.getFoodData();
+                        JSONObject jsonFood = response.getJSONObject("data");
+                        iFoodRespository.getFoodData(Database.getInstance(AppResources.getContext()).foodDAO().getFoodById(
+                                Food.generateFoodFromJSON(jsonFood).getID()));
                     } else {
                         //move error
                     }
@@ -128,12 +128,7 @@ public class FoodRespository {
                     e.printStackTrace();
                 }
             }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.e(TAG, "JsonObjectRequest onErrorResponse: " + error.getMessage());
-            }
-        }) {
+        }, error -> Log.e(TAG, "JsonObjectRequest onErrorResponse: " + error.getMessage())) {
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<String, String>();
@@ -142,7 +137,7 @@ public class FoodRespository {
             }
 
             @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
+            public Map<String, String> getHeaders() {
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("Content-Type", "application/x-www-form-urlencoded");
                 params.put("tokenkey", UserApp.user.getTokenKey());

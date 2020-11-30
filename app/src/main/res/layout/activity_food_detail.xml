@@ -7,7 +7,7 @@
     tools:context=".activities.Home.ui.store.StoreDetailActivity">
 
     <androidx.core.widget.NestedScrollView
-        android:id="@+id/nsvStoreView"
+        android:id="@+id/nsvFoodView"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -24,7 +24,7 @@
                 android:layout_height="match_parent"
                 android:background="@drawable/ic_launcher_background">
                 <ImageView
-                    android:id="@+id/imageStoreDetailIcon"
+                    android:id="@+id/imageStore2DetailIcon"
                     android:layout_width="match_parent"
                     android:layout_height="150dp"
                     android:src="@mipmap/ic_launcher"

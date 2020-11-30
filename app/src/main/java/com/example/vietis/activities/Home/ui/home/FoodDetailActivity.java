@@ -42,7 +42,7 @@ public class FoodDetailActivity extends AppCompatActivity implements IView {
 
     @Override
     public void mappingUI() {
-        imageStoreDetailIcon = findViewById(R.id.imageStoreDetailIcon);
+        imageStoreDetailIcon = findViewById(R.id.imageStore2DetailIcon);
         txtDetailFoodName = findViewById(R.id.txtDetailFoodName);
         txtDetailFoodAddress = findViewById(R.id.txtDetailFoodAddress);
         txtDetailFoodCategory = findViewById(R.id.txtDetailFoodCategory);
@@ -66,7 +66,7 @@ public class FoodDetailActivity extends AppCompatActivity implements IView {
         foodDetailViewModel.getFoodDetail(id);
     }
 
-    public void setupData(Food food) {
+    public void  setupData(Food food) {
         Picasso.get().load(food.getImageURL())
                 .placeholder(R.drawable.ic_launcher_foreground)
                 .resize(250, 250)

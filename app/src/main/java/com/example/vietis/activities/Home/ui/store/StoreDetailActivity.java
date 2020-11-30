@@ -102,8 +102,6 @@ public class StoreDetailActivity extends AppCompatActivity implements IView {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_store_detail);
-        if (saveBundle == false) {
-            saveBundle = true;
             new Thread(new Runnable() {
                 public void run() {
                     mappingUI();
@@ -111,9 +109,7 @@ public class StoreDetailActivity extends AppCompatActivity implements IView {
                     setUpData();
                 }
             }).start();
-        } else {
-            setUpData();
-        }
+
     }
 
     @Override
@@ -179,20 +175,7 @@ public class StoreDetailActivity extends AppCompatActivity implements IView {
                 LinearLayoutManager.VERTICAL, false);
         //FoodRecyclerView.setLayoutManager(layoutManager);
         CommentRecyclerView.setLayoutManager(layoutManager2);
-
-
         CommentRecyclerView.setAdapter(commentAdapter);
-    }
-
-    /**
-     * format description
-     *
-     * @param description
-     * @return
-     */
-    public String createIndentedText(String description) {
-        description = "\t" + description.replaceAll("\n", "\n\t");
-        return description;
     }
 
     @Override

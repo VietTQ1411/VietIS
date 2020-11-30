@@ -1,5 +1,8 @@
 package com.example.vietis.Data.entity;
 
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
 import com.example.vietis.Data.IRepository.repository.Config;
 
 import org.json.JSONArray;
@@ -15,9 +18,11 @@ import lombok.Getter;
 @Data
 @Builder
 @Getter
+@Entity
 public class Shop implements Serializable {
+    @PrimaryKey
     @Builder.Default
-    private int ID = 1;
+    private int ID = 0;
     @Builder.Default
     private String name = "";
     @Builder.Default
@@ -39,6 +44,16 @@ public class Shop implements Serializable {
     @Override
     public String toString() {
         return name + "-" + address + "-" + rating + "-" + phoneNumber + "-" + imageURL;
+    }
+
+    public Shop(int ID, String name, String address, float rating, String phoneNumber, String imageURL, String description) {
+        this.ID = ID;
+        this.name = name;
+        this.address = address;
+        this.rating = rating;
+        this.phoneNumber = phoneNumber;
+        this.imageURL = imageURL;
+        this.description = description;
     }
 
     public static Shop generateShopFromJSON(JSONObject jsonObject) {

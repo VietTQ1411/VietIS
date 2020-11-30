@@ -28,7 +28,7 @@ import java.util.Map;
 public class StoreRepository {
     private static StoreRepository instance = null;
     private ICommentRepository iCommentRepository;
-    private IStoreDeatilRepository iStoreDeatilRepository;
+    private IStoreDeatilRepository iStoreDetailRepository;
     private final String TAG = "Store Deatil Repository";
 
     /**
@@ -39,7 +39,7 @@ public class StoreRepository {
      */
     private StoreRepository(ICommentRepository ICommentRepository, IStoreDeatilRepository iStoreDeatilRepository) {
         this.iCommentRepository = ICommentRepository;
-        this.iStoreDeatilRepository = iStoreDeatilRepository;
+        this.iStoreDetailRepository = iStoreDeatilRepository;
     }
 
     public static StoreRepository getInstance(ICommentRepository ICommentRepository, IStoreDeatilRepository iStoreDeatilRepository) {
@@ -93,7 +93,10 @@ public class StoreRepository {
                         } else {
                             iCommentRepository.getCommentLimit(null);
                         }
-                        iStoreDeatilRepository.getStoreDetail();
+
+                        iStoreDetailRepository.getStoreDetail();
+                    }else{
+
                     }
                 } catch (JSONException e) {
                     Log.e(TAG, "JsonObjectRequest onErrorResponse: " + e.getMessage());
