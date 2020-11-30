@@ -68,10 +68,10 @@ public class FoodRespository {
                     if (stringResult.equals(AppResources.getResourses().getString(R.string.SUCCESS_REQUEST))) {
                         JSONArray jsonShopArray = response.getJSONArray("data");
                         for (int i = 0; i < jsonShopArray.length(); i++) {
-                            Database.getInstance(AppResources.getContext()).foodDAO().insertFood(Food.generateFoodFromJSON(jsonShopArray.getJSONObject(i)) );
-                        }
-                        ArrayList<Food> foods = new ArrayList<>(Database.getInstance(AppResources.getContext()).foodDAO().getAllFood());
-                        iFoodRespository.getAllFood(foods);
+                            MutableArray.getArrayList().add(Food.generateFoodFromJSON(jsonShopArray.getJSONObject(i)));
+                                                    }
+
+                        iFoodRespository.getFoodData();
                     } else {
                         //move error
                     }
@@ -118,9 +118,11 @@ public class FoodRespository {
                     JSONObject response = new JSONObject(StringResponse);
                     String stringResult = response.getString("result");
                     if (stringResult.equals(AppResources.getResourses().getString(R.string.SUCCESS_REQUEST))) {
-                        JSONObject jsonFood = response.getJSONObject("data");
-                        iFoodRespository.getFoodData(Database.getInstance(AppResources.getContext()).foodDAO().getFoodById(
-                                Food.generateFoodFromJSON(jsonFood).getID()));
+                        JSONArray jsonShopArray = response.getJSONArray("data");
+                        for (int i = 0; i < jsonShopArray.length(); i++) {
+                            MutableArray.getArrayList().add(Food.generateFoodFromJSON(jsonShopArray.getJSONObject(i)));
+                        }
+                        iFoodRespository.getFoodData();
                     } else {
                         //move error
                     }

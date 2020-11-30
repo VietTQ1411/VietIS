@@ -7,6 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public interface IFoodRespository {
-    public void getFoodData(Food food);
+    public void getFoodData();
     void getAllFood(ArrayList<Food> foodList);
 }

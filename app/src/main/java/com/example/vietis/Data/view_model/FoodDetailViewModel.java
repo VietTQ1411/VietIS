@@ -21,7 +21,6 @@ import java.util.ArrayList;
 public class FoodDetailViewModel extends ViewModel implements IFoodRespository {
 
     private FoodDetailActivity foodDetailActivity;
-    private WeakReference<FoodDetailActivity> = new
 
     public FoodDetailViewModel(FoodDetailActivity fragment) {
         this.foodDetailActivity = fragment;
@@ -38,8 +37,8 @@ public class FoodDetailViewModel extends ViewModel implements IFoodRespository {
     }
 
     @Override
-    public void getFoodData(Food food) {
-        foodDetailActivity.setupData(Database.getInstance(AppResources.getContext()).foodDAO().getFoodById(food.getID()));
+    public void getFoodData() {
+        foodDetailActivity.setupData((Food) MutableArray.getArrayList().get(0));
     }
 
     @Override
