@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -33,7 +32,6 @@ public class SettingFragment extends Fragment implements IView {
     private TextView txtPrivacy;
     private TextView txtPolicy;
     private TextView txtAppVersion;
-    private Button btnEdit;
     private Switch switchilly;
     private ImageButton ibPrivacy;
     private ImageButton ibPolicy;
@@ -44,6 +42,7 @@ public class SettingFragment extends Fragment implements IView {
     private LinearLayout isPolicy;
     private LinearLayout isApp;
     private LinearLayout isOut;
+    private LinearLayout llEditProfile;
     private SettingActivityViewModel settingActivityViewModel;
     private boolean isVisiblePrivacy = false;
     private boolean isVisiblePolicy = false;
@@ -81,7 +80,7 @@ public class SettingFragment extends Fragment implements IView {
         txtPrivacy = view.findViewById(R.id.txtPrivacy);
         txtPolicy = view.findViewById(R.id.txtPolicy);
         txtAppVersion = view.findViewById(R.id.txtAppVersion);
-        btnEdit = view.findViewById(R.id.btnEdit);
+        llEditProfile = view.findViewById(R.id.llEditProfile);
         switchilly = view.findViewById(R.id.switchilly);
         ibPrivacy = view.findViewById(R.id.ibPrivacy);
         ibPolicy = view.findViewById(R.id.ibPolicy);
@@ -109,13 +108,13 @@ public class SettingFragment extends Fragment implements IView {
             }
         });
 
-        btnEdit.setOnClickListener(new View.OnClickListener() {
+        llEditProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getContext(), EditProfileActivity.class));
             }
         });
-        btnEdit.setOnClickListener(v -> startActivity(new Intent(getContext(), EditProfileActivity.class)));
+
         isOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -157,6 +156,7 @@ public class SettingFragment extends Fragment implements IView {
                 txtAppVersion.setVisibility(View.GONE);
             }
         });
+
     }
 
 
@@ -171,10 +171,4 @@ public class SettingFragment extends Fragment implements IView {
                     .into(imgAvatar);
         }
     }
-
-        public void setData () {
-            txtAppVersion.setText("Version: 2");
-            txtPolicy.setText("Developers of Fuddy apps:\n + Trần Quang Việt\n + Nguyễn Thanh Tùng\n + Pham Huy");
-            txtPrivacy.setText("Do not irresponsibly cancel your order because it affects the others behind you");
-        }
-    }
+}

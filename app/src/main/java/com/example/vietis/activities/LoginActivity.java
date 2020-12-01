@@ -97,7 +97,6 @@ public class LoginActivity extends AppCompatActivity implements IView {
         loginActivityViewModel.login(getEmail(), getPassword());
     }
 
-
     private BroadcastReceiver mMessageReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
