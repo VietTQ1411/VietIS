@@ -11,12 +11,14 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.widget.NestedScrollView;
+import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.vietis.Data.entity.Comment;
 import com.example.vietis.Data.entity.Rating;
 import com.example.vietis.Data.entity.Shop;
+import com.example.vietis.Data.inteface.IView;
 import com.example.vietis.Data.view_model.ListActivityModel;
 import com.example.vietis.Data.view_model.StoreDetailActivityModel;
 import com.example.vietis.R;
@@ -24,7 +26,6 @@ import com.example.vietis.UI.adapter.CommentAdapter;
 import com.example.vietis.UI.adapter.SearchAdapter;
 import com.example.vietis.UI.dialog.RatingFragment;
 import com.example.vietis.Utilities.common.UserApp;
-import com.example.vietis.Data.inteface.IView;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -40,7 +41,7 @@ public class StoreDetailActivity extends AppCompatActivity implements IView {
      * Local param
      */
     private NestedScrollView nsvStoreView;
-    private String TAG = "Store Detail";
+    private final String TAG = "Store Detail";
     private boolean isVisible = true;
 
     /**
@@ -93,27 +94,32 @@ public class StoreDetailActivity extends AppCompatActivity implements IView {
     /**
      * Store Repository of store
      */
-    private Shop store = null;
     private List<Rating> listRate = null;
-    private StoreDetailActivityModel storeDeatilActivityModel;
-    private static Boolean saveBundle = false;
-    private TextView testText;
+
+    private StoreDetailActivityModel storeDetailActivityModel;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.test_layout);
+        setContentView(R.layout.activity_store_detail);
 
             new Thread(new Runnable() {
                 public void run() {
-//                    mappingUI();
-                    testText = findViewById(R.id.testText);
-//                    setupUI();
-
+                    mappingUI();
+                    setupUI();
                     setUpData();
                 }
             }).start();
-
     }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        mappingUI();
+        setupUI();
+        setUpData();
+    }
+
+
     @Override
     public void mappingUI() {
         nsvStoreView = findViewById(R.id.nsvStoreView);
@@ -166,28 +172,12 @@ public class StoreDetailActivity extends AppCompatActivity implements IView {
         /**
          * Layout RecyclerView
          */
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext(),
-                LinearLayoutManager.VERTICAL, false);
         RecyclerView.LayoutManager layoutManager2 = new LinearLayoutManager(getApplicationContext(),
                 LinearLayoutManager.VERTICAL, false);
-        //FoodRecyclerView.setLayoutManager(layoutManager);
         CommentRecyclerView.setLayoutManager(layoutManager2);
-
-
         CommentRecyclerView.setAdapter(commentAdapter);
+        storeDetailActivityModel = new StoreDetailActivityModel();
     }
-
-    /**
-     * format description
-     *
-     * @param description
-     * @return
-     */
-    public String createIndentedText(String description) {
-        description = "\t" + description.replaceAll("\n", "\n\t");
-        return description;
-    }
-
     @Override
     public void setupUI() {
         txtDescriptionVisible.setOnClickListener(new View.OnClickListener() {
@@ -227,41 +217,50 @@ public class StoreDetailActivity extends AppCompatActivity implements IView {
         String id = null;
         if (b != null) {
             id = b.getString("id");
-
         }
-        storeDeatilActivityModel = new StoreDetailActivityModel(this);
-        storeDeatilActivityModel.getStoreDetail(UserApp.user.getTokenKey(), id);
+        storeDetailActivityModel.getStoreDetail(UserApp.user.getTokenKey(), id);
+        storeDetailActivityModel.getShop().observe(this, new Observer<Shop>() {
+            @Override
+            public void onChanged(Shop shop) {
+                setUpStoreDetail(shop);
+            }
+        });
+        storeDetailActivityModel.getComments().observe(this, new Observer<List<Comment>>() {
+            @Override
+            public void onChanged(List<Comment> comments) {
+                setUpStoreComment(comments);
+            }
+        });
     }
 
-    public void setUpStoreComment(ArrayList<Comment> comments) {
+    public void setUpStoreComment(List<Comment> comments) {
         commentAdapter.setCommentArray(comments);
         commentAdapter.notifyDataSetChanged();
         nsvStoreView.scrollTo(0, 0);
     }
 
-    public void setUpStoreDetail(ArrayList<Object> objects) {
-        store = (Shop) objects.get(0);
+    public void setUpStoreDetail(Shop shop) {
 //        listRate = new ArrayList<>();
 //        for (int i = 1; i < objects.size(); i++) {
 //            listRate.add((Rating) objects.get(i));
 //        }
-//
-//        //Store description
-//        txtStoreName.setText(store.getName());
-//        txtStoreAddress.setText(store.getAddress());
-//        txtStorePhone.setText("Hotline: " + store.getPhoneNumber());
-//        txtStoreDescription.setText(store.getDescription());
-//        Picasso.get().load(store.getImageURL())
-//                .placeholder(R.drawable.ic_launcher_foreground)
-//                .resize(150, 150)
-//                .centerCrop()
-//                .into(imageStoreDetailIcon);
-//        //Rating section
+
+        //Store description
+        txtStoreName.setText(shop.getName());
+        txtStoreAddress.setText(shop.getAddress());
+        txtStorePhone.setText("Hotline: " + shop.getPhoneNumber());
+        txtStoreDescription.setText(shop.getDescription());
+        Picasso.get().load(shop.getImageURL())
+                .placeholder(R.drawable.ic_launcher_foreground)
+                .resize(150, 150)
+                .centerCrop()
+                .into(imageStoreDetailIcon);
+        //Rating section
 //        txtRating1.setText(listRate.get(0).getVoteCount() + " lượt đánh giá");
 //        txtRating2.setText(listRate.get(1).getVoteCount() + " lượt đánh giá");
 //        txtRating3.setText(listRate.get(2).getVoteCount() + " lượt đánh giá");
 //        txtRating4.setText(listRate.get(3).getVoteCount() + " lượt đánh giá");
 //        txtRating5.setText(listRate.get(4).getVoteCount() + " lượt đánh giá");
-        testText.setText(store.getName());
+
     }
 }

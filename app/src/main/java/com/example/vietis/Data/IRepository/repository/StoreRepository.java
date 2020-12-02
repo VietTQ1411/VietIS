@@ -23,6 +23,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class StoreRepository {
@@ -42,9 +43,9 @@ public class StoreRepository {
         this.iStoreDeatilRepository = iStoreDeatilRepository;
     }
 
-    public static StoreRepository getInstance(ICommentRepository ICommentRepository, IStoreDetailRepository iStoreDeatilRepository) {
+    public static StoreRepository getInstance(ICommentRepository ICommentRepository, IStoreDetailRepository iStoreDetailRepository) {
         if (instance == null) {
-            instance = new StoreRepository(ICommentRepository, iStoreDeatilRepository);
+            instance = new StoreRepository(ICommentRepository, iStoreDetailRepository);
         }
         return instance;
     }
@@ -70,7 +71,7 @@ public class StoreRepository {
                         //detail shop
                         JSONArray storeDetailObject = jsonStoreObject.getJSONArray("foundStore");
                         Shop store = Shop.generateShopFromJSON(storeDetailObject);
-                        MutableArray.getArrayList().add(store);
+
 
                         //rating star
                         for (int i = 5; i > 0; i--) {
@@ -81,21 +82,21 @@ public class StoreRepository {
 
                         //3 comments
                         JSONArray CommentObject = jsonStoreObject.getJSONArray("newComment");
-                        ArrayList<Comment> listComment = new ArrayList<>();
+                        List<Comment> listComment = new ArrayList<>();
                         for (int i = 0; i < CommentObject.length(); i++) {
-                            Comment com = Comment.generateCommentFroJSon(CommentObject.getJSONObject(i));
+                            Comment com = Comment.generateCommentFromJSon(CommentObject.getJSONObject(i));
                             if (com != null) {
                                 listComment.add(com);
                             }
                         }
-//                        if (listComment.size() > 0) {
-//                            iCommentRepository.getCommentLimit(listComment);
-//                        } else {
-//                            iCommentRepository.getCommentLimit(null);
-//                        }
-                        iStoreDeatilRepository.getStoreDetail();
+                        if (listComment.size() > 0) {
+                            iCommentRepository.getCommentLimit(listComment);
+                        } else {
+                            iCommentRepository.getCommentLimit(null);
+                        }
+                        iStoreDeatilRepository.getStoreDetail(store,null);
                     }else{
-
+                        iStoreDeatilRepository.getStoreDetail(null,new JSONException(stringResult));
                     }
                 } catch (JSONException e) {
                     Log.e(TAG, "JsonObjectRequest onErrorResponse: " + e.getMessage());
