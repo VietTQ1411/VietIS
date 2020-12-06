@@ -9,7 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -40,7 +40,6 @@ public class SettingFragment extends Fragment implements IView {
     private TextView txtPrivacy;
     private TextView txtPolicy;
     private TextView txtAppVersion;
-    private Button btnEdit;
     private Switch switchilly;
     private ImageButton ibPrivacy;
     private ImageButton ibPolicy;
@@ -51,6 +50,7 @@ public class SettingFragment extends Fragment implements IView {
     private LinearLayout isPolicy;
     private LinearLayout isApp;
     private LinearLayout isOut;
+    private LinearLayout llEditProfile;
     private SettingActivityViewModel settingActivityViewModel;
     private boolean isVisiblePrivacy = false;
     private boolean isVisiblePolicy = false;
@@ -76,7 +76,7 @@ public class SettingFragment extends Fragment implements IView {
         txtPrivacy = view.findViewById(R.id.txtPrivacy);
         txtPolicy = view.findViewById(R.id.txtPolicy);
         txtAppVersion = view.findViewById(R.id.txtAppVersion);
-        btnEdit = view.findViewById(R.id.btnEdit);
+        llEditProfile = view.findViewById(R.id.llEditProfile);
         switchilly = view.findViewById(R.id.switchilly);
         ibPrivacy = view.findViewById(R.id.ibPrivacy);
         ibPolicy = view.findViewById(R.id.ibPolicy);
@@ -93,13 +93,18 @@ public class SettingFragment extends Fragment implements IView {
     @Override
     public void setupUI() {
         getSettingData();
-        btnEdit.setOnClickListener(new View.OnClickListener() {
+        switchilly.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getContext(), EditProfileActivity.class));
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    //turn on notification
+                } else {
+                    //turn off notification
+                }
             }
         });
-        isOut.setOnClickListener(new View.OnClickListener() {
+
+                isOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -140,6 +145,7 @@ public class SettingFragment extends Fragment implements IView {
                 txtAppVersion.setVisibility(View.GONE);
             }
         });
+
     }
 
     public void getSettingData() {
@@ -150,11 +156,5 @@ public class SettingFragment extends Fragment implements IView {
                 .resize(100, 100)
                 .centerCrop()
                 .into(imgAvatar);
-    }
-
-    public void setData() {
-        txtAppVersion.setText("Version: 1.69");
-        txtPolicy.setText("Developers of Fuddy apps:\n + Trần Quang Việt\n + Nguyễn Danh Tùng\n + Đào Công Sơn\n + Nguyễn Anh Tuấn");
-        txtPrivacy.setText("Do not irresponsibly cancel your order because it affects the others behind you");
     }
 }

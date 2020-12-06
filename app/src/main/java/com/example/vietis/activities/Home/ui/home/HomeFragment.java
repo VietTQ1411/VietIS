@@ -30,9 +30,10 @@ import java.util.ArrayList;
 public class HomeFragment extends Fragment implements IView, IListView {
 
     //UI holders
-    private SearchView searchViewSearch;
+    private SearchView svSearch;
     private static View view;
     private RecyclerView recyclerViewSearch;
+
 
     //RecyclerView components
     private static SearchAdapter<Food> foodAdapter;
@@ -74,19 +75,24 @@ public class HomeFragment extends Fragment implements IView, IListView {
 
     @Override
     public void mappingUI() {
-        searchViewSearch = view.findViewById(R.id.searchFoodViewSearch);
+        svSearch = view.findViewById(R.id.svSearch);
         recyclerViewSearch = view.findViewById(R.id.recyclerViewFoodSearch);
+        rvTopCategories = view.findViewById(R.id.rvTopCategories);
         foodAdapter = new SearchAdapter(this, new ArrayList<Food>(), Food.class);
 
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(view.getContext(),
                 LinearLayoutManager.VERTICAL, false);
+        RecyclerView.LayoutManager layoutManager1 = new LinearLayoutManager(view.getContext(),
+                LinearLayoutManager.HORIZONTAL,false);
+        rvTopCategories.setLayoutManager(layoutManager1);
+        rvTopCategories.setAdapter(foodAdapter);
         recyclerViewSearch.setLayoutManager(layoutManager);
         recyclerViewSearch.setAdapter(foodAdapter);
     }
 
     @Override
     public void setupUI() {
-        searchViewSearch.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+        svSearch.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 PAGE = 0;

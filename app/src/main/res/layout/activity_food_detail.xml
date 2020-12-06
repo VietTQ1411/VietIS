@@ -6,118 +6,94 @@
     android:layout_height="match_parent"
     tools:context=".activities.Home.ui.store.StoreDetailActivity">
 
-    <androidx.core.widget.NestedScrollView
-        android:id="@+id/nsvStoreView"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:background="@drawable/hamburger" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <!--
-               About for store
-           -->
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/ic_launcher_background">
-                <ImageView
-                    android:id="@+id/imageStoreDetailIcon"
-                    android:layout_width="match_parent"
-                    android:layout_height="150dp"
-                    android:src="@mipmap/ic_launcher"
-                    android:layout_marginTop="80dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_gravity="center"
                 android:layout_marginTop="20dp"
-                android:gravity="center"
-                android:orientation="horizontal"
-                android:padding="10dp">
-                <LinearLayout
-                    android:layout_width="match_parent"
+                android:background="@drawable/fooddetail_bg">
+
+                <TextView
+                    android:id="@+id/txtDetailFoodName"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:gravity="start|center"
-                    android:orientation="vertical">
+                    android:layout_gravity="center"
+                    android:text="bún đậu mắm tôm"
+                    android:textColor="@color/colorPurple"
+                    android:textSize="30dp"
+                    android:textStyle="bold" />
 
-                    <TextView
-                        android:id="@+id/txtDetailFoodName"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Cửa hàng bún đậu mắm tôm"
-                        android:textColor="@color/colorBlack"
-                        android:textSize="24dp"
-                        android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/txtDetailFoodAddress"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Store Address"
+                    android:layout_marginStart="5dp"
+                    android:textColor="@color/colorPurple"
+                    android:textSize="17dp"
+                    android:layout_marginTop="10dp"
+                    />
 
-                    <TextView
-                        android:id="@+id/txtDetailFoodAddress"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Store Address"
-                        android:textColor="@color/colorBlack" />
+                <TextView
+                    android:id="@+id/txtDetailFoodCategory"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Store Address"
+                    android:textColor="@color/colorPurple"
+                    android:textSize="17dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginStart="5dp"/>
 
-                    <TextView
-                        android:id="@+id/txtDetailFoodCategory"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Hotline: Phone"
-                        android:textColor="@color/colorBlack" />
+                <TextView
+                    android:id="@+id/txtDetailFoodPrice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Store Address"
+                    android:textColor="@color/colorPurple"
+                    android:textSize="17dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginStart="5dp"/>
 
-                    <TextView
-                        android:id="@+id/txtDetailFoodPrice"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Hotline: Phone"
-                        android:textColor="@color/colorBlack" />
+                <TextView
+                    android:id="@+id/txtDetailFoodDescription"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Store Address"
+                    android:textColor="@color/colorPurple"
+                    android:textSize="17dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginStart="5dp"/>
 
-                    <TextView
-                        android:id="@+id/txtDetailFoodDescription"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Hotline: Phone"
-                        android:textColor="@color/colorBlack" />
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:orientation="horizontal">
-
-                        <Button
-                            android:id="@+id/btnOrder"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:text="Đặt hàng ngay" />
-
-                    </LinearLayout>
-                </LinearLayout>
             </LinearLayout>
 
-
-
-            <!--
-                Comment for store
-            -->
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/CommentRecyclerView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:nestedScrollingEnabled="false"></androidx.recyclerview.widget.RecyclerView>
-
+            <Button
+                android:id="@+id/btnOrder"
+                android:layout_width="200dp"
+                android:layout_height="50dp"
+                android:background="@drawable/order_bg"
+                android:text="Đặt hàng ngay"
+                android:textColor="@color/colorPurple"
+                android:layout_gravity="center"
+                android:layout_marginTop="200dp"/>
 
         </LinearLayout>
 
-    </androidx.core.widget.NestedScrollView>
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

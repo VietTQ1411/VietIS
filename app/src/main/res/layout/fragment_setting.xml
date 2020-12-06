@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorRed"
     android:orientation="vertical"
     tools:context=".activities.Home.ui.dashboard.SettingFragment">
     <LinearLayout
@@ -49,12 +48,12 @@
                             android:id="@+id/imgAvatar"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:scaleType="centerCrop" />
+                            android:scaleType="centerCrop"
+                            android:background="@drawable/hamburger"/>
 
                     </androidx.cardview.widget.CardView>
 
                 </LinearLayout>
-
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -67,6 +66,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="70dp"
                         android:layout_marginTop="8dp"
+                        android:text="Nguyen Thanh Tung"
+                        android:textColor="@color/colorPurple"
                         android:gravity="bottom"
                         android:textSize="24dp" />
 
@@ -74,31 +75,48 @@
                         android:id="@+id/txtProfileAccount"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
-                        android:textColor="@color/colorGray"
-                        android:textSize="20sp" />
+                        android:textSize="20dp"
+                        android:hint="tungnt@gmail.com" />
 
-                    <Button
-                        android:id="@+id/btnEdit"
-                        android:layout_width="150dp"
-                        android:layout_height="35dp"
-                        android:layout_gravity="center|bottom"
-                        android:layout_marginLeft="-20dp"
-                        android:text="Edit Profile"
-                        android:textSize="10dp" />
+                    <LinearLayout
+                        android:id="@+id/llEditProfile"
+                        android:layout_width="180dp"
+                        android:layout_height="wrap_content"
+                        android:background="#D3D3D3"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="15dp">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Edit Profile"
+                            android:textSize="20dp"
+                            android:gravity="center"
+                            android:textColor="@color/colorPurple"
+                            />
+
+                    </LinearLayout>
+
                 </LinearLayout>
+
             </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="350dp"
+                android:layout_height="30dp"
+                android:background="@drawable/setting_bg"
+                android:layout_gravity="center"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:layout_marginTop="20dp">
 
                 <LinearLayout
                     android:id="@+id/isNotification"
                     android:layout_width="match_parent"
                     android:layout_height="80dp"
-                    android:background="@drawable/drop_shadow"
                     android:orientation="horizontal"
                     android:weightSum="4">
 
@@ -109,8 +127,10 @@
                         android:layout_weight="3"
                         android:gravity="center|left"
                         android:paddingLeft="30dp"
-                        android:text="Notification"
-                        android:textSize="20dp" />
+                        android:text="Notifications"
+                        android:textSize="20dp"
+                        android:textColor="@color/colorPurple"/>
+
                     <Switch
                         android:id="@+id/switchilly"
                         android:layout_width="0dp"
@@ -118,13 +138,13 @@
                         android:layout_gravity="center"
                         android:layout_weight="1"
                         android:gravity="center" />
+
                 </LinearLayout>
 
                 <LinearLayout
                     android:id="@+id/isPrivacy"
                     android:layout_width="match_parent"
                     android:layout_height="80dp"
-                    android:background="@drawable/drop_shadow"
                     android:orientation="horizontal"
                     android:weightSum="4">
 
@@ -135,32 +155,32 @@
                         android:gravity="center|left"
                         android:paddingLeft="30dp"
                         android:text="Privacy"
-                        android:textSize="20sp" />
+                        android:textColor="@color/colorPurple"
+                        android:textSize="20dp" />
 
                     <ImageButton
-                        android:clickable="false"
                         android:id="@+id/ibPrivacy"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_gravity="center"
                         android:layout_weight="1"
-                        android:backgroundTint="@color/colorWhite"
-                        android:src="@drawable/ic_right" />
+                        android:background="@color/colorWhite"
+                        android:foregroundGravity="center"
+                        android:src="@drawable/ic_navigate_next"/>
+
                 </LinearLayout>
 
                 <TextView
                     android:visibility="gone"
                     android:id="@+id/txtPrivacy"
-                    style="@style/CodeFont"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Day la privacy cua app neeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee" />
+                    android:text="Day la privacy cua app neeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"/>
 
                 <LinearLayout
                     android:id="@+id/isPolicy"
                     android:layout_width="match_parent"
                     android:layout_height="80dp"
-                    android:background="@drawable/drop_shadow"
                     android:orientation="horizontal"
                     android:weightSum="4">
 
@@ -171,6 +191,7 @@
                         android:gravity="center|left"
                         android:paddingLeft="30dp"
                         android:text="Policy"
+                        android:textColor="@color/colorPurple"
                         android:textSize="20dp" />
 
                     <ImageButton
@@ -180,24 +201,22 @@
                         android:layout_height="match_parent"
                         android:layout_gravity="center"
                         android:layout_weight="1"
-                        android:backgroundTint="@color/colorWhite"
-                        android:src="@drawable/ic_right" />
+                        android:background="@color/colorWhite"
+                        android:src="@drawable/ic_navigate_next"/>
 
                 </LinearLayout>
 
                 <TextView
                     android:visibility="gone"
                     android:id="@+id/txtPolicy"
-                    style="@style/CodeFont"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Day la Policy cua app neeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee" />
+                    android:text="Day la Policy cua app neeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"/>
 
                 <LinearLayout
                     android:id="@+id/isApp"
                     android:layout_width="match_parent"
                     android:layout_height="80dp"
-                    android:background="@drawable/drop_shadow"
                     android:orientation="horizontal"
                     android:weightSum="4">
 
@@ -208,6 +227,7 @@
                         android:gravity="center|left"
                         android:paddingLeft="30dp"
                         android:text="App Version"
+                        android:textColor="@color/colorPurple"
                         android:textSize="20dp" />
 
                     <ImageButton
@@ -217,23 +237,22 @@
                         android:layout_height="match_parent"
                         android:layout_gravity="center"
                         android:layout_weight="1"
-                        android:backgroundTint="@color/colorWhite"
-                        android:src="@drawable/ic_right" />
+                        android:background="@color/colorWhite"
+                        android:src="@drawable/ic_navigate_next"/>
+
                 </LinearLayout>
 
                 <TextView
                     android:id="@+id/txtAppVersion"
-                    style="@style/CodeFont"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="1.0"
+                    android:text="Version 3.0"
                     android:visibility="gone" />
 
                 <LinearLayout
                     android:id="@+id/isOut"
                     android:layout_width="match_parent"
                     android:layout_height="80dp"
-                    android:background="@drawable/drop_shadow"
                     android:orientation="horizontal"
                     android:weightSum="4">
 
@@ -245,6 +264,7 @@
                         android:gravity="center|left"
                         android:paddingLeft="30dp"
                         android:text="Sign out"
+                        android:textColor="@color/colorPurple"
                         android:textSize="20dp" />
 
                     <ImageButton
@@ -254,12 +274,15 @@
                         android:layout_height="match_parent"
                         android:layout_gravity="center"
                         android:layout_weight="1"
-                        android:backgroundTint="@color/colorWhite"
-                        android:src="@drawable/exit_64px" />
+                        android:background="@color/colorWhite"
+                        android:src="@drawable/sign_out"/>
+
                 </LinearLayout>
 
             </LinearLayout>
 
         </LinearLayout>
+
     </ScrollView>
+
 </LinearLayout>

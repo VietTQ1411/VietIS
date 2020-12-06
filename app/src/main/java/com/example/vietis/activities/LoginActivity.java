@@ -3,17 +3,14 @@ package com.example.vietis.activities;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Observer;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.example.vietis.Data.entity.User;
@@ -24,10 +21,12 @@ import com.example.vietis.Utilities.common.UserApp;
 import com.example.vietis.activities.Home.HomeAppActivity;
 
 public class LoginActivity extends AppCompatActivity implements IView {
-    private EditText txtEmail;
-    private EditText txtPassword;
-    private Button btnLogin;
-    private TextView forgotPassword;
+
+    private TextView txtSignUpAccount;
+    private TextView txtForgotAccount;
+    private EditText edtSigninEmail;
+    private EditText edtSigninPassword;
+    private LinearLayout llSignin;
     private LoginActivityViewModel loginActivityViewModel;
 
     @Override
@@ -36,25 +35,34 @@ public class LoginActivity extends AppCompatActivity implements IView {
         setContentView(R.layout.activity_login);
         mappingUI();
         setupUI();
+        navigateToRegisterActivity();
     }
 
     @Override
     public void mappingUI() {
-        txtEmail = findViewById(R.id.login_username);
-        txtEmail.setText("viettqhe@gmail.com");
-        txtPassword = findViewById(R.id.login_password);
-        txtPassword.setText("123456");
-        btnLogin = findViewById(R.id.button_login);
-        forgotPassword = findViewById(R.id.forgot_password);
+        txtSignUpAccount = findViewById(R.id.txtSignUpAccount);
+        txtForgotAccount = findViewById(R.id.txtForgotAccount);
+        edtSigninEmail = findViewById(R.id.edtSigninEmail);
+        edtSigninPassword = findViewById(R.id.edtSigninPassword);
+        llSignin= findViewById(R.id.llSignIn);
         loginActivityViewModel = new LoginActivityViewModel(this);
     }
 
     @Override
     public void setupUI() {
-        btnLogin.setOnClickListener(new View.OnClickListener() {
+        llSignin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 login();
+            }
+        });
+    }
+
+    public void navigateToRegisterActivity(){
+        txtSignUpAccount.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
             }
         });
     }
@@ -78,17 +86,16 @@ public class LoginActivity extends AppCompatActivity implements IView {
     }
 
     public String getEmail() {
-        return txtEmail.getText().toString().trim();
+        return edtSigninEmail.getText().toString().trim();
     }
 
     public String getPassword() {
-        return txtPassword.getText().toString().trim();
+        return edtSigninPassword.getText().toString().trim();
     }
 
     private void login() {
         loginActivityViewModel.login(getEmail(), getPassword());
     }
-
 
     private BroadcastReceiver mMessageReceiver = new BroadcastReceiver() {
         @Override
