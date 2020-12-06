@@ -9,12 +9,15 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.example.vietis.Data.entity.User;
 import com.example.vietis.Data.view_model.SettingActivityViewModel;
 import com.example.vietis.R;
 import com.example.vietis.Data.inteface.IView;
+import com.example.vietis.Utilities.common.UserApp;
 import com.example.vietis.database.Database;
+import com.squareup.picasso.Picasso;
 
 public class EditProfileActivity extends AppCompatActivity implements IView {
 
@@ -125,7 +128,6 @@ public class EditProfileActivity extends AppCompatActivity implements IView {
                     edtEmail.setText(user.getEmail());
                     edtName.setText(user.getName());
                     edtPhoneNumber.setText(user.getPhoneNumber());
-                    edtAddress.setText(user.getAddress());
                 }
             }
         });
@@ -143,19 +145,5 @@ public class EditProfileActivity extends AppCompatActivity implements IView {
             txtWhy.setVisibility(View.GONE);
         }
 
-    }
-
-    public void getSettingData(){
-        if(UserApp.user.getImageURL() != null && !UserApp.user.getImageURL().isEmpty()) {
-            Picasso.get().load(UserApp.user.getImageURL())
-                    .placeholder(R.drawable.ic_launcher_foreground)
-                    .resize(100, 100)
-                    .centerCrop()
-                    .into(ibAvatar);
-        }
-        edtEmail.setHint(UserApp.user.getEmail());
-        edtPassword.setHint(UserApp.user.getHashedPassword());
-        edtName.setHint(UserApp.user.getName());
-        edtPhoneNumber.setHint(UserApp.user.getPhoneNumber());
     }
 }

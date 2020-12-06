@@ -64,7 +64,6 @@ public class SettingFragment extends Fragment implements IView {
         view = root;
         mappingUI();
         setupUI();
-        setData();
         return root;
     }
 
@@ -110,7 +109,7 @@ public class SettingFragment extends Fragment implements IView {
 
             }
         });
-        btnEdit.setOnClickListener(v -> startActivity(new Intent(getContext(), EditProfileActivity.class)));
+
         isOut.setOnClickListener(v -> startActivity((new Intent(getContext(), LoginActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP))));
 
         isPrivacy.setOnClickListener(v -> {

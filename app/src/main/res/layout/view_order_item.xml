@@ -94,10 +94,10 @@
             android:id="@+id/txtOrderStatus"
             android:layout_width="80dp"
             android:layout_height="25dp"
-
             android:text="Coming"
             android:gravity="center"
             android:textColor="@color/colorWhite"
+            android:background="@drawable/order_coming"
             android:layout_marginTop="13dp" />
 
     </LinearLayout>

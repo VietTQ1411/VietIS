@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/colorWhite"
     tools:context=".activities.Home.ui.dashboard.EditProfileActivity">
 
     <LinearLayout
@@ -100,6 +101,7 @@
                         android:background="@drawable/ic_edit" />
 
                 </LinearLayout>
+
             </LinearLayout>
 
             <LinearLayout
