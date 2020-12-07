@@ -35,7 +35,8 @@ const RatingRouter = require('./routings/Rating')
 app.use('/rating', RatingRouter)
 const OrderRouter = require('./routings/Order')
 app.use('/order', OrderRouter)
-
+const CategoryRouter = require('./routings/Category')
+app.use('/cate', CategoryRouter)
 
 
 /*

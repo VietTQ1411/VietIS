@@ -61,6 +61,7 @@ module.exports = sequelize => {
   const options = {
     tableName: "OrderDetail",
     comment: "",
+    timestamps: false,
     indexes: []
   };
   const OrderDetailModel = sequelize.define("OrderDetail_model", attributes, options);

@@ -14,18 +14,32 @@ module.exports = sequelize => {
       field: "id"
     },
     name: {
-      type: DataTypes.TEXT,
-      allowNull: true,
+      type: DataTypes.STRING(65535),
+      allowNull: false,
       defaultValue: null,
       primaryKey: false,
       autoIncrement: false,
       comment: null,
       field: "name"
+    },
+    imageId: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      defaultValue: null,
+      primaryKey: false,
+      autoIncrement: false,
+      comment: null,
+      field: "imageId",
+      references: {
+        key: "id",
+        model: "Image_model"
+      }
     }
   };
   const options = {
     tableName: "Category",
     comment: "",
+    timestamps: false,
     indexes: []
   };
   const CategoryModel = sequelize.define("Category_model", attributes, options);
