@@ -11,6 +11,7 @@ import com.example.vietis.Data.IRepository.ICommentRepository;
 import com.example.vietis.Data.entity.Comment;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class CommentActivityModel extends ViewModel implements ICommentRepository {
     private MutableLiveData<ArrayList<Comment>> mutableLiveDataComment = null;
@@ -27,8 +28,9 @@ public class CommentActivityModel extends ViewModel implements ICommentRepositor
         }
     }
 
+
     @Override
-    public void getCommentLimit(ArrayList<Comment> arrayListComment) {
+    public void getCommentLimit(List<Comment> arrayListComment) {
 
     }
 

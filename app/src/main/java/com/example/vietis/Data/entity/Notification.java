@@ -21,9 +21,9 @@ public class Notification implements Serializable {
     @Builder.Default
     private String content="";
     @Builder.Default
-    private String storeId;
+    private String storeId="";
     @Builder.Default
-    private String foodId;
+    private String foodId="";
     @Builder.Default
     private String idType="";
 

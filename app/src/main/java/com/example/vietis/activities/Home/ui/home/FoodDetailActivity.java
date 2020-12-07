@@ -1,7 +1,6 @@
 package com.example.vietis.activities.Home.ui.home;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
@@ -11,18 +10,13 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.vietis.Data.entity.Comment;
 import com.example.vietis.Data.entity.Food;
 import com.example.vietis.Data.view_model.FoodDetailViewModel;
-import com.example.vietis.Data.view_model.StoreDeatilActivityModel;
 import com.example.vietis.R;
 import com.example.vietis.UI.adapter.CommentAdapter;
 import com.example.vietis.Data.inteface.IView;
-import com.example.vietis.Utilities.common.UserApp;
 import com.example.vietis.activities.Home.ui.order.OrderActivity;
 import com.squareup.picasso.Picasso;
-
-import java.util.ArrayList;
 
 public class FoodDetailActivity extends AppCompatActivity implements IView {
 

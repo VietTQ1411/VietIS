@@ -12,15 +12,16 @@ import com.example.vietis.R;
 import com.example.vietis.UI.view_holder.CommentItemViewHolder;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class CommentAdapter extends RecyclerView.Adapter<CommentItemViewHolder> {
-    private ArrayList<Comment> arrayComment;
+    private List<Comment> arrayComment;
 
-    public CommentAdapter(ArrayList<Comment> arrayComment) {
+    public CommentAdapter(List<Comment> arrayComment) {
         this.arrayComment = arrayComment;
     }
 
-    public void setCommentArray(ArrayList<Comment> list) {
+    public void setCommentArray(List<Comment> list) {
         this.arrayComment = list;
     }
 

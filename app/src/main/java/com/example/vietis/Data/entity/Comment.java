@@ -32,7 +32,7 @@ public class Comment {
     private String dateCreate;
 
 
-    public static Comment generateCommentFroJSon(JSONObject jsonObject) {
+    public static Comment generateCommentFromJSon(JSONObject jsonObject) {
         try {
             return Comment.builder()
                     .id(Integer.parseInt(jsonObject.getString("id")))

@@ -9,7 +9,7 @@ import com.example.vietis.Data.inteface.IListView;
 import com.example.vietis.Data.inteface.IView;
 
 
-public class SearchItemViewHolder<T> extends RecyclerView.ViewHolder implements IView {
+public class SearchItemViewHolder<T> extends RecyclerView.ViewHolder {
 
     //UI holders
     private ShopItemViewHolder shopItemViewHolder;
@@ -33,14 +33,6 @@ public class SearchItemViewHolder<T> extends RecyclerView.ViewHolder implements 
 
     public FoodItemViewHolder getFoodItemViewHolder() {
         return foodItemViewHolder;
-    }
-
-    @Override
-    public void mappingUI() {
-    }
-
-    @Override
-    public void setupUI() {
     }
 
 }

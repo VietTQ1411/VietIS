@@ -2,7 +2,6 @@ package com.example.vietis.activities.Home.ui.home;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,19 +9,16 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.vietis.Data.entity.Food;
-import com.example.vietis.Data.entity.Shop;
+import com.example.vietis.Data.inteface.IListView;
+import com.example.vietis.Data.inteface.IView;
 import com.example.vietis.Data.view_model.ListActivityModel;
 import com.example.vietis.Data.view_model.MutableArray;
 import com.example.vietis.R;
 import com.example.vietis.UI.adapter.SearchAdapter;
-import com.example.vietis.Data.inteface.IListView;
-import com.example.vietis.Data.inteface.IView;
 import com.example.vietis.Utilities.common.AppResources;
 
 import java.util.ArrayList;
@@ -45,7 +41,12 @@ public class HomeFragment extends Fragment implements IView, IListView {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        if (view == null) {
+        if (view != null) {
+            ViewGroup parent = (ViewGroup) view.getParent();
+            if (parent != null) {
+                parent.removeView(view);
+            }
+        }
             View root = inflater.inflate(R.layout.fragment_home, container, false);
             view = root;
             new Thread(new Runnable() {
@@ -55,10 +56,7 @@ public class HomeFragment extends Fragment implements IView, IListView {
                 }
             }).start();
             return root;
-        }else{
-            getData();
-        }
-        return view;
+
     }
 
     @Override
@@ -78,15 +76,11 @@ public class HomeFragment extends Fragment implements IView, IListView {
     public void mappingUI() {
         svSearch = view.findViewById(R.id.svSearch);
         recyclerViewSearch = view.findViewById(R.id.recyclerViewFoodSearch);
-        rvTopCategories = view.findViewById(R.id.rvTopCategories);
         foodAdapter = new SearchAdapter(this, new ArrayList<Food>(), Food.class);
 
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(view.getContext(),
                 LinearLayoutManager.VERTICAL, false);
-        RecyclerView.LayoutManager layoutManager1 = new LinearLayoutManager(view.getContext(),
-                LinearLayoutManager.HORIZONTAL,false);
-        rvTopCategories.setLayoutManager(layoutManager1);
-        rvTopCategories.setAdapter(foodAdapter);
+
         recyclerViewSearch.setLayoutManager(layoutManager);
         recyclerViewSearch.setAdapter(foodAdapter);
     }
@@ -115,7 +109,7 @@ public class HomeFragment extends Fragment implements IView, IListView {
         getData();
     }
 
-    public void getData() {
+    public void  getData() {
         foodActivityModel = new ListActivityModel(HomeFragment.this);
         foodActivityModel.searchFoodFormServerWithPage("", PAGE);
     }
