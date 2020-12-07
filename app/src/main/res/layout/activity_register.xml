@@ -98,6 +98,7 @@
             android:layout_height="65dp"
             android:layout_marginStart="189dp"
             android:layout_marginTop="90dp"
+            android:clickable="true"
             android:background="@drawable/signin_bg2"
             android:orientation="horizontal">
 

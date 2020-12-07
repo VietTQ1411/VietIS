@@ -97,7 +97,7 @@ public class UserRepository {
         VolleySingleton.getInstance(AppResources.getContext()).getRequestQueue().add(jsonObjectRequest);
     }
 
-    public void register(String email, String password, String name, String userType) {
+    public void register(String email, String password, String userType) {
         StringRequest jsonObjectRequest = new StringRequest(com.android.volley.Request.Method.POST,
                 API.get_URL_STRING(AppResources.getResourses().getString(R.string.USER_REGISTER))
                 , new com.android.volley.Response.Listener<String>() {
@@ -130,7 +130,7 @@ public class UserRepository {
                 params.put("password", password);
                 params.put("userType", userType);
                 params.put("email", email);
-                params.put("name", name);
+
                 return params;
             }
 

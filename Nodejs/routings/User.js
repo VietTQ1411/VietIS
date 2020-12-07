@@ -24,7 +24,7 @@ router.post('/register', validateRegisterUser(), async(req, res) => {
         });
         return;
     }
-    const { email, password, name, userType } = req.body
+    const { email, password, userType } = req.body
     try {
         let foundUsers = await UserModel.findAll({
             where: {
@@ -47,7 +47,7 @@ router.post('/register', validateRegisterUser(), async(req, res) => {
         let newUser = await UserModel.create({
             email,
             hashPassword,
-            name,
+            name: "",
             userType,
             imageId: 1,
             expireDate,

@@ -27,7 +27,6 @@ import com.example.vietis.R;
 import com.example.vietis.Data.inteface.IView;
 import com.example.vietis.Utilities.common.UserApp;
 import com.example.vietis.activities.LoginActivity;
-import com.example.vietis.database.Database;
 import com.squareup.picasso.Picasso;
 
 import static androidx.core.app.ActivityCompat.finishAffinity;

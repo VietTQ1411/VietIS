@@ -1,10 +1,18 @@
 package com.example.vietis.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
 
+import com.example.vietis.Data.entity.User;
 import com.example.vietis.Data.inteface.IView;
 import com.example.vietis.Data.view_model.RegisterActivityViewModel;
 import com.example.vietis.R;
@@ -12,21 +20,29 @@ import com.example.vietis.R;
 public class RegisterActivity extends AppCompatActivity implements IView {
 
     private RegisterActivityViewModel registerActivityViewModel;
+    private EditText txtEmail;
+    private EditText txtPassword;
+    private EditText txtConfirmPassword;
+    private LinearLayout btnRegister;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-        //mappingUI();
-        //setupUI();
+        mappingUI();
+        setupUI();
     }
 
     @Override
     public void mappingUI() {
-        //registerActivityViewModel = new RegisterActivityViewModel();
+        txtEmail = findViewById(R.id.edtSignupEmail);
+        txtPassword=findViewById(R.id.edtSignupPassword);
+        txtConfirmPassword = findViewById(R.id.edtConfirmPassword);
+        btnRegister = findViewById(R.id.llSignUp);
+        registerActivityViewModel = new RegisterActivityViewModel();
     }
 
-    /*private String getEmail() {
+    private String getEmail() {
         return txtEmail.getText().toString().trim();
     }
 
@@ -34,44 +50,22 @@ public class RegisterActivity extends AppCompatActivity implements IView {
         return txtPassword.getText().toString().trim();
     }
 
-    private String getName() {
-        return txtName.getText().toString().trim();
-    }
 
     public void register() {
-        registerActivityViewModel.register(getEmail(), getPassword(), getName(), 1 + "");
-        registerActivityViewModel.getUser().observe(this,
-                new Observer<User>() {
-                    @Override
-                    public void onChanged(User user) {
-                        Database db = Database.getInstance(RegisterActivity.this);
-                            db.userDAO().insertUser(user);
-                            if(db.userDAO().getAll() != null){
-                                Log.d("USER","REGISTER SUCCESS");
-                            }else{
-                                Log.d("USER","REGISTER FAILED");
-                            }
-                        db.userDAO().insertUser(user);
-                        if (db.userDAO().getAll() != null) {
-                            Log.d("USER", "REGISTER SUCCESS");
-                        } else {
-                            Log.d("USER", "REGISTER FAILED");
-                        }
-                        if (user != null) {
-//                            Intent intent = new Intent(RegisterActivity.this, SearchActivity.class);
- //                           RegisterActivity.this.startActivity(intent);
-                        }
-                    }
-                });
-    }*/
+        if(txtPassword.getText().toString().equals(txtConfirmPassword.getText().toString()))
+        registerActivityViewModel.register(getEmail(), getPassword(), 1 + "");
+        else{
+            Toast.makeText(this, "Password doesn't match", Toast.LENGTH_SHORT).show();
+        }
+    }
 
     @Override
     public void setupUI() {
-        //btnRegister.setOnClickListener(new View.OnClickListener() {
-           // @Override
-           // public void onClick(View v) {
-           //     register();
-            //}
-       // });
+        btnRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                register();
+            }
+        });
     }
 }

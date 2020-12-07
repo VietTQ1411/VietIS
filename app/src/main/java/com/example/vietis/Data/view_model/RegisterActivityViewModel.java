@@ -12,12 +12,12 @@ import com.example.vietis.Data.IRepository.repository.UserRepository;
 import com.example.vietis.Data.entity.User;
 
 public class RegisterActivityViewModel  extends ViewModel implements IUserRepository {
-    private MutableLiveData<User> user = new MutableLiveData<>();
+    private final MutableLiveData<User> user = new MutableLiveData<>();
     public LiveData<User> getUser(){
         return user;
     }
-    public void register(String email, String password,String name, String userType) {
-        UserRepository.getInstance(this).register(email, password,name,userType);
+    public void register(String email, String password, String userType) {
+        UserRepository.getInstance(this).register(email, password,userType);
     }
     @Override
     public void afterLogin(final User user, final Exception error) {

@@ -41,7 +41,6 @@ public class LoginActivity extends AppCompatActivity implements IView {
     @Override
     public void mappingUI() {
         txtSignUpAccount = findViewById(R.id.txtSignUpAccount);
-        txtForgotAccount = findViewById(R.id.txtForgotAccount);
         edtSigninEmail = findViewById(R.id.edtSigninEmail);
         edtSigninPassword = findViewById(R.id.edtSigninPassword);
         llSignin= findViewById(R.id.llSignIn);

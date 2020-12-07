@@ -2,8 +2,6 @@ const { check, checkSchema } = require('express-validator');
 
 const validateRegisterUser = () => {
     return [
-        check('name', 'name does not Empty').not().isEmpty(),
-        check('name', 'name more than 3 degits').isLength({ min: 3 }),
         check('email', 'Invalid does not Empty').not().isEmpty(),
         check('email', 'Invalid email').isEmail(),
         //check('hashPassword', 'password more than 6 degits').isLength({ min: 6 }),

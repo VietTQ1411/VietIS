@@ -80,15 +80,6 @@
                 android:text="Have no account? Sign Up"
                 android:textSize="15dp" />
 
-            <TextView
-                android:id="@+id/txtForgotAccount"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="30dp"
-                android:autoLink="all"
-                android:text="Forget your password?"
-                android:textSize="15dp" />
-
         </LinearLayout>
 
         <LinearLayout
@@ -98,7 +89,9 @@
             android:layout_marginStart="190dp"
             android:layout_marginTop="150dp"
             android:background="@drawable/signin_bg2"
+            android:clickable="true"
             android:orientation="horizontal">
+
 
             <TextView
                 android:layout_width="wrap_content"
@@ -110,8 +103,8 @@
                 android:textSize="20dp" />
 
             <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginLeft="25dp"
                 android:src="@drawable/ic_navigate_next" />

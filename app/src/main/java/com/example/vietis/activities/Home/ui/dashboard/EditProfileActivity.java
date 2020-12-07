@@ -16,7 +16,6 @@ import com.example.vietis.Data.view_model.SettingActivityViewModel;
 import com.example.vietis.R;
 import com.example.vietis.Data.inteface.IView;
 import com.example.vietis.Utilities.common.UserApp;
-import com.example.vietis.database.Database;
 import com.squareup.picasso.Picasso;
 
 public class EditProfileActivity extends AppCompatActivity implements IView {
@@ -118,19 +117,19 @@ public class EditProfileActivity extends AppCompatActivity implements IView {
     }
 
     public void getSettingData(){
-        settingActivityViewModel.getSettingUser().observe(this, new Observer<User>() {
-            @Override
-            public void onChanged(User user) {
-                Database db = Database.getInstance(EditProfileActivity.this);
-                Intent intent = new Intent();
-                db.userDAO().getSettingUser(intent.getIntExtra("userid",0));
-                if(db.userDAO().getSettingUser(intent.getIntExtra("userid",0)) != null){
-                    edtEmail.setText(user.getEmail());
-                    edtName.setText(user.getName());
-                    edtPhoneNumber.setText(user.getPhoneNumber());
-                }
-            }
-        });
+//        settingActivityViewModel.getSettingUser().observe(this, new Observer<User>() {
+//            @Override
+//            public void onChanged(User user) {
+//                Database db = Database.getInstance(EditProfileActivity.this);
+//                Intent intent = new Intent();
+//                db.userDAO().getSettingUser(intent.getIntExtra("userid",0));
+//                if(db.userDAO().getSettingUser(intent.getIntExtra("userid",0)) != null){
+//                    edtEmail.setText(user.getEmail());
+//                    edtName.setText(user.getName());
+//                    edtPhoneNumber.setText(user.getPhoneNumber());
+//                }
+//            }
+//        });
 
         if(!edtNewPassword.getText().equals(edtConfirmPassword.getText())){
             txtWhy1.setText("New Password doesnt match. Please try again");
