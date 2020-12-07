@@ -23,7 +23,6 @@ import com.example.vietis.activities.Home.HomeAppActivity;
 public class LoginActivity extends AppCompatActivity implements IView {
 
     private TextView txtSignUpAccount;
-    private TextView txtForgotAccount;
     private EditText edtSigninEmail;
     private EditText edtSigninPassword;
     private LinearLayout llSignin;
@@ -41,7 +40,6 @@ public class LoginActivity extends AppCompatActivity implements IView {
     @Override
     public void mappingUI() {
         txtSignUpAccount = findViewById(R.id.txtSignUpAccount);
-        txtForgotAccount = findViewById(R.id.txtForgotAccount);
         edtSigninEmail = findViewById(R.id.edtSigninEmail);
         edtSigninPassword = findViewById(R.id.edtSigninPassword);
         llSignin= findViewById(R.id.llSignIn);
@@ -77,7 +75,7 @@ public class LoginActivity extends AppCompatActivity implements IView {
         UserApp.user.setTokenKey(user.getTokenKey());
         UserApp.user.setAddress(user.getAddress());
         UserApp.user.setName(user.getName());
-        UserApp.user.setId(33);
+        UserApp.user.setId(user.getId());
         UserApp.user.setImageId(user.getImageId());
         UserApp.user.setPhoneNumber(user.getPhoneNumber());
         UserApp.user.setImageURL(user.getImageURL());
