@@ -6,7 +6,8 @@ const ImageModel = require('../models/Image')(sequelize)
 const CategoryModel = require('../models/Category')(sequelize)
 const FoodModel = require('../models/Food')(sequelize)
 const StoreModel = require('../models/Store')(sequelize)
-const{Op}=require("sequelize")
+const{Op}=require("sequelize");
+const Store = require('../models/Store');
 
 ImageModel.hasMany(CategoryModel, {foreignKey: 'imageId'})
 CategoryModel.belongsTo(ImageModel, { foreignKey: 'imageId'})
@@ -59,11 +60,24 @@ router.post('/getFoodByCatId', async(req,res) =>{
             data: null
         })
     }
+    const{id} = req.body
     try{
         let foundFoods = await FoodModel.findAll({
             where: {
-                
-            }
+                catId: {
+                    [Op.eq]: id
+                }
+            },
+            include: [{
+                model: ImageModel,
+                as: "Image_model",
+                attributes: ["imageUrl"]
+            },
+            {
+               model: StoreModel,
+               as: "Store_model",
+               attributes: ["id"] 
+            }]
         })
     }
 })
