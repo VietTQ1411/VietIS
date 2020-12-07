@@ -3,6 +3,7 @@ package com.example.vietis.Data.IRepository;
 import com.example.vietis.Data.entity.Comment;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public interface ICommentRepository {
 
@@ -14,7 +15,7 @@ public interface ICommentRepository {
      * @param arrayListComment
 
      */
-    public void getCommentLimit(ArrayList<Comment> arrayListComment);
+    public void getCommentLimit(List<Comment> arrayListComment);
 
 
     /**

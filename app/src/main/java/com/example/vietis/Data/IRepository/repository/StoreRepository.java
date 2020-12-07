@@ -7,41 +7,29 @@ import com.android.volley.AuthFailureError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.example.vietis.Data.IRepository.ICommentRepository;
-import com.example.vietis.Data.IRepository.IStoreDeatilRepository;
+import com.example.vietis.Data.IRepository.IStoreDetailRepository;
 import com.example.vietis.Data.entity.Comment;
 import com.example.vietis.Data.entity.Rating;
 import com.example.vietis.Data.entity.Shop;
-import com.example.vietis.Data.entity.User;
 import com.example.vietis.Data.view_model.MutableArray;
 import com.example.vietis.R;
 import com.example.vietis.Utilities.common.AppResources;
 import com.example.vietis.Utilities.common.UserApp;
 import com.example.vietis.Utilities.helpers.API;
 
-import org.jetbrains.annotations.NotNull;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.Console;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import okhttp3.Call;
-import okhttp3.Callback;
-import okhttp3.MultipartBody;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.RequestBody;
-import okhttp3.Response;
-
 public class StoreRepository {
     private static StoreRepository instance = null;
     private ICommentRepository iCommentRepository;
-    private IStoreDeatilRepository iStoreDeatilRepository;
+    private IStoreDetailRepository iStoreDeatilRepository;
     private final String TAG = "Store Deatil Repository";
 
     /**
@@ -50,14 +38,14 @@ public class StoreRepository {
      * @param ICommentRepository
      * @param iStoreDeatilRepository
      */
-    private StoreRepository(ICommentRepository ICommentRepository, IStoreDeatilRepository iStoreDeatilRepository) {
+    private StoreRepository(ICommentRepository ICommentRepository, IStoreDetailRepository iStoreDeatilRepository) {
         this.iCommentRepository = ICommentRepository;
         this.iStoreDeatilRepository = iStoreDeatilRepository;
     }
 
-    public static StoreRepository getInstance(ICommentRepository ICommentRepository, IStoreDeatilRepository iStoreDeatilRepository) {
+    public static StoreRepository getInstance(ICommentRepository ICommentRepository, IStoreDetailRepository iStoreDetailRepository) {
         if (instance == null) {
-            instance = new StoreRepository(ICommentRepository, iStoreDeatilRepository);
+            instance = new StoreRepository(ICommentRepository, iStoreDetailRepository);
         }
         return instance;
     }
@@ -83,7 +71,7 @@ public class StoreRepository {
                         //detail shop
                         JSONArray storeDetailObject = jsonStoreObject.getJSONArray("foundStore");
                         Shop store = Shop.generateShopFromJSON(storeDetailObject);
-                        MutableArray.getArrayList().add(store);
+
 
                         //rating star
                         for (int i = 5; i > 0; i--) {
@@ -94,9 +82,9 @@ public class StoreRepository {
 
                         //3 comments
                         JSONArray CommentObject = jsonStoreObject.getJSONArray("newComment");
-                        ArrayList<Comment> listComment = new ArrayList<>();
+                        List<Comment> listComment = new ArrayList<>();
                         for (int i = 0; i < CommentObject.length(); i++) {
-                            Comment com = Comment.generateCommentFroJSon(CommentObject.getJSONObject(i));
+                            Comment com = Comment.generateCommentFromJSon(CommentObject.getJSONObject(i));
                             if (com != null) {
                                 listComment.add(com);
                             }
@@ -106,9 +94,9 @@ public class StoreRepository {
                         } else {
                             iCommentRepository.getCommentLimit(null);
                         }
-                        iStoreDeatilRepository.getStoreDeatil();
+                        iStoreDeatilRepository.getStoreDetail(store,null);
                     }else{
-
+                        iStoreDeatilRepository.getStoreDetail(null,new JSONException(stringResult));
                     }
                 } catch (JSONException e) {
                     Log.e(TAG, "JsonObjectRequest onErrorResponse: " + e.getMessage());

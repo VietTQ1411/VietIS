@@ -45,7 +45,12 @@ public class HomeFragment extends Fragment implements IView, IListView {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        if (view == null) {
+        if (view != null) {
+            ViewGroup parent = (ViewGroup) view.getParent();
+            if (parent != null) {
+                parent.removeView(view);
+            }
+        }
             View root = inflater.inflate(R.layout.fragment_home, container, false);
             view = root;
             new Thread(new Runnable() {
@@ -55,10 +60,7 @@ public class HomeFragment extends Fragment implements IView, IListView {
                 }
             }).start();
             return root;
-        }else{
-            getData();
-        }
-        return view;
+
     }
 
     @Override
@@ -115,7 +117,7 @@ public class HomeFragment extends Fragment implements IView, IListView {
         getData();
     }
 
-    public void getData() {
+    public void  getData() {
         foodActivityModel = new ListActivityModel(HomeFragment.this);
         foodActivityModel.searchFoodFormServerWithPage("", PAGE);
     }
