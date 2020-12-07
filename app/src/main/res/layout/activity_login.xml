@@ -140,6 +140,7 @@
                     android:src="@drawable/google" />
 
                 <TextView
+
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -147,6 +148,7 @@
                     android:text="Google"
                     android:textColor="#DB4437"
                     android:textSize="20dp" />
+                
 
             </LinearLayout>
 
