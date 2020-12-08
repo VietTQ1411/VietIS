@@ -42,7 +42,6 @@
             android:layout_marginStart="30dp"
             android:layout_marginTop="5dp"
             android:fontFamily="sans-serif-condensed"
-            android:text="Tungnt@gmail.com"
             android:textColor="@color/colorPurple"
             android:textSize="25dp" />
 
@@ -61,7 +60,6 @@
             android:layout_marginStart="30dp"
             android:layout_marginTop="5dp"
             android:inputType="textPassword"
-            android:text="adssadasd"
             android:textColor="@color/colorPurple"
             android:textSize="25dp" />
 
@@ -116,32 +114,32 @@
             android:layout_height="match_parent"
             android:orientation="horizontal">
 
-            <LinearLayout
-                android:id="@+id/llGoogle"
-                android:layout_width="180dp"
-                android:layout_height="50dp"
-                android:layout_gravity="center"
-                android:layout_marginStart="20dp"
-                android:background="@drawable/signin_bg3"
-                android:orientation="horizontal">
+<!--            <LinearLayout-->
+<!--                android:id="@+id/llGoogle"-->
+<!--                android:layout_width="180dp"-->
+<!--                android:layout_height="50dp"-->
+<!--                android:layout_gravity="center"-->
+<!--                android:layout_marginStart="20dp"-->
+<!--                android:background="@drawable/signin_bg3"-->
+<!--                android:orientation="horizontal">-->
 
-                <ImageView
-                    android:layout_width="50dp"
-                    android:layout_height="35dp"
-                    android:layout_gravity="center"
-                    android:layout_marginStart="20dp"
-                    android:src="@drawable/google" />
+<!--                <ImageView-->
+<!--                    android:layout_width="50dp"-->
+<!--                    android:layout_height="35dp"-->
+<!--                    android:layout_gravity="center"-->
+<!--                    android:layout_marginStart="20dp"-->
+<!--                    android:src="@drawable/google" />-->
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginStart="5dp"
-                    android:text="Google"
-                    android:textColor="#DB4437"
-                    android:textSize="20dp" />
+<!--                <TextView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_gravity="center"-->
+<!--                    android:layout_marginStart="5dp"-->
+<!--                    android:text="Google"-->
+<!--                    android:textColor="#DB4437"-->
+<!--                    android:textSize="20dp" />-->
 
-            </LinearLayout>
+<!--            </LinearLayout>-->
 
             <LinearLayout
                 android:id="@+id/llFacebook"

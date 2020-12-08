@@ -22,8 +22,6 @@ public class FoodItemViewHolder extends RecyclerView.ViewHolder implements IView
     private LinearLayout linearFoodItem;
     private ImageView imageViewFoodIcon;
     private TextView txtFoodName;
-    private TextView txtFoodAddress;
-    private RatingBar ratingBarFoodRating;
     private TextView txtPrice;
     //Parent
     private IListView parent;
@@ -56,8 +54,6 @@ public class FoodItemViewHolder extends RecyclerView.ViewHolder implements IView
                 .centerCrop()
                 .into(imageViewFoodIcon);
         txtFoodName.setText(food.getName());
-        txtFoodAddress.setText(food.getAddress());
-        //ratingBarFoodRating.setRating(food.getRating());
         txtPrice.setText(food.getPrice() + "");
     }
 
@@ -66,8 +62,6 @@ public class FoodItemViewHolder extends RecyclerView.ViewHolder implements IView
         linearFoodItem = itemView.findViewById(R.id.linearFoodItem);
         imageViewFoodIcon = itemView.findViewById(R.id.imageViewFoodIcon);
         txtFoodName = itemView.findViewById(R.id.txtFoodName);
-        txtFoodAddress = itemView.findViewById(R.id.txtFoodAddress);
-        ratingBarFoodRating = itemView.findViewById(R.id.ratingBarFoodRating);
         txtPrice = itemView.findViewById(R.id.txtPrice);
     }
 

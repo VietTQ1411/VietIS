@@ -42,7 +42,6 @@
             android:layout_marginStart="30dp"
             android:layout_marginTop="5dp"
             android:fontFamily="sans-serif-condensed"
-            android:text="Tungnt@gmail.com"
             android:textColor="@color/colorPurple"
             android:textSize="25dp" />
 
@@ -61,7 +60,6 @@
             android:layout_marginStart="30dp"
             android:layout_marginTop="5dp"
             android:inputType="textPassword"
-            android:text="adssadasd"
             android:textColor="@color/colorPurple"
             android:textSize="25dp" />
 
@@ -80,7 +78,6 @@
             android:layout_marginStart="30dp"
             android:layout_marginTop="5dp"
             android:inputType="textPassword"
-            android:text="adssadasd"
             android:textColor="@color/colorPurple"
             android:textSize="25dp" />
 
@@ -97,9 +94,8 @@
             android:layout_width="220dp"
             android:layout_height="65dp"
             android:layout_marginStart="189dp"
-            android:layout_marginTop="90dp"
-            android:clickable="true"
             android:background="@drawable/signin_bg2"
+            android:clickable="true"
             android:orientation="horizontal">
 
             <TextView

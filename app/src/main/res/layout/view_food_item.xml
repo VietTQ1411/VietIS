@@ -1,18 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/linearFoodItem"
-    android:layout_width="340dp"
-    android:layout_height="100dp"
-    android:layout_gravity="center"
+    android:layout_width="250dp"
+    android:layout_height="110dp"
+    android:layout_marginStart="70dp"
     android:layout_marginTop="20dp"
-    android:background="@android:drawable/dialog_holo_light_frame"
+    android:background="@drawable/drop_shadow"
     android:orientation="horizontal">
 
     <ImageView
-        android:layout_width="120dp"
+        android:id="@+id/imageViewFoodIcon"
+        android:layout_width="80dp"
         android:layout_height="80dp"
-        android:layout_marginTop="7dp"
-        android:background="@mipmap/ic_launcher" />
+        android:layout_gravity="center"
+        android:layout_marginStart="10dp"
+        android:background="@drawable/hamburger"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -20,24 +22,23 @@
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/txtFoodName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:text=""
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="5dp"
+            android:text="asdasd"
             android:textColor="@color/colorPurple"
-            android:textSize="25dp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text=""
-            android:textSize="20dp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:hint=""
             android:textSize="15dp" />
+
+        <TextView
+            android:id="@+id/txtPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="asdsaadasd"
+            android:layout_marginTop="5dp"
+            android:layout_marginStart="5dp"
+            android:textSize="10dp" />
 
     </LinearLayout>
 

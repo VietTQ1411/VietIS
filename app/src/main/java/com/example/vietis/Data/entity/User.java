@@ -1,9 +1,5 @@
 package com.example.vietis.Data.entity;
 
-import androidx.room.ColumnInfo;
-import androidx.room.Entity;
-import androidx.room.PrimaryKey;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -16,21 +12,19 @@ import lombok.Getter;
 @Data
 @Builder
 @Getter
-@Entity
 public class User implements Serializable {
-    @PrimaryKey(autoGenerate = true)
-    private int id;
-    @ColumnInfo(name = "email")
+    @Builder.Default
+    private int id=0;
     @Builder.Default
     private String email = "";
-    @ColumnInfo(name = "password")
     @Builder.Default
     private String password = "";
     @Builder.Default
     private String hashedPassword = "";
     @Builder.Default
     private String name = "";
-    private int imageId;
+    @Builder.Default
+    private int imageId=0;
     @Builder.Default
     private String imageURL = "";
     @Builder.Default
@@ -43,22 +37,6 @@ public class User implements Serializable {
     private String tokenKey = "";
     @Builder.Default
     private String expireDate = "";
-
-    public User(int id, String email, String password, String hashedPassword,
-                String name, int imageId,String imageURL, String phoneNumber, String address, int userType, String tokenKey, String expireDate) {
-        this.id = id;
-        this.email = email;
-        this.password = password;
-        this.hashedPassword = hashedPassword;
-        this.name = name;
-        this.imageId = imageId;
-        this.phoneNumber = phoneNumber;
-        this.address = address;
-        this.userType = userType;
-        this.tokenKey = tokenKey;
-        this.imageURL = imageURL;
-        this.expireDate = expireDate;
-    }
 
     public static User createUserFromJSONObject(JSONObject jsonObject) {
         try {

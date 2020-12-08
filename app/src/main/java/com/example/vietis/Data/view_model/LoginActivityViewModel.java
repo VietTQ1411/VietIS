@@ -13,12 +13,7 @@ import com.example.vietis.Data.IRepository.repository.UserRepository;
 import com.example.vietis.activities.LoginActivity;
 
 public class LoginActivityViewModel extends ViewModel implements IUserRepository {
-    private MutableLiveData<User> user = new MutableLiveData<>();
-    private LoginActivity loginActivity;
-
-    public LoginActivityViewModel(LoginActivity loginActivity) {
-        this.loginActivity = loginActivity;
-    }
+    private final MutableLiveData<User> user = new MutableLiveData<>();
 
     public LiveData<User> getUser() {
         return user;
@@ -33,7 +28,7 @@ public class LoginActivityViewModel extends ViewModel implements IUserRepository
         new Handler(Looper.getMainLooper()).post(new Runnable() {
             @Override
             public void run() {
-                loginActivity.navigateToHomeActivity(user);
+                LoginActivityViewModel.this.user.setValue(error == null ? user : User.builder().build());
             }
         });
     }

@@ -12,12 +12,6 @@ const Store = require('../models/Store');
 ImageModel.hasMany(CategoryModel, {foreignKey: 'imageId'})
 CategoryModel.belongsTo(ImageModel, { foreignKey: 'imageId'})
 
-ImageModel.hasMany(FoodModel, {foreignKey: 'imageId'})
-FoodModel.belongsTo(ImageModel, {foreignKey: 'imageId'})
-
-StoreModel.hasMany(FoodModel, { foreignKey: 'storeId' })
-FoodModel.belongsTo(StoreModel, { foreignKey: 'storeId' })
-
 router.post('/getAllCategory', async(req, res) =>{
     const {tokenkey} = req.headers
     const isValidToken = await checkToken({tokenkey})
@@ -51,34 +45,4 @@ router.post('/getAllCategory', async(req, res) =>{
     }
 })
 
-router.post('/getFoodByCatId', async(req,res) =>{
-    const {tokenkey} = req.headers
-    const isValidToken = await checkToken({tokenkey})
-    if(!isValidToken){
-        res.json({
-            result: "TK01",
-            data: null
-        })
-    }
-    const{id} = req.body
-    try{
-        let foundFoods = await FoodModel.findAll({
-            where: {
-                catId: {
-                    [Op.eq]: id
-                }
-            },
-            include: [{
-                model: ImageModel,
-                as: "Image_model",
-                attributes: ["imageUrl"]
-            },
-            {
-               model: StoreModel,
-               as: "Store_model",
-               attributes: ["id"] 
-            }]
-        })
-    }
-})
 module.exports = router

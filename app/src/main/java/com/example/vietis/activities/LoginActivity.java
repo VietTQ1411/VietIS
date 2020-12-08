@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.example.vietis.Data.entity.User;
@@ -34,7 +35,7 @@ public class LoginActivity extends AppCompatActivity implements IView {
         setContentView(R.layout.activity_login);
         mappingUI();
         setupUI();
-        navigateToRegisterActivity();
+
     }
 
     @Override
@@ -43,7 +44,7 @@ public class LoginActivity extends AppCompatActivity implements IView {
         edtSigninEmail = findViewById(R.id.edtSigninEmail);
         edtSigninPassword = findViewById(R.id.edtSigninPassword);
         llSignin= findViewById(R.id.llSignIn);
-        loginActivityViewModel = new LoginActivityViewModel(this);
+        loginActivityViewModel = new LoginActivityViewModel();
     }
 
     @Override
@@ -54,9 +55,6 @@ public class LoginActivity extends AppCompatActivity implements IView {
                 login();
             }
         });
-    }
-
-    public void navigateToRegisterActivity(){
         txtSignUpAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -64,6 +62,8 @@ public class LoginActivity extends AppCompatActivity implements IView {
             }
         });
     }
+
+
 
     public void navigateToHomeActivity(User user){
 
@@ -93,6 +93,14 @@ public class LoginActivity extends AppCompatActivity implements IView {
 
     private void login() {
         loginActivityViewModel.login(getEmail(), getPassword());
+        loginActivityViewModel.getUser().observe(this, new Observer<User>() {
+            @Override
+            public void onChanged(User user) {
+                if(user.getId() !=0){
+                    navigateToHomeActivity(user);
+                }
+            }
+        });
     }
 
     private BroadcastReceiver mMessageReceiver = new BroadcastReceiver() {

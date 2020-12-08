@@ -32,6 +32,7 @@ UserModel.belongsTo(ImageModel, { foreignKey: 'imageId' })
 CommentFoodModel.belongsTo(UserModel, { foreignKey: 'userId' })
 UserModel.hasMany(CommentFoodModel, { foreignKey: 'userId' })
 
+
 /**
  * URL: http://localhost:3000/foods/addnew
  */
@@ -142,17 +143,19 @@ router.post('/search', async(req, res) => {
  * URL: http://localhost:3000/foods/search
  */
 
-router.post('/detail', async(req, res) => {
+router.post('/getdetail', async(req, res) => {
     const { tokenkey } = req.headers
     const isValidToken = await checkToken({ tokenkey })
     if (isValidToken == false) {
         res.json({
-            result: "TK01"
+            result: "TK01",
+            data: null
         })
         return;
     }
     const { id } = req.body
     try {
+        
         let foundBooks = await FoodModel.findAll({
             where: {
                 id: {
@@ -176,6 +179,7 @@ router.post('/detail', async(req, res) => {
                 }
             ]
         })
+        
         res.json({
             result: "SC",
             data: foundBooks
@@ -186,6 +190,52 @@ router.post('/detail', async(req, res) => {
             message: `Error details: ${exception.toString()}`
         })
     }
-});
+})
 
+router.post('/getFoodByCatId', async(req,res) =>{
+    const {tokenkey} = req.headers
+    const isValidToken = await checkToken({tokenkey})
+    if(!isValidToken){
+        res.json({
+            result: "TK01",
+            data: null
+        })
+    }
+    const { catId } =  req.body
+    try{
+        let foundFoods = await FoodModel.findAll({
+            where: {
+                catId: {
+                    [Op.eq]: catId
+                }
+            },
+            include: [{
+                model: ImageModel,
+                as: "Image_model",
+                attributes: ["imageUrl"]
+            },
+            {
+               model: StoreModel,
+               as: "Store_model",
+               attributes: ["id"] 
+            }]
+        })
+        if (foundFoods.length == 0) {
+            res.json({
+                result: 'ST01',
+                data: null
+            })
+            return
+        }
+        res.json({
+            result: "SC",
+            data: foundFoods
+        })
+    }catch (exception){
+        res.status(500).json({
+            result: 'E500',
+            message: `Error details: ${exception.toString()}`
+        })
+    }
+})
 module.exports = router
