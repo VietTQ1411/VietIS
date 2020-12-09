@@ -2,11 +2,8 @@ package com.example.vietis.activities.Home.ui.store;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.RatingBar;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -24,7 +21,6 @@ import com.example.vietis.Data.view_model.StoreDetailActivityModel;
 import com.example.vietis.R;
 import com.example.vietis.UI.adapter.CommentAdapter;
 import com.example.vietis.UI.adapter.SearchAdapter;
-import com.example.vietis.UI.dialog.RatingFragment;
 import com.example.vietis.Utilities.common.UserApp;
 import com.squareup.picasso.Picasso;
 
@@ -57,7 +53,7 @@ public class StoreDetailActivity extends AppCompatActivity implements IView {
     /**
      * Rating for store
      */
-    private LinearLayout rate;
+   /* private LinearLayout rate;
     private RatingBar ratingBar1;
     private TextView txtRating1;
     private RatingBar ratingBar2;
@@ -67,7 +63,7 @@ public class StoreDetailActivity extends AppCompatActivity implements IView {
     private RatingBar ratingBar4;
     private TextView txtRating4;
     private RatingBar ratingBar5;
-    private TextView txtRating5;
+    private TextView txtRating5;*/
 
     /**
      * Comment for store
@@ -137,7 +133,7 @@ public class StoreDetailActivity extends AppCompatActivity implements IView {
         /**
          * Rating for store
          */
-        rate = findViewById(R.id.rate);
+        /*rate = findViewById(R.id.rate);
         ratingBar1 = findViewById(R.id.ratingBar1);
         txtRating1 = findViewById(R.id.txtRating1);
         ratingBar2 = findViewById(R.id.ratingBar2);
@@ -147,7 +143,7 @@ public class StoreDetailActivity extends AppCompatActivity implements IView {
         ratingBar4 = findViewById(R.id.ratingBar4);
         txtRating4 = findViewById(R.id.txtRating4);
         ratingBar5 = findViewById(R.id.ratingBar5);
-        txtRating5 = findViewById(R.id.txtRating5);
+        txtRating5 = findViewById(R.id.txtRating5);*/
 
         /**
          * Comment for store
@@ -180,20 +176,7 @@ public class StoreDetailActivity extends AppCompatActivity implements IView {
     }
     @Override
     public void setupUI() {
-        txtDescriptionVisible.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                isVisible = !isVisible;
-                if (isVisible) {
-                    txtDescriptionVisible.setText("Description ▼");
-                    txtStoreDescription.setVisibility(View.VISIBLE);
-                } else {
-                    txtDescriptionVisible.setText("Description ►");
-                    txtStoreDescription.setVisibility(View.GONE);
-                }
-            }
-        });
-        rate.setOnClickListener(new View.OnClickListener() {
+        /*rate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 RatingFragment dialog = new RatingFragment(StoreDetailActivity.this);
@@ -202,7 +185,7 @@ public class StoreDetailActivity extends AppCompatActivity implements IView {
                 dialog.getWindow().setLayout(width, height);
                 dialog.show();
             }
-        });
+        });*/
     }
 
     /**

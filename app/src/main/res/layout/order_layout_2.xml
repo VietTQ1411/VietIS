@@ -79,6 +79,7 @@
                         android:background="@drawable/ic_edit"
                         android:textSize="18dp" />
                 </LinearLayout>
+
             </LinearLayout>
 
             <EditText

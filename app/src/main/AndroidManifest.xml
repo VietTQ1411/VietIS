@@ -53,7 +53,6 @@
         <receiver android:name=".Utilities.notifications.MyBroadcastReceiver" />
         <!--Activity-->
         <activity android:name=".activities.Home.HomeAppActivity">
-
         </activity>
         <activity android:name=".activities.Home.ui.dashboard.EditProfileActivity" />
         <activity android:name=".activities.LoginActivity" />

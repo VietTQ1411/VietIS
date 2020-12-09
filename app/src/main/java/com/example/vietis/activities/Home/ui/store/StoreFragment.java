@@ -2,34 +2,30 @@ package com.example.vietis.activities.Home.ui.store;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.vietis.Data.entity.Shop;
+import com.example.vietis.Data.inteface.IListView;
+import com.example.vietis.Data.inteface.IView;
 import com.example.vietis.Data.view_model.ListActivityModel;
 import com.example.vietis.Data.view_model.MutableArray;
 import com.example.vietis.R;
 import com.example.vietis.UI.adapter.SearchAdapter;
-import com.example.vietis.Data.inteface.IListView;
-import com.example.vietis.Data.inteface.IView;
 import com.example.vietis.Utilities.common.AppResources;
 
 import java.util.ArrayList;
 
 public class StoreFragment extends Fragment implements IView, IListView {
     //UI holders
-    private SearchView storeSearchViewSearch;
+    //private SearchView storeSearchViewSearch;
     private static View view;
     private RecyclerView recyclerStoreViewSearch;
     //RecyclerView components
@@ -84,7 +80,7 @@ public class StoreFragment extends Fragment implements IView, IListView {
 
     @Override
     public void mappingUI() {
-        storeSearchViewSearch = view.findViewById(R.id.storeSearchViewSearch);
+        //storeSearchViewSearch = view.findViewById(R.id.storeSearchViewSearch);
         storeAdapter = new SearchAdapter(this, new ArrayList<Shop>(), Shop.class);
         storeActivityModel = new ListActivityModel(this);
         recyclerStoreViewSearch = view.findViewById(R.id.recyclerStoreViewSearch);
@@ -98,7 +94,7 @@ public class StoreFragment extends Fragment implements IView, IListView {
     @Override
     public void setupUI() {
         //SearchView action
-        storeSearchViewSearch.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+        /*storeSearchViewSearch.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 PAGE = 0;
@@ -116,7 +112,7 @@ public class StoreFragment extends Fragment implements IView, IListView {
                 storeAdapter.notifyDataSetChanged();
                 return false;
             }
-        });
+        });*/
         callData();
     }
 

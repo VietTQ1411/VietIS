@@ -52,7 +52,8 @@ public class LoginActivity extends AppCompatActivity implements IView {
         llSignin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                login();
+                //login();
+                startActivity(new Intent(LoginActivity.this, HomeAppActivity.class));
             }
         });
         txtSignUpAccount.setOnClickListener(new View.OnClickListener() {
