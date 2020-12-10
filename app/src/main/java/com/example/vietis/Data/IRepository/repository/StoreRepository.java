@@ -17,6 +17,7 @@ import com.example.vietis.Utilities.common.AppResources;
 import com.example.vietis.Utilities.common.UserApp;
 import com.example.vietis.Utilities.helpers.API;
 
+import org.jetbrains.annotations.NotNull;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -108,6 +109,7 @@ public class StoreRepository {
                 Log.e(TAG, "JsonObjectRequest onErrorResponse: " + error.getMessage());
             }
         }) {
+            @NotNull
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<String, String>();
@@ -115,6 +117,7 @@ public class StoreRepository {
                 return params;
             }
 
+            @NotNull
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String> params = new HashMap<String, String>();
