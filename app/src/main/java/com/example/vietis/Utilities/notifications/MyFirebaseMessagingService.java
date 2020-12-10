@@ -14,7 +14,6 @@ import androidx.core.app.NotificationManagerCompat;
 import com.example.vietis.R;
 import com.example.vietis.activities.Home.ui.home.FoodDetailActivity;
 import com.example.vietis.activities.Home.ui.store.StoreDetailActivity;
-import com.example.vietis.activities.Home.ui.store.StoreFragment;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 

@@ -17,7 +17,7 @@ import com.example.vietis.Utilities.common.AppResources;
 import com.example.vietis.activities.Home.ui.home.FoodDetailActivity;
 import com.example.vietis.activities.Home.ui.notifications.NotificationsFragment;
 import com.example.vietis.activities.Home.ui.store.StoreDetailActivity;
-import com.squareup.picasso.Picasso;
+
 
 public class NotificationViewHolder extends RecyclerView.ViewHolder implements IView {
     private ImageView imageShop;

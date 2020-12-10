@@ -65,8 +65,7 @@ public class UserRepository {
                         User user = User.createUserFromJSONObject(jsonUserObject);
                         user.setImageURL(jsonUserObject.getJSONObject("Image_model").getString("imageURL"));
                         iUserRepository.afterLogin(user, null);
-                    } else {
-                        //move error
+
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();

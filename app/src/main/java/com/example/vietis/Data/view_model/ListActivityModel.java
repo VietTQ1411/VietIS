@@ -66,10 +66,10 @@ public class ListActivityModel extends ViewModel implements IStoreRepository, IF
 
     /**
      * @param search
-     * @param page
+     * @param offset
      */
-    public void searchFoodFormServerWithPage(String search, int page) {
-        FoodRespository.getInstance(this).getFoodPaging(search, page);
+    public void searchFoodFormServerWithPage(String search, int offset) {
+        FoodRespository.getInstance(this).getFoodPaging(search, offset);
     }
 
 

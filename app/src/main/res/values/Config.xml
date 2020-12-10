@@ -7,7 +7,7 @@
     */
     <string name="HOST_NAME">10.1.35.166</string>
     <string name="POST">3000</string>
-    <string name="NUMBER_ITEM_GET_FORM_API">8</string>
+    <string name="NUMBER_ITEM_GET_FORM_API">4</string>
 
     /*
     Result API Code
@@ -29,5 +29,6 @@
     <string name="USER_LON">users/login</string>
     <string name="USER_LOGN">users/login</string>
     <string name="NOTI_GETALL">noti/getListNoti</string>
+    <string name="ADD_TOKEN_KEY">noti/addTokenKey</string>
     <string name="ADD_Order">order/add</string>
 </resources>

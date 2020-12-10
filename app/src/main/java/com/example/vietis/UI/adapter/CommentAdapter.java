@@ -6,12 +6,9 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.example.vietis.Data.entity.Comment;
 import com.example.vietis.R;
 import com.example.vietis.UI.view_holder.CommentItemViewHolder;
-
-import java.util.ArrayList;
 import java.util.List;
 
 public class CommentAdapter extends RecyclerView.Adapter<CommentItemViewHolder> {

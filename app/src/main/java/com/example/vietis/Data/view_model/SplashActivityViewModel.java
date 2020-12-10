@@ -21,8 +21,8 @@ public class SplashActivityViewModel extends ViewModel implements INotiRepositor
         return msg;
     }
 
-    public void deviceRegister(String tokenKey, String userId) {
-        NotificationRepository.getInstance(this).deviceRegister(tokenKey, userId);
+    public void deviceRegister(String tokenKey) {
+        NotificationRepository.getInstance(this).deviceRegister(tokenKey);
     }
 
     @Override

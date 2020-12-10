@@ -3,7 +3,6 @@ var router = express.Router();
 const { sendFirebaseCloudMessage } = require('../firebase-notifications/firebaseCloudMessaging')
 const { sequelize } = require('../databases/database')
 const PhoneTokenModel = require('../models/PhoneToken')(sequelize)
-const UserTokenModel = require('../models/UserToken')(sequelize)
 const NotificationModel = require('../models/Notification')(sequelize)
 const { validatePhoneToken } = require('../validations/validate')
 const { validationResult } = require('express-validator')
@@ -16,7 +15,7 @@ const { checkToken } = require('../helpers/TokenCheck')
 router.post('/addTokenKey', validatePhoneToken(), async(req, res) => {
     //validate du lieu tu client gui len
     const errors = validationResult(req);
-    const { userId, tokenKey } = req.body
+    const { tokenKey } = req.body
     try {
         if (!errors.isEmpty()) {
             let foundPhoneTokenModel = await PhoneTokenModel.findAll({
@@ -33,6 +32,8 @@ router.post('/addTokenKey', validatePhoneToken(), async(req, res) => {
                 })
                 return
             }
+            
+        }
             let newPhoneToken = await PhoneTokenModel.create({
                 tokenKey
             })
@@ -43,37 +44,7 @@ router.post('/addTokenKey', validatePhoneToken(), async(req, res) => {
                 message: 'Register new user successfully'
             })
             return
-        }
-
-        let foundUserToken = await UserTokenModel.findAll({
-            where: {
-                userId: {
-                    [Op.eq]: userId
-                },
-                tokenKey: {
-                    [Op.like]: tokenKey
-                }
-            }
-        })
-        if (foundUserToken.length > 0) {
-            res.json({
-                result: 'failed',
-                data: {},
-                message: 'user token tồn tại'
-            })
-            return
-        }
-
-        let newUserToken = await UserTokenModel.create({
-            userId,
-            tokenKey
-        })
-        await newUserToken.save()
-
-        res.json({
-            result: 'ok',
-            message: 'Register new user successfully'
-        })
+        
     } catch (exception) {
         res.status(500).json({
             result: 'failed 500',

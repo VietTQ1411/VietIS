@@ -3,6 +3,7 @@ package com.example.vietis.Data.IRepository.repository;
 import android.util.Log;
 
 import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.example.vietis.Data.entity.Notification;
@@ -29,55 +30,66 @@ import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
-import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class NotificationRepository {
     private static NotificationRepository instance = null;
-    private INotiRepository iNotiRepository;
-    private String TAG = "Noti Repo";
+    private final INotiRepository iNotiRepository;
+    private final String TAG = "Noti Repo";
     private NotificationRepository(INotiRepository iNotiRepository) {
         this.iNotiRepository = iNotiRepository;
     }
 
     public static NotificationRepository getInstance(INotiRepository iNotiRepository) {
-
-        return new NotificationRepository(iNotiRepository);
+            if(instance==null){
+                instance = new NotificationRepository(iNotiRepository);
+            }
+        return instance;
     }
 
-    public void deviceRegister(String tokenKey, String userId){
-        OkHttpClient okHttpClient = new OkHttpClient();
-        RequestBody requestBody = new MultipartBody.Builder()
-                .setType(MultipartBody.FORM)
-                .addFormDataPart("userId", userId)
-                .addFormDataPart("tokenKey", tokenKey)
-                .build();
-        Request request = new Request.Builder()
-                .url(API.get_URL_STRING("noti/addTokenKey"))
-                .post(requestBody)
-                .build();
-        Call call = okHttpClient.newCall(request);
-        call.enqueue(new Callback() {
+    public void deviceRegister(String tokenKey){
+        StringRequest jsonObjectRequest = new StringRequest(com.android.volley.Request.Method.POST,
+                API.get_URL_STRING(AppResources.getResourses().getString(R.string.ADD_TOKEN_KEY))
+                , new com.android.volley.Response.Listener<String>() {
             @Override
-            public void onFailure(@NotNull Call call, @NotNull IOException ioException) {
-                iNotiRepository.getNotiMessage(null, ioException);
+            public void onResponse(String StringResponse) {
+                Log.v("LOG_VOLLEY", StringResponse);
+                MutableArray.clearData();
+                        try {
+                            JSONObject response = new JSONObject(StringResponse);
+                            String msg = response.getString("result");
+                            iNotiRepository.getNotiMessage(msg, null);
+                        } catch (JSONException e) {
+                            iNotiRepository.getNotiMessage(null, e);
+
+                        }
+                    }
+        }, new com.android.volley.Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                iNotiRepository.getNotiMessage(null, error);
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("tokenKey", tokenKey);
+                return params;
             }
 
             @Override
-            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
-                try {
-                    String jsonString = response.body().string();
-                    JSONObject jsonNotiMsg = new JSONObject(jsonString);
-                    String msg = jsonNotiMsg.getString("message");
-                    iNotiRepository.getNotiMessage(msg, null);
-                } catch (JSONException e) {
-                    iNotiRepository.getNotiMessage(null, e);
-                    System.out.println(e.toString());
-                }
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("Content-Type", "application/x-www-form-urlencoded");
+                return params;
             }
-        });
-    }
+        };
+        jsonObjectRequest.setTag(TAG);
+        VolleySingleton.getInstance(AppResources.getContext()).getRequestQueue().add(jsonObjectRequest);
+
+
+}
     public void getListNoti() {
         StringRequest jsonObjectRequest = new StringRequest(com.android.volley.Request.Method.POST,
                 API.get_URL_STRING(AppResources.getResourses().getString(R.string.NOTI_GETALL))

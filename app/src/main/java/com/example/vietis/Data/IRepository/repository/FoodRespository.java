@@ -53,7 +53,7 @@ public class FoodRespository {
         return instance;
     }
 
-    public void getFoodPaging(String query, int page) {
+    public void getFoodPaging(String query, int offset) {
         StringRequest jsonObjectRequest = new StringRequest(Request.Method.POST,
                 API.get_URL_STRING(AppResources.getResourses().getString(R.string.GET_FOOD_PAGING))
                 , new Response.Listener<String>() {
@@ -87,8 +87,8 @@ public class FoodRespository {
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("search", query);
-                params.put("page", page + "");
-                params.put("pageNumber", AppResources.getResourses().getString(R.string.NUMBER_ITEM_GET_FORM_API));
+                params.put("offset", offset + "");
+                params.put("limit", AppResources.getResourses().getString(R.string.NUMBER_ITEM_GET_FORM_API));
                 return params;
             }
 

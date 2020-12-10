@@ -8,6 +8,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -24,7 +25,7 @@ import com.google.firebase.messaging.FirebaseMessaging;
 public class SplashActivity extends AppCompatActivity implements IView {
 
     private static final String TAG = "Notification";
-    private SplashActivityViewModel splashActivityViewModel = new SplashActivityViewModel();
+    private final SplashActivityViewModel splashActivityViewModel = new SplashActivityViewModel();
 
     private void createNotificationChannels() {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.O) {
@@ -55,12 +56,14 @@ public class SplashActivity extends AppCompatActivity implements IView {
                     return;
                 }
                 String token = task.getResult();
-                splashActivityViewModel.deviceRegister(token, "");
+                splashActivityViewModel.deviceRegister(token);
                 splashActivityViewModel.getMsg().observe(SplashActivity.this, new Observer<String>() {
                     @Override
                     public void onChanged(String msg) {
                         if(!msg.equals("")){
-                            Log.d("NOTIFICATIONS",msg);
+                            Toast.makeText(SplashActivity.this,msg,Toast.LENGTH_SHORT).show();
+                        }else{
+                            Toast.makeText(SplashActivity.this,"failed",Toast.LENGTH_SHORT).show();
                         }
                     }
                 });

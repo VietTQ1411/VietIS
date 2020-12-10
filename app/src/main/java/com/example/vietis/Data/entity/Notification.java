@@ -2,10 +2,7 @@ package com.example.vietis.Data.entity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.Serializable;
-import java.util.ArrayList;
-
 import lombok.Builder;
 import lombok.Data;
 import lombok.Getter;

@@ -4,10 +4,7 @@ import com.example.vietis.Data.IRepository.repository.Config;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-
 import java.io.Serializable;
-import java.util.ArrayList;
-
 import lombok.Builder;
 import lombok.Data;
 import lombok.Getter;

@@ -4,6 +4,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -36,6 +37,8 @@ public class LoginActivity extends AppCompatActivity implements IView {
         mappingUI();
         setupUI();
 
+
+
     }
 
     @Override
@@ -52,8 +55,9 @@ public class LoginActivity extends AppCompatActivity implements IView {
         llSignin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //login();
-                startActivity(new Intent(LoginActivity.this, HomeAppActivity.class));
+                login();
+                Log.d("onclick","asdasdasda");
+
             }
         });
         txtSignUpAccount.setOnClickListener(new View.OnClickListener() {

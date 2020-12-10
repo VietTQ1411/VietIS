@@ -1,7 +1,6 @@
 package com.example.vietis.Data.entity;
 
 import java.util.ArrayList;
-
 import lombok.Builder;
 import lombok.Data;
 import lombok.Getter;

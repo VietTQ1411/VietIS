@@ -34,37 +34,37 @@ public class StoreFragment extends Fragment implements IView, IListView {
     private ListActivityModel storeActivityModel;
     private int PAGE = 0;
 
-//    public View onCreateView(@NonNull LayoutInflater inflater,
-//                             ViewGroup container, Bundle savedInstanceState) {
-//        if (view != null) {
-//            ViewGroup parent = (ViewGroup) view.getParent();
-//            if (parent != null) {
-//                parent.removeView(view);
-//            }
-//        }
-//            View root = inflater.inflate(R.layout.fragment_store, container, false);
-//            view = root;
-//            new Thread(new Runnable() {
-//                public void run() {
-//                    mappingUI();
-//                    setupUI();
-//                }
-//            }).start();
-//            return root;
-//
-//    }
+    public View onCreateView(@NonNull LayoutInflater inflater,
+                             ViewGroup container, Bundle savedInstanceState) {
+        if (view != null) {
+            ViewGroup parent = (ViewGroup) view.getParent();
+            if (parent != null) {
+                parent.removeView(view);
+            }
+        }
+            View root = inflater.inflate(R.layout.fragment_store, container, false);
+            view = root;
+            new Thread(new Runnable() {
+                public void run() {
+                    mappingUI();
+                    setupUI();
+                }
+            }).start();
+            return root;
 
-
-    @Nullable
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
-        View v = inflater.inflate(R.layout.fragment_store, container, false);
-        view = v;
-        mappingUI();
-        setupUI();
-        return v;
     }
+
+
+//    @Nullable
+//    @Override
+//    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+//
+//        View v = inflater.inflate(R.layout.fragment_store, container, false);
+//        view = v;
+//        mappingUI();
+//        setupUI();
+//        return v;
+//    }
 
     @Override
     public void onResume() {

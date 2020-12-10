@@ -1,10 +1,7 @@
 package com.example.vietis.Utilities.helpers;
 
-import com.android.volley.Response;
 import com.example.vietis.R;
 import com.example.vietis.Utilities.common.AppResources;
-
-import org.json.JSONObject;
 
 public class API {
     /**

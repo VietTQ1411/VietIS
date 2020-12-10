@@ -6,7 +6,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.vietis.Data.inteface.IListView;
-import com.example.vietis.Data.inteface.IView;
 
 
 public class SearchItemViewHolder<T> extends RecyclerView.ViewHolder {

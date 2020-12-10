@@ -1,10 +1,6 @@
 package com.example.vietis.Data.entity;
 
-
 import org.json.JSONObject;
-
-import java.util.ArrayList;
-
 import lombok.Builder;
 import lombok.Data;
 import lombok.Getter;

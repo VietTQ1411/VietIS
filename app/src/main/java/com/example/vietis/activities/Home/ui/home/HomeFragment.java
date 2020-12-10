@@ -32,7 +32,7 @@ public class HomeFragment extends Fragment implements IView, IListView {
     private RecyclerView recyclerViewSearch;
     private static SearchAdapter<Food> foodAdapter;
     private ListActivityModel foodActivityModel;
-    private int PAGE = 0;
+    private int offset = 0;
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -55,15 +55,11 @@ public class HomeFragment extends Fragment implements IView, IListView {
 
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-    }
 
     @Override
     public void onStop() {
         super.onStop();
-        PAGE = 0;
+        offset = 0;
         MutableArray.clearData();
     }
     
@@ -84,23 +80,10 @@ public class HomeFragment extends Fragment implements IView, IListView {
 
     @Override
     public void setupUI() {
-        svSearch.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+        svSearch.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onQueryTextSubmit(String query) {
-                PAGE = 0;
-                foodActivityModel.searchFoodFormServerWithPage(query, PAGE);
-                PAGE++;
-                return false;
-            }
+            public void onClick(View v) {
 
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                if (newText.isEmpty()) {
-                    return false;
-                }
-                foodAdapter.setObjectArray(foodActivityModel.searchFood(newText));
-                foodAdapter.notifyDataSetChanged();
-                return false;
             }
         });
         getData();
@@ -108,7 +91,7 @@ public class HomeFragment extends Fragment implements IView, IListView {
 
     public void getData() {
         foodActivityModel = new ListActivityModel(HomeFragment.this);
-        foodActivityModel.searchFoodFormServerWithPage("", PAGE);
+        foodActivityModel.searchFoodFormServerWithPage("", offset);
     }
 
     public void setUpData(ArrayList<Food> list) {

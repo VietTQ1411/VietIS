@@ -46,24 +46,10 @@ router.post('/search', validateString(), async(req, res) => {
         });
         return;
     }
-    const { search, page, pageNumber } = req.body
+    const { offset, limit } = req.body
     try {
         let foundStore = await StoreModel.findAll({
-            where: {
-                [Op.or]: [{
-                    name: {
-                        [Op.substring]: search
-                    }
-                }, {
-                    address: {
-                        [Op.substring]: search
-                    }
-                }, {
-                    phoneNumber: {
-                        [Op.substring]: search
-                    }
-                }]
-            },
+        
             include: [{
                     model: ImageModel,
                     as: "Image_model",
@@ -74,8 +60,10 @@ router.post('/search', validateString(), async(req, res) => {
                     as: "RatingStore_models",
                 }
             ],
-            limit: parseInt(pageNumber),
-            offset: parseInt(pageNumber) * parseInt(page),
+            order: StoreModel.id
+            ,
+            limit: limit,
+            offset: offset
         })
 
         res.json({
