@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.SearchView;
@@ -25,15 +26,11 @@ import java.util.ArrayList;
 
 public class HomeFragment extends Fragment implements IView, IListView {
 
-    //UI holders
+    //private TextView txtSeeMore;
     private SearchView svSearch;
     private static View view;
     private RecyclerView recyclerViewSearch;
-
-
-    //RecyclerView components
     private static SearchAdapter<Food> foodAdapter;
-    //View Model
     private ListActivityModel foodActivityModel;
     private int PAGE = 0;
 
@@ -74,6 +71,7 @@ public class HomeFragment extends Fragment implements IView, IListView {
     @Override
     public void mappingUI() {
         svSearch = view.findViewById(R.id.svSearch);
+        //txtSeeMore = view.findViewById(R.id.txtSeeMore);
         recyclerViewSearch = view.findViewById(R.id.recyclerViewFoodSearch);
         foodAdapter = new SearchAdapter(this, new ArrayList<Food>(), Food.class);
 
@@ -108,7 +106,7 @@ public class HomeFragment extends Fragment implements IView, IListView {
         getData();
     }
 
-    public void  getData() {
+    public void getData() {
         foodActivityModel = new ListActivityModel(HomeFragment.this);
         foodActivityModel.searchFoodFormServerWithPage("", PAGE);
     }
@@ -121,14 +119,14 @@ public class HomeFragment extends Fragment implements IView, IListView {
 
     @Override
     public void navigateToStoreDetail(Integer idStore) {
-        /**Not use Function*/
+        Intent intent = new Intent(view.getContext(), FoodDetailActivity.class);
+        intent.putExtra("id", idStore + "");
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        AppResources.getContext().startActivity(intent);
     }
 
     @Override
     public void navigateToFoodDetail(Integer idFood) {
-        Intent intent = new Intent(view.getContext(), FoodDetailActivity.class);
-        intent.putExtra("id", idFood + "");
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        AppResources.getContext().startActivity(intent);
+        //lalalalala
     }
 }

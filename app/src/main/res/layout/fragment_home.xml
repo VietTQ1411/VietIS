@@ -69,6 +69,17 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"/>
 
+            <!--<TextView
+                android:id="@+id/txtSeeMore"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="See More"
+                android:textSize="15dp"
+                android:textColor="@color/colorPurple"
+                android:layout_marginTop="15dp"
+                android:layout_gravity="center"
+                android:clickable="true"/>-->
+
         </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>
