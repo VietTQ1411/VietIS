@@ -15,8 +15,8 @@
 
         <ImageView
             android:id="@+id/imageViewFoodIcon"
-            android:layout_width="90dp"
-            android:layout_height="90dp"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
             android:layout_gravity="center"
             android:layout_marginStart="10dp"
             android:src="@drawable/hamburger"/>
@@ -27,7 +27,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/txtCategoriesFoodName"
+                android:id="@+id/txtStoreFoodName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
@@ -37,33 +37,50 @@
                 android:textSize="15dp" />
 
             <TextView
-                android:id="@+id/txtCategoriesStoreName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
-                android:layout_marginTop="2dp"
-                android:text="Store Name"
-                android:textSize="14dp"/>
-
-            <TextView
-                android:id="@+id/txtCategoriesFoodPrice"
+                android:id="@+id/txtStoreFoodPrice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="asdsaadasd"
-                android:layout_marginTop="2dp"
                 android:layout_marginStart="5dp"
+                android:layout_marginTop="3dp"
                 android:textColor="@color/colorBlack"
-                android:textSize="13dp" />
+                android:textSize="14dp" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="-2dp"
+                android:layout_marginStart="120dp"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/btnDown"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:background="#fff3f3f3"
+                    android:src="@drawable/minus" />
+
+                <TextView
+                    android:id="@+id/txtOrderQuantityChange"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:inputType="number"
+                    android:text="1"
+                    android:textSize="15dp" />
+
+                <ImageButton
+                    android:id="@+id/btnUp"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:background="#fff3f3f3"
+                    android:layout_marginStart="10dp"
+                    android:src="@drawable/plus" />
+
+            </LinearLayout>
 
         </LinearLayout>
 
     </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="10dp"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/setting_bg"
-        android:layout_gravity="center" />
 
 </LinearLayout>
