@@ -21,8 +21,9 @@
         android:layout_marginStart="60dp"
         android:background="@drawable/search_bg"
         android:iconifiedByDefault="false"
+        android:backgroundTint="@color/transparent"
         android:queryBackground="@null"
-        android:queryHint="Search" />
+        app:queryHint="Search" />
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -46,17 +47,11 @@
                 android:textSize="25dp" />
 
             <GridView
+                android:id="@+id/gvCategories"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
                 android:horizontalSpacing="4dp"
-                android:numColumns="4"/>
-
-            <GridView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:horizontalSpacing="3dp"
                 android:numColumns="4"/>
 
             <TextView

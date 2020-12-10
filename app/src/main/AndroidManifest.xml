@@ -13,7 +13,6 @@
     <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
 
     <application
-        android:usesCleartextTraffic="true"
         android:name=".Utilities.common.AppResources"
         android:allowBackup="true"
         android:icon="@drawable/icon"
@@ -21,10 +20,10 @@
         android:networkSecurityConfig="@xml/network_security_config"
         android:roundIcon="@drawable/icon"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <!--
-            Service firebase
-        -->
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true">
+        <activity android:name=".activities.ViewCategoriesFood"></activity>
+        <!--             Service firebase -->
         <service
             android:name=".Utilities.notifications.MyFirebaseMessagingService"
             android:exported="false">
@@ -32,6 +31,7 @@
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
+
         <meta-data
             android:name="firebase_messaging_auto_init_enabled"
             android:value="false" />
@@ -50,26 +50,26 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
-        <receiver android:name=".Utilities.notifications.MyBroadcastReceiver" />
-        <!--Activity-->
-        <activity android:name=".activities.Home.HomeAppActivity">
-        </activity>
+
+        <receiver android:name=".Utilities.notifications.MyBroadcastReceiver" /> <!-- Activity -->
+        <activity android:name=".activities.Home.HomeAppActivity"></activity>
         <activity android:name=".activities.Home.ui.dashboard.EditProfileActivity" />
         <activity android:name=".activities.LoginActivity" />
         <activity android:name=".activities.RegisterActivity" />
         <activity android:name=".activities.Home.ui.home.FoodDetailActivity" />
         <activity android:name=".activities.Home.ui.order.OrderActivity" />
-        <activity android:name=".activities.SplashActivity" >
+        <activity android:name=".activities.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity android:name=".activities.Home.ui.store.StoreDetailActivity" />
         <activity
             android:name="com.google.firebase.auth.internal.FederatedSignInActivity"
-            tools:replace="android:launchMode"
-            android:launchMode="standard" />
+            android:launchMode="standard"
+            tools:replace="android:launchMode" />
     </application>
 
 </manifest>

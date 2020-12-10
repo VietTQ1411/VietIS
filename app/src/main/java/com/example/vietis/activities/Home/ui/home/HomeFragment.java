@@ -29,7 +29,6 @@ public class HomeFragment extends Fragment implements IView, IListView {
     private SearchView svSearch;
     private static View view;
     private RecyclerView recyclerViewSearch;
-    private RecyclerView rvTopCategories;
 
 
     //RecyclerView components
