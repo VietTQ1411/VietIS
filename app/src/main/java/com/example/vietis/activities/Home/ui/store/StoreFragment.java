@@ -40,20 +40,21 @@ public class StoreFragment extends Fragment implements IView, IListView {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        if (view == null) {
-            View root = inflater.inflate(R.layout.fragment_store, container, false);
-            view = root;
-            new Thread(new Runnable() {
-                public void run() {
-                    mappingUI();
-                    setupUI();
-                }
-            }).start();
-            return root;
-        }else{
-            callData();
+        if (view != null) {
+            ViewGroup parent = (ViewGroup) view.getParent();
+            if (parent != null) {
+                parent.removeView(view);
+            }
         }
-        return view;
+        View root = inflater.inflate(R.layout.fragment_store, container, false);
+        view = root;
+        new Thread(new Runnable() {
+            public void run() {
+                mappingUI();
+                setupUI();
+            }
+        }).start();
+        return root;
     }
 
 

@@ -60,11 +60,21 @@ public class SettingFragment extends Fragment implements IView {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
+        if (view != null) {
+            ViewGroup parent = (ViewGroup) view.getParent();
+            if (parent != null) {
+                parent.removeView(view);
+            }
+        }
         View root = inflater.inflate(R.layout.fragment_setting, container, false);
         view = root;
-        mappingUI();
-        setupUI();
-        setData();
+        new Thread(new Runnable() {
+            public void run() {
+                mappingUI();
+                setupUI();
+                setData();
+            }
+        }).start();
         return root;
     }
 

@@ -90,17 +90,5 @@ public class LoginActivity extends AppCompatActivity implements IView {
     }
 
 
-    private BroadcastReceiver mMessageReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            //do your code snippet here.
-            finish();
-        }
-    };
 
-    @Override
-    protected void onDestroy() {
-        LocalBroadcastManager.getInstance(this).unregisterReceiver(mMessageReceiver);
-        super.onDestroy();
-    }
 }
