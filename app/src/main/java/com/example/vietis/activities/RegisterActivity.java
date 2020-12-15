@@ -12,7 +12,6 @@ import androidx.lifecycle.Observer;
 
 import com.example.vietis.Data.inteface.IView;
 import com.example.vietis.R;
-import com.example.vietis.database.Database;
 import com.example.vietis.Data.entity.User;
 import com.example.vietis.Data.view_model.RegisterActivityViewModel;
 
@@ -58,19 +57,8 @@ public class RegisterActivity extends AppCompatActivity implements IView {
                 new Observer<User>() {
                     @Override
                     public void onChanged(User user) {
-                        Database db = Database.getInstance(RegisterActivity.this);
-                            db.userDAO().insertUser(user);
-                            if(db.userDAO().getAll() != null){
-                                Log.d("USER","REGISTER SUCCESS");
-                            }else{
-                                Log.d("USER","REGISTER FAILED");
-                            }
-                        db.userDAO().insertUser(user);
-                        if (db.userDAO().getAll() != null) {
-                            Log.d("USER", "REGISTER SUCCESS");
-                        } else {
-                            Log.d("USER", "REGISTER FAILED");
-                        }
+
+
                         if (user != null) {
 //                            Intent intent = new Intent(RegisterActivity.this, SearchActivity.class);
  //                           RegisterActivity.this.startActivity(intent);

@@ -99,7 +99,7 @@ router.post('/search', async(req, res) => {
         })
         return;
     }
-    const { search, page, pageNumber } = req.body
+    const { search, limit , offset } = req.body
     try {
         let foundBooks = await FoodModel.findAll({
             where: {
@@ -123,8 +123,9 @@ router.post('/search', async(req, res) => {
                     attributes: ['address']
                 }
             ],
-            limit: parseInt(pageNumber),
-            offset: parseInt(pageNumber) * parseInt(page)
+            order: FoodModel.id,
+            limit: parseInt(limit),
+            offset: parseInt(limit) * parseInt(offset)
         })
         res.json({
             result: "SC",
